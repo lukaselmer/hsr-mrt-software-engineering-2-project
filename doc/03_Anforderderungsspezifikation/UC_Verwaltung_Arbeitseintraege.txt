@@ -1,0 +1,5 @@
+h1. Verwaltung Arbeitseinträge, Casual Style
+Primary Actor: Aussendienstmitarbeiter, Sekretärin
+Die vom Mitarbeiter aufgezeichneten Arbeitseinträge (siehe UC1: Arbeitseinträge erfassen) können im Nachhinein bearbeitet werden. Hier kann sowohl der Monteur wie auch die Sekretärin alle aufgezeichneten Arbeitseinträge ansehen und bearbeiten. Dazu gehört das Anpassen / Hinzufügen des Kunden mit einer bestimmten Kundenadresse und einer Wohnungsnummer. Ebenfalls muss die Anfangs- und Endzeit, die Rechnungsadresse (z.B. Verwaltung Immobilien XYZ) und eine Beschreibung der ausgeführeten Arbeiten angepasst werden können.
+Hinzu kommt, dass das verwendete Material (Bezeichnung und Anzahl) und ebenso die im Detail geleisteten Stunden (Bsp. Wasserhahn ersetzen, 1.5h, Autofahrt, 0.5h) erfasst werden können müssen.
+Die einzelnen Arbeitseinträge müssen zusätzlich pro Tag gruppiert werden können.
