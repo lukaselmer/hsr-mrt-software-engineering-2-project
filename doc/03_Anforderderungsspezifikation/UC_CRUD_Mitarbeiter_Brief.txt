@@ -1,3 +1,11 @@
 h1. Use Case CRUD Mitarbeiter Brief
 Primary Actor: Sekretärin
+Die Sekretärin verwaltet die Mitarbeiter (CRUD). Das System speichert die Mitarbeiter persistent. Der Mitarbeiter kann sich einloggen, nachdem er im System erfasst wurde (siehe UC5).
+
+
+
+
+Dazu gehört das Erstellen, das Ändern, wie auch das Löschen eines Mitarbeiters. Um Mitarbeiter schnell zu finden, kann die Sekretärin nach Mitarbeitern suchen.
+
+
 Die Sekretärin verwaltet die Mitarbeiter. Dazu gehört das Erstellen, das Ändern, wie auch das Löschen eines Mitarbeiters. Um Mitarbeiter schnell zu finden, kann die Sekretärin nach Mitarbeitern suchen.
