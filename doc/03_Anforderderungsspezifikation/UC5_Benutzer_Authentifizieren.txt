@@ -1,3 +1,3 @@
 h1. Use Case Benutzer authentifizieren Brief
 Primary Actor: Aussendienstmitarbeiter, Sekretärin
-Der Benutzer kann sich am System anmelden.
+Der Benutzer kann sich am System anmelden mittels Benutzernamen und Passwort.
