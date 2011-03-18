@@ -1,6 +1,11 @@
 h1. Use Case CRUD Mitarbeiter Brief
 Primary Actor: Sekretärin
-Die Sekretärin verwaltet die Daten eines Mitarbeiters (CRUD). Die Daten eines Mitarbeiters umfassen: ....
+Die Sekretärin verwaltet die Daten eines Mitarbeiters (CRUD). Die Daten eines Mitarbeiters umfassen:
+* Vor- und Nachname
+* Login
+* Passwort
+* Telefon
+* Email
 
 
 

@@ -1,0 +1,6 @@
+h1. Use Case CRUD Kunde
+Primary Actor: Sekretärin
+Die Sekretärin verwaltet die Kunden (CRUD). Die Daten eines Kunden umfassen:
+* Vor- und Nachname
+* Telefonnummer
+* Adresse
