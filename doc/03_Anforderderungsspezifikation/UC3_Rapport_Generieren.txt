@@ -1,0 +1,5 @@
+h1. Generierung Rapport, Casual Style
+Primary Actor: Sekretärin
+Durch die Kommunikation mit den Mitarbeitern weiss die Sekretärin, zu welchem Zeitpunkt alle von den Mitarbeitern aufgezeichneten Stundeneinträge, die einem bestimmten Auftrag angehören, im System erfasst sind.
+Aus den Notizen des Mitarbeiters fügt die Sekretärin die verwendeten Materialen dem Auftrag hinzu.
+Nun veranlasst sie das System, einen Rapport zu generieren. Das System liefert ihr eine Auftragsübersicht: Kundenadresse, Rechnungsadresse, geleistete Stunden, verwendete Materialien und Notizen werden angezeigt. Das Total für die Materialien und das Total für die geleisteten Stunden werden vom System berechnet separat angezeigt.
