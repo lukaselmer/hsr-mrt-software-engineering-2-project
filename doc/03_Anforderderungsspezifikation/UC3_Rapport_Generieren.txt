@@ -1,5 +1,3 @@
-h1. Generierung Rapport, Casual Style
+h1. Rapport generieren, Brief
 Primary Actor: Sekretärin
-Durch die Kommunikation mit den Mitarbeitern weiss die Sekretärin, zu welchem Zeitpunkt alle von den Mitarbeitern aufgezeichneten Stundeneinträge, die einem bestimmten Auftrag angehören, im System erfasst sind.
-Aus den Notizen des Mitarbeiters fügt die Sekretärin die verwendeten Materialen dem Auftrag hinzu.
-Nun veranlasst sie das System, einen Rapport zu generieren. Das System liefert den Rapport.
+Die Sekretärin veranlasst das System, einen Rapport zu einem bestimmten Auftrag zu generieren. Das System liefert den Rapport.
