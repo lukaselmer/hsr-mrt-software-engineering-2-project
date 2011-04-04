@@ -1,26 +1,22 @@
 package ch.hsr.se2p.mrt.models;
 
-import ch.hsr.se2p.mrt.util.Config;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
+import ch.hsr.se2p.mrt.util.Config;
 
-public class DatabaseOpenHelper extends SQLiteOpenHelper {
+public class DbHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
-	public static final String TABLE_NAME_CACHED_LOGINS = "cached_logins";
-	public static final String CACHED_LOGINS_USERNAME = "username";
-	public static final String CACHED_LOGINS_PASSWORD = "password";
 
 	public static final String TABLE_ADDRESSES = "addresses";
 	public static final String TABLE_TIME_ENTRIES = "time_entries";
 	public static final String TABLE_TIME_ENTRY_TYPES = "time_entry_types";
 	public static final String TABLE_CUSTOMERS = "customers";
 
-	private static final String ID_AND_SERVER_ID = "id INTEGER PRIMARY KEY ASC, server_id INTEGER, ";
-	public static final String CREATE_ADRESSES = "CREATE TABLE " + TABLE_ADDRESSES + " (" + ID_AND_SERVER_ID + "line1 TEXT, line2 TEXT, line2 TEXT, zip INTEGER, place TEXT);";
+	private static final String ID_AND_SERVER_ID = BaseColumns._ID + " INTEGER PRIMARY KEY ASC, server_id INTEGER, ";
+	public static final String CREATE_ADRESSES = "CREATE TABLE " + TABLE_ADDRESSES + " (" + ID_AND_SERVER_ID + "line1 TEXT, line2 TEXT, line3 TEXT, zip INTEGER, place TEXT);";
 	public static final String CREATE_TIME_ENTRIES = "CREATE TABLE " + TABLE_TIME_ENTRIES + " (" + ID_AND_SERVER_ID
 			+ " hashcode TEXT, time_start INTEGER, time_stop INTEGER, description TEXT, position TEXT, audo_record BLOB, customer_id INTEGER, time_entry_type_id INTEGER);";
 	public static final String CREATE_TIME_ENTRY_TYPES = "CREATE TABLE " + TABLE_TIME_ENTRY_TYPES + " (" + ID_AND_SERVER_ID + " description TEXT, updated_at INTEGER);";
@@ -31,7 +27,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 	private static final String TABLES_DELETE = "DROP TABLE " + TABLE_ADDRESSES + ";" + "DROP TABLE " + TABLE_TIME_ENTRIES + ";" + "DROP TABLE " + TABLE_TIME_ENTRY_TYPES + ";" + "DROP TABLE "
 			+ TABLE_CUSTOMERS + ";";
 
-	public DatabaseOpenHelper(Context context) {
+	public DbHelper(Context context) {
 		super(context, Config.DATABASE_NAME, null, DATABASE_VERSION); // context, name, factory, version
 	}
 
@@ -46,7 +42,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
 		db.execSQL(TABLES_CREATE);
 	}
 
-	public static SQLiteDatabase getDb(ContextWrapper applicationContext) {
-		return new DatabaseOpenHelper(applicationContext).getReadableDatabase();
+	public static SQLiteDatabase getWriteableDb(Context applicationContext) {
+		return new DbHelper(applicationContext).getWritableDatabase();
+	}
+	public static SQLiteDatabase getReadableDb(Context applicationContext) {
+		return new DbHelper(applicationContext).getReadableDatabase();
 	}
 }

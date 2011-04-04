@@ -4,7 +4,7 @@ public class Config {
 	private Config() {
 	}
 
-	public static final String DATABASE_NAME = "mrt";
+	public static final String DATABASE_NAME = "mrt.db";
 	public static final String MRT_HOST = "mrt.elmermx.ch";
 	public static final String MRT_SERVER = "http://" + MRT_HOST;
 	// public static final String CHECK_INTERNET_CONNTECTION_URL = MRT_SERVER + "/logins/new.tt";
