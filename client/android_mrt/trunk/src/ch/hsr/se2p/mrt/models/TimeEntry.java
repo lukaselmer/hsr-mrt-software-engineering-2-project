@@ -10,7 +10,7 @@ import android.location.Location;
 import android.provider.BaseColumns;
 
 public class TimeEntry {
-	private static String TABLE_NAME = DbHelper.TABLE_TIME_ENTRIES;
+	private static String TABLE_NAME = DbHelper.TIME_ENTRIES_TABLE_NAME;
 
 	public static class Values {
 		public String hashcode, description;
@@ -22,28 +22,28 @@ public class TimeEntry {
 
 	private Values values = new Values();
 
-	public static long create(SQLiteDatabase db, Values values) {
+	public static long create(DbHelper dbh, Values values) {
 		ContentValues initialValues = new ContentValues();
-		initialValues.put("hashcode", values.hashcode);
-		initialValues.put("description", values.description);
-		initialValues.put("position", values.position == null ? "" : values.position.toString());
-		initialValues.put("time_start", values.timeStart == null ? "" : values.timeStart.toString());
-		initialValues.put("time_stop", values.timeStop == null ? "" : values.timeStop.toString());
-		initialValues.put("customer_id", values.customerId == null ? "" : values.customerId.toString());
-		initialValues.put("time_entry_type_id", values.timeEntryTypeId == null ? "" : values.timeEntryTypeId.toString());
-		return db.insert(TABLE_NAME, null, initialValues);
+		initialValues.put(DbHelper.TIME_ENTRIES_C_HASHCODE[0], values.hashcode);
+		initialValues.put(DbHelper.TIME_ENTRIES_C_DESCRIPTION[0], values.description);
+		initialValues.put(DbHelper.TIME_ENTRIES_C_POSITION[0], values.position == null ? "" : values.position.toString());
+		initialValues.put(DbHelper.TIME_ENTRIES_C_TIME_START[0], values.timeStart == null ? "" : values.timeStart.toString());
+		initialValues.put(DbHelper.TIME_ENTRIES_C_TIME_STOP[0], values.timeStop == null ? "" : values.timeStop.toString());
+		initialValues.put(DbHelper.TIME_ENTRIES_C_CUSTOMER_ID[0], values.customerId == null ? "" : values.customerId.toString());
+		initialValues.put(DbHelper.TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID[0], values.timeEntryTypeId == null ? "" : values.timeEntryTypeId.toString());
+		return dbh.insert(TABLE_NAME, initialValues);
 	}
 
-	public static void delete(SQLiteDatabase db, long id) {
-		db.delete(TABLE_NAME, BaseColumns._ID + "=" + id, null);
+	public static void delete(DbHelper dbh, long id) {
+		dbh.delete(TABLE_NAME, id);
 	}
 
-	public static Cursor getAll(SQLiteDatabase db) {
-		return db.query(TABLE_NAME, null, null, null, null, null, null);
+	public static Cursor all(DbHelper dbh) {
+		return dbh.all(TABLE_NAME);
 	}
 
-	public static Cursor getById(SQLiteDatabase db, long id) {
-		return db.query(TABLE_NAME, null, BaseColumns._ID + "=" + id, null, null, null, null);
+	public static Cursor getById(DbHelper dbh, long id) {
+		return dbh.findById(TABLE_NAME, id);
 	}
 
 }
