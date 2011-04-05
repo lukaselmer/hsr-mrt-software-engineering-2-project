@@ -34,6 +34,7 @@ public class TimeEntry {
 		initialValues.put(DbHelper.TIME_ENTRIES_C_HASHCODE[0], values.hashcode);
 		initialValues.put(DbHelper.TIME_ENTRIES_C_DESCRIPTION[0], values.description);
 		initialValues.put(DbHelper.TIME_ENTRIES_C_POSITION[0], values.position == null ? "" : values.position.toString());
+		initialValues.put(DbHelper.TIME_ENTRIES_C_AUDIO_RECORD[0], values.audoRecord == null ? "" : values.audoRecord.toString());
 		initialValues.put(DbHelper.TIME_ENTRIES_C_TIME_START[0], values.timeStart == null ? "" : values.timeStart.toString());
 		initialValues.put(DbHelper.TIME_ENTRIES_C_TIME_STOP[0], values.timeStop == null ? "" : values.timeStop.toString());
 		initialValues.put(DbHelper.TIME_ENTRIES_C_CUSTOMER_ID[0], values.customerId == null ? "" : values.customerId.toString());
