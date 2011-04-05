@@ -14,6 +14,7 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 public class MainActivity extends Activity {
 
 	public static final String TAG = MainActivity.class.getSimpleName();
+	private DbHelper dbh;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -21,21 +22,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		DbHelper dbh = new DbHelper(getApplicationContext());
+		dbh = new DbHelper(getApplicationContext());
 
-		ContentValues cv = new ContentValues();
-		for (int i = 0; i < 10; i++) {
-			TimeEntry.Values v = new TimeEntry.Values();
-			v.description = "test bla bla";
-			long id = TimeEntry.create(dbh, v);
-			Log.i(TAG, "Inserted ID: " + id);
-		}
-		
+		createSomeTimeEntries();
+		transmitTheTimeEnties();
 
-		Cursor c = TimeEntry.all(dbh);
-		Log.d(TAG, "c.getCount(): " + c.getCount());
-		
-		
 		dbh.close();
 
 		// TimeEntry.Values values = new TimeEntry.Values();
@@ -67,6 +58,20 @@ public class MainActivity extends Activity {
 		// doRequests(username, password);
 		// }
 		// });
+	}
+
+	private void createSomeTimeEntries() {
+		for (int i = 0; i < 10; i++) {
+			TimeEntry.Values v = new TimeEntry.Values();
+			v.description = "test bla bla " + i + ", time is " + System.currentTimeMillis();
+			long id = TimeEntry.create(dbh, v);
+			Log.i(TAG, "Inserted ID: " + id);
+		}
+	}
+
+	private void transmitTheTimeEnties() {
+		Cursor c = TimeEntry.all(dbh);
+		Log.d(TAG, "c.getCount(): " + c.getCount());
 	}
 
 }

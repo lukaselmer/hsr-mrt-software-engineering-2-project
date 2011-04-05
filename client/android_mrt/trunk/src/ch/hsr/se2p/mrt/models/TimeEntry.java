@@ -22,6 +22,13 @@ public class TimeEntry {
 
 	private Values values = new Values();
 
+	public TimeEntry(Values values) {
+		this.values = values;
+	}
+	public TimeEntry(Cursor c) {
+		this.values = parseCursor(c);
+	}
+	
 	public static long create(DbHelper dbh, Values values) {
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(DbHelper.TIME_ENTRIES_C_HASHCODE[0], values.hashcode);
@@ -44,6 +51,11 @@ public class TimeEntry {
 
 	public static Cursor getById(DbHelper dbh, long id) {
 		return dbh.findById(TABLE_NAME, id);
+	}
+	
+	private Values parseCursor(Cursor c){
+		Values v = new Values();
+		return v;
 	}
 
 }
