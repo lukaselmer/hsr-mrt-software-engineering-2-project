@@ -10,6 +10,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20110406124921) do
+
+  create_table "time_entries", :force => true do |t|
+    t.integer  "customer_id"
+    t.integer  "time_entry_type_id"
+    t.string   "hashcode"
+    t.text     "description"
+    t.datetime "time_start"
+    t.datetime "time_stop"
+    t.integer  "position_id"
+    t.string   "audio_record_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
