@@ -4,16 +4,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
-import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.R.layout;
 import ch.hsr.se2p.mrt.models.DbHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
+import ch.hsr.se2p.mrt.network.Transmitter;
 
 public class MainActivity extends Activity {
 
@@ -26,12 +21,14 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		dbh = new DbHelper(getApplicationContext());
+		try {
+			dbh = new DbHelper(getApplicationContext());
 
-		createSomeTimeEntries();
-		transmitTheTimeEnties();
-
-		dbh.close();
+			createSomeTimeEntries();
+			transmitTheTimeEnties();
+		} finally {
+			dbh.close();
+		}
 
 		// TimeEntry.Values values = new TimeEntry.Values();
 		// values.description = "bla";
@@ -65,32 +62,34 @@ public class MainActivity extends Activity {
 	}
 
 	private void createSomeTimeEntries() {
-			TimeEntry t1 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t1.setDescription("with description, time is " + System.currentTimeMillis());
-			t1.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*60*4))); //4h later
-			long id1 = TimeEntry.create(dbh, t1);
-			Log.i(TAG, "Inserted ID: " + id1);
-			
-			TimeEntry t2 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t2.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*60*3))); //3h later
-			long id2 = TimeEntry.create(dbh, t2);
-			Log.i(TAG, "Inserted ID: " + id2);
+		TimeEntry t1 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+		t1.setDescription("with description, time is " + System.currentTimeMillis());
+		t1.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 4))); // 4h later
+		long id1 = TimeEntry.create(dbh, t1);
+		Log.i(TAG, "Inserted ID: " + id1);
 
-			TimeEntry t3 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t3.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*30))); //30min later
-			long id3 = TimeEntry.create(dbh, t3);
-			Log.i(TAG, "Inserted ID: " + id3);		
+		TimeEntry t2 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+		t2.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 3))); // 3h later
+		long id2 = TimeEntry.create(dbh, t2);
+		Log.i(TAG, "Inserted ID: " + id2);
+
+		TimeEntry t3 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+		t3.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 30))); // 30min later
+		long id3 = TimeEntry.create(dbh, t3);
+		Log.i(TAG, "Inserted ID: " + id3);
 	}
 
 	private void transmitTheTimeEnties() {
 		List<TimeEntry> l = TimeEntry.all(dbh);
 		Log.d(TAG, "Size: " + l.size());
+		Transmitter transmitter = new Transmitter();
 		for (TimeEntry timeEntry : l) {
-			Log.d(TAG, "timeEntry: " + timeEntry.getId());
-			Log.d(TAG, "Hashcode: " + timeEntry.getHashcode());
-			Log.d(TAG, "Description: " + timeEntry.getDescription());
-			Log.d(TAG, "Start: " + timeEntry.getTimeStart());
-			Log.d(TAG, "Stop: " + timeEntry.getTimeStop());
+			if(transmitter.transmit(timeEntry)){
+				TimeEntry.setTransmitted(dbh,timeEntry);
+				if(transmitter.confirm(timeEntry)){
+					TimeEntry.delete(dbh, timeEntry.getId());
+				}
+			}
 		}
 	}
 

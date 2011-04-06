@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
-import ch.hsr.se2p.mrt.MainActivity;
-import ch.hsr.se2p.mrt.util.Config;
 
 public class DbHelper {
 	public static final String TAG = DbHelper.class.getSimpleName();
@@ -38,7 +36,7 @@ public class DbHelper {
 	public static final String[] RAILS_ID = { "rails_id", "INTEGER" };
 
 	private static final String DATABASE_NAME = "mrt.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 7;
 
 	public static final String TEXT = "TEXT";
 	public static final String INTEGER = "INTEGER";
@@ -54,8 +52,9 @@ public class DbHelper {
 	public static final String[] TIME_ENTRIES_C_TIME_STOP = { "time_stop", INTEGER };
 	public static final String[] TIME_ENTRIES_C_CUSTOMER_ID = { "customer_id", INTEGER };
 	public static final String[] TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID = { "time_entry_type_id", INTEGER };
+	public static final String[] TIME_ENTRIES_C_TRANSMITTED = { "transmitted", INTEGER };
 	public static final String[][] TIME_ENTRIES_COLUMNS = { C_ID, RAILS_ID, TIME_ENTRIES_C_HASHCODE, TIME_ENTRIES_C_DESCRIPTION, TIME_ENTRIES_C_POSITION, TIME_ENTRIES_C_AUDIO_RECORD,
-			TIME_ENTRIES_C_TIME_START, TIME_ENTRIES_C_TIME_STOP, TIME_ENTRIES_C_CUSTOMER_ID, TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID };
+			TIME_ENTRIES_C_TIME_START, TIME_ENTRIES_C_TIME_STOP, TIME_ENTRIES_C_CUSTOMER_ID, TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID, TIME_ENTRIES_C_TRANSMITTED };
 
 	/* Add the other tables */
 	private static final String[][][][] TABLE_DEFINITIONS = new String[][][][] { { { { TIME_ENTRIES_TABLE_NAME } }, TIME_ENTRIES_COLUMNS } };
@@ -75,6 +74,10 @@ public class DbHelper {
 
 	public long insert(String tableName, ContentValues contentValues) {
 		return db.insert(tableName, C_ID[0], contentValues);
+	}
+
+	public void update(String tableName, ContentValues contentValues, int id) {
+		db.update(tableName, contentValues, "id=?", new String[] { "" + id });
 	}
 
 	public Cursor all(String tableName) {
