@@ -1,9 +1,13 @@
 package ch.hsr.se2p.mrt;
 
+import java.sql.Timestamp;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
 import ch.hsr.se2p.mrt.R;
@@ -61,17 +65,33 @@ public class MainActivity extends Activity {
 	}
 
 	private void createSomeTimeEntries() {
-		for (int i = 0; i < 10; i++) {
-			TimeEntry.Values v = new TimeEntry.Values();
-			v.description = "test bla bla " + i + ", time is " + System.currentTimeMillis();
-			long id = TimeEntry.create(dbh, v);
-			Log.i(TAG, "Inserted ID: " + id);
-		}
+			TimeEntry t1 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+			t1.setDescription("with description, time is " + System.currentTimeMillis());
+			t1.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*60*4))); //4h later
+			long id1 = TimeEntry.create(dbh, t1);
+			Log.i(TAG, "Inserted ID: " + id1);
+			
+			TimeEntry t2 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+			t2.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*60*3))); //3h later
+			long id2 = TimeEntry.create(dbh, t2);
+			Log.i(TAG, "Inserted ID: " + id2);
+
+			TimeEntry t3 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+			t3.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000*60*30))); //30min later
+			long id3 = TimeEntry.create(dbh, t3);
+			Log.i(TAG, "Inserted ID: " + id3);		
 	}
 
 	private void transmitTheTimeEnties() {
-		Cursor c = TimeEntry.all(dbh);
-		Log.d(TAG, "c.getCount(): " + c.getCount());
+		List<TimeEntry> l = TimeEntry.all(dbh);
+		Log.d(TAG, "Size: " + l.size());
+		for (TimeEntry timeEntry : l) {
+			Log.d(TAG, "timeEntry: " + timeEntry.getId());
+			Log.d(TAG, "Hashcode: " + timeEntry.getHashcode());
+			Log.d(TAG, "Description: " + timeEntry.getDescription());
+			Log.d(TAG, "Start: " + timeEntry.getTimeStart());
+			Log.d(TAG, "Stop: " + timeEntry.getTimeStop());
+		}
 	}
 
 }
