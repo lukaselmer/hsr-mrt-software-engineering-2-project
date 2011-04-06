@@ -10,9 +10,7 @@ import java.util.List;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.location.Location;
-import android.location.LocationManager;
 import android.os.Parcel;
-import android.os.Parcelable;
 
 public class TimeEntry {
 	private static String TABLE_NAME = DbHelper.TIME_ENTRIES_TABLE_NAME;
