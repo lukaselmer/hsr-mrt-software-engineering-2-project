@@ -46,9 +46,11 @@ class TimeEntriesController < ApplicationController
       if @time_entry.save
         format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully created.') }
         format.xml  { render :xml => @time_entry, :status => :created, :location => @time_entry }
+        format.json { render :json => @time_entry, :status => :created, :location => @time_entry  }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @time_entry.errors, :status => :unprocessable_entity }
+        format.json  { render :json => @time_entry.errors, :status => :unprocessable_entity }
       end
     end
   end
