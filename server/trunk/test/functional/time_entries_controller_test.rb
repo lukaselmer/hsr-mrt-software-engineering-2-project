@@ -17,11 +17,34 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should create time_entry" do
+    hsh = @time_entry.attributes
+    hsh['hashcode'] = 'asdasdasd'
     assert_difference('TimeEntry.count') do
-      post :create, :time_entry => @time_entry.attributes
+      post :create, :time_entry => hsh
     end
 
     assert_redirected_to time_entry_path(assigns(:time_entry))
+  end
+
+  test "should create time_entry by json" do
+    hsh = @time_entry.attributes
+    hsh['hashcode'] = 'asdasdasd'
+    
+    assert_difference('TimeEntry.count') do
+      post :create, :time_entry => hsh, :format => :json
+    end
+
+    assert_response :success
+  end
+
+
+  test "should not create time_entry by json with existing hashcode" do
+
+    assert_no_difference('TimeEntry.count') do
+      post :create, :time_entry => @time_entry.attributes, :format => :json
+    end
+
+    assert_response :success
   end
 
   test "should show time_entry" do

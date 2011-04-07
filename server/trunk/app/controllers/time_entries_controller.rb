@@ -1,6 +1,5 @@
 class TimeEntriesController < ApplicationController
   # GET /time_entries
-  # GET /time_entries.xml
   def index
     @time_entries = TimeEntry.all
 
@@ -20,7 +19,6 @@ class TimeEntriesController < ApplicationController
   end
 
   # GET /time_entries/new
-  # GET /time_entries/new.xml
   def new
     @time_entry = TimeEntry.new
 
@@ -35,12 +33,11 @@ class TimeEntriesController < ApplicationController
   end
 
   # POST /time_entries
-  # POST /time_entries.xml
   def create
-    @time_entry = TimeEntry.new(params[:time_entry])
+    @time_entry = TimeEntry.find_by_hashcode(params[:time_entry][:hashcode]) || TimeEntry.new(params[:time_entry])
 
     respond_to do |format|
-      if @time_entry.save
+      if (!@time_entry.new_record?) || @time_entry.save
         format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully created.') }
         format.json { render :json => @time_entry, :status => :created, :location => @time_entry  }
       else
@@ -51,7 +48,6 @@ class TimeEntriesController < ApplicationController
   end
 
   # PUT /time_entries/1
-  # PUT /time_entries/1.xml
   def update
     @time_entry = TimeEntry.find(params[:id])
 
@@ -65,7 +61,6 @@ class TimeEntriesController < ApplicationController
   end
 
   # DELETE /time_entries/1
-  # DELETE /time_entries/1.xml
   def destroy
     @time_entry = TimeEntry.find(params[:id])
     @time_entry.destroy
