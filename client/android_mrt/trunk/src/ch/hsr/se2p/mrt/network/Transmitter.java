@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.Formatter;
 import java.util.Map;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -35,6 +36,7 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.util.Config;
 
 public class Transmitter {
+	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 300;
 	private static final String TAG = Transmitter.class.getSimpleName();
 	private String cookie;
 
@@ -90,24 +92,15 @@ public class Transmitter {
 	}
 
 	private String doPost(String url, JSONObject c) throws ClientProtocolException, IOException {
-
-		HttpParams httpParameters = new BasicHttpParams();
-		// Set the timeout in milliseconds until a connection is established.
-		int timeoutConnection = 3000;
-		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-		// Set the default socket timeout (SO_TIMEOUT)
-		// in milliseconds which is the timeout for waiting for data.
-		int timeoutSocket = 3000;
-		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
-		DefaultHttpClient client = new DefaultHttpClient(httpParameters);
+		DefaultHttpClient client = new DefaultHttpClient(getHttpParams());
 
 		HttpPost post = new HttpPost(url);
 		JSONObject holder = new JSONObject();
 
+		Log.i(TAG, "Starting HTTP Reququest: " + url);
 		try {
 			holder.put("time_entry", c);
-			Log.e("TimeEntry JSON", "TimeEntry JSON = " + holder.toString());
+			Log.i(TAG, "Parameter time_entry = " + holder.toString());
 			StringEntity se = new StringEntity(holder.toString());
 			post.setEntity(se);
 			post.setHeader("Content-Type", "application/json");
@@ -118,35 +111,31 @@ public class Transmitter {
 			js.printStackTrace();
 		}
 
-		Log.e(TAG, "Executing HTTP Reququest");
+		if (cookie != null)
+			post.addHeader("cookie", cookie);
+
+		Log.i(TAG, "Executing HTTP request");
 
 		HttpResponse response = null;
 		try {
 			response = client.execute(post);
 		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-			Log.e("ClientProtocol", "" + e);
+			Log.d("ClientProtocol", "ClientProtocolException when executing request", e);
+			return null;
 		} catch (IOException e) {
-			e.printStackTrace();
-			Log.e("IO", "" + e);
+			Log.d(TAG, "IOException when executing request", e);
+			return null;
 		}
 
-		// Log.e(TAG, "Headers: " + response.getAllHeaders());
-		Log.e(TAG, "Readming answer");
-
+		Log.i(TAG, "HTTP request finished");
 		HttpEntity entity = response.getEntity();
-		// if (entity != null) {
-		// try {
-		// entity.consumeContent();
-		// } catch (IOException e) {
-		// Log.e("IO E", "" + e);
-		// e.printStackTrace();
-		// }
-		// }
-
-		Log.e(TAG, "Answer length is: " + entity.getContentLength());
+		Log.i(TAG, "Server answer length is: " + entity.getContentLength());
 		String responseString = EntityUtils.toString(entity);
-		Log.e(TAG, "Answer is: " + responseString);
+		Log.e(TAG, "Server answer is: " + responseString);
+
+		Header h = response.getFirstHeader("set-cookie");
+		if (h != null)
+			cookie = h.getValue();
 
 		return responseString;
 
@@ -189,6 +178,7 @@ public class Transmitter {
 		// request.setEntity(e);
 		// return httpclient.execute(request);
 	}
+
 	// private String httpRequest(String url_string, boolean post) {
 	// String myString = null;
 	// try {
@@ -217,4 +207,14 @@ public class Transmitter {
 	// }
 	// return myString;
 	// }
+
+	protected HttpParams getHttpParams() {
+		HttpParams httpParams = new BasicHttpParams();
+		// Set the timeout in milliseconds until a connection is established.
+		HttpConnectionParams.setConnectionTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
+		// Set the default socket timeout (SO_TIMEOUT)
+		// in milliseconds which is the timeout for waiting for data.
+		HttpConnectionParams.setSoTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
+		return httpParams;
+	}
 }
