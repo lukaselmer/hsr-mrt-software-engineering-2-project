@@ -1,5 +1,9 @@
 Mrt::Application.routes.draw do
-  resources :time_entries
+  resources :time_entries do
+    member do
+	  post 'remove_hashcode'
+	end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
