@@ -11,6 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import ch.hsr.se2p.mrt.network.Transmitter;
+
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.location.Location;
@@ -61,36 +63,37 @@ public class TimeEntry implements JSONObjectable {
 		}
 	}
 
-	public static long create(DbHelper dbh, TimeEntry timeEntry) {
-		if (timeEntry.timeStart == null || timeEntry.timeStop == null) {
+	public long create(DbHelper dbh) {
+		if (timeStart == null || timeStop == null) {
 			return -1;
 		}
-		return dbh.insert(TABLE_NAME, generateContentValues(timeEntry));
+		return dbh.insert(TABLE_NAME, generateContentValues());
 	}
 
-	public static void setTransmitted(DbHelper dbh, TimeEntry timeEntry) {
-		dbh.update(TABLE_NAME, generateContentValues(timeEntry), timeEntry.id);
+	public void setTransmitted(DbHelper dbh) {
+		transmitted = new Integer(1);
+		dbh.update(TABLE_NAME, generateContentValues(), id);
 	}
 
-	protected static ContentValues generateContentValues(TimeEntry timeEntry) {
+	protected ContentValues generateContentValues() {
 		ContentValues contentValues = new ContentValues();
-		contentValues.put(DbHelper.TIME_ENTRIES_C_CUSTOMER_ID[0], timeEntry.customerId == null ? "" : timeEntry.customerId.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID[0], timeEntry.timeEntryTypeId == null ? "" : timeEntry.timeEntryTypeId.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_HASHCODE[0], timeEntry.hashcode);
-		contentValues.put(DbHelper.TIME_ENTRIES_C_DESCRIPTION[0], timeEntry.description);
-		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_START[0], timeEntry.timeStart.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_STOP[0], timeEntry.timeStop.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_TRANSMITTED[0], timeEntry.transmitted.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_AUDIO_RECORD[0], timeEntry.audoRecord == null ? "" : timeEntry.audoRecord.toString());
-		contentValues.put(DbHelper.TIME_ENTRIES_C_POSITION[0], getPositionString(timeEntry));
+		contentValues.put(DbHelper.TIME_ENTRIES_C_CUSTOMER_ID[0], customerId == null ? "" : customerId.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_ENTRY_TYPE_ID[0], timeEntryTypeId == null ? "" : timeEntryTypeId.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_HASHCODE[0], hashcode);
+		contentValues.put(DbHelper.TIME_ENTRIES_C_DESCRIPTION[0], description);
+		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_START[0], timeStart.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_TIME_STOP[0], timeStop.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_TRANSMITTED[0], transmitted.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_AUDIO_RECORD[0], audoRecord == null ? "" : audoRecord.toString());
+		contentValues.put(DbHelper.TIME_ENTRIES_C_POSITION[0], getPositionString());
 		return contentValues;
 	}
 
-	protected static String getPositionString(TimeEntry timeEntry) {
+	protected String getPositionString() {
 		String postitionString = "";
-		if (timeEntry.position != null) {
+		if (position != null) {
 			Parcel p = Parcel.obtain();
-			timeEntry.position.writeToParcel(p, 0);
+			position.writeToParcel(p, 0);
 			postitionString = p.readString();
 		}
 		return postitionString;
@@ -114,7 +117,7 @@ public class TimeEntry implements JSONObjectable {
 		return j;
 	}
 
-	public static void delete(DbHelper dbh, long id) {
+	public void delete(DbHelper dbh) {
 		dbh.delete(TABLE_NAME, id);
 	}
 
@@ -194,5 +197,9 @@ public class TimeEntry implements JSONObjectable {
 
 	public Integer getRailsId() {
 		return railsId;
+	}
+
+	public boolean isTransmitted() {
+		return transmitted == 1;
 	}
 }

@@ -65,17 +65,17 @@ public class MainActivity extends Activity {
 		TimeEntry t1 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 		t1.setDescription("with description, time is " + System.currentTimeMillis());
 		t1.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 4))); // 4h later
-		long id1 = TimeEntry.create(dbh, t1);
+		long id1 = t1.create(dbh);
 		Log.i(TAG, "Inserted ID: " + id1);
 
 		TimeEntry t2 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 		t2.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 3))); // 3h later
-		long id2 = TimeEntry.create(dbh, t2);
+		long id2 = t2.create(dbh);
 		Log.i(TAG, "Inserted ID: " + id2);
 
 		TimeEntry t3 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 		t3.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 30))); // 30min later
-		long id3 = TimeEntry.create(dbh, t3);
+		long id3 = t3.create(dbh);
 		Log.i(TAG, "Inserted ID: " + id3);
 	}
 
@@ -84,10 +84,12 @@ public class MainActivity extends Activity {
 		Log.d(TAG, "Size: " + l.size());
 		Transmitter transmitter = new Transmitter();
 		for (TimeEntry timeEntry : l) {
-			if(transmitter.transmit(timeEntry)){
-				TimeEntry.setTransmitted(dbh,timeEntry);
-				if(transmitter.confirm(timeEntry)){
-					TimeEntry.delete(dbh, timeEntry.getId());
+			if (transmitter.transmit(timeEntry)) {
+				if (!timeEntry.isTransmitted()) {
+					timeEntry.setTransmitted(dbh);
+				}
+				if (transmitter.confirm(timeEntry)) {
+					timeEntry.delete(dbh);
 				}
 			}
 		}
