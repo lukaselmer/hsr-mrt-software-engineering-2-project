@@ -25,17 +25,23 @@ public class TimeEntry implements JSONObjectable {
 	@DatabaseField
 	private String hashcode, description;
 	@DatabaseField
-	private Timestamp timeStart, timeStop;
-	@DatabaseField
+	private long timeStart, timeStop;
+	// TODO: Add location
+	// @DatabaseField
 	private Location position;
-	@DatabaseField
+	// TODO: Add audio record
+	// @DatabaseField
 	private Blob audoRecord;
 
 	private static SecureRandom random = new SecureRandom();
 
+	TimeEntry() {
+		// Needed for ormlite
+	}
+
 	public TimeEntry(Timestamp timeStart) {
 		hashcode = new BigInteger(130, random).toString(32);
-		this.timeStart = timeStart;
+		this.timeStart = timeStart.getTime();
 	}
 
 	public void setTransmitted() {
@@ -50,8 +56,8 @@ public class TimeEntry implements JSONObjectable {
 			j.put("time_entry_type_id", timeEntryTypeId);
 			j.put("hashcode", hashcode);
 			j.put("description", description);
-			j.put("time_start", timeStart);
-			j.put("time_stop", timeStop);
+			j.put("time_start", getTimeStart());
+			j.put("time_stop", getTimeStop());
 			j.put("position", position);
 			j.put("audo_record", audoRecord);
 		} catch (JSONException e) {
@@ -77,11 +83,11 @@ public class TimeEntry implements JSONObjectable {
 	}
 
 	public Timestamp getTimeStart() {
-		return timeStart;
+		return new Timestamp(timeStart);
 	}
 
 	public Timestamp getTimeStop() {
-		return timeStop;
+		return new Timestamp(timeStop);
 	}
 
 	public Location getPosition() {
@@ -101,7 +107,7 @@ public class TimeEntry implements JSONObjectable {
 	}
 
 	public void setTimeStop(Timestamp timeStop) {
-		this.timeStop = timeStop;
+		this.timeStop = timeStop.getTime();
 	}
 
 	public void setCustomerId(Integer customerId) {

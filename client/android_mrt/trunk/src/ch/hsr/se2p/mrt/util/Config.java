@@ -14,5 +14,5 @@ public class Config {
 	// public static final String STUDENTS_URL = MRT_SERVER + "/students.tt";
 	// public static final String OWN_TIMETABLE_URL = MRT_SERVER + "/timetables/own.tt";
 	public static final String TIME_ENTRY_CREATE_URL = MRT_SERVER + "/time_entries.json";
-	public static final String TIME_ENTRY_REMOVE_HASH_CODE_URL = MRT_SERVER + "/time_entries/%i/remove_hashcode.json";
+	public static final String TIME_ENTRY_REMOVE_HASH_CODE_URL = MRT_SERVER + "/time_entries/%d/remove_hashcode.json";
 }
