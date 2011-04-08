@@ -17,24 +17,27 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should create time_entry" do
-    hsh = @time_entry.attributes
-    hsh['hashcode'] = 'asdasdasd'
+    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_difference('TimeEntry.count') do
-      post :create, :time_entry => hsh
+      post :create, :time_entry => valid_entry.attributes
     end
-
     assert_redirected_to time_entry_path(assigns(:time_entry))
   end
 
   test "should create time_entry by json" do
-    hsh = @time_entry.attributes
-    hsh['hashcode'] = 'asdasdasd'
-    
+    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_difference('TimeEntry.count') do
-      post :create, :time_entry => hsh, :format => :json
+      post :create, :time_entry => valid_entry.attributes, :format => :json
     end
-
     assert_response :success
+  end
+
+  test "should not create time_entry by json without hashcode" do
+    invalid_entry = TimeEntry.new(:description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
+    assert_no_difference('TimeEntry.count') do
+      post :create, :time_entry => invalid_entry, :format => :json
+    end
+    assert_response :unprocessable_entity
   end
 
   test "should remove hashcode" do
@@ -51,11 +54,9 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should not create time_entry by json with existing hashcode" do
-
     assert_no_difference('TimeEntry.count') do
       post :create, :time_entry => @time_entry.attributes, :format => :json
     end
-
     assert_response :success
   end
 
@@ -78,7 +79,6 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_difference('TimeEntry.count', -1) do
       delete :destroy, :id => @time_entry.to_param
     end
-
     assert_redirected_to time_entries_path
   end
 end

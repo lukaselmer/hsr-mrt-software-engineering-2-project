@@ -3,7 +3,8 @@ class TimeEntry < ActiveRecord::Base
   belongs_to :time_entry_type
   belongs_to :position
 
-  validates :hashcode, :presence => true, :on => :create
+  #validates :hashcode, :presence => true, :on => :create
+  validates :time_start, :time_stop, :presence => true
 
   def remove_hashcode
     update_attribute(:hashcode, nil)
