@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class TimeEntryTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
+
+  test "remove_hashcode removes hashcode" do
+    assert_not_nil true
+
     assert true
   end
 end

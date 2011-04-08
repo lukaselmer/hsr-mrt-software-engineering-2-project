@@ -4,4 +4,8 @@ class TimeEntry < ActiveRecord::Base
   belongs_to :position
 
   validates :hashcode, :presence => true, :on => :create
+
+  def remove_hashcode
+    update_attribute(:hashcode, nil)
+  end
 end

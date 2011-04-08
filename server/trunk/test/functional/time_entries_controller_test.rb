@@ -37,6 +37,18 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should remove hashcode" do
+    post :remove_hashcode, :id => @time_entry.to_param, :format => :json
+    @time_entry.reload
+    assert_nil(@time_entry.hashcode)
+    assert_response :success
+  end
+
+  test "should leave time_entry unchanged if hashcode is already nil" do
+    @time_entry.remove_hashcode
+    post :remove_hashcode, :id => @time_entry.to_param, :format => :json
+    assert_response :success
+  end
 
   test "should not create time_entry by json with existing hashcode" do
 

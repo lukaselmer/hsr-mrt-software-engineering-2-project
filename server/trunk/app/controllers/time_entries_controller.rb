@@ -73,7 +73,7 @@ class TimeEntriesController < ApplicationController
   # POST /time_entries/1/remove_hashcode
   def remove_hashcode
     @time_entry = TimeEntry.find(params[:id])
-    @time_entry.update_attribute(:hashcode, nil)
+    @time_entry.remove_hashcode
     
     respond_to do |format|
       format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully persisted.') }
