@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt;
+package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -7,6 +7,7 @@ import java.util.List;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.models.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.Transmitter;
