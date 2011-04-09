@@ -1,7 +1,6 @@
 package ch.hsr.se2p.mrt.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.MainActivity;
 import ch.hsr.se2p.mrt.R;
