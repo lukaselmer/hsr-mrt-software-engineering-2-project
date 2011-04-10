@@ -31,7 +31,7 @@ public class TimeEntry implements JSONObjectable {
 	private Location position;
 	// TODO: Add audio record
 	// @DatabaseField
-	private Blob audoRecord;
+	private Blob audioRecord;
 
 	private static SecureRandom random = new SecureRandom();
 
@@ -59,7 +59,7 @@ public class TimeEntry implements JSONObjectable {
 			j.put("time_start", getTimeStart());
 			j.put("time_stop", getTimeStop());
 			j.put("position", position);
-			j.put("audo_record", audoRecord);
+			j.put("audio_record", audioRecord);
 		} catch (JSONException e) {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
@@ -118,8 +118,8 @@ public class TimeEntry implements JSONObjectable {
 		this.timeEntryTypeId = timeEntryTypeId;
 	}
 
-	public void setAudoRecord(Blob audoRecord) {
-		this.audoRecord = audoRecord;
+	public void setAudioRecord(Blob audioRecord) {
+		this.audioRecord = audioRecord;
 	}
 
 	public void setRailsId(Integer railsId) {

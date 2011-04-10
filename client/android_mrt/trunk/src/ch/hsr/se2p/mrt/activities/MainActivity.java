@@ -64,7 +64,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			displayAlertDialog("", "TimeEntry with id " + id + " created.");
 		} catch (SQLException e) {
 			dialog.dismiss();
-			Log.e(TAG, "Database excaeption", e);
+			Log.e(TAG, "Database Exception", e);
 			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.");
 		}
 	}
