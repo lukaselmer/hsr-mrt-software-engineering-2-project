@@ -2,7 +2,6 @@ package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -57,19 +56,16 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	};
 
 	private void createTimeEntryDialog(boolean withDescrition) {
-		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...", true);
+		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...");
 		dialog.show();
 		try {
 			int id = createTimeEntry(withDescrition);
 			dialog.dismiss();
-			AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
-			b.setMessage("TimeEntry with id " + id + " created.");
-			b.setPositiveButton("Ok", null);
-			b.create().show();
+			displayAlertDialog("", "TimeEntry with id " + id + " created.");
 		} catch (SQLException e) {
 			dialog.dismiss();
 			Log.e(TAG, "Database excaeption", e);
-			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
+			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.");
 		}
 	}
 
@@ -81,8 +77,8 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		b.create().show();
 	}
 
-	private void sendTimeEntiesDialog() {
-		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Transmitting TimeEntry. Please wait...", true);
+	private synchronized void sendTimeEntiesDialog() {
+		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...");
 		dialog.show();
 		List<TimeEntry> timeEntries;
 		try {
@@ -90,27 +86,27 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		} catch (SQLException e) {
 			dialog.dismiss();
 			Log.e(TAG, "Database excaeption", e);
-			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
+			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.");
 			return;
 		}
-		transmitTimeEnties(timeEntries);
+		if (timeEntries.size() == 0) {
+			dialog.dismiss();
+			displayAlertDialog("Transmission finished", "No TimeEntries found.");
+			return;
+		}
 
-		// try {
-		// transmitAllTimeEnties();
-		// dialog.dismiss();
-		// AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
-		// b.setMessage("TimeEntries transmitted.");
-		// b.setPositiveButton("Ok", null);
-		// b.create().show();
-		// } catch (SQLException e) {
-		// // dialog.dismiss();
-		// // Log.e(TAG, "Database excaeption", e);
-		// // AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
-		// // b.setTitle("SQL Exception");
-		// // b.setMessage(e.getMessage() + "\n" + "For further details, see log");
-		// // b.setPositiveButton("Ok", null);
-		// // b.create().show();
-		// }
+		dialog.setMessage("Transmitting " + timeEntries.size() + " TimeEntries...");
+		int count = 0;
+		try {
+			count = transmitTimeEnties(timeEntries);
+		} catch (SQLException e) {
+			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
+		}
+		dialog.dismiss();
+		if (count == 0)
+			displayAlertDialog("Transmission finished", "No TimeEntries transmitted. For further details, see log.");
+		else
+			displayAlertDialog("Transmission finished", count + " of " + timeEntries.size() + " TimeEntries transmitted.");
 	}
 
 	// private OnClickListener lstnCreateTimeEntryWithoutDescription = new OnClickListener() {
@@ -163,28 +159,22 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return timeEntryDao.queryForAll();
 	}
 
-	private int transmitTimeEnties(List<TimeEntry> timeEntries) {
-		//List<TimeEntry> timeEntries = new ArrayList<TimeEntry>();
+	private int transmitTimeEnties(List<TimeEntry> timeEntries) throws SQLException {
 		int timeEntriesTransmitted = 0;
-		try {
-			Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-
-			Log.d(TAG, "Size: " + timeEntries.size());
-			Transmitter transmitter = new Transmitter();
-			for (TimeEntry timeEntry : timeEntries) {
-				if (transmitter.transmit(timeEntry)) {
-					if (!timeEntry.isTransmitted()) {
-						timeEntry.setTransmitted();
-						timeEntryDao.update(timeEntry);
-					}
-					if (transmitter.confirm(timeEntry)) {
-						timeEntryDao.delete(timeEntry);
-						timeEntriesTransmitted++;
-					}
+		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
+		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
+		Transmitter transmitter = new Transmitter();
+		for (TimeEntry timeEntry : timeEntries) {
+			if (transmitter.transmit(timeEntry)) {
+				if (!timeEntry.isTransmitted()) {
+					timeEntry.setTransmitted();
+					timeEntryDao.update(timeEntry);
+				}
+				if (transmitter.confirm(timeEntry)) {
+					timeEntryDao.delete(timeEntry);
+					timeEntriesTransmitted++;
 				}
 			}
-		} catch (SQLException e) {
-			Log.e(TAG, "Database excaeption", e);
 		}
 		return timeEntriesTransmitted;
 	}

@@ -41,13 +41,8 @@ public class Transmitter {
 	private String cookie;
 
 	public boolean transmit(TimeEntry timeEntry) {
-		// Log.d(TAG, "timeEntry: " + timeEntry.getId());
-		// Log.d(TAG, "Hashcode: " + timeEntry.getHashcode());
-		// Log.d(TAG, "Description: " + timeEntry.getDescription());
-		// Log.d(TAG, "Start: " + timeEntry.getTimeStart());
-		// Log.d(TAG, "Stop: " + timeEntry.getTimeStop());
-		String ret = transmit(timeEntry.toJSONObject(), Config.TIME_ENTRY_CREATE_URL);
 		try {
+			String ret = transmit(timeEntry.toJSONObject(), Config.TIME_ENTRY_CREATE_URL);
 			JSONObject readObject = new JSONObject(ret);
 			int id = readObject.optJSONObject("time_entry").getInt("id");
 			String hashcode = readObject.optJSONObject("time_entry").getString("hashcode");
@@ -61,37 +56,35 @@ public class Transmitter {
 			// Request failed, pass
 		} catch (NullPointerException e) {
 			// Request failed, pass
+		} catch (IOException e) {
+			// Request failed, pass
 		}
 		return false;
 	}
 
 	public boolean confirm(TimeEntry timeEntry) {
-		String ret = transmit(timeEntry.toJSONObject(), String.format(Config.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
-		JSONObject readObject;
 		int id = 0;
 		try {
+			String ret = transmit(timeEntry.toJSONObject(), String.format(Config.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
+			JSONObject readObject;
+
 			readObject = new JSONObject(ret);
 			id = readObject.optJSONObject("time_entry").getInt("id");
 		} catch (JSONException e) {
 			// Request failed, pass
 		} catch (NullPointerException e) {
 			// Request failed, pass
+		} catch (IOException e) {
+			// Request failed, pass
 		}
 		return id == timeEntry.getRailsId();
 	}
 
-	private String transmit(JSONObject j, String url) {
-		try {
-			return doPost(url, j);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+	private String transmit(JSONObject j, String url) throws IOException {
+		return doPost(url, j);
 	}
 
-	private String doPost(String url, JSONObject c) throws ClientProtocolException, IOException {
+	private String doPost(String url, JSONObject c) throws IOException {
 		DefaultHttpClient client = new DefaultHttpClient(getHttpParams());
 
 		HttpPost post = new HttpPost(url);
@@ -124,7 +117,7 @@ public class Transmitter {
 			return null;
 		} catch (IOException e) {
 			Log.d(TAG, "IOException when executing request", e);
-			return null;
+			throw e;
 		}
 
 		Log.i(TAG, "HTTP request finished");
