@@ -4,9 +4,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.models.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
@@ -20,8 +25,6 @@ import com.j256.ormlite.dao.Dao;
 
 public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
-	public static final String TAG = MainActivity.class.getSimpleName();
-
 	static {
 		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
 			@Override
@@ -31,39 +34,113 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 
+	public static final String TAG = MainActivity.class.getSimpleName();
+
+	private OnClickListener lstnCreateTimeEntryWithDescription = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			createTimeEntryDialog(true);
+		}
+	};
+	private OnClickListener lstnCreateTimeEntryWithoutDescription = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			createTimeEntryDialog(false);
+		}
+	};
+	private OnClickListener lstnSendTimeEntries = new OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			sendTimeEntiesDialog();
+		}
+	};
+
+	private void createTimeEntryDialog(boolean withDescrition) {
+		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...", true);
+		dialog.show();
+		try {
+			int id = createTimeEntry(withDescrition);
+			dialog.dismiss();
+			AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+			b.setMessage("TimeEntry with id " + id + " created.");
+			b.setPositiveButton("Ok", null);
+			b.create().show();
+		} catch (SQLException e) {
+			dialog.dismiss();
+			Log.e(TAG, "Database excaeption", e);
+			AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+			b.setTitle("SQL Exception");
+			b.setMessage(e.getMessage() + "\n" + "For further details, see log");
+			b.setPositiveButton("Ok", null);
+			b.create().show();
+		}
+	}
+
+	private void sendTimeEntiesDialog() {
+		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...", true);
+		dialog.show();
+		// try {
+		transmitTheTimeEnties();
+		dialog.dismiss();
+		AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+		b.setMessage("TimeEntries transmitted.");
+		b.setPositiveButton("Ok", null);
+		b.create().show();
+		// }
+		// catch (SQLException e) {
+		// dialog.dismiss();
+		// Log.e(TAG, "Database excaeption", e);
+		// AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+		// b.setTitle("SQL Exception");
+		// b.setMessage(e.getMessage() + "\n" + "For further details, see log");
+		// b.setPositiveButton("Ok", null);
+		// b.create().show();
+		// }
+	}
+
+	// private OnClickListener lstnCreateTimeEntryWithoutDescription = new OnClickListener() {
+	// @Override
+	// public void onClick(View v) {
+	//
+	// }
+	// };
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		createSomeTimeEntries();
-		transmitTheTimeEnties();
+		Button b1 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
+		b1.setOnClickListener(lstnCreateTimeEntryWithDescription);
+		Button b2 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
+		b2.setOnClickListener(lstnCreateTimeEntryWithoutDescription);
+		Button b3 = (Button) findViewById(R.id.btnSendTimeEntries);
+		b3.setOnClickListener(lstnSendTimeEntries);
+
+		// createSomeTimeEntries();
+		// transmitTheTimeEnties();
 
 	}
 
-	private void createSomeTimeEntries() {
-		try {
-			Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
+	// private void createSomeTimeEntries() {
+	// try {
+	// createTimeEntryWithDescription();
+	// createTimeEntryWithoutDescription();
+	// } catch (SQLException e) {
+	// Log.e(TAG, "Database excaeption", e);
+	// }
+	// }
 
-			TimeEntry t1 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t1.setDescription("with description, time is " + System.currentTimeMillis());
-			t1.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 4))); // 4h later
-			int id1 = timeEntryDao.create(t1);
-			Log.i(TAG, "Inserted ID: " + id1);
-
-			TimeEntry t2 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t2.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 3))); // 3h later
-			int id2 = timeEntryDao.create(t1);
-			Log.i(TAG, "Inserted ID: " + id2);
-
-			TimeEntry t3 = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			t3.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 30))); // 30min later
-			int id3 = timeEntryDao.create(t1);
-			Log.i(TAG, "Inserted ID: " + id3);
-		} catch (SQLException e) {
-			Log.e(TAG, "Database excaeption", e);
-		}
+	private int createTimeEntry(boolean withDescription) throws SQLException {
+		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
+		TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+		if (withDescription)
+			t.setDescription("with description, time is " + System.currentTimeMillis());
+		t.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 4))); // 4h later
+		timeEntryDao.create(t);
+		Log.i(TAG, "Inserted ID: " + t.getId());
+		return t.getId();
 	}
 
 	private void transmitTheTimeEnties() {
