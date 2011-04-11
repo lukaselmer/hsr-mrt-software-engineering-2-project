@@ -19,7 +19,7 @@ import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.models.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
-import ch.hsr.se2p.mrt.network.Transmitter;
+import ch.hsr.se2p.mrt.network.HttpTransmitter;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -143,7 +143,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		int timeEntriesTransmitted = 0;
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
-		Transmitter transmitter = new Transmitter();
+		HttpTransmitter transmitter = new HttpTransmitter();
 		for (TimeEntry timeEntry : timeEntries) {
 			if (transmitter.transmit(timeEntry)) {
 				if (!timeEntry.isTransmitted()) {

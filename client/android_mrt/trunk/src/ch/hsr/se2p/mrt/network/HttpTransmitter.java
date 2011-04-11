@@ -21,9 +21,9 @@ import android.util.Log;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.util.Config;
 
-public class Transmitter {
+public class HttpTransmitter {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;
-	private static final String TAG = Transmitter.class.getSimpleName();
+	private static final String TAG = HttpTransmitter.class.getSimpleName();
 	private String cookie;
 
 	public boolean transmit(TimeEntry timeEntry) {
