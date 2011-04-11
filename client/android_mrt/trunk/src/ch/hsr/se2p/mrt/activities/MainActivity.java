@@ -41,9 +41,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-	private static final int DIALOG_TRANSMIT_TIME_ENTRIES_SUCCESS = 0, DIALOG_TRANSMIT_TIME_ENTRIES_FAIL = 1, DIALOG_EXCEPTION = 2;
-
-	// private TransmitTimeEntriesTask transmitTimeEntriesTask = null;
 	public static final String TAG = MainActivity.class.getSimpleName();
 
 	private OnClickListener lstnCreateTimeEntryWithDescription = new OnClickListener() {
@@ -97,13 +94,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return d;
 	}
 
-	// private OnClickListener lstnCreateTimeEntryWithoutDescription = new OnClickListener() {
-	// @Override
-	// public void onClick(View v) {
-	//
-	// }
-	// };
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -118,10 +108,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		b3.setOnClickListener(lstnSendTimeEntries);
 
 		updateView();
-
-		// createSomeTimeEntries();
-		// transmitTheTimeEnties();
-
 	}
 
 	private void updateView() {
@@ -134,15 +120,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 		tv.setText(String.format(getString(R.string.txtWelcome), getTimeEntriesToTransmitCount()));
 	}
-
-	// private void createSomeTimeEntries() {
-	// try {
-	// createTimeEntryWithDescription();
-	// createTimeEntryWithoutDescription();
-	// } catch (SQLException e) {
-	// Log.e(TAG, "Database excaeption", e);
-	// }
-	// }
 
 	private int getTimeEntriesToTransmitCount() {
 		try {
@@ -251,130 +228,4 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return m;
 	}
 
-	// @Override
-	// protected Dialog onCreateDialog(int id) {
-	// Dialog dialog;
-	// switch (id) {
-	// case DIALOG_TRANSMIT_TIME_ENTRIES_SUCCESS:
-	// dialog = getAlertDialog("Transmission finished", "No TimeEntries transmitted. For further details, see log.");
-	// break;
-	// // case DIALOG_TRANSMIT_TIME_ENTRIES_FAIL:
-	// // dialog = getAlertDialog("Transmission finished", transmitTimeEntriesTask.getSuccessful() + " of " + transmitTimeEntriesTask.getTotal() + " TimeEntries transmitted.");
-	// // break;
-	// // case DIALOG_EXCEPTION:
-	// // dialog = getAlertDialog("SQL Exception", currentException.getMessage() + "\n" + "For further details, see log");
-	// // break;
-	// default:
-	// dialog = null;
-	// }
-	// return dialog;
-	// }
-
-	// private class TransmitTimeEntriesTask extends AsyncTask<TimeEntry, Integer, Integer> {
-	// private Exception exception;
-	// private TimeEntry[] timeEntries;
-	// private int timeEntriesSucessfullyTransmitted = 0;
-	//
-	// public Exception getException() {
-	// return exception;
-	// }
-	//
-	// public int getTotal() {
-	// return timeEntries.length;
-	// }
-	//
-	// public int getSuccessful() {
-	// return timeEntriesSucessfullyTransmitted;
-	// }
-	//
-	// protected Integer doInBackground(TimeEntry... timeEntries) {
-	// this.timeEntries = timeEntries;
-	// timeEntriesSucessfullyTransmitted = 0;
-	// try {
-	// Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-	// Log.d(TAG, "Transmitting " + timeEntries.length + " timeEntries");
-	// Transmitter transmitter = new Transmitter();
-	// for (TimeEntry timeEntry : timeEntries) {
-	// if (transmitter.transmit(timeEntry)) {
-	// if (!timeEntry.isTransmitted()) {
-	// timeEntry.setTransmitted();
-	// timeEntryDao.update(timeEntry);
-	// } else {
-	// break;
-	// }
-	// if (transmitter.confirm(timeEntry)) {
-	// timeEntryDao.delete(timeEntry);
-	// timeEntriesSucessfullyTransmitted++;
-	// } else {
-	// break;
-	// }
-	// } else {
-	// break;
-	// }
-	// }
-	// } catch (SQLException e) {
-	// this.exception = e;
-	// }
-	// return timeEntriesSucessfullyTransmitted;
-	//
-	// // int count = urls.length;
-	// // long totalSize = 0;
-	// // for (int i = 0; i < count; i++) {
-	// // totalSize += Downloader.downloadFile(urls[i]);
-	// // publishProgress((int) ((i / (float) count) * 100));
-	// // }
-	// // return totalSize;
-	// }
-	//
-	// // protected void onProgressUpdate(Integer... progress) {
-	// // setProgressPercent(progress[0]);
-	// // }
-	//
-	// protected void onPostExecute(Integer result) {
-	// if (exception != null){
-	// currentException = exception;
-	// showDialog(DIALOG_EXCEPTION);
-	// }
-	// showDialog(result == 0 ? DIALOG_TRANSMIT_TIME_ENTRIES_FAIL : DIALOG_TRANSMIT_TIME_ENTRIES_SUCCESS);
-	// }
-	// }
-
 }
-
-//
-// try {
-// dbh = new DbHelper(getApplicationContext());
-//
-// } finally {
-// dbh.close();
-// }
-
-// TimeEntry.Values values = new TimeEntry.Values();
-// values.description = "bla";
-//
-// long id = TimeEntry.create(db, values);
-// Log.d(TAG, "TimeEntry with ID " + id + " created");
-//
-// c = TimeEntry.getById(db, id);
-// Log.d(TAG, "c.getCount(): " + c.getCount());
-// Log.d(TAG, "c.c.getString(0): " + c.getString(0));
-// Log.d(TAG, "c.c.getString(1): " + c.getString(1));
-// Log.d(TAG, "c.c.getString(2): " + c.getString(2));
-// Log.d(TAG, "c.c.getString(3): " + c.getString(3));
-// Log.d(TAG, "c.c.getString(4): " + c.getString(4));
-
-// final Button button = (Button) findViewById(R.id.login_button);
-// final EditText usernameEditText = (EditText)
-// findViewById(R.id.login), passwordEditText = (EditText)
-// findViewById(R.id.password);
-// String[] usernameAndPassword = loadLoginFromCache();
-// if (usernameAndPassword != null) {
-// doRequests(usernameAndPassword[0], usernameAndPassword[1]);
-// }
-// button.setOnClickListener(new View.OnClickListener() {
-// public void onClick(View v) {
-// String username = usernameEditText.getText().toString(), password =
-// passwordEditText.getText().toString();
-// doRequests(username, password);
-// }
-// });
