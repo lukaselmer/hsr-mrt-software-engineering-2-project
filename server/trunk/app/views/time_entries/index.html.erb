@@ -8,6 +8,7 @@
     <th>Beschreibung</th>
     <th>Startzeit</th>
     <th>Endzeit</th>
+    <th>Dauer</th>
     <!--<th>Position</th>
     <th>Audio record name</th>-->
     <th></th>
@@ -21,9 +22,10 @@
       <td><%= time_entry.time_entry_type_id %></td>-->
       <td><%= time_entry.hashcode %></td>
       <td><%= time_entry.description %></td>
-      <td><%= l time_entry.time_start, :format => :short %></td>
-      <td><%= l time_entry.time_stop, :format => :short %></td>
-      <!--<td><%= time_entry.position_id %></td>
+      <td><%= l time_entry.time_start %></td>
+      <td><%= l time_entry.time_stop %></td>
+      <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
+      <!--  <td><%= time_entry.position_id %></td>
       <td><%= time_entry.audio_record_name %></td>-->
       <td><%= link_to 'Anzeigen', time_entry %></td>
       <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>

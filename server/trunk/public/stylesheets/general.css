@@ -1,0 +1,298 @@
+body {
+    line-height: 1.5;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+    color: #333;
+    font-size: 75%;
+    background-color: #fff;
+    padding: 0;
+    margin: 0;
+}
+
+body, p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+    font-size:   13px;
+    line-height: 18px;
+}
+
+pre {
+    background-color: #eee;
+    padding: 10px;
+    font-size: 11px;
+}
+
+h1 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 3em;
+    line-height: 1;
+    margin-bottom: 0.5em;
+}
+h1 img {
+    margin: 0;
+}
+
+h2 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 2em;
+    margin-bottom: 0.75em;
+}
+
+h3 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 1.5em;
+    line-height: 1;
+    margin-bottom: 1em;
+}
+
+h4 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 1.2em;
+    line-height: 1.25;
+    margin-bottom: 1.25em;
+}
+
+h5 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 1.5em;
+}
+
+h6 {
+    font-weight: normal;
+    color: #222222;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+h2 img, h3 img, h4 img, h5 img, h6 img {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 1.5em;
+}
+
+
+a { color: #000; text-decoration: underline; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+a:focus { color: #fff; background-color:#000; }
+a:active { color: #fff; background-color:#000;}
+div.field, div.actions {
+    margin-bottom: 10px;
+}
+
+hr {
+    background: #dddddd;
+    color: #dddddd;
+    clear: both;
+    float: none;
+    width: 100%;
+    height: .1em;
+    margin: 0 0 1.45em;
+    border: none;
+}
+
+hr.space {
+    background: #dddddd;
+    color: #dddddd;
+    clear: both;
+    float: none;
+    width: 100%;
+    height: .1em;
+    margin: 0 0 1.45em;
+    border: none;
+    background: #fff;
+    color: #fff;
+    visibility: hidden;
+}
+
+fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearer {
+    clear: both;
+}
+
+body h1 {
+    color: #000;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+body h2 {
+    color: #000;
+    font-size: 1.5em;
+    line-height: 1;
+    margin-bottom: 0.5em;
+}
+
+
+table {
+    border: 1px solid #e4e4e4;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 4px;
+}
+table th {
+    background-color: #EEEEEE;
+    padding: 4px;
+    text-align: left;
+}
+table td {
+    vertical-align: top;
+}
+table tbody tr.group td {
+    padding: 0.8em 0 0.5em 0.3em;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+table tbody tr.group td span.count {
+    color: #aaa;
+    font-size: 80%;
+}
+table tbody tr:hover {
+    background-color: #ffffdd;
+}
+table tbody tr.group:hover {
+    background-color: inherit;
+}
+table tbody td.actions {
+    width: 50px;
+}
+
+
+form fieldset {
+    border: 1px solid #cccccc;
+}
+form input.text, form input.title, form input[type=text], form input[type=password],
+form textarea,
+form select {
+    border: 1px solid #bbbbbb;
+}
+form input.text:focus, form input.title:focus, form input[type=text]:focus, form input[type=password]:focus,
+form textarea:focus,
+form select:focus {
+    border: 1px solid #666666;
+}
+form label {
+    font-weight: bold;
+}
+form fieldset {
+    padding: 1.4em;
+    margin: 0 0 1.5em 0;
+}
+form legend {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+form input.text, form input.title, form input[type=text], form input[type=password] {
+    width: 300px;
+    margin: 0.5em 0;
+    background-color: #fff;
+    padding: 4px 5px;
+}
+form input.title {
+    font-size: 1.5em;
+}
+form input[type=checkbox], form input.checkbox,
+form input[type=radio], form input.radio {
+    position: relative;
+    top: 0.25em;
+}
+form textarea {
+    margin: 0.5em 0;
+    padding: 5px;
+}
+form select {
+    width: 300px;
+    margin: 0.5em 0;
+    background-color: #fff;
+    padding: 4px 5px;
+}
+
+#notice {
+    color: green;
+}
+
+/*.field_with_errors {
+    padding: 2px;
+    background-color: red;
+    display: table;
+}*/
+.fieldWithErrors input, .fieldWithErrors select, .fieldWithErrors textarea {
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 2px solid green !important;
+    border-color: #f10f79 !important;
+}
+.fieldWithErrors input:focus, .fieldWithErrors select:focus, .fieldWithErrors textarea:focus {
+    border: 2px solid green;
+    border-color: #f10f79;
+}
+
+#error_explanation {
+    width: 450px;
+    border: 2px solid red;
+    padding: 7px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+}
+#error_explanation h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px;
+    margin-bottom: 0px;
+    background-color: #c00;
+    color: #fff;
+}
+#error_explanation ul li {
+    font-size: 12px;
+    list-style: square;
+}
+
+
+/*
+#errorExplanation {
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  width: 400px;
+  border: 2px solid green;
+  border-color: #f10f79;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin: 10px 0 20px 0;
+  background-color: #f0f0f0;
+}
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #f10f79;
+  color: #fff;
+}
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+  padding-top: 20px;
+}
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}*/
