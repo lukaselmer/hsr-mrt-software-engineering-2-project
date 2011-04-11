@@ -1,13 +1,5 @@
 package ch.hsr.se2p.mrt.models;
 
-import java.sql.Timestamp;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.database.DatabaseUtils;
-import android.database.sqlite.SQLiteDatabase;
-import android.location.Location;
 import android.provider.BaseColumns;
 
 public class Customer implements BaseColumns {

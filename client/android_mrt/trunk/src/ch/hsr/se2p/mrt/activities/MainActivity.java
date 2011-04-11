@@ -1,6 +1,5 @@
 package ch.hsr.se2p.mrt.activities;
 
-import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
@@ -9,12 +8,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.os.Message;
-import android.os.Parcel;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -64,8 +60,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			updateView();
 		}
 	};
-
-	private Exception currentException;
 
 	private void createTimeEntryDialog(boolean withDescrition) {
 		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...", true);
