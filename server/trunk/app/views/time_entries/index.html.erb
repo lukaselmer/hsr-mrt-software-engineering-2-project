@@ -1,37 +1,37 @@
-<h1>Listing time_entries</h1>
+<h1>Stundeneinträge</h1>
 
 <table>
   <tr>
-    <th>Customer</th>
-    <th>Time entry type</th>
+    <!--<th>Customer</th>
+    <th>Time entry type</th>-->
     <th>Hashcode</th>
-    <th>Description</th>
-    <th>Time start</th>
-    <th>Time stop</th>
-    <th>Position</th>
-    <th>Audio record name</th>
+    <th>Beschreibung</th>
+    <th>Startzeit</th>
+    <th>Endzeit</th>
+    <!--<th>Position</th>
+    <th>Audio record name</th>-->
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @time_entries.each do |time_entry| %>
-  <tr>
-    <td><%= time_entry.customer_id %></td>
-    <td><%= time_entry.time_entry_type_id %></td>
-    <td><%= time_entry.hashcode %></td>
-    <td><%= time_entry.description %></td>
-    <td><%= time_entry.time_start %></td>
-    <td><%= time_entry.time_stop %></td>
-    <td><%= time_entry.position_id %></td>
-    <td><%= time_entry.audio_record_name %></td>
-    <td><%= link_to 'Show', time_entry %></td>
-    <td><%= link_to 'Edit', edit_time_entry_path(time_entry) %></td>
-    <td><%= link_to 'Destroy', time_entry, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+  <% @time_entries.each do |time_entry| %>
+    <tr>
+      <!--<td><%= time_entry.customer_id %></td>
+      <td><%= time_entry.time_entry_type_id %></td>-->
+      <td><%= time_entry.hashcode %></td>
+      <td><%= time_entry.description %></td>
+      <td><%= l time_entry.time_start, :format => :short %></td>
+      <td><%= l time_entry.time_stop, :format => :short %></td>
+      <!--<td><%= time_entry.position_id %></td>
+      <td><%= time_entry.audio_record_name %></td>-->
+      <td><%= link_to 'Anzeigen', time_entry %></td>
+      <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
+      <td><%= link_to 'Löschen', time_entry, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+    </tr>
+  <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Time entry', new_time_entry_path %>
+<%= link_to 'Neuer Stundeneintrag', new_time_entry_path %>
