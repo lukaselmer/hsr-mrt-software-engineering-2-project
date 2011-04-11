@@ -75,6 +75,12 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_redirected_to time_entry_path(assigns(:time_entry))
   end
 
+  test "should not update time_entry without start_time" do
+    @time_entry.time_start = nil
+    put :update, :id => @time_entry.to_param, :time_entry => @time_entry.attributes
+    assert_response :success
+  end
+
   test "should destroy time_entry" do
     assert_difference('TimeEntry.count', -1) do
       delete :destroy, :id => @time_entry.to_param
