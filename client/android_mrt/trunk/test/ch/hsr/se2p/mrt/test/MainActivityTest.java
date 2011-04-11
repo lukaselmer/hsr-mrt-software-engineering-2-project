@@ -20,7 +20,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		super.setUp();
 		mActivity = this.getActivity();
 		mView = (TextView) mActivity.findViewById(R.id.textview);
-		resourceString = mActivity.getString(R.string.hello);
+		resourceString = mActivity.getString(R.string.txtWelcome);
 	}
 
 	public void testPreconditions() {

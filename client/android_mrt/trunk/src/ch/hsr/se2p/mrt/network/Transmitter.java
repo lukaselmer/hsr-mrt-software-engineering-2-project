@@ -1,43 +1,28 @@
 package ch.hsr.se2p.mrt.network;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.util.Formatter;
-import java.util.Map;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
-import org.apache.http.util.ByteArrayBuffer;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import android.util.Log;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.util.Config;
 
 public class Transmitter {
-	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 300;
+	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 500;
 	private static final String TAG = Transmitter.class.getSimpleName();
 	private String cookie;
 
@@ -52,7 +37,6 @@ public class Transmitter {
 				timeEntry.setRailsId(id);
 				return true;
 			}
-			return true;
 		} catch (JSONException e) {
 			// Request failed, pass
 		} catch (NullPointerException e) {
