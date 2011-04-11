@@ -28,7 +28,7 @@ namespace :test_coverage do
         file_location = "file:///#{File.join([Rails.root, 'doc', 'coverage', section_name, 'index.html'])}"
         puts "HTML output: <#{file_location}>"
         puts "Opening brwoser..."
-        system(ENV['OS'] == 'Windows_NT' ? "#{"explorer" : "x-www-browser"} #{file_location}")
+        system("#{ENV['OS'] == 'Windows_NT' ? "explorer" : "x-www-browser"} #{file_location}")
       end
       puts "\n\n"
     end
