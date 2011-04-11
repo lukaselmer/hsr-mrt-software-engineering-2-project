@@ -19,7 +19,6 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
-import ch.hsr.se2p.mrt.util.Config;
 
 public class HttpTransmitter {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;
@@ -30,7 +29,7 @@ public class HttpTransmitter {
 		if (timeEntry.isTransmitted())
 			return true;
 		try {
-			String ret = transmit(timeEntry.toJSONObject(), Config.TIME_ENTRY_CREATE_URL);
+			String ret = transmit(timeEntry.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
 			JSONObject readObject = new JSONObject(ret);
 			int id = readObject.optJSONObject("time_entry").getInt("id");
 			String hashcode = readObject.optJSONObject("time_entry").getString("hashcode");
@@ -52,7 +51,7 @@ public class HttpTransmitter {
 	public boolean confirm(TimeEntry timeEntry) {
 		int id = 0;
 		try {
-			String ret = transmit(timeEntry.toJSONObject(), String.format(Config.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
+			String ret = transmit(timeEntry.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
 			JSONObject readObject;
 
 			readObject = new JSONObject(ret);
