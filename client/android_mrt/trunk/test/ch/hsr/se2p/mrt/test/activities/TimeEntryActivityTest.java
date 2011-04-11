@@ -1,17 +1,16 @@
-package ch.hsr.se2p.mrt.test;
+package ch.hsr.se2p.mrt.test.activities;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.activities.TimeEntryActivity;
 
-public class MainActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
-
+public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
 	private TimeEntryActivity mActivity;
 	private TextView mView;
 	private String resourceString;
 
-	public MainActivityTest() {
+	public TimeEntryActivityTest() {
 		super(TimeEntryActivity.class);
 	}
 
