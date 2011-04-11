@@ -145,7 +145,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return timeEntryDao.queryForAll();
 	}
 
-	private int transmitTimeEnties(List<TimeEntry> timeEntries, ProgressDialog dialog) throws SQLException {
+	private int transmitTimeEnties(List<TimeEntry> timeEntries, ProgressDialog dialog, Handler progressHandler) throws SQLException {
 		int timeEntriesTransmitted = 0;
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
@@ -155,8 +155,6 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				if (!timeEntry.isTransmitted()) {
 					timeEntry.setTransmitted();
 					timeEntryDao.update(timeEntry);
-				} else {
-					break;
 				}
 
 				if (transmitter.confirm(timeEntry)) {
@@ -168,12 +166,16 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			} else {
 				break;
 			}
+			dialog.setProgress(timeEntriesTransmitted);
 		}
 		return timeEntriesTransmitted;
 	}
 
 	private void sendTimeEntiesDialog() {
-		final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...", true);
+		final ProgressDialog dialog = new ProgressDialog(MainActivity.this); // ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...", true, false);
+		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		dialog.setTitle("Transmitting TimeEntries...");
+		dialog.setCancelable(false);
 		dialog.show();
 		final List<TimeEntry> timeEntries;
 		try {
@@ -190,13 +192,21 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			return;
 		}
 
-		dialog.setMessage("Transmitting " + timeEntries.size() + " TimeEntries...");
+		dialog.setProgress(0);
+		dialog.setMax(timeEntries.size());
 
-		final Handler handler = new Handler() {
+		final Handler notificationHandler = new Handler() {
 			public void handleMessage(Message msg) {
-				//dialog.dismiss();
 				Bundle b = msg.getData();
 				displayAlertDialog(b.getString("title"), b.getString("message"));
+				updateView();
+			}
+		};
+		final Handler progressHandler = new Handler() {
+			public void handleMessage(Message msg) {
+				Bundle b = msg.getData();
+				displayAlertDialog(b.getString("title"), b.getString("message"));
+				updateView();
 			}
 		};
 
@@ -204,17 +214,14 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			public void run() {
 				int count = 0;
 				try {
-					count = transmitTimeEnties(timeEntries, dialog);
+					count = transmitTimeEnties(timeEntries, dialog, progressHandler);
 				} catch (SQLException e) {
 					MainActivity.this.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
 				}
 				dialog.dismiss();
-				//handler.sendEmptyMessage(0);
 
-				if (count == 0)
-					handler.sendMessage(getMessageForAlertDialog("Transmission finished", "No TimeEntries transmitted. For further details, see log."));
-				else
-					handler.sendMessage(getMessageForAlertDialog("Transmission finished", count + " of " + timeEntries.size() + " TimeEntries transmitted."));
+				String messageText = (count == 0) ? "No TimeEntries transmitted. For further details, see log." : count + " of " + timeEntries.size() + " TimeEntries transmitted.";
+				notificationHandler.sendMessage(getMessageForAlertDialog("Transmission finished", messageText));
 			}
 		}).start();
 	}
@@ -227,5 +234,4 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		m.setData(b);
 		return m;
 	}
-
 }

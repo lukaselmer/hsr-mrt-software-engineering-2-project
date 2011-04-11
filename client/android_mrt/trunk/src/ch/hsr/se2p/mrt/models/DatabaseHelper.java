@@ -15,7 +15,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	private static final String DATABASE_NAME = "mrt.db";
-	private static final int DATABASE_VERSION = 1;
+	private static final int DATABASE_VERSION = 2;
 
 	// the DAO object we use to access the TimeEntry table
 	private Dao<TimeEntry, Integer> timeEntryDao = null;

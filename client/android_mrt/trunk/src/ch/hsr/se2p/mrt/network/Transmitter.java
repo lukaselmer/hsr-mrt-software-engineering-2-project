@@ -22,11 +22,13 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.util.Config;
 
 public class Transmitter {
-	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 500;
+	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;
 	private static final String TAG = Transmitter.class.getSimpleName();
 	private String cookie;
 
 	public boolean transmit(TimeEntry timeEntry) {
+		if (timeEntry.isTransmitted())
+			return true;
 		try {
 			String ret = transmit(timeEntry.toJSONObject(), Config.TIME_ENTRY_CREATE_URL);
 			JSONObject readObject = new JSONObject(ret);
@@ -109,7 +111,7 @@ public class Transmitter {
 		HttpEntity entity = response.getEntity();
 		Log.i(TAG, "Server answer length is: " + entity.getContentLength());
 		String responseString = EntityUtils.toString(entity);
-		Log.e(TAG, "Server answer is: " + responseString);
+		Log.i(TAG, "Server answer is: " + responseString);
 
 		Header h = response.getFirstHeader("set-cookie");
 		if (h != null)
