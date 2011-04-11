@@ -31,3 +31,4 @@ gem 'capistrano'
 # group :development, :test do
 #   gem 'webrat'
 # end
+gem 'rcov'
