@@ -37,7 +37,7 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.find_by_hashcode(params[:time_entry][:hashcode]) || TimeEntry.new(params[:time_entry])
 
     respond_to do |format|
-      if params[:hashcode] != nil && (!@time_entry.new_record?) || @time_entry.save
+      if (!@time_entry.new_record?) || ((!params[:time_entry][:hashcode].blank?) && @time_entry.save)
         format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully created.') }
         format.json { render :json => @time_entry, :status => :created, :location => @time_entry  }
       else

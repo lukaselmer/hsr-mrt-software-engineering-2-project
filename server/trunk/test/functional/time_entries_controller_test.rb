@@ -17,7 +17,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should create time_entry" do
-    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
+    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Valid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_difference('TimeEntry.count') do
       post :create, :time_entry => valid_entry.attributes
     end
@@ -25,7 +25,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should create time_entry by json" do
-    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
+    valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Valid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_difference('TimeEntry.count') do
       post :create, :time_entry => valid_entry.attributes, :format => :json
     end
@@ -35,7 +35,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
   test "should not create time_entry by json without hashcode" do
     invalid_entry = TimeEntry.new(:description => "Invalid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_no_difference('TimeEntry.count') do
-      post :create, :time_entry => invalid_entry, :format => :json
+      post :create, :time_entry => invalid_entry.attributes, :format => :json
     end
     assert_response :unprocessable_entity
   end
