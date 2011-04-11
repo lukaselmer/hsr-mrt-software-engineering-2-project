@@ -27,8 +27,7 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 
-public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
-
+public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
 		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
 			@Override
@@ -37,7 +36,8 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-	public static final String TAG = MainActivity.class.getSimpleName();
+
+	public static final String TAG = TimeEntryActivity.class.getSimpleName();
 
 	private OnClickListener lstnCreateTimeEntryWithDescription = new OnClickListener() {
 		@Override
@@ -62,7 +62,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	};
 
 	private void createTimeEntryDialog(boolean withDescrition) {
-		ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "", "Creating TimeEntry. Please wait...", true);
+		ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this, "", "Creating TimeEntry. Please wait...", true);
 		dialog.show();
 		try {
 			int id = createTimeEntry(withDescrition);
@@ -80,7 +80,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected Dialog getAlertDialog(String title, String message) {
-		AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
+		AlertDialog.Builder b = new AlertDialog.Builder(TimeEntryActivity.this);
 		b.setTitle(title);
 		b.setMessage(message);
 		b.setPositiveButton("Ok", null);
@@ -166,7 +166,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void sendTimeEntiesDialog() {
-		final ProgressDialog dialog = new ProgressDialog(MainActivity.this); // ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...", true, false);
+		final ProgressDialog dialog = new ProgressDialog(TimeEntryActivity.this); // ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...", true, false);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setTitle("Transmitting TimeEntries...");
 		dialog.setCancelable(false);
@@ -210,7 +210,7 @@ public class MainActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				try {
 					count = transmitTimeEnties(timeEntries, dialog, progressHandler);
 				} catch (SQLException e) {
-					MainActivity.this.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
+					TimeEntryActivity.this.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
 				}
 				dialog.dismiss();
 
