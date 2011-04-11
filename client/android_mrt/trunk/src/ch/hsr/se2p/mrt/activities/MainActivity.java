@@ -17,9 +17,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.models.DatabaseHelper;
-import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.HttpTransmitter;
+import ch.hsr.se2p.mrt.persistence.helpers.DatabaseHelper;
+import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;

@@ -18,7 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-import ch.hsr.se2p.mrt.models.TimeEntry;
+import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
 import ch.hsr.se2p.mrt.util.Config;
 
 public class HttpTransmitter {

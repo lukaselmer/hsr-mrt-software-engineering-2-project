@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.models;
+package ch.hsr.se2p.mrt.persistence.models;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -10,6 +10,8 @@ import org.json.JSONObject;
 
 import android.location.Location;
 import android.util.Log;
+
+import ch.hsr.se2p.mrt.persistence.helpers.JSONObjectable;
 
 import com.j256.ormlite.field.DatabaseField;
 
