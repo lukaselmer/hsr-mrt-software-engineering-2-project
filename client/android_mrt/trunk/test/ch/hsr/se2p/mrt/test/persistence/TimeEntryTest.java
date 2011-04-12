@@ -3,6 +3,9 @@ package ch.hsr.se2p.mrt.test.persistence;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.j256.ormlite.dao.Dao;
 
 import ch.hsr.se2p.mrt.persistence.database.DatabaseHelper;
@@ -75,6 +78,28 @@ public class TimeEntryTest extends AndroidTestCase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
+		}
+	}
+
+	public void testToJSON() {
+		try {
+			Timestamp timeStop = new Timestamp(System.currentTimeMillis()), timeStart = new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60);
+			TimeEntry t = new TimeEntry(timeStart);
+			t.setTimeStop(timeStop);
+			t.setDescription("bla");
+			int id = dao.create(t);
+			t = dao.queryForId(id);
+			JSONObject j = t.toJSONObject();
+			assertEquals("bla", j.getString("description"));
+			assertEquals(timeStart, j.get("time_start"));
+			assertEquals(timeStop, j.get("time_stop"));
+			assertEquals(t.getHashcode(), j.getString("hashcode"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assertTrue(false);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			assertTrue(false);
 		}
 	}
 }

@@ -46,6 +46,74 @@ public class TimeEntry implements JSONObjectable {
 		this.timeStart = timeStart.getTime();
 	}
 
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getHashcode() {
+		return hashcode;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public Location getPosition() {
+		return position;
+	}
+
+	public Integer getRailsId() {
+		return railsId;
+	}
+
+	public Integer getTimeEntryTypeId() {
+		return timeEntryTypeId;
+	}
+
+	public Timestamp getTimeStart() {
+		return new Timestamp(timeStart);
+	}
+
+	public Timestamp getTimeStop() {
+		return new Timestamp(timeStop);
+	}
+
+	public boolean isTransmitted() {
+		return transmitted;
+	}
+
+	public void setAudioRecord(Blob audioRecord) {
+		this.audioRecord = audioRecord;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPosition(Location position) {
+		this.position = position;
+	}
+
+	public void setRailsId(Integer railsId) {
+		this.railsId = railsId;
+	}
+
+	public void setTimeEntryTypeId(Integer timeEntryTypeId) {
+		this.timeEntryTypeId = timeEntryTypeId;
+	}
+
+	public void setTimeStop(Timestamp timeStop) {
+		this.timeStop = timeStop.getTime();
+	}
+
 	public void setTransmitted() {
 		transmitted = true;
 	}
@@ -66,73 +134,5 @@ public class TimeEntry implements JSONObjectable {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
 		return j;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public Integer getCustomerId() {
-		return customerId;
-	}
-
-	public Integer getTimeEntryTypeId() {
-		return timeEntryTypeId;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public Timestamp getTimeStart() {
-		return new Timestamp(timeStart);
-	}
-
-	public Timestamp getTimeStop() {
-		return new Timestamp(timeStop);
-	}
-
-	public Location getPosition() {
-		return position;
-	}
-
-	public String getHashcode() {
-		return hashcode;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public void setPosition(Location position) {
-		this.position = position;
-	}
-
-	public void setTimeStop(Timestamp timeStop) {
-		this.timeStop = timeStop.getTime();
-	}
-
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
-	}
-
-	public void setTimeEntryTypeId(Integer timeEntryTypeId) {
-		this.timeEntryTypeId = timeEntryTypeId;
-	}
-
-	public void setAudioRecord(Blob audioRecord) {
-		this.audioRecord = audioRecord;
-	}
-
-	public void setRailsId(Integer railsId) {
-		this.railsId = railsId;
-	}
-
-	public Integer getRailsId() {
-		return railsId;
-	}
-
-	public boolean isTransmitted() {
-		return transmitted;
 	}
 }
