@@ -71,6 +71,7 @@ public class HttpTransmitterTest extends AndroidTestCase {
 		TimeEntry timeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
 		timeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 		timeEntry.setDescription("bla");
+		
 		assertTrue(transmitter.transmit(timeEntry));
 	}
 }
