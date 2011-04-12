@@ -1,20 +1,24 @@
 package ch.hsr.se2p.mrt.test.network;
 
-import ch.hsr.se2p.mrt.network.HttpTransmitter;
+import java.sql.Timestamp;
+
 import android.test.AndroidTestCase;
-import android.test.mock.MockContext;
+import ch.hsr.se2p.mrt.network.HttpTransmitter;
+import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
 
 public class HttpTransmitterTest extends AndroidTestCase {
 	private HttpTransmitter transmitter;
 
 	@Override
 	protected void setUp() throws Exception {
-		MockContext c = new MockContext();
-		setContext(c);
 		transmitter = new HttpTransmitter();
 	}
 
-	public void testBla() {
+	public void testTransmission() {
 		assertTrue(true);
+		TimeEntry timeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
+		timeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
+		timeEntry.setDescription("bla");
+		assertTrue(transmitter.transmit(timeEntry));
 	}
 }
