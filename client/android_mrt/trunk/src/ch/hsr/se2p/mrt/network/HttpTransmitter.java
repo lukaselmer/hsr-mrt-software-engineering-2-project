@@ -7,6 +7,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -52,9 +53,7 @@ public class HttpTransmitter {
 		int id = 0;
 		try {
 			String ret = transmit(timeEntry.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
-			JSONObject readObject;
-
-			readObject = new JSONObject(ret);
+			JSONObject readObject = new JSONObject(ret);
 			id = readObject.optJSONObject("time_entry").getInt("id");
 		} catch (JSONException e) {
 			// Request failed, pass
@@ -70,12 +69,30 @@ public class HttpTransmitter {
 		return doPost(url, j);
 	}
 
-	private String doPost(String url, JSONObject c) throws IOException {
+	private String doPost(String url, JSONObject jsonObject) throws IOException {
+		return doHttpRequest(url, jsonObject, new HttpPost(url));
+	}
+
+	private String doHttpRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
 		DefaultHttpClient client = new DefaultHttpClient(getHttpParams());
-
-		HttpPost post = new HttpPost(url);
 		JSONObject holder = new JSONObject();
+		prepareRequest(url, jsonObject, httpRequest, holder);
+		HttpResponse response = executeRequest(client, httpRequest);
+		String responseString = handleResponse(response);
+		return responseString;
+	}
 
+	protected HttpParams getHttpParams() {
+		HttpParams httpParams = new BasicHttpParams();
+		// Set the timeout in milliseconds until a connection is established.
+		HttpConnectionParams.setConnectionTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
+		// Set the default socket timeout (SO_TIMEOUT)
+		// in milliseconds which is the timeout for waiting for data.
+		HttpConnectionParams.setSoTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
+		return httpParams;
+	}
+
+	protected void prepareRequest(String url, JSONObject c, HttpEntityEnclosingRequestBase post, JSONObject holder) {
 		Log.i(TAG, "Starting HTTP Reququest: " + url);
 		try {
 			holder.put("time_entry", c);
@@ -92,10 +109,12 @@ public class HttpTransmitter {
 
 		if (cookie != null)
 			post.addHeader("cookie", cookie);
+	}
 
+	protected HttpResponse executeRequest(DefaultHttpClient client, HttpEntityEnclosingRequestBase post) throws IOException {
+		HttpResponse response = null;
 		Log.i(TAG, "Executing HTTP request");
 
-		HttpResponse response = null;
 		try {
 			response = client.execute(post);
 		} catch (ClientProtocolException e) {
@@ -105,7 +124,10 @@ public class HttpTransmitter {
 			Log.d(TAG, "IOException when executing request", e);
 			throw e;
 		}
+		return response;
+	}
 
+	protected String handleResponse(HttpResponse response) throws IOException {
 		Log.i(TAG, "HTTP request finished");
 		HttpEntity entity = response.getEntity();
 		Log.i(TAG, "Server answer length is: " + entity.getContentLength());
@@ -115,85 +137,7 @@ public class HttpTransmitter {
 		Header h = response.getFirstHeader("set-cookie");
 		if (h != null)
 			cookie = h.getValue();
-
 		return responseString;
-
-		// int TIMEOUT_MILLISEC = 10000; // = 10 seconds
-		// HttpParams httpParams = new BasicHttpParams();
-		// HttpConnectionParams.setConnectionTimeout(httpParams, TIMEOUT_MILLISEC);
-		// HttpConnectionParams.setSoTimeout(httpParams, TIMEOUT_MILLISEC);
-		// HttpClient client = new DefaultHttpClient(httpParams);
-		//
-		// HttpPost request = new HttpPost(url);
-		// request.setEntity(new ByteArrayEntity(
-		// c.toString().getBytes("UTF8")));
-		// HttpResponse response = client.execute(request);
-		//
-		// return response;
-
-		// DefaultHttpClient httpclient = new DefaultHttpClient();
-		// HttpPost httpost = new HttpPost(url);
-		//
-		// JSONObject holder = new JSONObject();
-		// try {
-		// holder.put("time_entry", c.toString());
-		// } catch (JSONException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// StringEntity se = new StringEntity(holder.toString());
-		// httpost.setEntity(se);
-		// httpost.setHeader("Accept", "application/json");
-		// httpost.setHeader("Content-type", "application/json");
-		//
-		// ResponseHandler responseHandler = new BasicResponseHandler();
-		// return httpclient.execute(httpost, responseHandler);
-
-		// HttpClient httpclient = new DefaultHttpClient();
-		// HttpPost request = new HttpPost(url);
-		// StringEntity e = new StringEntity(c.toString());
-		// e.setContentEncoding("UTF-8");
-		// e.setContentType("application/json");
-		// request.setEntity(e);
-		// return httpclient.execute(request);
 	}
 
-	// private String httpRequest(String url_string, boolean post) {
-	// String myString = null;
-	// try {
-	// URL url = new URL(url_string);
-	// HttpURLConnection urlConn = (HttpURLConnection) url.openConnection();
-	// if (post) {
-	// urlConn.setRequestMethod("POST");
-	// }
-	// if (cookie != null) {
-	// urlConn.addRequestProperty("cookie", cookie);
-	// }
-	// InputStream is = urlConn.getInputStream();
-	// BufferedInputStream bis = new BufferedInputStream(is);
-	// ByteArrayBuffer baf = new ByteArrayBuffer(50);
-	// int current = 0;
-	// while ((current = bis.read()) != -1) {
-	// baf.append((byte) current);
-	// }
-	// myString = new String(baf.toByteArray());
-	// String c = urlConn.getHeaderField("set-cookie");
-	// if (c != null) {
-	// cookie = c;
-	// }
-	// } catch (Exception e) {
-	// myString = e.getMessage();
-	// }
-	// return myString;
-	// }
-
-	protected HttpParams getHttpParams() {
-		HttpParams httpParams = new BasicHttpParams();
-		// Set the timeout in milliseconds until a connection is established.
-		HttpConnectionParams.setConnectionTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
-		// Set the default socket timeout (SO_TIMEOUT)
-		// in milliseconds which is the timeout for waiting for data.
-		HttpConnectionParams.setSoTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
-		return httpParams;
-	}
 }
