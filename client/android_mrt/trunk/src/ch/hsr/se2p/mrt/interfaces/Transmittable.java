@@ -14,5 +14,5 @@ public interface Transmittable {
 	 * @return whether response was valid or not
 	 * @throws JSONException
 	 */
-	public boolean processResponse(JSONObject jsonObject) throws JSONException;
+	public boolean processTransmission(JSONObject jsonObject) throws JSONException;
 }

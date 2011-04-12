@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import android.location.Location;
 import android.util.Log;
-
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
@@ -67,7 +66,7 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return position;
 	}
 
-	public int getRailsId() {
+	public int getIdOnServer() {
 		return railsId;
 	}
 
@@ -138,15 +137,20 @@ public class TimeEntry implements Transmittable, Confirmable {
 	}
 
 	@Override
-	public boolean processResponse(JSONObject jsonObject) throws JSONException {
+	public boolean processTransmission(JSONObject jsonObject) throws JSONException {
 		int id = jsonObject.optJSONObject("time_entry").getInt("id");
 		String hashcode = jsonObject.optJSONObject("time_entry").getString("hashcode");
-		
+
 		if (getHashcode().equals(hashcode) && id != 0) {
 			// Everything is fine, it worked! Now lets get rid of the hashcode!
 			setRailsId(id);
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean processConfirmation(JSONObject jsonObject) throws JSONException {
+		return getIdOnServer() == jsonObject.optJSONObject("time_entry").getInt("id");
 	}
 }

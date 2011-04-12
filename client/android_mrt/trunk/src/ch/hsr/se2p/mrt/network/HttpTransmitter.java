@@ -33,8 +33,7 @@ public class HttpTransmitter {
 			return true;
 		try {
 			String ret = transmit(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
-			JSONObject readObject = new JSONObject(ret);
-			if (transmittable.processResponse(readObject)) {
+			if (transmittable.processTransmission(new JSONObject(ret))) {
 				return true;
 			}
 		} catch (JSONException e) {
@@ -48,11 +47,9 @@ public class HttpTransmitter {
 	}
 
 	public boolean confirm(Confirmable confirmable) {
-		int id = 0;
 		try {
-			String ret = transmit(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getRailsId()));
-			JSONObject readObject = new JSONObject(ret);
-			id = readObject.optJSONObject("time_entry").getInt("id");
+			String ret = transmit(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getIdOnServer()));
+			return confirmable.processConfirmation(new JSONObject(ret));
 		} catch (JSONException e) {
 			// Request failed, pass
 		} catch (NullPointerException e) {
@@ -60,7 +57,7 @@ public class HttpTransmitter {
 		} catch (IOException e) {
 			// Request failed, pass
 		}
-		return id == confirmable.getRailsId();
+		return false;
 	}
 
 	protected String transmit(JSONObject jsonObject, String url) throws IOException {
