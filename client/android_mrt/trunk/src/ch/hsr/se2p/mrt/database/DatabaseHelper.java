@@ -1,11 +1,11 @@
-package ch.hsr.se2p.mrt.persistence.database;
+package ch.hsr.se2p.mrt.database;
 
 import java.sql.SQLException;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
+import ch.hsr.se2p.mrt.models.TimeEntry;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;

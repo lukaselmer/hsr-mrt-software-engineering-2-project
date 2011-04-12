@@ -7,7 +7,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
+import ch.hsr.se2p.mrt.models.TimeEntry;
 
 import com.j256.ormlite.dao.Dao;
 import com.jayway.android.robotium.solo.Solo;

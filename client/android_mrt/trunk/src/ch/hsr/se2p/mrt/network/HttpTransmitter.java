@@ -20,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
+import ch.hsr.se2p.mrt.models.TimeEntry;
 
 public class HttpTransmitter {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;

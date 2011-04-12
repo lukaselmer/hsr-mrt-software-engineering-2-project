@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.persistence.models.interfaces;
+package ch.hsr.se2p.mrt.interfaces;
 
 import org.json.JSONObject;
 

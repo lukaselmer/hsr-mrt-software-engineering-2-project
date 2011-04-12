@@ -14,7 +14,7 @@ import org.apache.http.entity.StringEntity;
 import android.test.AndroidTestCase;
 import ch.hsr.se2p.mrt.mocks.MockHttpClient;
 import ch.hsr.se2p.mrt.mocks.MockHttpResponse;
-import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
+import ch.hsr.se2p.mrt.models.TimeEntry;
 
 public class HttpTransmitterTest extends AndroidTestCase {
 	private HttpTransmitter transmitter;

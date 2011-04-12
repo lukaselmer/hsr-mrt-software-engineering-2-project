@@ -8,8 +8,8 @@ import org.json.JSONObject;
 
 import com.j256.ormlite.dao.Dao;
 
-import ch.hsr.se2p.mrt.persistence.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
+import ch.hsr.se2p.mrt.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.models.TimeEntry;
 import android.test.AndroidTestCase;
 
 public class TimeEntryTest extends AndroidTestCase {

@@ -1,7 +1,7 @@
 package ch.hsr.se2p.mrt.activities;
 
 import android.content.Context;
-import ch.hsr.se2p.mrt.persistence.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.database.DatabaseHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;

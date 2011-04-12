@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.persistence.models;
+package ch.hsr.se2p.mrt.models;
 
 import com.j256.ormlite.field.DatabaseField;
 
