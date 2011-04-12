@@ -15,5 +15,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="lib" path="lib/robotium-solo-2.2.jar" sourcepath="lib/robotium-source.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

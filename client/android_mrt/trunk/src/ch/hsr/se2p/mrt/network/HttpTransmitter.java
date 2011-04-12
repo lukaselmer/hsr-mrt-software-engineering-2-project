@@ -32,6 +32,11 @@ public class HttpTransmitter {
 			return true;
 		try {
 			String ret = transmit(timeEntry.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
+			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
+			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
+			System.out.println(ret);
+			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
+			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
 			JSONObject readObject = new JSONObject(ret);
 			int id = readObject.optJSONObject("time_entry").getInt("id");
 			String hashcode = readObject.optJSONObject("time_entry").getString("hashcode");
@@ -66,7 +71,7 @@ public class HttpTransmitter {
 		return id == timeEntry.getRailsId();
 	}
 
-	private String transmit(JSONObject jsonObject, String url) throws IOException {
+	protected String transmit(JSONObject jsonObject, String url) throws IOException {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}
 
@@ -74,7 +79,7 @@ public class HttpTransmitter {
 		return new HttpPost(url);
 	}
 
-	private String doHttpRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
+	protected String doHttpRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
 		HttpClient client = getHttpClient();
 		JSONObject holder = new JSONObject();
 		prepareRequest(url, jsonObject, httpRequest, holder);

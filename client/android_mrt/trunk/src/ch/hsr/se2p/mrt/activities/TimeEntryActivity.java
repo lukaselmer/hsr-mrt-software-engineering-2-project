@@ -116,7 +116,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		updateView();
 	}
 
-	private void updateView() {
+	protected void updateView() {
 		TextView tv;
 		try {
 			tv = (TextView) findViewById(R.id.textview);
