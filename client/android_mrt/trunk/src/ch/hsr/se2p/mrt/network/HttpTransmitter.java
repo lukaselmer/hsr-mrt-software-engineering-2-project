@@ -20,24 +20,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-import ch.hsr.se2p.mrt.models.TimeEntry;
+import ch.hsr.se2p.mrt.interfaces.Confirmable;
+import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 public class HttpTransmitter {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;
 	private static final String TAG = HttpTransmitter.class.getSimpleName();
 	private String cookie;
 
-	public boolean transmit(TimeEntry timeEntry) {
-		if (timeEntry.isTransmitted())
+	public boolean transmit(Transmittable transmittable) {
+		if (transmittable.isTransmitted())
 			return true;
 		try {
-			String ret = transmit(timeEntry.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
+			String ret = transmit(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
 			JSONObject readObject = new JSONObject(ret);
-			int id = readObject.optJSONObject("time_entry").getInt("id");
-			String hashcode = readObject.optJSONObject("time_entry").getString("hashcode");
-			if (timeEntry.getHashcode().equals(hashcode) && id != 0) {
-				// Everything is fine, it worked! Now lets get rid of the hashcode!
-				timeEntry.setRailsId(id);
+			if (transmittable.processResponse(readObject)) {
 				return true;
 			}
 		} catch (JSONException e) {
@@ -50,10 +47,10 @@ public class HttpTransmitter {
 		return false;
 	}
 
-	public boolean confirm(TimeEntry timeEntry) {
+	public boolean confirm(Confirmable confirmable) {
 		int id = 0;
 		try {
-			String ret = transmit(timeEntry.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_REMOVE_HASH_CODE_URL, timeEntry.getRailsId()));
+			String ret = transmit(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getRailsId()));
 			JSONObject readObject = new JSONObject(ret);
 			id = readObject.optJSONObject("time_entry").getInt("id");
 		} catch (JSONException e) {
@@ -63,7 +60,7 @@ public class HttpTransmitter {
 		} catch (IOException e) {
 			// Request failed, pass
 		}
-		return id == timeEntry.getRailsId();
+		return id == confirmable.getRailsId();
 	}
 
 	protected String transmit(JSONObject jsonObject, String url) throws IOException {

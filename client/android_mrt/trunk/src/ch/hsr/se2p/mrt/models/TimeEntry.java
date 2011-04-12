@@ -11,11 +11,11 @@ import org.json.JSONObject;
 import android.location.Location;
 import android.util.Log;
 
-import ch.hsr.se2p.mrt.interfaces.JSONObjectable;
+import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class TimeEntry implements JSONObjectable {
+public class TimeEntry implements Transmittable {
 	private static final String TAG = TimeEntry.class.getSimpleName();
 
 	@DatabaseField(generatedId = true)
@@ -134,5 +134,18 @@ public class TimeEntry implements JSONObjectable {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
 		return j;
+	}
+
+	@Override
+	public boolean processResponse(JSONObject jsonObject) throws JSONException {
+		int id = jsonObject.optJSONObject("time_entry").getInt("id");
+		String hashcode = jsonObject.optJSONObject("time_entry").getString("hashcode");
+		
+		if (getHashcode().equals(hashcode) && id != 0) {
+			// Everything is fine, it worked! Now lets get rid of the hashcode!
+			setRailsId(id);
+			return true;
+		}
+		return false;
 	}
 }
