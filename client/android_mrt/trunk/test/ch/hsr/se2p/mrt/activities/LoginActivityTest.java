@@ -1,5 +1,7 @@
 package ch.hsr.se2p.mrt.activities;
 
-public class LoginActivityTest {
+import android.app.Activity;
+
+public class LoginActivityTest extends Activity {
 
 }

@@ -2,34 +2,30 @@ package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 
-import android.app.Instrumentation;
-import android.content.Context;
-import android.net.ConnectivityManager;
+import junit.framework.TestCase;
+
+import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.test.mock.MockResources;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.activities.TimeEntryActivity;
 import ch.hsr.se2p.mrt.persistence.models.TimeEntry;
 
 import com.j256.ormlite.dao.Dao;
 
 public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
-	private TimeEntryActivity mActivity;
 	private TextView mView;
 	private String resourceString;
 
 	public TimeEntryActivityTest() {
-		super("TimeEntryActivityTest", TimeEntryActivity.class);
+		super("ch.hsr.se2p.mrt.activities", TimeEntryActivity.class);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		mActivity = this.getActivity();
-		mView = (TextView) mActivity.findViewById(R.id.textview);
-		resourceString = mActivity.getString(R.string.txtWelcome);
+		mView = (TextView) getActivity().findViewById(R.id.textview);
+		// resourceString = mActivity.getString(R.string.txtWelcome);
 	}
 
 	@Override
@@ -47,7 +43,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
 			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) mView.getText());
-			mActivity.getLstnCreateTimeEntryWithDescription().onClick(mView);
+			getActivity().getLstnCreateTimeEntryWithDescription().onClick(mView);
 			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) mView.getText());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -57,10 +53,12 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	@UiThreadTest
 	public void testCreateTimeEntries() {
+		getInstrumentation();
+		getActivity();
 		try {
 			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
 			int count = dao.queryForAll().size();
-			mActivity.getLstnCreateTimeEntryWithDescription().onClick(mView);
+			getActivity().getLstnCreateTimeEntryWithDescription().onClick(mView);
 			assertEquals(count + 1, dao.queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
