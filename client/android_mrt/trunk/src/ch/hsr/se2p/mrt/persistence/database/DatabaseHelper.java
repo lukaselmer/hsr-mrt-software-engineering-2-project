@@ -38,15 +38,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-		reset();
+		reset(db, connectionSource);
 	}
 
 	public void reset() {
-		ConnectionSource connectionSource = getConnectionSource();
+		reset(getWritableDatabase(), getConnectionSource());
+	}
+
+	public void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Upgrading database -> drop + create");
 			TableUtils.dropTable(connectionSource, TimeEntry.class, true);
-			onCreate(getWritableDatabase(), connectionSource);
+			onCreate(db, connectionSource);
 		} catch (SQLException e) {
 			Log.e(TAG, "Can't drop databases", e);
 			throw new RuntimeException(e);
