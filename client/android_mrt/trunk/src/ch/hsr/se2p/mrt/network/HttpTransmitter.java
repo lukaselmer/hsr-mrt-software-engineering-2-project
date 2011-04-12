@@ -32,11 +32,6 @@ public class HttpTransmitter {
 			return true;
 		try {
 			String ret = transmit(timeEntry.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
-			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
-			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
-			System.out.println(ret);
-			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
-			System.out.println("XXXXXXXXXXXXXXXXXXXXX");
 			JSONObject readObject = new JSONObject(ret);
 			int id = readObject.optJSONObject("time_entry").getInt("id");
 			String hashcode = readObject.optJSONObject("time_entry").getString("hashcode");
