@@ -7,6 +7,7 @@ import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
@@ -65,21 +66,25 @@ public class HttpTransmitter {
 		return id == timeEntry.getRailsId();
 	}
 
-	private String transmit(JSONObject j, String url) throws IOException {
-		return doPost(url, j);
+	private String transmit(JSONObject jsonObject, String url) throws IOException {
+		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}
 
-	private String doPost(String url, JSONObject jsonObject) throws IOException {
-		return doHttpRequest(url, jsonObject, new HttpPost(url));
+	protected HttpEntityEnclosingRequestBase getHttpPost(String url) {
+		return new HttpPost(url);
 	}
 
 	private String doHttpRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
-		DefaultHttpClient client = new DefaultHttpClient(getHttpParams());
+		HttpClient client = getHttpClient();
 		JSONObject holder = new JSONObject();
 		prepareRequest(url, jsonObject, httpRequest, holder);
 		HttpResponse response = executeRequest(client, httpRequest);
 		String responseString = handleResponse(response);
 		return responseString;
+	}
+
+	protected HttpClient getHttpClient() {
+		return new DefaultHttpClient(getHttpParams());
 	}
 
 	protected HttpParams getHttpParams() {
@@ -92,14 +97,14 @@ public class HttpTransmitter {
 		return httpParams;
 	}
 
-	protected void prepareRequest(String url, JSONObject c, HttpEntityEnclosingRequestBase post, JSONObject holder) {
+	protected void prepareRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest, JSONObject holder) {
 		Log.i(TAG, "Starting HTTP Reququest: " + url);
 		try {
-			holder.put("time_entry", c);
+			holder.put("time_entry", jsonObject);
 			Log.i(TAG, "Parameter time_entry = " + holder.toString());
 			StringEntity se = new StringEntity(holder.toString());
-			post.setEntity(se);
-			post.setHeader("Content-Type", "application/json");
+			httpRequest.setEntity(se);
+			httpRequest.setHeader("Content-Type", "application/json");
 		} catch (UnsupportedEncodingException e) {
 			Log.e("Error", "" + e, e);
 			e.printStackTrace();
@@ -108,15 +113,15 @@ public class HttpTransmitter {
 		}
 
 		if (cookie != null)
-			post.addHeader("cookie", cookie);
+			httpRequest.addHeader("cookie", cookie);
 	}
 
-	protected HttpResponse executeRequest(DefaultHttpClient client, HttpEntityEnclosingRequestBase post) throws IOException {
+	protected HttpResponse executeRequest(HttpClient client, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
 		HttpResponse response = null;
 		Log.i(TAG, "Executing HTTP request");
 
 		try {
-			response = client.execute(post);
+			response = client.execute(httpRequest);
 		} catch (ClientProtocolException e) {
 			Log.d("ClientProtocol", "ClientProtocolException when executing request", e);
 			return null;
