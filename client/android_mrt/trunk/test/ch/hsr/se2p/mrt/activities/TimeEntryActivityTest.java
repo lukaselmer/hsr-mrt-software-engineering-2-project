@@ -7,7 +7,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.test.mock.MockContentProvider;
 import android.test.mock.MockResources;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
@@ -22,7 +21,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	private String resourceString;
 
 	public TimeEntryActivityTest() {
-		super(TimeEntryActivity.class);
+		super("TimeEntryActivityTest", TimeEntryActivity.class);
 	}
 
 	@Override
