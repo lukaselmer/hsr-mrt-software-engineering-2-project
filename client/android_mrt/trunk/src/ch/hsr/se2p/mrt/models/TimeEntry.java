@@ -11,11 +11,12 @@ import org.json.JSONObject;
 import android.location.Location;
 import android.util.Log;
 
+import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class TimeEntry implements Transmittable {
+public class TimeEntry implements Transmittable, Confirmable {
 	private static final String TAG = TimeEntry.class.getSimpleName();
 
 	@DatabaseField(generatedId = true)
@@ -66,7 +67,7 @@ public class TimeEntry implements Transmittable {
 		return position;
 	}
 
-	public Integer getRailsId() {
+	public int getRailsId() {
 		return railsId;
 	}
 

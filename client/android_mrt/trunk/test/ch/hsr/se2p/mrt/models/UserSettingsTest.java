@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.persistence;
+package ch.hsr.se2p.mrt.models;
 
 public class UserSettingsTest {
 
