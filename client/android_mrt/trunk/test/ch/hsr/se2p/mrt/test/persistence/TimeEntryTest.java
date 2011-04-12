@@ -43,13 +43,35 @@ public class TimeEntryTest extends AndroidTestCase {
 		try {
 			assertEquals(0, dao.queryForAll().size());
 			TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)); // 1h ago
-			int id = dao.create(t);
 			t.setDescription("bla");
-			t.setTimeStop(new Timestamp(System.currentTimeMillis()));
+			Timestamp timeStop = new Timestamp(System.currentTimeMillis());
+			t.setTimeStop(timeStop);
+			int id = dao.create(t);
 			assertEquals(1, dao.queryForAll().size());
 			t = dao.queryForId(id);
 			assertNotNull(t);
 			assertEquals(id, (int) t.getId());
+			assertEquals("bla", t.getDescription());
+			assertEquals(timeStop, t.getTimeStop());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+
+	public void testSetTransmitted() {
+		try {
+			assertEquals(0, dao.queryForAll().size());
+			TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)); // 1h ago
+			int id = dao.create(t);
+			t.setTransmitted();
+			t.setTimeStop(new Timestamp(System.currentTimeMillis()));
+			assertEquals(1, dao.queryForAll().size());
+			dao.update(t);
+			t = dao.queryForId(id);
+			assertNotNull(t);
+			assertEquals(id, (int) t.getId());
+			assertTrue(t.isTransmitted());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
