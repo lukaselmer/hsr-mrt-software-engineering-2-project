@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.test.persistence;
+package ch.hsr.se2p.mrt.persistence;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
