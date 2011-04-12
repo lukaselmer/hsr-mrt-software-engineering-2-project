@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import junit.framework.TestCase;
 
+import android.content.Context;
 import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
@@ -16,16 +17,18 @@ import com.j256.ormlite.dao.Dao;
 public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
 	private TextView mView;
 	private String resourceString;
+	private TimeEntryActivity mActivity;
 
 	public TimeEntryActivityTest() {
-		super("ch.hsr.se2p.mrt.activities", TimeEntryActivity.class);
+		super("ch.hsr.se2p.mrt", TimeEntryActivity.class);
 	}
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		mView = (TextView) getActivity().findViewById(R.id.textview);
-		// resourceString = mActivity.getString(R.string.txtWelcome);
+		mActivity = getActivity();
+		mView = (TextView) mActivity.findViewById(R.id.textview);
+		resourceString = mActivity.getString(R.string.txtWelcome);
 	}
 
 	@Override
