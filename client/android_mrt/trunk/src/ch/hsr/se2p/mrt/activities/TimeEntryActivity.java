@@ -61,6 +61,18 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	};
 
+	public OnClickListener getLstnCreateTimeEntryWithDescription() {
+		return lstnCreateTimeEntryWithDescription;
+	}
+
+	public OnClickListener getLstnCreateTimeEntryWithoutDescription() {
+		return lstnCreateTimeEntryWithoutDescription;
+	}
+
+	public OnClickListener getLstnSendTimeEntries() {
+		return lstnSendTimeEntries;
+	}
+
 	private void createTimeEntryDialog(boolean withDescrition) {
 		ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this, "", "Creating TimeEntry. Please wait...", true);
 		dialog.show();

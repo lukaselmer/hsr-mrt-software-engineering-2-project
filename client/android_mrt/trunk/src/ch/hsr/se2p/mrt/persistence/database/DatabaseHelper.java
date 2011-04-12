@@ -48,6 +48,18 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 	}
 
+	public void reset() {
+		ConnectionSource connectionSource = getConnectionSource();
+		try {
+			Log.i(TAG, "Upgrading database -> drop + create");
+			TableUtils.dropTable(connectionSource, TimeEntry.class, true);
+			onCreate(getWritableDatabase(), connectionSource);
+		} catch (SQLException e) {
+			Log.e(TAG, "Can't drop databases", e);
+			throw new RuntimeException(e);
+		}
+	}
+
 	public Dao<TimeEntry, Integer> getTimeEntryDao() throws SQLException {
 		if (timeEntryDao == null)
 			timeEntryDao = getDao(TimeEntry.class);
