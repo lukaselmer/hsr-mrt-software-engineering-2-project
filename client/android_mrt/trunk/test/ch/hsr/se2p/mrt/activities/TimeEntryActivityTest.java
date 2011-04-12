@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.test.activities;
+package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 

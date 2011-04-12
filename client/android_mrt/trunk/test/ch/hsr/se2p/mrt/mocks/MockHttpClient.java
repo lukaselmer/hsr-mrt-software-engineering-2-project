@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.test.mocks;
+package ch.hsr.se2p.mrt.mocks;
 
 import java.io.IOException;
 
