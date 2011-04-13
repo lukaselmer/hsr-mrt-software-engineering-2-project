@@ -81,6 +81,14 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create time_entry without start_time" do
+    invalid_entry = TimeEntry.new(:description => "Valid Entry", :time_stop => 1.hour.ago)
+    assert_no_difference('TimeEntry.count') do
+      post :create, :time_entry => invalid_entry.attributes
+    end
+    assert_response :success
+  end
+
   test "should destroy time_entry" do
     assert_difference('TimeEntry.count', -1) do
       delete :destroy, :id => @time_entry.to_param
