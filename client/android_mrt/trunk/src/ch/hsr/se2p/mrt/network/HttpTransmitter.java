@@ -24,7 +24,7 @@ import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 public class HttpTransmitter {
-	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 3000;
+	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 10000;
 	private static final String TAG = HttpTransmitter.class.getSimpleName();
 	private String cookie;
 
