@@ -1,7 +1,6 @@
 package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
