@@ -15,10 +15,10 @@ import ch.hsr.se2p.mrt.network.mocks.MockHttpResponse;
 import android.test.AndroidTestCase;
 
 public class HttpTestCase extends AndroidTestCase {
-	HttpTransmitter httpTransmitter;
+	HttpHelper httpHelper;
 
 	protected void expectedResultFromTransmitter(final String result) {
-		httpTransmitter = new HttpTransmitter() {
+		httpHelper = new HttpHelper() {
 			protected HttpClient getHttpClient() {
 				return new MockHttpClient() {
 					public HttpResponse execute(HttpUriRequest request) throws IOException, ClientProtocolException {

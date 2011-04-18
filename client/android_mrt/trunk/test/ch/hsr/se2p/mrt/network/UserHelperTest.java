@@ -9,7 +9,7 @@ public class UserHelperTest extends HttpTestCase {
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
 		Integer id = 77;
 		expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email + "\",\"id\":" + id + "}}");
-		UserHelper userHelper = new UserHelper(httpTransmitter);
+		UserHelper userHelper = new UserHelper(httpHelper);
 		assertTrue(userHelper.login("validlogin", "validpassword", u));
 		assertEquals(firstName, u.getFirstName());
 		assertEquals(lastName, u.getLastName());
@@ -20,7 +20,7 @@ public class UserHelperTest extends HttpTestCase {
 	public void testLoginFails() {
 		User u = new User();
 		expectedResultFromTransmitter("{}");
-		UserHelper userHelper = new UserHelper(httpTransmitter);
+		UserHelper userHelper = new UserHelper(httpHelper);
 		assertFalse(userHelper.login("invalidlogin", "invalidpassword", u));
 	}
 

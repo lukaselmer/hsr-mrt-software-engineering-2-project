@@ -1,0 +1,110 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (classFileParser.cpp:3174), pid=5140, tid=5720
+#  Error: ShouldNotReachHere()
+#
+# JRE version: 6.0_20-b02
+# Java VM: Java HotSpot(TM) Client VM (16.3-b01 mixed mode windows-x86 )
+# If you would like to submit a bug report, please visit:
+#   http://java.sun.com/webapps/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0244a000):  JavaThread "Unknown thread" [_thread_in_vm, id=5720, stack(0x003b0000,0x00400000)]
+
+Stack: [0x003b0000,0x00400000],  sp=0x003ff880,  free space=13e003ff890k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x1f4180]
+V  [jvm.dll+0xa1e29]
+V  [jvm.dll+0x74a41]
+V  [jvm.dll+0x760e4]
+V  [jvm.dll+0x1c26a5]
+V  [jvm.dll+0x1c2ddd]
+V  [jvm.dll+0x1c3195]
+V  [jvm.dll+0x1c31db]
+V  [jvm.dll+0x1c3302]
+V  [jvm.dll+0x1c337a]
+V  [jvm.dll+0x1c382d]
+V  [jvm.dll+0x1c3c32]
+V  [jvm.dll+0x1e40b3]
+V  [jvm.dll+0x1e448c]
+V  [jvm.dll+0xd89c1]
+V  [jvm.dll+0x1ddcd8]
+V  [jvm.dll+0x102e10]
+C  [javaw.exe+0x1657]
+C  [javaw.exe+0x1e2c]
+C  [javaw.exe+0x8614]
+C  [kernel32.dll+0x133ca]
+C  [ntdll.dll+0x39ed2]
+C  [ntdll.dll+0x39ea5]
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x0244a000 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=5720, stack(0x003b0000,0x00400000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Dynamic libraries:
+0x00400000 - 0x00424000 	C:\Program Files (x86)\Java\jdk1.6.0_20\bin\javaw.exe
+0x76fe0000 - 0x77160000 	C:\Windows\SysWOW64\ntdll.dll
+0x74c60000 - 0x74d70000 	C:\Windows\syswow64\kernel32.dll
+0x74c10000 - 0x74c56000 	C:\Windows\syswow64\KERNELBASE.dll
+0x74730000 - 0x747d0000 	C:\Windows\syswow64\ADVAPI32.dll
+0x74ed0000 - 0x74f7c000 	C:\Windows\syswow64\msvcrt.dll
+0x75580000 - 0x75599000 	C:\Windows\SysWOW64\sechost.dll
+0x751f0000 - 0x752e0000 	C:\Windows\syswow64\RPCRT4.dll
+0x746d0000 - 0x74730000 	C:\Windows\syswow64\SspiCli.dll
+0x746c0000 - 0x746cc000 	C:\Windows\syswow64\CRYPTBASE.dll
+0x75480000 - 0x75580000 	C:\Windows\syswow64\USER32.dll
+0x752e0000 - 0x75370000 	C:\Windows\syswow64\GDI32.dll
+0x75940000 - 0x7594a000 	C:\Windows\syswow64\LPK.dll
+0x74b50000 - 0x74bed000 	C:\Windows\syswow64\USP10.dll
+0x758e0000 - 0x75940000 	C:\Windows\system32\IMM32.DLL
+0x74e00000 - 0x74ecc000 	C:\Windows\syswow64\MSCTF.dll
+0x7c340000 - 0x7c396000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\msvcr71.dll
+0x6d8b0000 - 0x6db47000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\client\jvm.dll
+0x71e10000 - 0x71e42000 	C:\Windows\system32\WINMM.dll
+0x70bb0000 - 0x70bfc000 	C:\Windows\system32\apphelp.dll
+0x6d860000 - 0x6d86c000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\verify.dll
+0x6d3e0000 - 0x6d3ff000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\java.dll
+0x6d340000 - 0x6d348000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\hpi.dll
+0x759c0000 - 0x759c5000 	C:\Windows\syswow64\PSAPI.DLL
+0x6d8a0000 - 0x6d8af000 	C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin\zip.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 -Xbootclasspath:C:\android\android-sdk-windows\platforms\android-7\android.jar 
+java_command: org.eclipse.jdt.internal.junit.runner.RemoteTestRunner -version 3 -port 49974 -testLoaderClass org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestLoader -loaderpluginname org.eclipse.jdt.junit.runtime -testNameFile C:\Users\LUKASE~1\AppData\Local\Temp\testNames3651754083365465568.txt
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files (x86)\Java\jdk1.6.0_20
+CLASSPATH=.;C:\Program Files (x86)\Java\jre6\lib\ext\QTJava.zip
+PATH=C:/Program Files (x86)/Java/jre6/bin/client;C:/Program Files (x86)/Java/jre6/bin;C:/Program Files (x86)/Java/jre6/lib/i386;C:\Program Files (x86)\ATI Stream\bin\x86_64;C:\Program Files (x86)\ATI Stream\bin\x86;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;J:\dev\ruby-1.8.7\bin;xxxE:\dev\ruby-1.8.6\bin;xxxJ:\dev\ruby192\bin;xxxJ:\dev\ruby_dev_kit\bin;xxxJ:\dev\ruby_dev_kit\mingw\bin;C:\Program Files (x86)\PC Connectivity Solution\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\ImageMagick-6.5.6-Q8;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;E:\dev\sphinx-0.9.9-win32-id64-full\bin;E:\dev\msys\1.0\bin;E:\dev\mingw\bin;C:\Program Files (x86)\CollabNet\Subversion Client;C:\apache-ant-1.8.1\bin;C:\Program Files (x86)\Java\jdk1.6.0_20\bin;C:\Program Files (x86)\Java\jdk1.6.0_20\jre\bin;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Git\cmd;C:\Git\bin;C:\Program Files\TortoiseGit\bin;C:\Program Files (x86)\PuTTY;C:\Program Files (x86)\Windows Live\Shared;E:\dev\sdl;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files\TortoiseSVN\bin;C:\android\eclipse;
+USERNAME=Lukas Elmer
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 26 Stepping 5, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 Service Pack 1
+
+CPU:total 8 (8 cores per cpu, 2 threads per core) family 6 model 26 stepping 5, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht
+
+Memory: 4k page, physical 12573776k(9064552k free), swap 25145708k(21559784k free)
+
+vm_info: Java HotSpot(TM) Client VM (16.3-b01) for windows-x86 JRE (1.6.0_20-b02), built on Apr 12 2010 13:52:23 by "java_re" with MS VC++ 7.1 (VS2003)
+
+time: Tue Apr 19 01:18:57 2011
+elapsed time: 0 seconds
+

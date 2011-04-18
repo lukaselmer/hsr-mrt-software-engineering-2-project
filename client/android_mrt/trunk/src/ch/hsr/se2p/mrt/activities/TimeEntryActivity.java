@@ -19,7 +19,8 @@ import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
-import ch.hsr.se2p.mrt.network.HttpTransmitter;
+import ch.hsr.se2p.mrt.network.HttpHelper;
+import ch.hsr.se2p.mrt.network.TimeEntryHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -60,6 +61,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			updateView();
 		}
 	};
+
+	private HttpHelper httpHelper;
 
 	public OnClickListener getLstnCreateTimeEntryWithDescription() {
 		return lstnCreateTimeEntryWithDescription;
@@ -105,6 +108,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+
+		httpHelper = new HttpHelper();
 
 		Button b1 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
 		b1.setOnClickListener(lstnCreateTimeEntryWithDescription);
@@ -155,15 +160,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		int timeEntriesTransmitted = 0;
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
-		HttpTransmitter transmitter = new HttpTransmitter();
+		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(httpHelper);
 		for (TimeEntry timeEntry : timeEntries) {
-			if (transmitter.transmit(timeEntry)) {
+			if (timeEntryHelper.transmit(timeEntry)) {
 				if (!timeEntry.isTransmitted()) {
 					timeEntry.setTransmitted();
 					timeEntryDao.update(timeEntry);
 				}
 
-				if (transmitter.confirm(timeEntry)) {
+				if (timeEntryHelper.confirm(timeEntry)) {
 					timeEntryDao.delete(timeEntry);
 					timeEntriesTransmitted++;
 				} else {

@@ -23,42 +23,11 @@ import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
-public class HttpTransmitter {
+public class HttpHelper {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 10000;
-	private static final String TAG = HttpTransmitter.class.getSimpleName();
+	private static final String TAG = HttpHelper.class.getSimpleName();
 	private String cookie;
 
-	public boolean transmit(Transmittable transmittable) {
-		if (transmittable.isTransmitted())
-			return true;
-		try {
-			String ret = doHttpPost(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
-			if (transmittable.processTransmission(new JSONObject(ret))) {
-				return true;
-			}
-		} catch (JSONException e) {
-			// Request failed, pass
-		} catch (NullPointerException e) {
-			// Request failed, pass
-		} catch (IOException e) {
-			// Request failed, pass
-		}
-		return false;
-	}
-
-	public boolean confirm(Confirmable confirmable) {
-		try {
-			String ret = doHttpPost(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getIdOnServer()));
-			return confirmable.processConfirmation(new JSONObject(ret));
-		} catch (JSONException e) {
-			// Request failed, pass
-		} catch (NullPointerException e) {
-			// Request failed, pass
-		} catch (IOException e) {
-			// Request failed, pass
-		}
-		return false;
-	}
 
 	protected String doHttpPost(JSONObject jsonObject, String url) throws IOException {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
