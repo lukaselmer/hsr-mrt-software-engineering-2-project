@@ -21,31 +21,12 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
-import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 public class HttpTransmitter {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 10000;
 	private static final String TAG = HttpTransmitter.class.getSimpleName();
 	private String cookie;
-
-	public boolean login(String login, String password, Receivable receivable) {
-		try {
-			JSONObject j = new JSONObject();
-			j.put("login", login);
-			j.put("password", password);
-			String ret = doHttpPost(j, NetworkConfig.LOGIN_URL);
-			return receivable.fromJSON(new JSONObject(ret));
-		} catch (NullPointerException e) {
-			// Request failed, pass
-		} catch (IOException e) {
-			// Request failed, pass
-		} catch (JSONException e) {
-			Log.e(TAG, "Error creating JSON Object", e);
-			// Request failed, pass
-		}
-		return false;
-	}
 
 	public boolean transmit(Transmittable transmittable) {
 		if (transmittable.isTransmitted())
