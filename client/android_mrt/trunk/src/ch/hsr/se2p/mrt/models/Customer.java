@@ -15,6 +15,9 @@ public class Customer implements BaseColumns {
 		this.lastName = lastName;
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
 	public String toString(){
 		return lastName + " " + firstName;
