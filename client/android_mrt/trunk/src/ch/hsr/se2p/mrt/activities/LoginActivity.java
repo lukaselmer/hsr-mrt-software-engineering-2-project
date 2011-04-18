@@ -36,21 +36,29 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 
-		Button okBtn = (Button) findViewById(R.id.loginButton);
-		okBtn.setOnClickListener(new OnClickListener() {
+		Button loginBtn = (Button) findViewById(R.id.loginButton);
+		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				int usernameSize = editUsername.getText().length();
 				int passwordSize = editPassword.getText().length();
-				if (usernameSize == 0 || passwordSize == 0) {
-					displayAlertDialog();
-				} else {
+				if (usernameSize > 0 && passwordSize > 0) {
 					ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 					// doLogin(editUsername.getText().toString(), editPassword.getText().toString());
+				} else {
+					displayAlertDialog();
 				}
 			}
 
 		});
+		
+		Button cancelBtn= (Button) findViewById(R.id.cancelButton);
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+        	public void onClick(View v) { 
+            	
+            }
+        });
 	}
 
 	protected void displayAlertDialog() {

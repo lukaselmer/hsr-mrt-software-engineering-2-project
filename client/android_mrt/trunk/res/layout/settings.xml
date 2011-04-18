@@ -27,9 +27,21 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:password="true"></EditText>
-  <Button android:text="Anmelden" 
-  	android:id="@+id/loginButton" 
-    android:layout_width="wrap_content" 
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"></Button>
+    <LinearLayout 
+   	 android:orientation="horizontal"
+     android:layout_width="fill_parent"
+     android:layout_height="wrap_content"
+     android:gravity="center">
+      <Button android:text="Anmelden" 
+  		android:id="@+id/loginButton" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="40px"
+    	android:paddingRight="40px"
+    	android:layout_marginRight="40px"></Button>
+  	  <Button android:text="Abbrechen" 
+  		android:id="@+id/cancelButton" 
+    	android:layout_width="wrap_content" 
+    	android:layout_height="wrap_content"></Button>
+    </LinearLayout>
 </LinearLayout>
