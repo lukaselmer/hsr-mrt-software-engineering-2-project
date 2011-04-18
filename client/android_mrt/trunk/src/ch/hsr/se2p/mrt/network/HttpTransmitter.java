@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
+import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 public class HttpTransmitter {
@@ -28,11 +29,29 @@ public class HttpTransmitter {
 	private static final String TAG = HttpTransmitter.class.getSimpleName();
 	private String cookie;
 
+	public boolean login(String login, String password, Receivable receivable) {
+		try {
+			JSONObject j = new JSONObject();
+			j.put("login", login);
+			j.put("password", password);
+			String ret = doHttpPost(j, NetworkConfig.LOGIN_URL);
+			return receivable.fromJSON(new JSONObject(ret));
+		} catch (NullPointerException e) {
+			// Request failed, pass
+		} catch (IOException e) {
+			// Request failed, pass
+		} catch (JSONException e) {
+			Log.e(TAG, "Error creating JSON Object", e);
+			// Request failed, pass
+		}
+		return false;
+	}
+
 	public boolean transmit(Transmittable transmittable) {
 		if (transmittable.isTransmitted())
 			return true;
 		try {
-			String ret = transmit(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
+			String ret = doHttpPost(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
 			if (transmittable.processTransmission(new JSONObject(ret))) {
 				return true;
 			}
@@ -48,7 +67,7 @@ public class HttpTransmitter {
 
 	public boolean confirm(Confirmable confirmable) {
 		try {
-			String ret = transmit(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getIdOnServer()));
+			String ret = doHttpPost(confirmable.toJSONObject(), String.format(NetworkConfig.TIME_ENTRY_CONFIRM_URL, confirmable.getIdOnServer()));
 			return confirmable.processConfirmation(new JSONObject(ret));
 		} catch (JSONException e) {
 			// Request failed, pass
@@ -60,7 +79,7 @@ public class HttpTransmitter {
 		return false;
 	}
 
-	protected String transmit(JSONObject jsonObject, String url) throws IOException {
+	protected String doHttpPost(JSONObject jsonObject, String url) throws IOException {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}
 
