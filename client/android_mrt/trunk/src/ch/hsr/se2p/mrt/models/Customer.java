@@ -23,7 +23,7 @@ public class Customer implements Receivable {
 	@DatabaseField
 	private long updatedAt;
 
-	Customer() {
+	public Customer() {
 		// Needed for ormlite
 	}
 
