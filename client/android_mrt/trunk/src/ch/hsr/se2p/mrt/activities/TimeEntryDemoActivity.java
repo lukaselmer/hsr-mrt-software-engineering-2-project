@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.Spinner;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
@@ -28,16 +32,25 @@ public class TimeEntryDemoActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
+	
+	private OnClickListener lstnStartStopTime = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			// TODO Auto-generated method stub
+			
+		}
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
 
-		AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		AutoCompleteTextView txtView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
 		ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(
 				this, R.layout.list_item, CustomerHelper.hackForTest());
-		textView.setAdapter(customerAdapter);
+		txtView.setAdapter(customerAdapter);
 
 		Spinner spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(
@@ -46,7 +59,8 @@ public class TimeEntryDemoActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypeAdapater
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(timeEntryTypeAdapater);
-
+		
+		Button b1 = (Button) findViewById(R.id.btnStartStop);
 	}
 
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
