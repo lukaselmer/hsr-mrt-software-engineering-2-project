@@ -1,4 +1,8 @@
 Mrt::Application.routes.draw do
+  resources :addresses
+
+  resources :customers
+
   devise_for :users, :controllers => { :sessions => "sessions" }
   devise_scope :user do
       resources :sessions, :only => [:create]
