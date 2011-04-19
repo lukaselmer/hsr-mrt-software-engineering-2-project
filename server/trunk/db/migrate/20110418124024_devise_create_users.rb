@@ -6,7 +6,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.encryptable
       t.string :first_name
       t.string :last_name
-      t.integer :type
+      t.integer :user_type
       t.timestamps
     end
 

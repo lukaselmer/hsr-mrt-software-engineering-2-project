@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20110418124024) do
     t.string   "password_salt"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "type"
+    t.integer  "user_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
