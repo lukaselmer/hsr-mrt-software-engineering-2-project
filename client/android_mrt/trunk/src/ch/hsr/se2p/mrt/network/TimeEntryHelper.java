@@ -20,9 +20,7 @@ public class TimeEntryHelper {
 			return true;
 		try {
 			String ret = httpHelper.doHttpPost(transmittable.toJSONObject(), NetworkConfig.TIME_ENTRY_CREATE_URL);
-			if (transmittable.processTransmission(new JSONObject(ret))) {
-				return true;
-			}
+			return transmittable.processTransmission(new JSONObject(ret));
 		} catch (JSONException e) {
 			// Request failed, pass
 		} catch (NullPointerException e) {

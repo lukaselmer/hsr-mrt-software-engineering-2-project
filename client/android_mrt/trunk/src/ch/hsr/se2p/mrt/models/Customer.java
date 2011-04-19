@@ -1,25 +1,62 @@
 package ch.hsr.se2p.mrt.models;
 
-import android.provider.BaseColumns;
+import java.sql.Timestamp;
 
-public class Customer implements BaseColumns {
+import android.location.Location;
+
+import com.j256.ormlite.field.DatabaseField;
+
+public class Customer {
+	@DatabaseField(generatedId = true)
 	private Integer id;
-	private String firstName;
-	private String lastName;
-	
-	
-	public Customer(Integer id, String firstName, String lastName) {
+	@DatabaseField
+	private Integer railsId;
+	@DatabaseField
+	private String firstName, lastName, phone;
+	@DatabaseField
+	private Location position;
+	@DatabaseField
+	private long updatedAt;
+
+	public Customer(Integer railsId, String firstName, String lastName, String phone, Location position, Timestamp updatedAt) {
 		super();
-		this.id = id;
+		this.railsId = railsId;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.phone = phone;
+		this.position = position;
+		this.updatedAt = updatedAt.getTime();
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public String toString(){
+	public Integer getRailsId() {
+		return railsId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public Location getPosition() {
+		return position;
+	}
+
+	public long getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public String toString() {
 		return lastName + " " + firstName;
 	}
 }

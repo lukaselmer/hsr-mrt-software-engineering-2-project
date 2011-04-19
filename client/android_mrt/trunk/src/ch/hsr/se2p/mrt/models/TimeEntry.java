@@ -2,13 +2,11 @@ package ch.hsr.se2p.mrt.models;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.location.Location;
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
@@ -30,10 +28,10 @@ public class TimeEntry implements Transmittable, Confirmable {
 	private long timeStart, timeStop;
 	// TODO: Add location
 	// @DatabaseField
-	private Location position;
+	// private Location position;
 	// TODO: Add audio record
 	// @DatabaseField
-	private Blob audioRecord;
+	// private Blob audioRecord;
 
 	private static SecureRandom random = new SecureRandom();
 
@@ -62,9 +60,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return id;
 	}
 
-	public Location getPosition() {
-		return position;
-	}
+	// public Location getPosition() {
+	// return position;
+	// }
 
 	public int getIdOnServer() {
 		return railsId;
@@ -86,9 +84,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return transmitted;
 	}
 
-	public void setAudioRecord(Blob audioRecord) {
-		this.audioRecord = audioRecord;
-	}
+	// public void setAudioRecord(Blob audioRecord) {
+	// this.audioRecord = audioRecord;
+	// }
 
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
@@ -98,9 +96,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 		this.description = description;
 	}
 
-	public void setPosition(Location position) {
-		this.position = position;
-	}
+	// public void setPosition(Location position) {
+	// this.position = position;
+	// }
 
 	public void setRailsId(Integer railsId) {
 		this.railsId = railsId;
@@ -128,8 +126,8 @@ public class TimeEntry implements Transmittable, Confirmable {
 			j.put("description", description);
 			j.put("time_start", getTimeStart());
 			j.put("time_stop", getTimeStop());
-			j.put("position", position);
-			j.put("audio_record", audioRecord);
+			// j.put("position", position);
+			// j.put("audio_record", audioRecord);
 		} catch (JSONException e) {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}

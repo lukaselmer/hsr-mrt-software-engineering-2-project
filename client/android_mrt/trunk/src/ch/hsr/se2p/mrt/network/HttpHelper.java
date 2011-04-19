@@ -67,11 +67,9 @@ public class HttpHelper {
 			httpRequest.setHeader("Content-Type", "application/json");
 		} catch (UnsupportedEncodingException e) {
 			Log.e("Error", "" + e, e);
-			e.printStackTrace();
-		} catch (JSONException js) {
-			js.printStackTrace();
+		} catch (JSONException e) {
+			Log.e("Error", "" + e, e);
 		}
-
 		if (cookie != null)
 			httpRequest.addHeader("cookie", cookie);
 	}
