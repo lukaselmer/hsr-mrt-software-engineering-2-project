@@ -1,8 +1,10 @@
 package ch.hsr.se2p.mrt.activities;
 
+import ch.hsr.se2p.mrt.services.SynchronizationService;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 
 class ActivityHelper {
 
@@ -17,5 +19,9 @@ class ActivityHelper {
 		b.setPositiveButton("Ok", null);
 		Dialog d = b.create();
 		return d;
+	}
+
+	public static void startSyncService(Activity activity) {
+		activity.startService(new Intent(SynchronizationService.class.getName()));
 	}
 }

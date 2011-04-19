@@ -12,6 +12,13 @@
 			</intent-filter>
 		</activity>
 
+		<service android:name="ch.hsr.se2p.mrt.services.SynchronizationService"
+			android:process=":remote" android:enabled="true" android:exported="true">
+			<intent-filter>
+				<action android:name="ch.hsr.se2p.mrt.services.SynchronizationService" />
+			</intent-filter>
+		</service>
+
 		<!-- For tests -->
 		<uses-library android:name="android.test.runner" />
 

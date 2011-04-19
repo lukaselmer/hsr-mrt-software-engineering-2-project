@@ -51,7 +51,7 @@ public class LoginActivity extends Activity {
 
 	private void processLogin(String username, String password) {
 		// ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
-		if (new UserHelper(new HttpHelper()) {
+		if (new UserHelper(HttpHelper.inst()) {
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
 			};

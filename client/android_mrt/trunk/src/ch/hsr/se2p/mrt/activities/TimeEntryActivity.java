@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.HttpHelper;
 import ch.hsr.se2p.mrt.network.TimeEntryHelper;
+import ch.hsr.se2p.mrt.services.SynchronizationService;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -91,15 +93,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-
-
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		httpHelper = new HttpHelper();
+		httpHelper = HttpHelper.inst();
+
+		ActivityHelper.startSyncService(this);
 
 		Button b1 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
 		b1.setOnClickListener(lstnCreateTimeEntryWithDescription);
@@ -173,7 +175,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void sendTimeEntiesDialog() {
-		final ProgressDialog dialog = new ProgressDialog(TimeEntryActivity.this); // ProgressDialog.show(MainActivity.this, "", "Searching TimeEntries to transmit...", true, false);
+		final ProgressDialog dialog = new ProgressDialog(TimeEntryActivity.this); // ProgressDialog.show(MainActivity.this, "",
+																					// "Searching TimeEntries to transmit...", true, false);
 		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 		dialog.setTitle("Transmitting TimeEntries...");
 		dialog.setCancelable(false);
@@ -189,7 +192,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 		if (timeEntries.size() == 0) {
 			dialog.dismiss();
-			ActivityHelper.displayAlertDialog("Transmission finished", "No TimeEntries found.",this);
+			ActivityHelper.displayAlertDialog("Transmission finished", "No TimeEntries found.", this);
 			return;
 		}
 
@@ -221,7 +224,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				}
 				dialog.dismiss();
 
-				String messageText = (count == 0) ? "No TimeEntries transmitted. For further details, see log." : count + " of " + timeEntries.size() + " TimeEntries transmitted.";
+				String messageText = (count == 0) ? "No TimeEntries transmitted. For further details, see log." : count + " of " + timeEntries.size()
+						+ " TimeEntries transmitted.";
 				notificationHandler.sendMessage(getMessageForAlertDialog("Transmission finished", messageText));
 			}
 		}).start();
