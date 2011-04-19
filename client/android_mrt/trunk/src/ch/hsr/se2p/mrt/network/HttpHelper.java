@@ -16,8 +16,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -26,7 +24,7 @@ public class HttpHelper {
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 10000;
 	private static final String TAG = HttpHelper.class.getSimpleName();
 	private String cookie;
-	
+
 	protected String doHttpPost(Object jsonObject, String url) throws IOException {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}

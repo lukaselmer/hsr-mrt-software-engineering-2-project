@@ -3,7 +3,8 @@
 	package="ch.hsr.se2p.mrt" android:versionCode="1" android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7" />
 
-	<application android:icon="@drawable/icon" android:label="@string/app_name">
+	<application android:name="ch.hsr.se2p.mrt.activities.MRTApplication"
+		android:icon="@drawable/icon" android:label="@string/app_name">
 		<activity android:name="ch.hsr.se2p.mrt.activities.TimeEntryActivity"
 			android:label="@string/app_name">
 			<intent-filter>

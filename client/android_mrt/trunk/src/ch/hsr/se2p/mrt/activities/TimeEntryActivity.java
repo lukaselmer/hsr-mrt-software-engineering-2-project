@@ -65,7 +65,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	};
 
-	private HttpHelper httpHelper;
+	private MRTApplication mrtApplication;
 
 	public OnClickListener getLstnCreateTimeEntryWithDescription() {
 		return lstnCreateTimeEntryWithDescription;
@@ -98,8 +98,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
-		httpHelper = HttpHelper.inst();
+		
+		mrtApplication = (MRTApplication) getApplication();
 
 		ActivityHelper.startSyncService(this);
 
@@ -152,7 +152,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		int timeEntriesTransmitted = 0;
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
-		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(httpHelper);
+		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(mrtApplication.getHttpHelper());
 		for (TimeEntry timeEntry : timeEntries) {
 			if (timeEntryHelper.transmit(timeEntry)) {
 				if (!timeEntry.isTransmitted()) {
