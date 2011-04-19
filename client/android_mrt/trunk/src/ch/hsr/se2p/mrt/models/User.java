@@ -1,5 +1,7 @@
 package ch.hsr.se2p.mrt.models;
 
+import java.sql.Timestamp;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,6 +17,8 @@ public class User implements Receivable {
 	private Integer railsId;
 	@DatabaseField
 	private String firstName, lastName, email;
+	@DatabaseField
+	private long updatedAt;
 
 	public User() {
 		// Needed for ormlite
@@ -30,6 +34,7 @@ public class User implements Receivable {
 		firstName = userObj.getString("first_name");
 		lastName = userObj.getString("last_name");
 		email = userObj.getString("email");
+		updatedAt = userObj.getLong("updated_at");
 		return true;
 	}
 
@@ -51,5 +56,15 @@ public class User implements Receivable {
 
 	public Integer getRailsId() {
 		return railsId;
+	}
+
+	@Override
+	public Integer getIdOnServer() {
+		return getRailsId();
+	}
+
+	@Override
+	public Timestamp getUpdatedAt() {
+		return new Timestamp(updatedAt);
 	}
 }

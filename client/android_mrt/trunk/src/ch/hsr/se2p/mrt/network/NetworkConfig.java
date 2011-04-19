@@ -11,4 +11,7 @@ public class NetworkConfig {
 	public static final String TIME_ENTRY_CREATE_URL = MRT_SERVER + "/time_entries.json";
 	public static final String TIME_ENTRY_CONFIRM_URL = MRT_SERVER + "/time_entries/%d/remove_hashcode.json";
 	public static final String LOGIN_URL = MRT_SERVER + "/login.json";
+	public static final String SYNCHRONIZE_CUSTOMERS_URL = MRT_SERVER + "/customers/synchronize.json";
+
+	
 }

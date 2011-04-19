@@ -2,11 +2,16 @@ package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.location.Location;
+
+import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class Customer {
+public class Customer implements Receivable {
 	@DatabaseField(generatedId = true)
 	private Integer id;
 	@DatabaseField
@@ -18,21 +23,22 @@ public class Customer {
 	@DatabaseField
 	private long updatedAt;
 
-	public Customer(Integer railsId, String firstName, String lastName, String phone, Location position, Timestamp updatedAt) {
-		super();
-		this.railsId = railsId;
+	Customer() {
+		// Needed for ormlite
+	}
+
+	// TODO: remove this!!
+	public Customer(Integer id, String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phone = phone;
-		this.position = position;
-		this.updatedAt = updatedAt.getTime();
+		this.id = id;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public Integer getRailsId() {
+	public Integer getIdOnServer() {
 		return railsId;
 	}
 
@@ -52,11 +58,32 @@ public class Customer {
 		return position;
 	}
 
-	public long getUpdatedAt() {
-		return updatedAt;
+	public Timestamp getUpdatedAt() {
+		return new Timestamp(updatedAt);
 	}
 
 	public String toString() {
 		return lastName + " " + firstName;
+	}
+
+	@Override
+	public boolean fromJSON(JSONObject jsonObject) throws JSONException {
+		JSONObject customerObj = jsonObject.optJSONObject("customer");
+		int railsId = customerObj.getInt("id");
+		if (railsId <= 0)
+			return false;
+		this.railsId = railsId;
+		firstName = customerObj.getString("first_name");
+		lastName = customerObj.getString("last_name");
+		phone = customerObj.getString("phone");
+		position = parsePosition(customerObj);
+		updatedAt = customerObj.getLong("updated_at");
+		return true;
+	}
+
+	private Location parsePosition(JSONObject customerObj) throws JSONException {
+		// customerObj.getLong("position");
+		// TODO: Parse position
+		return null;
 	}
 }
