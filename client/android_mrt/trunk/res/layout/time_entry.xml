@@ -2,18 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="fill_parent" android:layout_height="fill_parent"
 	android:orientation="vertical">
-	<TextView android:text="Status" android:id="@+id/textView1"
+	<TextView android:text="Status" android:id="@+id/txtStatus"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
-	<TextView android:text="Zeit gestoppt" android:id="@+id/textView2"
+	<TextView android:text="Zeit gestoppt" android:id="@+id/txtTime"
 		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
 	<AutoCompleteTextView android:layout_height="wrap_content"
-		android:id="@+id/autoCompleteTextView1" android:layout_width="fill_parent"
-		android:text="Kunde"></AutoCompleteTextView>
+		android:id="@+id/autocompleteCustomer" android:layout_width="fill_parent"
+		android:hint="Kunde"></AutoCompleteTextView>
 	<Spinner android:layout_width="fill_parent" android:id="@+id/spinner1"
 		android:layout_height="wrap_content"></Spinner>
-	<EditText android:id="@+id/editText1" android:text="Beschreibung"
+	<EditText android:id="@+id/txtDescription" android:hint="Beschreibung"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"
-		android:layout_weight="1"></EditText>
-	<Button android:id="@+id/button1" android:text="Start"
+		android:layout_weight="1" android:drawingCacheQuality="low"></EditText>
+	<Button android:id="@+id/btnStartStop" android:text="Start"
 		android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
 </LinearLayout>
