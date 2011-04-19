@@ -127,11 +127,4 @@ public class CustomerHelperTest extends HttpTestCase {
 		return c;
 	}
 
-	// public void testLoginFails() {
-	// User u = new User();
-	// expectedResultFromTransmitter("{}");
-	// UserHelper userHelper = new UserHelper(httpHelper);
-	// assertFalse(userHelper.login("invalidlogin", "invalidpassword", u));
-	// }
-
 }
