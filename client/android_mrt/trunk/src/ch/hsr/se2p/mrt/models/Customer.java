@@ -21,7 +21,9 @@ public class Customer implements Receivable {
 	@DatabaseField
 	private Location position;
 	@DatabaseField
-	private long updatedAt;
+	private Long updatedAt;
+	@DatabaseField
+	private boolean deleted;
 
 	public Customer() {
 		// Needed for ormlite
@@ -38,7 +40,7 @@ public class Customer implements Receivable {
 		return id;
 	}
 
-	public Integer getIdOnServer() {
+	public int getIdOnServer() {
 		return railsId;
 	}
 
@@ -62,13 +64,16 @@ public class Customer implements Receivable {
 		return new Timestamp(updatedAt);
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
 	public String toString() {
 		return lastName + " " + firstName;
 	}
 
 	@Override
-	public boolean fromJSON(JSONObject jsonObject) throws JSONException {
-		JSONObject customerObj = jsonObject.optJSONObject("customer");
+	public boolean fromJSON(JSONObject customerObj) throws JSONException {
 		int railsId = customerObj.getInt("id");
 		if (railsId <= 0)
 			return false;
@@ -77,7 +82,8 @@ public class Customer implements Receivable {
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
 		position = parsePosition(customerObj);
-		updatedAt = customerObj.getLong("updated_at");
+		updatedAt = Timestamp.valueOf(customerObj.getString("updated_at")).getTime();
+		deleted = customerObj.has("deleted_at");
 		return true;
 	}
 

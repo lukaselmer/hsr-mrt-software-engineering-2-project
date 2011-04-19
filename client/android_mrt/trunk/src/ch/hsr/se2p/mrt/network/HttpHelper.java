@@ -36,8 +36,7 @@ public class HttpHelper {
 
 	protected String doHttpRequest(String url, Object jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
 		HttpClient client = getHttpClient();
-		JSONObject holder = new JSONObject();
-		prepareRequest(url, jsonObject, httpRequest, holder);
+		prepareRequest(url, jsonObject, httpRequest);
 		HttpResponse response = executeRequest(client, httpRequest);
 		String responseString = handleResponse(response);
 		return responseString;
@@ -57,17 +56,13 @@ public class HttpHelper {
 		return httpParams;
 	}
 
-	protected void prepareRequest(String url, Object jsonObject, HttpEntityEnclosingRequestBase httpRequest, JSONObject holder) {
+	protected void prepareRequest(String url, Object jsonObject, HttpEntityEnclosingRequestBase httpRequest) {
 		Log.i(TAG, "Starting HTTP Reququest: " + url);
 		try {
-			holder.put("time_entry", jsonObject);
-			Log.i(TAG, "Parameter time_entry = " + holder.toString());
-			StringEntity se = new StringEntity(holder.toString());
+			StringEntity se = new StringEntity(jsonObject.toString());
 			httpRequest.setEntity(se);
 			httpRequest.setHeader("Content-Type", "application/json");
 		} catch (UnsupportedEncodingException e) {
-			Log.e("Error", "" + e, e);
-		} catch (JSONException e) {
 			Log.e("Error", "" + e, e);
 		}
 		if (cookie != null)

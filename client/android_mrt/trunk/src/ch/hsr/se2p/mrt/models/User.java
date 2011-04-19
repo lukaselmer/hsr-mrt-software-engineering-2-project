@@ -59,7 +59,7 @@ public class User implements Receivable {
 	}
 
 	@Override
-	public Integer getIdOnServer() {
+	public int getIdOnServer() {
 		return getRailsId();
 	}
 

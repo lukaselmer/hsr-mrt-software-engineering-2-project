@@ -29,17 +29,20 @@ public class CustomerHelper {
 		return list;
 	}
 
-	public boolean synchronize(List<Receivable> receivables, Class<Receivable> clazz) {
+	public boolean synchronize(List<Receivable> receivables, Class<? extends Receivable> clazz) {
 		try {
 			String ret = synchronizeRequest(receivables);
-			updateOrCreateReceivables(receivables, new JSONArray(ret), clazz);
+			updateOrCreateReceivables(receivables, new JSONObject(ret), clazz);
 			return true;
 		} catch (NullPointerException e) {
 			// Request failed, pass
+			e.printStackTrace();
 		} catch (IOException e) {
 			// Request failed, pass
+			e.printStackTrace();
 		} catch (JSONException e) {
 			// Request failed, pass
+			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			// Request failed, pass
 			e.printStackTrace();
@@ -50,7 +53,8 @@ public class CustomerHelper {
 		return false;
 	}
 
-	private void updateOrCreateReceivables(List<Receivable> receivables, JSONArray jsonArray, Class<Receivable> clazz) throws JSONException, IllegalAccessException, InstantiationException {
+	private void updateOrCreateReceivables(List<Receivable> receivables, JSONObject jsonObject, Class<? extends Receivable> clazz) throws JSONException, IllegalAccessException, InstantiationException {
+		JSONArray jsonArray = jsonObject.getJSONArray("customers");
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject o = jsonArray.getJSONObject(i);
 			Receivable r = clazz.newInstance();

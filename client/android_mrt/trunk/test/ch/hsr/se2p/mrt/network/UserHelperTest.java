@@ -8,7 +8,8 @@ public class UserHelperTest extends HttpTestCase {
 		User u = new User();
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
 		Integer id = 77;
-		expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email + "\",\"id\":" + id + "}}");
+		expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
+				+ "\",\"id\":" + id + "}}");
 		UserHelper userHelper = new UserHelper(httpHelper);
 		assertTrue(userHelper.login("validlogin", "validpassword", u));
 		assertEquals(firstName, u.getFirstName());

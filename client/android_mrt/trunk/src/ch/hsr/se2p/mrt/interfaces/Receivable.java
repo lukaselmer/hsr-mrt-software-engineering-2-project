@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public interface Receivable {
-	public Integer getIdOnServer();
+	public int getIdOnServer();
 
 	public Timestamp getUpdatedAt();
 
