@@ -1,4 +1,7 @@
 Mrt::Application.routes.draw do
+  devise_for :users, :controllers => { :sessions => "sessions" }
+  resources :users
+
   resources :time_entries do
     member do
 	  post 'remove_hashcode'
