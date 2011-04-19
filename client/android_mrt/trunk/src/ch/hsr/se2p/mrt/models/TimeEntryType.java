@@ -17,5 +17,9 @@ public class TimeEntryType {
 		return name;
 	}
 	
+	public String toString(){
+		return name;
+	}
+	
 	
 }
