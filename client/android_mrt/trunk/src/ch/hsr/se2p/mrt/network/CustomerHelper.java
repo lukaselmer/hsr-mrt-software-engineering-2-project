@@ -1,9 +1,9 @@
 package ch.hsr.se2p.mrt.network;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,14 +73,17 @@ public class CustomerHelper {
 		return httpHelper.doHttpPost(generateJSONRequest(receivables), NetworkConfig.SYNCHRONIZE_CUSTOMERS_URL);
 	}
 
-	protected JSONArray generateJSONRequest(List<Receivable> receivables) throws JSONException {
-		JSONArray ret = new JSONArray();
+	// JSONArray ret = new JSONArray(); for (Receivable receivable : receivables) { JSONObject j = new JSONObject();
+	// j.put("id", receivable.getIdOnServer()); j.put("updated_at", receivable.getUpdatedAt()); ret.put(j); } return ret;
+	protected JSONObject generateJSONRequest(List<Receivable> receivables) throws JSONException {
+		JSONObject ret = new JSONObject();
+		Timestamp maxUpdatedAt = new Timestamp(0);
 		for (Receivable receivable : receivables) {
-			JSONObject j = new JSONObject();
-			j.put("id", receivable.getIdOnServer());
-			j.put("updated_at", receivable.getUpdatedAt());
-			ret.put(j);
+			if (maxUpdatedAt.before(receivable.getUpdatedAt())) {
+				maxUpdatedAt = receivable.getUpdatedAt();
+			}
 		}
+		ret.put("last_update", maxUpdatedAt);
 		return ret;
 	}
 }
