@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :remember_me, :first_name, :last_name, :type, :password_salt
 
+  def passwords_match?
+
+  end
+
 end
