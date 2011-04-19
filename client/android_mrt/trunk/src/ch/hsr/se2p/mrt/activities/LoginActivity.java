@@ -1,13 +1,12 @@
 package ch.hsr.se2p.mrt.activities;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
@@ -26,9 +25,10 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-
+	
 	private EditText editUsername;
 	private EditText editPassword;
+	private CheckBox saveLogin;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -36,42 +36,50 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
 
+		editUsername = (EditText) findViewById(R.id.editUsername);
+		editPassword = (EditText) findViewById(R.id.editPassword);
+		saveLogin = (CheckBox) findViewById(R.id.cBsaveLogin);
+		
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				int usernameSize = editUsername.getText().length();
-				int passwordSize = editPassword.getText().length();
-				if (usernameSize > 0 && passwordSize > 0) {
-					ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
-					// doLogin(editUsername.getText().toString(), editPassword.getText().toString());
+				if (editUsername.getText().length() > 0 && editPassword.getText().length() > 0) {
+					processLogin(editUsername.getText().toString(), editPassword.getText().toString());
 				} else {
-					displayAlertDialog();
-				}
-			}
-
-		});
-		
-		Button cancelBtn= (Button) findViewById(R.id.cancelButton);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-        	public void onClick(View v) { 
-            	
-            }
-        });
-	}
-
-	protected void displayAlertDialog() {
-		AlertDialog.Builder dialogAlerting = new AlertDialog.Builder(LoginActivity.this);
-		dialogAlerting.setMessage("Bitte Benutzername und Passwort angeben!");
-		dialogAlerting.setTitle("Fehler");
-		dialogAlerting.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				dialog.cancel();
+					displayDialog("Fehler","Bitte Benutzernamen und Passwort angeben!");
+	            }
 			}
 		});
-		dialogAlerting.create();
 	}
 
+	private void processLogin(String username, String password) {
+		//ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
+		boolean bool = false;  //doLogin(username, password)
+		if (bool) {
+			saveLoginData(username, password);
+			displayDialog("Willkommen", "Anmeldung war erfolgreich.");
+			//wechsle Ansicht
+			return;
+		}
+		displayDialog(null, "Anmeldung schlug fehl!");
+		editPassword.setText("");
+	}
+	
+	private void saveLoginData(String username, String password) {
+		if (saveLogin.isChecked()) {
+			
+		} else {
+			
+		}
+	}
+
+	private void displayDialog(String title, String message) {
+		AlertDialog alertDialog = new AlertDialog.Builder(this)
+			.setMessage(message)
+			.setTitle(title)
+			.setPositiveButton("OK", null)
+			.create();
+		alertDialog.show();
+	}
 }
