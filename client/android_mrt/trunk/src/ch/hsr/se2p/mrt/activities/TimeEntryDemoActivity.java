@@ -1,6 +1,8 @@
 package ch.hsr.se2p.mrt.activities;
 
 import android.content.Context;
+import android.os.Bundle;
+import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -16,5 +18,10 @@ public class TimeEntryDemoActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				return new DatabaseHelper(context);
 			}
 		});
+	}
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.time_entry);
 	}
 }
