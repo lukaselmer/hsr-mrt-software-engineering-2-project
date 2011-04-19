@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class TimeEntriesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @time_entry = time_entries(:one)
   end
