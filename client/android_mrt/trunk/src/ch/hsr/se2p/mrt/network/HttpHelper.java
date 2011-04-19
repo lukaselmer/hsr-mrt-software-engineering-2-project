@@ -26,7 +26,7 @@ public class HttpHelper {
 	private static final String TAG = HttpHelper.class.getSimpleName();
 	private String cookie;
 
-	protected String doHttpPost(JSONObject jsonObject, String url) throws IOException {
+	protected String doHttpPost(Object jsonObject, String url) throws IOException {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}
 
@@ -34,7 +34,7 @@ public class HttpHelper {
 		return new HttpPost(url);
 	}
 
-	protected String doHttpRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
+	protected String doHttpRequest(String url, Object jsonObject, HttpEntityEnclosingRequestBase httpRequest) throws IOException {
 		HttpClient client = getHttpClient();
 		JSONObject holder = new JSONObject();
 		prepareRequest(url, jsonObject, httpRequest, holder);
@@ -57,7 +57,7 @@ public class HttpHelper {
 		return httpParams;
 	}
 
-	protected void prepareRequest(String url, JSONObject jsonObject, HttpEntityEnclosingRequestBase httpRequest, JSONObject holder) {
+	protected void prepareRequest(String url, Object jsonObject, HttpEntityEnclosingRequestBase httpRequest, JSONObject holder) {
 		Log.i(TAG, "Starting HTTP Reququest: " + url);
 		try {
 			holder.put("time_entry", jsonObject);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +32,7 @@ public class CustomerHelper {
 	public boolean synchronize(List<Receivable> receivables, Class<Receivable> clazz) {
 		try {
 			String ret = synchronizeRequest(receivables);
-			updateReceivables(receivables, ret);
+			updateOrCreateReceivables(receivables, new JSONArray(ret), clazz);
 			return true;
 		} catch (NullPointerException e) {
 			// Request failed, pass
@@ -39,25 +40,46 @@ public class CustomerHelper {
 			// Request failed, pass
 		} catch (JSONException e) {
 			// Request failed, pass
+		} catch (IllegalAccessException e) {
+			// Request failed, pass
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// Request failed, pass
+			e.printStackTrace();
 		}
 		return false;
 	}
 
-	private void updateReceivables(List<Receivable> receivables, String ret) {
-		// return receivable.fromJSON(new JSONObject(ret));
+	private void updateOrCreateReceivables(List<Receivable> receivables, JSONArray jsonArray, Class<Receivable> clazz) throws JSONException, IllegalAccessException, InstantiationException {
+		for (int i = 0; i < jsonArray.length(); i++) {
+			JSONObject o = jsonArray.getJSONObject(i);
+			Receivable r = clazz.newInstance();
+			r.fromJSON(o);
+			updateOrCreateReceivable(r, receivables, o);
+		}
+	}
 
+	private void updateOrCreateReceivable(Receivable r, List<Receivable> receivables, JSONObject jsonObject) throws JSONException {
+		for (Receivable receivable : receivables) {
+			if (receivable.getIdOnServer() == r.getIdOnServer()) {
+				receivable.fromJSON(jsonObject);
+				return;
+			}
+		}
+		receivables.add(r);
 	}
 
 	private String synchronizeRequest(List<Receivable> receivables) throws IOException, JSONException {
 		return httpHelper.doHttpPost(generateJSONRequest(receivables), NetworkConfig.SYNCHRONIZE_CUSTOMERS_URL);
 	}
 
-	protected JSONObject generateJSONRequest(List<Receivable> receivables) throws JSONException {
-		JSONObject ret = new JSONObject();
+	protected JSONArray generateJSONRequest(List<Receivable> receivables) throws JSONException {
+		JSONArray ret = new JSONArray();
 		for (Receivable receivable : receivables) {
 			JSONObject j = new JSONObject();
+			j.put("id", receivable.getIdOnServer());
 			j.put("updated_at", receivable.getUpdatedAt());
-			ret.put("" + receivable.getIdOnServer(), j);
+			ret.put(j);
 		}
 		return ret;
 	}
