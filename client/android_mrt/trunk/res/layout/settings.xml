@@ -14,16 +14,14 @@
   	android:id="@+id/viewUsername" 
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"></TextView>
-  <EditText
-    android:id="@+id/editUsername"
+  <EditText android:id="@+id/editUsername"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"></EditText>
    <TextView android:text="Passwort" 
   	android:id="@+id/viewPassword" 
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"></TextView>
-  <EditText
-    android:id="@+id/editPassword"
+  <EditText android:id="@+id/editPassword"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:password="true"></EditText>

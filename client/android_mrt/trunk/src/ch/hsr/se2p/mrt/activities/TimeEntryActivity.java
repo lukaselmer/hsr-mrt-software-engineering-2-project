@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
+import ch.hsr.se2p.mrt.R;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -16,7 +18,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.HttpHelper;
@@ -82,26 +83,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		try {
 			int id = createTimeEntry(withDescrition);
 			dialog.dismiss();
-			displayAlertDialog("", "TimeEntry with id " + id + " created.");
+			ActivityHelper.displayAlertDialog("", "TimeEntry with id " + id + " created.", this);
 		} catch (SQLException e) {
 			dialog.dismiss();
 			Log.e(TAG, "Database Exception", e);
-			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.");
+			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.", this);
 		}
 	}
 
-	private void displayAlertDialog(String title, String message) {
-		getAlertDialog(title, message).show();
-	}
 
-	protected Dialog getAlertDialog(String title, String message) {
-		AlertDialog.Builder b = new AlertDialog.Builder(TimeEntryActivity.this);
-		b.setTitle(title);
-		b.setMessage(message);
-		b.setPositiveButton("Ok", null);
-		Dialog d = b.create();
-		return d;
-	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -194,12 +184,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		} catch (SQLException e) {
 			dialog.dismiss();
 			Log.e(TAG, "Database excaeption", e);
-			displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.");
+			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.", this);
 			return;
 		}
 		if (timeEntries.size() == 0) {
 			dialog.dismiss();
-			displayAlertDialog("Transmission finished", "No TimeEntries found.");
+			ActivityHelper.displayAlertDialog("Transmission finished", "No TimeEntries found.",this);
 			return;
 		}
 
@@ -209,14 +199,14 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		final Handler notificationHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				Bundle b = msg.getData();
-				displayAlertDialog(b.getString("title"), b.getString("message"));
+				ActivityHelper.displayAlertDialog(b.getString("title"), b.getString("message"), TimeEntryActivity.this);
 				updateView();
 			}
 		};
 		final Handler progressHandler = new Handler() {
 			public void handleMessage(Message msg) {
 				Bundle b = msg.getData();
-				displayAlertDialog(b.getString("title"), b.getString("message"));
+				ActivityHelper.displayAlertDialog(b.getString("title"), b.getString("message"), TimeEntryActivity.this);
 				updateView();
 			}
 		};
@@ -227,7 +217,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				try {
 					count = transmitTimeEnties(timeEntries, dialog, progressHandler);
 				} catch (SQLException e) {
-					TimeEntryActivity.this.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log");
+					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log", TimeEntryActivity.this);
 				}
 				dialog.dismiss();
 
