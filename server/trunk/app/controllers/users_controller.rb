@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.all
+    @user_types = User::TYPES
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
+    @user_types = User::TYPES
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
   # GET /users/new.xml
   def new
     @user = User.new
+    @user_types = User::TYPES
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
+    @user_types = User::TYPES
   end
 
   # POST /users

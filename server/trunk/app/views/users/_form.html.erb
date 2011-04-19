@@ -33,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :user_type %><br />
-    <%= f.select :user_type, { :admin => 0, :secretary => 1, :employee => 2 } %>
+    <%= f.select :user_type, @user_types %>
   </div>
   <div class="actions">
     <%= f.submit %>
