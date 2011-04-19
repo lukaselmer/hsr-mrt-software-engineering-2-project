@@ -54,9 +54,11 @@ class TimeEntriesController < ApplicationController
   def create_by_json
     # Case 1: Hashcode is blank and error is rendered
     render :json => "Hashcode blank", :status => :unprocessable_entity and return if params[:time_entry][:hashcode].blank?
+
     # Case 2: TimeEntry exists and is rendered
     @time_entry = TimeEntry.find_by_hashcode(params[:time_entry][:hashcode])
     render :json => @time_entry, :status => :created, :location => @time_entry and return if !@time_entry.nil?
+
     # Case 3: TimeEntry does not exists and is created
     @time_entry = TimeEntry.new(params[:time_entry])
     render :json => @time_entry.errors, :status => :unprocessable_entity and return if !@time_entry.save
