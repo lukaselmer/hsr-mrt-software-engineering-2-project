@@ -25,6 +25,7 @@ public class LoginActivity extends Activity {
 	private User user;
 
 	SharedPreferences preferences;
+	private MRTApplication mrtApplication;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -68,8 +69,9 @@ public class LoginActivity extends Activity {
 	}
 
 	private void processLogin(String username, String password) {
+		mrtApplication = (MRTApplication) getApplication();
 		// ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
-		if (new UserHelper(HttpHelper.inst()) {
+		if (new UserHelper(mrtApplication.getHttpHelper()) {
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
 			};

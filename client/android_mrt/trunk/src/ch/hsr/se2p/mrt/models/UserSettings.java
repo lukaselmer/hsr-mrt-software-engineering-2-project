@@ -3,41 +3,31 @@ package ch.hsr.se2p.mrt.models;
 import com.j256.ormlite.field.DatabaseField;
 
 public class UserSettings {
+	@DatabaseField(generatedId = true)
+	private Integer id;
 	@DatabaseField
-	private Integer userId;
-	@DatabaseField
-	private String firstName, lastName;
-
-	private static UserSettings currentSettings;
+	private String email, password;
 
 	UserSettings() {
 		// Needed for ormlite
 	}
 
-	public static UserSettings getCurrentSettings() {
-		return currentSettings;
-	}
-
-	public static void setCurrentSettings(UserSettings currentSettings) {
-		UserSettings.currentSettings = currentSettings;
-	}
-
-	public UserSettings(Integer userId, String firstName, String lastName) {
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public UserSettings(Integer id, String email, String password) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
 	}
 
 	public Integer getUserId() {
-		return userId;
+		return id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getPassword() {
+		return password;
 	}
 
 }

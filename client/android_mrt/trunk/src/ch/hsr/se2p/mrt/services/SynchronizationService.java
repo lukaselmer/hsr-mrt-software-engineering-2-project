@@ -41,7 +41,7 @@ public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 		super.onCreate();
 		Log.i(TAG, "Service creating");
 		mrtApplication = (MRTApplication) getApplication();
-		serviceTask = new SynchronizationServiceTask(getHelper(), new CustomerHelper(mrtApplication.getHttpHelper()));
+		serviceTask = new SynchronizationServiceTask(getHelper(), mrtApplication);
 		timer = new Timer("SynchronizationServiceTimer");
 		timer.schedule(serviceTask, START_DELAY, UPDATE_INTERVAL);
 	}

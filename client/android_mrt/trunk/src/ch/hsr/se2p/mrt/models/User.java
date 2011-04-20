@@ -34,7 +34,7 @@ public class User implements Receivable {
 		firstName = userObj.getString("first_name");
 		lastName = userObj.getString("last_name");
 		email = userObj.getString("email");
-		updatedAt = userObj.getLong("updated_at");
+		updatedAt = Timestamp.parse(userObj.getString("updated_at"));
 		return true;
 	}
 

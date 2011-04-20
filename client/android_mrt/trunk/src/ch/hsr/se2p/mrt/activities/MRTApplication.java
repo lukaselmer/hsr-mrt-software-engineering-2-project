@@ -1,37 +1,37 @@
 package ch.hsr.se2p.mrt.activities;
 
+import ch.hsr.se2p.mrt.models.User;
 import ch.hsr.se2p.mrt.network.HttpHelper;
 import android.app.Application;
 
 public class MRTApplication extends Application {
-	private HttpHelper httpHelper;
-	private String login, password;
+	private final HttpHelper httpHelper;
+	private String email, password;
+	private final User currentUser;
 
 	public MRTApplication() {
 		httpHelper = new HttpHelper();
+		currentUser = new User();
 	}
 
 	public HttpHelper getHttpHelper() {
 		return httpHelper;
 	}
 
-	public void setHttpHelper(HttpHelper httpHelper) {
-		this.httpHelper = httpHelper;
+	public String getEmail() {
+		return email;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
+	public void setCredentials(String email, String password) {
+		this.email = email;
+		this.password = password;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public User getCurrentUser() {
+		return currentUser;
 	}
 }

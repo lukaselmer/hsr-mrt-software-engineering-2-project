@@ -20,7 +20,6 @@ import org.apache.http.util.EntityUtils;
 import android.util.Log;
 
 public class HttpHelper {
-	private static HttpHelper inst;
 	private static final int HTTP_TIMEOUT_IN_MILLISECONDS = 10000;
 	private static final String TAG = HttpHelper.class.getSimpleName();
 	private String cookie;
@@ -95,14 +94,6 @@ public class HttpHelper {
 		if (h != null)
 			cookie = h.getValue();
 		return responseString;
-	}
-
-	public static HttpHelper inst() {
-		synchronized (HttpHelper.class) {
-			if (inst == null)
-				inst = new HttpHelper();
-			return inst;
-		}
 	}
 
 }
