@@ -2,22 +2,32 @@ package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
-import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.TimeEntry;
-import ch.hsr.se2p.mrt.network.TimeEntryHelper;
+import ch.hsr.se2p.mrt.models.TimeEntryType;
+import ch.hsr.se2p.mrt.network.CustomerHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -36,193 +46,110 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	public static final String TAG = TimeEntryActivity.class.getSimpleName();
-	private MRTApplication mrtApplication;
+	
+	private boolean isStarted = false;
+	private TimeEntry timeEntry;
+	private AutoCompleteTextView textView;
+	private Spinner spinner;
+	private ArrayAdapter<Customer> customerAdapter;
 
-	private OnClickListener lstnCreateTimeEntryWithDescription = new OnClickListener() {
+	private OnClickListener lstnStartStopTime = new OnClickListener() {
+
 		@Override
 		public void onClick(View v) {
-			createTimeEntryDialog(true);
-			updateView();
+			if (!isStarted) {
+				createTimeEntry();
+				isStarted = true;
+				updateView();
+			} else {
+				try {
+					finishTimeEntry();
+				} catch (SQLException e) {
+					Log.e(TAG, "Database Exception", e);
+				}
+				isStarted = false;
+				updateView();
+			}
+
 		}
 	};
-	private OnClickListener lstnCreateTimeEntryWithoutDescription = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			createTimeEntryDialog(false);
-			updateView();
-		}
-	};
-	private OnClickListener lstnSendTimeEntries = new OnClickListener() {
-		@Override
-		public void onClick(View v) {
-			sendTimeEntiesDialog();
-			updateView();
-		}
-	};
 
-	public OnClickListener getLstnCreateTimeEntryWithDescription() {
-		return lstnCreateTimeEntryWithDescription;
-	}
-
-	public OnClickListener getLstnCreateTimeEntryWithoutDescription() {
-		return lstnCreateTimeEntryWithoutDescription;
-	}
-
-	public OnClickListener getLstnSendTimeEntries() {
-		return lstnSendTimeEntries;
-	}
-
-	private void createTimeEntryDialog(boolean withDescrition) {
-		ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this, "", "Creating TimeEntry. Please wait...", true);
-		dialog.show();
-		try {
-			int id = createTimeEntry(withDescrition);
-			dialog.dismiss();
-			ActivityHelper.displayAlertDialog("", "TimeEntry with id " + id + " created.", this);
-		} catch (SQLException e) {
-			dialog.dismiss();
-			Log.e(TAG, "Database Exception", e);
-			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.", this);
-		}
-	}
-
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView(R.layout.time_entry);
 
-		mrtApplication = (MRTApplication) getApplication();
+		textView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		customerAdapter = new ArrayAdapter<Customer>(
+				this, R.layout.list_item, CustomerHelper.hackForTest());
+		textView.setAdapter(customerAdapter);
+		textView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+				arg0.getItemAtPosition(arg2);
+			}
+			
+		});
 
-		Button b1 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
-		b1.setOnClickListener(lstnCreateTimeEntryWithDescription);
-		Button b2 = (Button) findViewById(R.id.btnCreateTimeEntryWithoutDescription);
-		b2.setOnClickListener(lstnCreateTimeEntryWithoutDescription);
-		Button b3 = (Button) findViewById(R.id.btnSendTimeEntries);
-		b3.setOnClickListener(lstnSendTimeEntries);
+		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(
+				this, android.R.layout.simple_spinner_item,
+				hackForTimeEntryTypes());
+		timeEntryTypeAdapater
+				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(timeEntryTypeAdapater);
 
+		Button button = (Button) findViewById(R.id.btnStartStop);
+		button.setOnClickListener(lstnStartStopTime);
 		updateView();
 	}
 
 	protected void updateView() {
-		TextView tv;
-		tv = (TextView) findViewById(R.id.textview);
-		tv.setText(String.format(getString(R.string.txtWelcome), mrtApplication.getCurrentUser().getFirstName(), getTimeEntriesToTransmitCount()));
-	}
-
-	private int getTimeEntriesToTransmitCount() {
-		try {
-			return getTimeEntriesToTransmit().size();
-		} catch (SQLException e) {
-			return 0;
+		TextView tv = (TextView) findViewById(R.id.txtTime);
+		Button button = (Button) findViewById(R.id.btnStartStop);
+		Drawable d = findViewById(R.id.btnStartStop).getBackground();
+		PorterDuffColorFilter filter;
+		if (isStarted) {
+			tv.setText("Zeit gestartet um "
+					+ timeEntry.getTimeStart().toLocaleString());
+			button.setText("Stop");
+			filter = new PorterDuffColorFilter(Color.RED,
+					PorterDuff.Mode.SRC_ATOP);
+		} else {
+			tv.setText("Zeit gestoppt");
+			button.setText("Start");
+			filter = new PorterDuffColorFilter(Color.GREEN,
+					PorterDuff.Mode.SRC_ATOP);
 		}
+		d.setColorFilter(filter);
 	}
 
-	private int createTimeEntry(boolean withDescription) throws SQLException {
+	protected void createTimeEntry() {
+		timeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+	}
+
+	protected int finishTimeEntry() throws SQLException {
+		timeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
+		timeEntry.setTimeEntryTypeId(((TimeEntryType) spinner.getSelectedItem()).getId());
+		timeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
+		int i = textView.getListSelection();
+		System.out.println(i);
+		Toast.makeText(getApplicationContext(),
+				"Neuer Stundeneintrag wurde erstellt: " + timeEntry.getDescription(), Toast.LENGTH_LONG).show();
+		
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-		TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-		if (withDescription)
-			t.setDescription("with description, time is " + System.currentTimeMillis());
-		t.setTimeStop(new Timestamp(System.currentTimeMillis() + (1000 * 60 * 60 * 4))); // 4h later
-		timeEntryDao.create(t);
-		Log.i(TAG, "Inserted ID: " + t.getId());
-		return t.getId();
+		timeEntryDao.create(timeEntry);
+		return 1;
 	}
 
-	private List<TimeEntry> getTimeEntriesToTransmit() throws SQLException {
-		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-		return timeEntryDao.queryForAll();
-	}
-
-	private int transmitTimeEnties(List<TimeEntry> timeEntries, ProgressDialog dialog, Handler progressHandler) throws SQLException {
-		int timeEntriesTransmitted = 0;
-		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-		Log.d(TAG, "Transmitting " + timeEntries.size() + " timeEntries");
-		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(mrtApplication.getHttpHelper());
-		for (TimeEntry timeEntry : timeEntries) {
-			if (timeEntryHelper.transmit(timeEntry)) {
-				if (!timeEntry.isTransmitted()) {
-					timeEntry.setTransmitted();
-					timeEntryDao.update(timeEntry);
-				}
-
-				if (timeEntryHelper.confirm(timeEntry)) {
-					timeEntryDao.delete(timeEntry);
-					timeEntriesTransmitted++;
-				} else {
-					break;
-				}
-			} else {
-				break;
-			}
-			dialog.setProgress(timeEntriesTransmitted);
-		}
-		return timeEntriesTransmitted;
-	}
-
-	private void sendTimeEntiesDialog() {
-		final ProgressDialog dialog = new ProgressDialog(TimeEntryActivity.this); // ProgressDialog.show(MainActivity.this, "",
-																					// "Searching TimeEntries to transmit...", true, false);
-		dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		dialog.setTitle("Transmitting TimeEntries...");
-		dialog.setCancelable(false);
-		dialog.show();
-		final List<TimeEntry> timeEntries;
-		try {
-			timeEntries = getTimeEntriesToTransmit();
-		} catch (SQLException e) {
-			dialog.dismiss();
-			Log.e(TAG, "Database excaeption", e);
-			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.", this);
-			return;
-		}
-		if (timeEntries.size() == 0) {
-			dialog.dismiss();
-			ActivityHelper.displayAlertDialog("Transmission finished", "No TimeEntries found.", this);
-			return;
-		}
-
-		dialog.setProgress(0);
-		dialog.setMax(timeEntries.size());
-
-		final Handler notificationHandler = new Handler() {
-			public void handleMessage(Message msg) {
-				Bundle b = msg.getData();
-				ActivityHelper.displayAlertDialog(b.getString("title"), b.getString("message"), TimeEntryActivity.this);
-				updateView();
-			}
-		};
-		final Handler progressHandler = new Handler() {
-			public void handleMessage(Message msg) {
-				Bundle b = msg.getData();
-				ActivityHelper.displayAlertDialog(b.getString("title"), b.getString("message"), TimeEntryActivity.this);
-				updateView();
-			}
-		};
-
-		new Thread(new Runnable() {
-			public void run() {
-				int count = 0;
-				try {
-					count = transmitTimeEnties(timeEntries, dialog, progressHandler);
-				} catch (SQLException e) {
-					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log", TimeEntryActivity.this);
-				}
-				dialog.dismiss();
-
-				String messageText = (count == 0) ? "No TimeEntries transmitted. For further details, see log." : count + " of " + timeEntries.size()
-						+ " TimeEntries transmitted.";
-				notificationHandler.sendMessage(getMessageForAlertDialog("Transmission finished", messageText));
-			}
-		}).start();
-	}
-
-	private Message getMessageForAlertDialog(String title, String message) {
-		Message m = Message.obtain();
-		Bundle b = new Bundle();
-		b.putString("title", title);
-		b.putString("message", message);
-		m.setData(b);
-		return m;
+	final static List<TimeEntryType> hackForTimeEntryTypes() {
+		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
+		timeEntryTypes.add(new TimeEntryType(1, "Stundeneintragstyp 1"));
+		timeEntryTypes.add(new TimeEntryType(2, "Stundeneintragstyp 2"));
+		timeEntryTypes.add(new TimeEntryType(3, "Stundeneintragstyp 3"));
+		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 4"));
+		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 5"));
+		return timeEntryTypes;
 	}
 }

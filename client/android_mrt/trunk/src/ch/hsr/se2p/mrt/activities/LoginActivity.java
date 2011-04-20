@@ -74,7 +74,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void startNewActivity() {
-		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
+		Intent intent = new Intent(LoginActivity.this, TimeEntryActivityDemo.class);
 		this.startActivity(intent);
 		finish();
 	}

@@ -11,14 +11,14 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 import com.j256.ormlite.dao.Dao;
 import com.jayway.android.robotium.solo.Solo;
 
-public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
+public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivityDemo> {
 	private TextView view;
 	private String resourceString;
-	private TimeEntryActivity activity;
+	private TimeEntryActivityDemo activity;
 	private Solo solo;
 
 	public TimeEntryActivityTest() {
-		super("ch.hsr.se2p.mrt", TimeEntryActivity.class);
+		super("ch.hsr.se2p.mrt", TimeEntryActivityDemo.class);
 	}
 
 	@Override
