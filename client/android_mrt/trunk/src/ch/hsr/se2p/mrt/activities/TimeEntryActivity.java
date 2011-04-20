@@ -4,10 +4,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import ch.hsr.se2p.mrt.R;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.TimeEntryHelper;
@@ -37,7 +36,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	public static final String TAG = TimeEntryActivity.class.getSimpleName();
-	private String userFirstName;
+	private MRTApplication mrtApplication;
 
 	private OnClickListener lstnCreateTimeEntryWithDescription = new OnClickListener() {
 		@Override
@@ -60,8 +59,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			updateView();
 		}
 	};
-
-	private MRTApplication mrtApplication;
 
 	public OnClickListener getLstnCreateTimeEntryWithDescription() {
 		return lstnCreateTimeEntryWithDescription;
@@ -94,15 +91,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-//		//Extract passed data
-//		Bundle bundle = getIntent().getExtras();
-//		String userFirstName = (String) bundle.get("firstName");
-//		String userLastName = (String) bundle.get("lastName");
-//		int userIdName = (Integer) bundle.get("id");
-		Intent intent = getIntent();
-		userFirstName = intent.getStringExtra("firstName");
-		
+
+		mrtApplication = (MRTApplication) getApplication();
+
 		Button b1 = (Button) findViewById(R.id.btnCreateTimeEntryWithDescription);
 		b1.setOnClickListener(lstnCreateTimeEntryWithDescription);
 		Button b2 = (Button) findViewById(R.id.btnCreateTimeEntryWithoutDescription);
@@ -115,14 +106,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	protected void updateView() {
 		TextView tv;
-		try {
-			tv = (TextView) findViewById(R.id.textview);
-		} catch (NullPointerException e) {
-			// Element not yet initialized
-			return;
-		}
-		tv.setText(String.format(getString(R.string.txtWelcome), getTimeEntriesToTransmitCount()));
-		tv.setText(String.format(getString(R.string.txtName), userFirstName));
+		tv = (TextView) findViewById(R.id.textview);
+		tv.setText(String.format(getString(R.string.txtWelcome), mrtApplication.getCurrentUser().getFirstName(), getTimeEntriesToTransmitCount()));
 	}
 
 	private int getTimeEntriesToTransmitCount() {
