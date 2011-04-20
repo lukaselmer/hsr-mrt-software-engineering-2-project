@@ -6,7 +6,7 @@
 	<application android:name="ch.hsr.se2p.mrt.activities.MRTApplication"
 		android:icon="@drawable/icon" android:label="@string/app_name">
 
-		<activity android:name="activities.TimeEntryActivityDemo"
+		<activity android:name="activities.TimeEntryActivity"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.RUN" />
