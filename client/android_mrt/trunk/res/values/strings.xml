@@ -5,4 +5,5 @@
     <string name="btnCreateTimeEntryWithoutDescription">Create TimeEntry without description</string>
     <string name="btnSendTimeEntries">Send TimeEntries</string>
     <string name="txtWelcome">Welcome to MRT\nThere are %d TimeEntries in the local database.</string>
+    <string name="txtName">Hallo %d</string>
 </resources>

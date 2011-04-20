@@ -22,7 +22,6 @@ public class LoginActivity extends Activity {
 	private EditText editUsername;
 	private EditText editPassword;
 	private CheckBox saveLogin;
-	private User user;
 
 	SharedPreferences preferences;
 	private MRTApplication mrtApplication;
@@ -32,8 +31,9 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
+
+		mrtApplication = (MRTApplication) getApplication();
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		user = new User();
 
 		editUsername = (EditText) findViewById(R.id.editUsername);
 		editPassword = (EditText) findViewById(R.id.editPassword);
@@ -54,7 +54,7 @@ public class LoginActivity extends Activity {
 
 	private void startNewActivity() {
 		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
-		intent.putExtra("firstName",user.getFirstName());
+		intent.putExtra("firstName",mrtApplication.getCurrentUser().getFirstName());
 //		Bundle bundle = new Bundle();
 //		bundle.putString("firstName",user.getFirstName());
 //		bundle.putString("lastName",user.getLastName());
@@ -69,13 +69,12 @@ public class LoginActivity extends Activity {
 	}
 
 	private void processLogin(String username, String password) {
-		mrtApplication = (MRTApplication) getApplication();
 		// ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 		if (new UserHelper(mrtApplication.getHttpHelper()) {
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
 			};
-		}.login(username, password, user)) {
+		}.login(username, password, mrtApplication.getCurrentUser())) {
 			saveLoginData(username, password);
 			//ActivityHelper.displayAlertDialog("Willkommen " + user.getFirstName() + " " + user.getLastName(), "Anmeldung war erfolgreich.", this);
 			ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);		
