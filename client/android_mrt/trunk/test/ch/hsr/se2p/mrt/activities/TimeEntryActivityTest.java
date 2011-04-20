@@ -60,7 +60,8 @@ public class TimeEntryActivityTest extends
 	@UiThreadTest
 	public void testPreconditions() {
 		assertEquals("", editCustomer.getText().toString());
-		assertEquals(new Integer(1), ((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
+		assertEquals(new Integer(1),
+				((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
 		assertEquals("", editDescription.getText().toString());
 		assertEquals(START, button.getText().toString());
 	}
@@ -78,10 +79,27 @@ public class TimeEntryActivityTest extends
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
 		try {
-			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
+			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(
+					TimeEntry.class);
+			int count = dao.queryForAll().size();
+			solo.clickOnButton(START);
+			solo.clickOnButton(STOP);
+			assertEquals(count + 1, dao.queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
 		}
+	}
+
+	public void testCreateTimeEntryWithCustomer() {
+
+	}
+
+	public void testCreateTimeEntryWithTimeEntryType() {
+
+	}
+
+	public void testCreateTimeEntryWithDescription() {
+
 	}
 }
