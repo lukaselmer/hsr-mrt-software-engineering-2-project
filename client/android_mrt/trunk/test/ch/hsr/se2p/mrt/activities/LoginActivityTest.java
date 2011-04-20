@@ -66,6 +66,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertFalse(activity.equals(solo.getCurrentActivity()));
 		
 		// TODO: Save preferences successful
+		//Problem: das Passwort wird aus dem EditText-Feld "gelöscht", darum kann es nicht aus editPassword gelesen werden
+		editPassword.setText("1234");
+		
 		String email = activity.preferences.getString("email", null);
 		String password = activity.preferences.getString("password", null);
 		assertEquals(editEmail.getText().toString(), email);

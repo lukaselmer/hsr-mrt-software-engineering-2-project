@@ -57,6 +57,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//showLoginData();
 				checkLoginData();
 			}
 		});
@@ -98,18 +99,18 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-//	private void showLoginData() {
-//		String email = preferences.getString("email", null);
-//		String password = preferences.getString("password", null);
-//		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
-//	}
+	private void showLoginData() {
+		String email = preferences.getString("email", null);
+		String password = preferences.getString("password", null);
+		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
+	}
 
 	private void saveLoginData() {
-		Editor edit = preferences.edit();
 		String email = editEmail.getText().toString();
 		String password = editPassword.getText().toString();
+		Editor edit = preferences.edit();
 		edit.putString("email", email);
-		edit.putString("password", password);
+			edit.putString("password", password);
 		edit.commit();
 	}
 	
