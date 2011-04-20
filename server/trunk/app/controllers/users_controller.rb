@@ -33,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user_types = User::TYPES
 
-    #Rails.logger.debug @user.inspect
+    puts params.inspect
 
     if @user.save
       redirect_to(@user, :notice => 'User was successfully created.')
