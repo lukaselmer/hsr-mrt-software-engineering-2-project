@@ -34,7 +34,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private EditText editEmail;
 	private EditText editPassword;
 	private CheckBox saveLogin;
-	
+
 	SharedPreferences preferences;
 	private MRTApplication mrtApplication;
 
@@ -46,12 +46,12 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		mrtApplication = (MRTApplication) getApplication();
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
-		
+
 		editEmail = (EditText) findViewById(R.id.editEmail);
 		editPassword = (EditText) findViewById(R.id.editPassword);
 		saveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
 
-		//checkIfAvailablePreferences();
+		// checkIfAvailablePreferences();
 
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
@@ -66,11 +66,11 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 
-//	private void checkIfAvailablePreferences() {
-//		String email = preferences.getString("email", null);
-//		String password = preferences.getString("password", null);
-//		processLogin(email, password);
-//	}
+	// private void checkIfAvailablePreferences() {
+	// String email = preferences.getString("email", null);
+	// String password = preferences.getString("password", null);
+	// processLogin(email, password);
+	// }
 
 	private void startNewActivity() {
 		Intent intent = new Intent(LoginActivity.this, TimeEntryActivityDemo.class);
@@ -83,7 +83,6 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		if (new UserHelper(mrtApplication.getHttpHelper()) {
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
-				
 			};
 		}.login(email, password, mrtApplication.getCurrentUser())) {
 			saveLoginData(email, password);
@@ -96,7 +95,8 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void saveLoginData(String email, String password) {
-		if(true) return;
+		if (true)
+			return;
 		if (saveLogin.isChecked()) {
 			saveLoginData();
 		}

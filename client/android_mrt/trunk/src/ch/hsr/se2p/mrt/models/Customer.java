@@ -18,7 +18,7 @@ public class Customer implements Receivable {
 	private Integer railsId;
 	@DatabaseField
 	private String firstName, lastName, phone;
-	@DatabaseField
+	//TODO: @DatabaseField
 	private Location position;
 	@DatabaseField
 	private Long updatedAt;

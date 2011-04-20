@@ -15,8 +15,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -28,7 +26,6 @@ import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
-import ch.hsr.se2p.mrt.network.CustomerHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -46,34 +43,32 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 	public static final String TAG = TimeEntryActivity.class.getSimpleName();
-	
+
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
-	private AutoCompleteTextView autoCompleteTextView;
+	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner spinner;
-	private ArrayAdapter<Customer> customerAdapter;
+	private List<Customer> customers;
 
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
 			if (!isStarted) {
-				currentTimeEntry = new TimeEntry(new Timestamp(
-						System.currentTimeMillis()));
+				currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 				isStarted = true;
 				updateView();
 			} else {
-				ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this,
-						"", "Creating TimeEntry. Please wait...", true);
+				ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this, "", "Creating TimeEntry. Please wait...", true);
 				dialog.show();
 				try {
-					updateTimeEntry();
+					saveTimeEntry();
 					dialog.dismiss();
 					Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 				} catch (SQLException e) {
 					dialog.dismiss();
 					Log.e(TAG, "Database Exception", e);
-					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage()
-							+ "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
+					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "FÃ¼r weitere Informationen Log anzeigen.",
+							TimeEntryActivity.this);
 				}
 				isStarted = false;
 				updateView();
@@ -86,30 +81,30 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
 
-		autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item,
-				CustomerHelper.hackForTest());
-		autoCompleteTextView.setAdapter(customerAdapter);
-		autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				arg0.getItemAtPosition(arg2);
-			}
-
-		});
+		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		updateAutocompleteCustomers();
 
 		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(
-				this, android.R.layout.simple_spinner_item,
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
-		timeEntryTypeAdapater
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(timeEntryTypeAdapater);
 
 		Button button = (Button) findViewById(R.id.btnStartStop);
 		button.setOnClickListener(lstnStartStopTime);
 		updateView();
+	}
+
+	protected ArrayAdapter<Customer> getCustomerAdapter() {
+		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+	}
+
+	private void loadCustomers() {
+		try {
+			customers = getHelper().getCustomerDao().queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Init customers", e);
+		}
 	}
 
 	protected void updateView() {
@@ -118,39 +113,55 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		Drawable d = findViewById(R.id.btnStartStop).getBackground();
 		PorterDuffColorFilter filter;
 		if (isStarted) {
-			tv.setText("Zeit gestartet um "
-					+ currentTimeEntry.getTimeStart().toLocaleString());
+			tv.setText("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString());
 			button.setText("Stop");
-			filter = new PorterDuffColorFilter(Color.RED,
-					PorterDuff.Mode.SRC_ATOP);
+			filter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
 		} else {
 			tv.setText("Zeit gestoppt");
 			button.setText("Start");
-			filter = new PorterDuffColorFilter(Color.GREEN,
-					PorterDuff.Mode.SRC_ATOP);
+			filter = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
 		}
 		d.setColorFilter(filter);
+		updateAutocompleteCustomers();
 	}
 
-	protected void updateTimeEntry() throws SQLException {
+	private void updateAutocompleteCustomers() {
+		loadCustomers();
+		autoCompleteCustomers.setAdapter(getCustomerAdapter());
+	}
+
+	protected void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinner
-				.getSelectedItem()).getId());
-		currentTimeEntry
-				.setDescription(((TextView) findViewById(R.id.txtDescription))
-						.getText().toString());
+		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinner.getSelectedItem()).getId());
+		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
+
+	}
+
+	private Customer getCustomer() {
+		if (autoCompleteCustomers.getText().length() == 0) {
+			return null;
+		}
+		String customerName = autoCompleteCustomers.getText().toString();
+		// TODO: this!!! Wuuuaaaaahhh!!!!!
+		return null;
+	}
+
+	private synchronized List<Customer> getCustomers() {
+		if (customers == null)
+			loadCustomers();
+		return customers;
 	}
 
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
 		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
-		timeEntryTypes.add(new TimeEntryType(1, "Stundeneintragstyp 1"));
-		timeEntryTypes.add(new TimeEntryType(2, "Stundeneintragstyp 2"));
-		timeEntryTypes.add(new TimeEntryType(3, "Stundeneintragstyp 3"));
-		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 4"));
-		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 5"));
+		timeEntryTypes.add(new TimeEntryType(1, "Kein Stundeneintragstyp"));
+		timeEntryTypes.add(new TimeEntryType(2, "Stundeneintragstyp 1"));
+		timeEntryTypes.add(new TimeEntryType(3, "Stundeneintragstyp 2"));
+		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 3"));
+		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 4"));
 		return timeEntryTypes;
 	}
 }
