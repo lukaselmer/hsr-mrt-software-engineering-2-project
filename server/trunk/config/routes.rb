@@ -2,6 +2,7 @@ Mrt::Application.routes.draw do
   resources :addresses
 
   post 'customers/synchronize(.:format)' => 'customers#synchronize'
+  get 'customers/synchronize(.:format)' => 'customers#synchronize'
   resources :customers
 
   devise_for :users, :controllers => { :sessions => "sessions" }
