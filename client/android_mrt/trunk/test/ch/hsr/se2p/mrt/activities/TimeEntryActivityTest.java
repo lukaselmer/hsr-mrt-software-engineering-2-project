@@ -12,9 +12,9 @@ import com.j256.ormlite.dao.Dao;
 import com.jayway.android.robotium.solo.Solo;
 
 public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
-	private TextView mView;
+	private TextView view;
 	private String resourceString;
-	private TimeEntryActivity mActivity;
+	private TimeEntryActivity activity;
 	private Solo solo;
 
 	public TimeEntryActivityTest() {
@@ -25,9 +25,9 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	protected void setUp() throws Exception {
 		super.setUp();
 		getActivity().getHelper().reset();
-		mActivity = getActivity();
-		mView = (TextView) mActivity.findViewById(R.id.textview);
-		resourceString = mActivity.getString(R.string.txtWelcome);
+		activity = getActivity();
+		view = (TextView) activity.findViewById(R.id.textview);
+		resourceString = activity.getString(R.string.txtWelcome);
 		this.solo = new Solo(getInstrumentation(), getActivity());
 	}
 
@@ -44,7 +44,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 
 	public void testPreconditions() {
-		assertNotNull(mView);
+		assertNotNull(view);
 	}
 
 	@UiThreadTest
@@ -52,9 +52,9 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			getActivity().updateView();
 			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
-			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) mView.getText());
-			getActivity().getLstnCreateTimeEntryWithDescription().onClick(mView);
-			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) mView.getText());
+			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) view.getText());
+			getActivity().getLstnCreateTimeEntryWithDescription().onClick(view);
+			assertEquals(String.format(resourceString, dao.queryForAll().size()), (String) view.getText());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -68,7 +68,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
 			int count = dao.queryForAll().size();
-			getActivity().getLstnCreateTimeEntryWithDescription().onClick(mView);
+			getActivity().getLstnCreateTimeEntryWithDescription().onClick(view);
 			assertEquals(count + 1, dao.queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -84,7 +84,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	// t.setTimeStop(new Timestamp(System.currentTimeMillis()));
 	// dao.create(t);
 	// int count = dao.queryForAll().size();
-	// mActivity.getLstnSendTimeEntries().onClick(mView);
+	// activity.getLstnSendTimeEntries().onClick(view);
 	// solo.sleep(500);
 	// // new MockContentProvider().
 	// assertEquals(0, dao.queryForAll().size());

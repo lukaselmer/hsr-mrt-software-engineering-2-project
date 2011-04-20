@@ -26,7 +26,7 @@
     android:layout_height="wrap_content"
     android:password="true"></EditText>
   <CheckBox android:text=" Angemeldet bleiben" 
-  	android:id="@+id/cBsaveLogin" 
+  	android:id="@+id/chbxSaveLogin" 
   	android:layout_width="wrap_content" 
   	android:layout_height="wrap_content"
   	android:checked="true"
