@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.models.User;
-import ch.hsr.se2p.mrt.network.HttpHelper;
 import ch.hsr.se2p.mrt.network.UserHelper;
 
 public class LoginActivity extends Activity {
@@ -30,8 +28,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.settings);
-
+		
 		mrtApplication = (MRTApplication) getApplication();
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -39,6 +36,10 @@ public class LoginActivity extends Activity {
 		editPassword = (EditText) findViewById(R.id.editPassword);
 		saveLogin = (CheckBox) findViewById(R.id.cBsaveLogin);
 
+		checkIfAvailablePreferences();
+		
+		setContentView(R.layout.settings);
+		
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
@@ -52,20 +53,16 @@ public class LoginActivity extends Activity {
 		});
 	}
 
+	private void checkIfAvailablePreferences() {
+		String username = preferences.getString("username", "n/a");
+		String password = preferences.getString("password", "n/a");
+		processLogin(username, password);
+	}
+
 	private void startNewActivity() {
 		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
-		intent.putExtra("firstName",mrtApplication.getCurrentUser().getFirstName());
-//		Bundle bundle = new Bundle();
-//		bundle.putString("firstName",user.getFirstName());
-//		bundle.putString("lastName",user.getLastName());
-//		bundle.putInt("id",user.getId());
-//		intent.putExtras(bundle);
 		this.startActivity(intent);
-//		//Extract passed data
-//		Bundle bundle = getIntent().getExtras();
-//		String userFirstName = (String) bundle.get("firstName");
-//		String userLastName = (String) bundle.get("lastName");
-//		int userIdName = (Integer) bundle.get("id");
+		finish();
 	}
 
 	private void processLogin(String username, String password) {
