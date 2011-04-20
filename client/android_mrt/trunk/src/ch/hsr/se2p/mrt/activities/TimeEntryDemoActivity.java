@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.Customer;
@@ -41,70 +42,85 @@ public class TimeEntryDemoActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-	
+
 	private boolean isStarted = false;
 	private TimeEntry timeEntry;
-	
+
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
-		
+
 		@Override
 		public void onClick(View v) {
-			if (!isStarted){
-				timeEntry = createTimeEntry();
+			if (!isStarted) {
+				createTimeEntry();
 				isStarted = true;
 				updateView();
 			} else {
-				timeEntry = finishTimeEntry();
+				finishTimeEntry();
 				isStarted = false;
 				updateView();
 			}
-			
+
 		}
 	};
+	private AutoCompleteTextView txtView;
+	private Spinner spinner;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
 
-		AutoCompleteTextView txtView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		txtView = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
 		ArrayAdapter<Customer> customerAdapter = new ArrayAdapter<Customer>(
 				this, R.layout.list_item, CustomerHelper.hackForTest());
 		txtView.setAdapter(customerAdapter);
 
-		Spinner spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(
 				this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
 		timeEntryTypeAdapater
 				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(timeEntryTypeAdapater);
-		
-		Button b1 = (Button) findViewById(R.id.btnStartStop);
-		b1.setOnClickListener(lstnStartStopTime);
-		updateView();
-	}
 
-	protected TimeEntry finishTimeEntry() {
-		// TODO Auto-generated method stub
-		return null;
+		Button button = (Button) findViewById(R.id.btnStartStop);
+		button.setOnClickListener(lstnStartStopTime);
+		updateView();
 	}
 
 	protected void updateView() {
 		TextView tv = (TextView) findViewById(R.id.txtTime);
-		Button b = (Button) findViewById(R.id.btnStartStop);
-	    Drawable d = findViewById(R.id.btnStartStop).getBackground();
-	    PorterDuffColorFilter filter;
-		if(isStarted){
-			tv.setText("Zeit gestartet um " + timeEntry.getTimeStart().toLocaleString());
-			b.setText("Stop");
-			filter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);  
+		Button button = (Button) findViewById(R.id.btnStartStop);
+		Drawable d = findViewById(R.id.btnStartStop).getBackground();
+		PorterDuffColorFilter filter;
+		if (isStarted) {
+			tv.setText("Zeit gestartet um "
+					+ timeEntry.getTimeStart().toLocaleString());
+			button.setText("Stop");
+			filter = new PorterDuffColorFilter(Color.RED,
+					PorterDuff.Mode.SRC_ATOP);
 		} else {
 			tv.setText("Zeit gestoppt");
-			b.setText("Start");
-			filter = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
+			button.setText("Start");
+			filter = new PorterDuffColorFilter(Color.GREEN,
+					PorterDuff.Mode.SRC_ATOP);
 		}
 		d.setColorFilter(filter);
+	}
+
+	protected void createTimeEntry() {
+		timeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+	}
+
+	protected void finishTimeEntry() {
+		timeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
+		timeEntry
+				.setTimeEntryTypeId(((TimeEntryType) spinner.getSelectedItem())
+						.getId());
+		timeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
+		Toast.makeText(getApplicationContext(),
+				"Neuer Time Entry mit: " + timeEntry.getDescription(), Toast.LENGTH_LONG).show();
+		
 	}
 
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
@@ -115,10 +131,5 @@ public class TimeEntryDemoActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 4"));
 		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 5"));
 		return timeEntryTypes;
-	}
-	
-	private TimeEntry createTimeEntry(){
-		TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-		return t;
 	}
 }
