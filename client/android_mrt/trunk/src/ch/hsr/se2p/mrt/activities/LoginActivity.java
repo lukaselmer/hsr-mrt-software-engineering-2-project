@@ -5,7 +5,6 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,10 +31,10 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 
-	private EditText editUsername;
+	private EditText editEmail;
 	private EditText editPassword;
 	private CheckBox saveLogin;
-
+	
 	SharedPreferences preferences;
 	private MRTApplication mrtApplication;
 
@@ -43,35 +42,35 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.settings);
+		setContentView(R.layout.login);
 
 		mrtApplication = (MRTApplication) getApplication();
 		preferences = PreferenceManager.getDefaultSharedPreferences(this);
 		
-		editUsername = (EditText) findViewById(R.id.editUsername);
+		editEmail = (EditText) findViewById(R.id.editEmail);
 		editPassword = (EditText) findViewById(R.id.editPassword);
 		saveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
 
-		checkIfAvailablePreferences();
+		//checkIfAvailablePreferences();
 
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (editUsername.getText().length() > 0 && editPassword.getText().length() > 0) {
-					processLogin(editUsername.getText().toString(), editPassword.getText().toString());
+				if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
+					processLogin(editEmail.getText().toString(), editPassword.getText().toString());
 				} else {
-					ActivityHelper.displayAlertDialog("Fehler", "Bitte Benutzernamen und Passwort angeben!", LoginActivity.this);
+					ActivityHelper.displayAlertDialog("Fehler", "Bitte Emailadresse und Passwort angeben!", LoginActivity.this);
 				}
 			}
 		});
 	}
 
-	private void checkIfAvailablePreferences() {
-		String username = preferences.getString("username", "n/a");
-		String password = preferences.getString("password", "n/a");
-		processLogin(username, password);
-	}
+//	private void checkIfAvailablePreferences() {
+//		String email = preferences.getString("email", null);
+//		String password = preferences.getString("password", null);
+//		processLogin(email, password);
+//	}
 
 	private void startNewActivity() {
 		Intent intent = new Intent(LoginActivity.this, TimeEntryActivityDemo.class);
@@ -79,14 +78,15 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		finish();
 	}
 
-	private void processLogin(String username, String password) {
+	private void processLogin(String email, String password) {
 		// ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 		if (new UserHelper(mrtApplication.getHttpHelper()) {
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
+				
 			};
-		}.login(username, password, mrtApplication.getCurrentUser())) {
-			saveLoginData(username, password);
+		}.login(email, password, mrtApplication.getCurrentUser())) {
+			saveLoginData(email, password);
 			// ActivityHelper.displayAlertDialog("Willkommen " + user.getFirstName() + " " + user.getLastName(), "Anmeldung war erfolgreich.", this);
 			ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 			startNewActivity();
@@ -95,7 +95,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		editPassword.setText("");
 	}
 
-	private void saveLoginData(String username, String password) {
+	private void saveLoginData(String email, String password) {
 		if(true) return;
 		if (saveLogin.isChecked()) {
 			saveLoginData();
@@ -103,16 +103,16 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void showLoginData() {
-		String username = preferences.getString("username", "n/a");
-		String password = preferences.getString("password", "n/a");
-		ActivityHelper.displayAlertDialog(null, "Username: " + username + " Passwort: " + password, this);
+		String email = preferences.getString("email", null);
+		String password = preferences.getString("password", null);
+		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
 	}
 
 	private void saveLoginData() {
 		Editor edit = preferences.edit();
-		String username = editUsername.getText().toString();
+		String email = editEmail.getText().toString();
 		String password = editPassword.getText().toString();
-		edit.putString("username", username);
+		edit.putString("email", email);
 		edit.putString("password", password);
 		edit.commit();
 	}

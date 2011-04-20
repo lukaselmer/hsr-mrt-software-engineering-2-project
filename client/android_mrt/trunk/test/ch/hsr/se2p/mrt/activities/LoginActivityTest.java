@@ -8,7 +8,6 @@ import android.test.UiThreadTest;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -19,7 +18,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	private LoginActivity activity;
 	private Solo solo;
 
-	private EditText editUsername;
+	private EditText editEmail;
 	private EditText editPasswort;
 	private CheckBox checkbox;
 	private Button loginBtn;
@@ -29,7 +28,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		super.setUp();
 		// getActivity().getHelper().reset();
 		activity = getActivity();
-		editUsername = (EditText) activity.findViewById(R.id.editUsername);
+		editEmail = (EditText) activity.findViewById(R.id.editEmail);
 		editPasswort = (EditText) activity.findViewById(R.id.editPassword);
 		checkbox = (CheckBox) activity.findViewById(R.id.chbxSaveLogin);
 		loginBtn = (Button) activity.findViewById(R.id.loginButton);
@@ -48,17 +47,79 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		// getActivity().deleteDatabase(TEST_DB_NAME);
 	}
 
+	@UiThreadTest
 	public void testPreconditions() {
-		assertNull(editUsername);
-		assertNull(editPasswort);
+		assertEquals("", editEmail.getText().toString());
+		assertEquals("", editPasswort.getText().toString());
 		assertEquals(true, checkbox.isChecked());
 	}
 
+	public void testNoLoginDataSuppliedWithoutPreferencesSaved() {
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editEmail.setText("");
+				editPasswort.setText("");
+				loginBtn.performClick();
+			}
+		});
+		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		solo.clickOnButton("Ok");
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertEquals(activity, solo.getCurrentActivity());
+
+		String email = activity.preferences.getString("email", null);
+		String password = activity.preferences.getString("password", null);
+		assertFalse("".equals(email));
+		assertFalse("".equals(password));
+	}
+
+	public void testNoPasswordSuppliedWithoutPreferencesSaved() {
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editEmail.setText("aarglos@mrt.ch");
+				editPasswort.setText("");
+				loginBtn.performClick();
+			}
+		});
+		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		solo.clickOnButton("Ok");
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertEquals(activity, solo.getCurrentActivity());
+
+		String email = activity.preferences.getString("email", null);
+		String password = activity.preferences.getString("password", null);
+		assertFalse("".equals(email));
+		assertFalse("".equals(password));
+	}
+
+	public void testNoEmailSuppliedWithoutPreferencesSaved() {
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editEmail.setText("");
+				editPasswort.setText("1234");
+				loginBtn.performClick();
+			}
+		});
+		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		solo.clickOnButton("Ok");
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertEquals(activity, solo.getCurrentActivity());
+
+		String email = activity.preferences.getString("email", null);
+		String password = activity.preferences.getString("password", null);
+		assertFalse("".equals(email));
+		assertFalse("".equals(password));
+	}
+
 	@UiThreadTest
-	public void testLoginSuccessfulWithPreferenceSave() {
-		editUsername.setText("");
-		editPasswort.setText("");
+	public void testLoginSuccessfulWithPreferencesSaved() {
+		editEmail.setText("aarglos@mrt.ch");
+		editPasswort.setText("1234");
 		loginBtn.performClick();
+
 
 		// TODO: Test if dialog is showing
 		// TODO: Click on dialog
@@ -67,10 +128,39 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	}
 
 	@UiThreadTest
-	public void testLoginSuccessfulWithoutPreferenceSave() {
-		editUsername.setText("");
+	public void testLoginSuccessfulWithoutPreferencesSaved() {
+		editEmail.setText("ttuechtig@mrt.ch");
 		editPasswort.setText("");
 		loginBtn.performClick();
+
+
+		// TODO: Test if dialog is showing
+		// TODO: Click on dialog
+		// TODO: Check if main window is not showing
+		// TODO: Preferences not saved
+	}
+	
+	public void testLoginUnsuccessfulWithoutPreferenceSave() {
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editEmail.setText("ttuechtig@mrt.ch");
+				editPasswort.setText("");
+				loginBtn.performClick();
+			}
+		});
+		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		solo.clickOnButton("Ok");
+		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertEquals(activity, solo.getCurrentActivity());
+
+		String email = activity.preferences.getString("email", null);
+		String password = activity.preferences.getString("password", null);
+		assertFalse("".equals(email));
+		assertFalse("".equals(password));
+		
+		
+		
 
 		// TODO: Test if dialog is showing
 		// TODO: Click on dialog
@@ -78,48 +168,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		// TODO: Preferences not saved
 	}
 
-	@UiThreadTest
-	public void testNoLoginDataSupplied() {
-		editUsername.setText("");
-		editPasswort.setText("");
-		loginBtn.performClick();
-
-		// TODO: Test if dialog is showing
-		// TODO: Click on dialog
-		// TODO: Check if main window is showing
-
-	}
-
-	@UiThreadTest
-	public void testNoUsernameSupplied() {
-		editUsername.setText("");
-		editPasswort.setText("");
-		loginBtn.performClick();
-		assertTrue(true);
-	}
-
-	@UiThreadTest
-	public void testNoPasswordSupplied() {
-		editUsername.setText("");
-		editPasswort.setText("");
-		loginBtn.performClick();
-		assertTrue(true);
-	}
-
-	@UiThreadTest
-	public void testBla() {
-		assertTrue(true);
-	}
-
-	// @Override
-	// protected void tearDown() throws Exception {
-	// // TODO Auto-generated method stub
-	// super.tearDown();
-	// }
-
 	// AlertDialog.Builder b = new AlertDialog.Builder(ch.hsr.se2p.mrt.activities.LoginActivity);
 	// b.setTitle("Fehler");
-	// b.setMessage("Bitte Benutzernamen und Passwort angeben!");
+	// b.setMessage("Bitte Emailadresse und Passwort angeben!");
 
 	// activity.runOnUiThread(new Runnable() {
 	// public void run() {
@@ -127,8 +178,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	// }
 	// });
 
-	// assertNull(editUsername);
-	// assertNull(editPasswort);
 	// assertTrue(b.isShowing());
 
 }

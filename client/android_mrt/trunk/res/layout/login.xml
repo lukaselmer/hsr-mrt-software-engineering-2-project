@@ -10,11 +10,11 @@
     android:layout_height="wrap_content"
     android:textStyle="bold"
     android:textSize="30px"></TextView>
- <TextView android:text="Benutzername" 
-  	android:id="@+id/viewUsername" 
+ <TextView android:text="Emailadresse" 
+  	android:id="@+id/viewEmail" 
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"></TextView>
-  <EditText android:id="@+id/editUsername"
+  <EditText android:id="@+id/editEmail"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"></EditText>
    <TextView android:text="Passwort" 
