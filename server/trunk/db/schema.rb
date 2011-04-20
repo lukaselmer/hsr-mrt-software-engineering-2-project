@@ -26,8 +26,9 @@ ActiveRecord::Schema.define(:version => 20110419191811) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
-    t.integer  "updated_at"
+    t.datetime  "updated_at"
     t.datetime "created_at"
+    t.datetime "deleted_at"
   end
 
   create_table "time_entries", :force => true do |t|

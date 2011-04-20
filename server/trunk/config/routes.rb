@@ -1,11 +1,12 @@
 Mrt::Application.routes.draw do
   resources :addresses
 
+  post 'customers/synchronize(.:format)' => 'customers#synchronize'
   resources :customers
 
   devise_for :users, :controllers => { :sessions => "sessions" }
   devise_scope :user do
-      resources :sessions, :only => [:create]
+    resources :sessions, :only => [:create]
   end
 
   resources :users

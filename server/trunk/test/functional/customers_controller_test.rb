@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @customer = customers(:one)
   end
@@ -45,5 +47,11 @@ class CustomersControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to customers_path
+  end
+
+  test "should get all customers when synchronizing without last_update" do
+    post :synchronize, :format => :json
+    assert_response :success
+    assert_not_nil assigns(:updated_customers)
   end
 end

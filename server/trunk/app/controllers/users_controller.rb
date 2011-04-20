@@ -42,17 +42,15 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.xml
   def create
     @user = User.new(params[:user])
+    @user_types = User::TYPES
 
     respond_to do |format|
       if @user.save
         format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end

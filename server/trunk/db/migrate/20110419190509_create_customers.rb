@@ -5,9 +5,9 @@ class CreateCustomers < ActiveRecord::Migration
       t.integer :id
       t.string :last_name
       t.string :phone
-      t.integer :updated_at
 
       t.timestamps
+      t.timestamp :deleted_at
     end
   end
 
