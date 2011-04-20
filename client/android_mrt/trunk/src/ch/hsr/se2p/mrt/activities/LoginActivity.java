@@ -51,7 +51,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		editPassword = (EditText) findViewById(R.id.editPassword);
 		saveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
 
-//		checkIfAvailablePreferencesForAutoLogin();
+		checkPreferencesForAutoLogin();
 
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
@@ -63,11 +63,13 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 
-//	private void checkIfAvailablePreferencesForAutoLogin() {
-//		String email = preferences.getString("email", null);
-//		String password = preferences.getString("password", null);
-//		processLogin(email, password);
-//	}
+	private void checkPreferencesForAutoLogin() {
+		String email = preferences.getString("email", null);
+		String password = preferences.getString("password", null);
+		if (email.length() > 0 && password.length() > 0) {
+			processLogin(email, password);
+		}
+	}
 	
 	protected void checkLoginData() {
 		if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
@@ -110,7 +112,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		String password = editPassword.getText().toString();
 		Editor edit = preferences.edit();
 		edit.putString("email", email);
-			edit.putString("password", password);
+		edit.putString("password", password);
 		edit.commit();
 	}
 	
