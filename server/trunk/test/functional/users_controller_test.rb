@@ -5,6 +5,12 @@ class UsersControllerTest < ActionController::TestCase
 
   setup do
     @user = users(:one)
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @admin = User.create! do |user|
+      user.email = 'admin@test.com'
+      user.password = '12345'
+    end
+    sign_in @admin
   end
 
   test "should get index" do
@@ -19,8 +25,9 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should create user" do
+    valid_user = User.new( :email => 'test@test.com', :password => '12345' )
     assert_difference('User.count') do
-      post :create, :user => @user.attributes
+      post :create, :user => valid_user.attributes
     end
 
     assert_redirected_to user_path(assigns(:user))

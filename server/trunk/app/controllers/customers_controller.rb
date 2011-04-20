@@ -1,11 +1,9 @@
 class CustomersController < ApplicationController
+  
+
   # GET /customers
   def index
     @customers = Customer.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-    end
   end
 
   # GET /customers/1
@@ -35,12 +33,10 @@ class CustomersController < ApplicationController
   def create
     @customer = Customer.new(params[:customer])
 
-    respond_to do |format|
-      if @customer.save
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully created.') }
-      else
-        format.html { render :action => "new" }
-      end
+    if @customer.save
+      redirect_to(@customer, :notice => 'Customer was successfully created.')
+    else
+      render :action => "new"
     end
   end
 
@@ -48,12 +44,10 @@ class CustomersController < ApplicationController
   def update
     @customer = Customer.find(params[:id])
 
-    respond_to do |format|
-      if @customer.update_attributes(params[:customer])
-        format.html { redirect_to(@customer, :notice => 'Customer was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
-      end
+    if @customer.update_attributes(params[:customer])
+      redirect_to(@customer, :notice => 'Customer was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
@@ -62,20 +56,11 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(customers_url) }
-    end
+    redirect_to(customers_url)
   end
 
   def synchronize
-    if params[:last_update].nil?
-      @updated_customers = Customer.all
-    else
-      @updated_customers = Customer.where("updated_at > :last_update OR created_at > :last_update OR deleted_at > :last_update", :last_update => params[:last_update])
-    end
-    
-    respond_to do |format|
-        format.json { render :json => @updated_customers }
-    end
+    @updated_customers = Customer.updated_after(params[:last_update])
+    render :json => @updated_customers
   end
 end

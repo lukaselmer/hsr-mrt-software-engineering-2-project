@@ -18,7 +18,7 @@
     <td><%= user.email %></td>
     <td><%= user.user_type %></td>
     <td><%= link_to 'Show', user %></td>
-    <% if can_modify? current_user, controller.class %>
+    <% if true %>
       <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <% end -%>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -5,6 +5,13 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   setup do
     @time_entry = time_entries(:one)
+    
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = User.create! do |user|
+      user.email = 'test@test.com'
+      user.password = '12345'
+    end
+    sign_in @user
   end
 
   test "should get index" do
