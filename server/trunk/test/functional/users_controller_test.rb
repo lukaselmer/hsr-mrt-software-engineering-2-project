@@ -9,6 +9,7 @@ class UsersControllerTest < ActionController::TestCase
     @admin = User.create! do |user|
       user.email = 'admin@test.com'
       user.password = '12345'
+      user.user_type = 1
     end
     sign_in @admin
   end

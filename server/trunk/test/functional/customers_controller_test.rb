@@ -10,7 +10,7 @@ class CustomersControllerTest < ActionController::TestCase
     @user = User.create! do |user|
       user.email = 'test@test.com'
       user.password = '12345'
-      user.password_confirmation = '12345'
+      user.user_type = 1
     end
     sign_in @user
   end

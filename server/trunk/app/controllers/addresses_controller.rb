@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_filter :authorize_user!, :only => [:new, :create, :edit, :update, :destroy]
   # GET /addresses
   # GET /addresses.xml
   def index

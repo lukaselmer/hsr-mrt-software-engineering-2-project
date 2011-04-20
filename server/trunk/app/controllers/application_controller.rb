@@ -2,14 +2,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
 
-    def has_writeaccess?(user)
+  def has_writeaccess_to?(user, resource)
+  return false if user.nil? or resource.nil?
+  return true if user.user_type == User::TYPES[:ADMIN]
 
-      acl = {
-        CustomerController.class => [User::TYPES[:SECRETARY]]
-      }
+  acl = {
+    "CustomersController" => [User::TYPES[:SECRETARY]],
+    "UsersController" => [User::TYPES[:SECRETARY]],
+    "AddressesController" => [User::TYPES[:SECRETARY]],
+    "TimeEntriesController" => [User::TYPES[:SECRETARY], User::TYPES[:EMPLOYEE]]
+  }
 
-      acl_resource = acl[self.class]
-      return acl_resource.include? user.user_type unless user.nil? or acl_resource.nil?
-      false
-    end
+  return acl.fetch(resource, {}).include? user.user_type
+end
+
+def authorize_user!
+  render :file => "#{Rails.root}/public/403.html", :status => :not_found unless has_writeaccess_to? current_user, self.class.name
+end
 end

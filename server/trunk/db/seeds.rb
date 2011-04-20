@@ -8,4 +8,5 @@
 User.create! do |admin|
   admin.email = 'admin@mrt.ch'
   admin.password = 'mrt'
+  admin.user_type = 0
 end

@@ -16,7 +16,7 @@
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
     <td><%= user.email %></td>
-    <td><%= user.user_type %></td>
+    <td><%= @user_types.index(user.user_type) %></td>
     <td><%= link_to 'Show', user %></td>
     <% if true %>
       <td><%= link_to 'Edit', edit_user_path(user) %></td>

@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  
+  before_filter :authorize_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /customers
   def index

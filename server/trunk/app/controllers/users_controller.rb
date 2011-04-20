@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :authorize_user!, :only => [:new, :create, :edit, :update, :destroy]
 
   # GET /users
   def index

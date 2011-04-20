@@ -1,4 +1,5 @@
 class TimeEntriesController < ApplicationController
+  before_filter :authorize_user!, :only => [:new, :create, :edit, :update, :destroy]
   # GET /time_entries
   def index
     @time_entries = TimeEntry.all
