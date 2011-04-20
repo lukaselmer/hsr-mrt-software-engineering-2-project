@@ -1,15 +1,18 @@
 package ch.hsr.se2p.mrt.activities;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -31,6 +34,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
 
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
@@ -41,7 +45,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-
+	public static final String TAG = TimeEntryActivity.class.getSimpleName();
+	
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
 	private AutoCompleteTextView autoCompleteTextView;
@@ -57,9 +62,21 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				isStarted = true;
 				updateView();
 			} else {
-				createTimeEntry();
+				ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this,
+						"", "Creating TimeEntry. Please wait...", true);
+				dialog.show();
+				try {
+					updateTimeEntry();
+					dialog.dismiss();
+					Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
+				} catch (SQLException e) {
+					dialog.dismiss();
+					Log.e(TAG, "Database Exception", e);
+					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage()
+							+ "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
+				}
+				isStarted = false;
 				updateView();
-
 			}
 		}
 	};
@@ -115,20 +132,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		d.setColorFilter(filter);
 	}
 
-	protected void createTimeEntry() {
+	protected void updateTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinner
 				.getSelectedItem()).getId());
 		currentTimeEntry
 				.setDescription(((TextView) findViewById(R.id.txtDescription))
 						.getText().toString());
-		int i = autoCompleteTextView.getListSelection();
-		System.out.println(i);
-		Toast.makeText(
-				getApplicationContext(),
-				"Neuer Stundeneintrag wurde erstellt: "
-						+ currentTimeEntry.getDescription(), Toast.LENGTH_LONG)
-				.show();
+		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
+		timeEntryDao.create(currentTimeEntry);
+		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
 	}
 
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
