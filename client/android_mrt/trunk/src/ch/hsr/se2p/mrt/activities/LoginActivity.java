@@ -51,42 +51,40 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		editPassword = (EditText) findViewById(R.id.editPassword);
 		saveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
 
-		// checkIfAvailablePreferences();
+//		checkIfAvailablePreferencesForAutoLogin();
 
 		Button loginBtn = (Button) findViewById(R.id.loginButton);
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
-					processLogin(editEmail.getText().toString(), editPassword.getText().toString());
-				} else {
-					ActivityHelper.displayAlertDialog("Fehler", "Bitte Emailadresse und Passwort angeben!", LoginActivity.this);
-				}
+				checkLoginData();
 			}
 		});
 	}
 
-	// private void checkIfAvailablePreferences() {
-	// String email = preferences.getString("email", null);
-	// String password = preferences.getString("password", null);
-	// processLogin(email, password);
-	// }
-
-	private void startNewActivity() {
-		Intent intent = new Intent(LoginActivity.this, TimeEntryActivityDemo.class);
-		this.startActivity(intent);
-		finish();
+//	private void checkIfAvailablePreferencesForAutoLogin() {
+//		String email = preferences.getString("email", null);
+//		String password = preferences.getString("password", null);
+//		processLogin(email, password);
+//	}
+	
+	protected void checkLoginData() {
+		if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
+			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
+		} else {
+			ActivityHelper.displayAlertDialog("Fehler", "Bitte Emailadresse und Passwort angeben!", LoginActivity.this);
+		}
 	}
 
 	private void processLogin(String email, String password) {
-		// ProgressDialog dialog = ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
-		if (new UserHelper(mrtApplication.getHttpHelper()) {
+		if (new UserHelper(mrtApplication.getHttpHelper()) 
+		{
 			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
 				return true;
-			};
-		}.login(email, password, mrtApplication.getCurrentUser())) {
+			};	
+		}
+		.login(email, password, mrtApplication.getCurrentUser())) {
 			saveLoginData(email, password);
-			// ActivityHelper.displayAlertDialog("Willkommen " + user.getFirstName() + " " + user.getLastName(), "Anmeldung war erfolgreich.", this);
 			ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 			startNewActivity();
 		}
@@ -95,18 +93,16 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void saveLoginData(String email, String password) {
-		if (true)
-			return;
 		if (saveLogin.isChecked()) {
 			saveLoginData();
 		}
 	}
 
-	private void showLoginData() {
-		String email = preferences.getString("email", null);
-		String password = preferences.getString("password", null);
-		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
-	}
+//	private void showLoginData() {
+//		String email = preferences.getString("email", null);
+//		String password = preferences.getString("password", null);
+//		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
+//	}
 
 	private void saveLoginData() {
 		Editor edit = preferences.edit();
@@ -115,5 +111,11 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		edit.putString("email", email);
 		edit.putString("password", password);
 		edit.commit();
+	}
+	
+	private void startNewActivity() {
+		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
+		this.startActivity(intent);
+		finish();
 	}
 }
