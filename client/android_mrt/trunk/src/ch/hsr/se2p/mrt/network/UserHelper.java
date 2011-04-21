@@ -30,7 +30,7 @@ public class UserHelper {
 
 	protected JSONObject generateJSONObject(String email, String password) throws JSONException {
 		JSONObject j = new JSONObject();
-		j.put("login", email);
+		j.put("email", email);
 		j.put("password", password);
 		return j;
 	}
