@@ -1,7 +1,6 @@
 class CreateAddresses < ActiveRecord::Migration
   def self.up
     create_table :addresses do |t|
-      t.integer :id
       t.string :line1
       t.string :line2
       t.string :line3
