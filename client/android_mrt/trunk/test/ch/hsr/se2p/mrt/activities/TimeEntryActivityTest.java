@@ -79,8 +79,7 @@ public class TimeEntryActivityTest extends
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
 		try {
-			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(
-					TimeEntry.class);
+			Dao<TimeEntry, ?> dao = getActivity().getHelper().getDao(TimeEntry.class);
 			int count = dao.queryForAll().size();
 			solo.clickOnButton(START);
 			solo.clickOnButton(STOP);
@@ -91,15 +90,16 @@ public class TimeEntryActivityTest extends
 		}
 	}
 
-	public void testCreateTimeEntryWithCustomer() {
-
-	}
-
-	public void testCreateTimeEntryWithTimeEntryType() {
-
-	}
-
-	public void testCreateTimeEntryWithDescription() {
-
-	}
+//	public void testCreateTimeEntryWithCustomer() {
+//
+//	}
+//
+//	public void testCreateTimeEntryWithTimeEntryType() {
+//		
+//
+//	}
+//
+//	public void testCreateTimeEntryWithDescription() {
+//
+//	}
 }
