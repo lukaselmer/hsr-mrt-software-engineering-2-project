@@ -27,6 +27,8 @@ public class TimeEntryActivityTest extends
 	private Button button;
 	private TextView txtTime;
 	private Dao<TimeEntry, ?> dao;
+	private int count;
+	private TimeEntry timeEntry;
 
 	public static final String START = "Start";
 	public static final String STOP = "Stop";
@@ -82,21 +84,12 @@ public class TimeEntryActivityTest extends
 	}
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
-		solo.clickOnButton(START);
+		setDao();
 		try {
-			dao = getActivity().getHelper().getDao(TimeEntry.class);
-			int count = dao.queryForAll().size();
-			solo.clickOnButton(STOP);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				assert (false);
-			}
 			assertEquals(count + 1, dao.queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
-			assert (false);
+			assert(false);
 		}
 	}
 
@@ -107,6 +100,95 @@ public class TimeEntryActivityTest extends
 				TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getName(), timeEntryType.getName());
 	}
 
+	public void testSelectionCustomer() {
+		setCustomerName();
+		assertEquals("Muster Peter", editCustomer.getText().toString());
+	}
+
+	@UiThreadTest
+	public void testDescription() {
+		editDescription.setText(DESCRIPTION);
+		assertEquals(DESCRIPTION, editDescription.getText().toString());
+	}
+
+	public void testCreateTimeEntryWithTimeEntryType() {
+		setSpinner();
+		setDao();
+		try {
+			timeEntry = dao.queryForAll().get(count);
+			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), timeEntry.getTimeEntryTypeId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+
+	public void testCreateTimeEntryWithCustomer() {
+		setCustomerName();
+		setDao();
+		try {
+			timeEntry = dao.queryForAll().get(count);
+			assertEquals(getActivity().getHelper().getCustomerDao().queryForAll().get(1).getId(), timeEntry.getCustomerId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+	
+	public void testCreateTimeEntryWithInvalidCustomer(){
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editCustomer.setText("Ungültiger Benutzer");
+			}
+		});
+		setDao();
+		try {
+			timeEntry = dao.queryForAll().get(count);
+			assertEquals(null, timeEntry.getCustomerId());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+
+	public void testCreateTimeEntryWithDescription() {
+		setDescription();
+		setDao();		
+		try {
+			timeEntry = dao.queryForAll().get(count);
+			assertEquals(DESCRIPTION, timeEntry.getDescription());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+	
+	private void setDao() {
+		solo.clickOnButton(START);
+		try {
+			dao = getActivity().getHelper().getDao(TimeEntry.class);
+			count = dao.queryForAll().size();
+			solo.clickOnButton(STOP);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				assert (false);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+	
+	private void setDescription() {
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editDescription.setText(DESCRIPTION);			
+			}
+		});
+	}
+	
 	private void setSpinner() {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
@@ -120,11 +202,7 @@ public class TimeEntryActivityTest extends
 		}
 		solo.sendKey(KeyEvent.KEYCODE_DPAD_CENTER);
 	}
-
-	public void testSelectionCustomer() {
-		setCustomerName();
-		assertEquals("Muster Peter", editCustomer.getText().toString());
-	}
+	
 
 	private void setCustomerName() {
 		activity.runOnUiThread(new Runnable() {
@@ -134,75 +212,5 @@ public class TimeEntryActivityTest extends
 		});
 		solo.sendKey(KeyEvent.KEYCODE_DPAD_DOWN);
 		solo.sendKey(KeyEvent.KEYCODE_DPAD_CENTER);
-	}
-
-	@UiThreadTest
-	public void testDescription() {
-		editDescription.setText(DESCRIPTION);
-		assertEquals(DESCRIPTION, editDescription.getText().toString());
-	}
-
-	public void testCreateTimeEntryWithTimeEntryType() {
-		setSpinner();
-		solo.clickOnButton(START);
-		try {
-			dao = getActivity().getHelper().getDao(TimeEntry.class);
-			solo.clickOnButton(STOP);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				assert (false);
-			}
-			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size() - 1);
-			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), t.getTimeEntryTypeId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
-	}
-
-	public void testCreateTimeEntryWithCustomer() {
-		setCustomerName();
-		solo.clickOnButton(START);
-		try {
-			dao = getActivity().getHelper().getDao(TimeEntry.class);
-			solo.clickOnButton(STOP);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				assert (false);
-			}
-			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size() - 1);
-			assertEquals(getActivity().getHelper().getCustomerDao().queryForAll().get(1).getId(), t.getCustomerId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
-	}
-
-	public void testCreateTimeEntryWithDescription() {
-		solo.clickOnButton(START);
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editDescription.setText(DESCRIPTION);
-			}
-		});
-		try {
-			dao = getActivity().getHelper().getDao(TimeEntry.class);
-			solo.clickOnButton(STOP);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				assert (false);
-			}
-			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size() - 1);
-			assertEquals(DESCRIPTION, t.getDescription());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
 	}
 }
