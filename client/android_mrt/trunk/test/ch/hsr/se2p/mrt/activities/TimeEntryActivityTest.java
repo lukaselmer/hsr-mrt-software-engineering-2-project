@@ -42,10 +42,8 @@ public class TimeEntryActivityTest extends
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
-		editCustomer = (AutoCompleteTextView) activity
-				.findViewById(R.id.autocompleteCustomer);
-		editTimeEntryType = (Spinner) activity
-				.findViewById(R.id.spinnerTimeEntryType);
+		editCustomer = (AutoCompleteTextView) activity.findViewById(R.id.autocompleteCustomer);
+		editTimeEntryType = (Spinner) activity.findViewById(R.id.spinnerTimeEntryType);
 		editDescription = (TextView) activity.findViewById(R.id.txtDescription);
 		button = (Button) activity.findViewById(R.id.btnStartStop);
 		txtTime = (TextView) activity.findViewById(R.id.txtTime);
@@ -63,55 +61,51 @@ public class TimeEntryActivityTest extends
 		super.tearDown();
 	}
 
-	//
-	// @UiThreadTest
-	// public void testPreconditions() {
-	// assertEquals("", editCustomer.getText().toString());
-	// assertEquals(new Integer(1),
-	// ((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
-	// assertEquals("", editDescription.getText().toString());
-	// assertEquals(START, button.getText().toString());
-	// }
-	//
-	// public void testStandardDialog() {
-	// assertEquals("Zeit gestoppt", txtTime.getText().toString());
-	// solo.clickOnButton(START);
-	// assertTrue(solo.searchText("Zeit gestartet um ", true));
-	// assertEquals(STOP, button.getText().toString());
-	// solo.clickOnButton(STOP);
-	// assertTrue(solo
-	// .searchText("Neuer Stundeneintrag wurde erstellt.", true));
-	// assertEquals(START, button.getText().toString());
-	// }
-	//
-	// public void testCreateTimeEntryWithoutAnyInformation() {
-	// solo.clickOnButton(START);
-	// try {
-	// dao = getActivity().getHelper().getDao(TimeEntry.class);
-	// int count = dao.queryForAll().size();
-	// solo.clickOnButton(STOP);
-	// try {
-	// Thread.sleep(1000);
-	// } catch (InterruptedException e) {
-	// e.printStackTrace();
-	// assert (false);
-	// }
-	// assertEquals(count + 1, dao.queryForAll().size());
-	// } catch (SQLException e) {
-	// e.printStackTrace();
-	// assert (false);
-	// }
-	// }
-	//
+	@UiThreadTest
+	public void testPreconditions() {
+		assertEquals("", editCustomer.getText().toString());
+		assertEquals(new Integer(1),
+				((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
+		assertEquals("", editDescription.getText().toString());
+		assertEquals(START, button.getText().toString());
+	}
+
+	public void testStandardDialog() {
+		assertEquals("Zeit gestoppt", txtTime.getText().toString());
+		solo.clickOnButton(START);
+		assertTrue(solo.searchText("Zeit gestartet um ", true));
+		assertEquals(STOP, button.getText().toString());
+		solo.clickOnButton(STOP);
+		assertTrue(solo.searchText("Neuer Stundeneintrag wurde erstellt.", true));
+		assertEquals(START, button.getText().toString());
+	}
+
+	public void testCreateTimeEntryWithoutAnyInformation() {
+		solo.clickOnButton(START);
+		try {
+			dao = getActivity().getHelper().getDao(TimeEntry.class);
+			int count = dao.queryForAll().size();
+			solo.clickOnButton(STOP);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				assert (false);
+			}
+			assertEquals(count + 1, dao.queryForAll().size());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
+
 	public void testSpinnerSelection() {
 		setSpinner();
-		TimeEntryType timeEntryType = (TimeEntryType) editTimeEntryType
-				.getSelectedItem();
+		TimeEntryType timeEntryType = (TimeEntryType) editTimeEntryType.getSelectedItem();
 		assertEquals(
-				TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION)
-						.getName(), timeEntryType.getName());
+				TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getName(), timeEntryType.getName());
 	}
-	
+
 	private void setSpinner() {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
@@ -126,19 +120,21 @@ public class TimeEntryActivityTest extends
 		solo.sendKey(KeyEvent.KEYCODE_DPAD_CENTER);
 	}
 
-	// public void testSelectionCustomer(){
-	//
-	// }
-	// @UiThreadTest
-	// public void testDescription(){
-	// editDescription.setText(DESCRIPTION);
-	// assertEquals(DESCRIPTION, editDescription.getText().toString());
-	// }
+//	public void testSelectionCustomer() {
+//
+//	}
+
+	@UiThreadTest
+	public void testDescription() {
+		editDescription.setText(DESCRIPTION);
+		assertEquals(DESCRIPTION, editDescription.getText().toString());
+	}
+
 	public void testCreateTimeEntryWithTimeEntryType() {
+		setSpinner();
 		solo.clickOnButton(START);
 		try {
-			dao = getActivity().getHelper().getDao(
-					TimeEntry.class);
+			dao = getActivity().getHelper().getDao(TimeEntry.class);
 			solo.clickOnButton(STOP);
 			try {
 				Thread.sleep(1000);
@@ -146,19 +142,38 @@ public class TimeEntryActivityTest extends
 				e.printStackTrace();
 				assert (false);
 			}
-			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size()-1);
-			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(INITIAL_POSITION).getId(), t.getTimeEntryTypeId());
+			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size() - 1);
+			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), t.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
 		}
 	}
-	// public void testCreateTimeEntryWithCustomer() {
-	// }
-	//
 
-	//
-	// public void testCreateTimeEntryWithDescription() {
-	//
-	// }
+//	public void testCreateTimeEntryWithCustomer() {
+//	}
+
+	public void testCreateTimeEntryWithDescription() {
+		solo.clickOnButton(START);
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				editDescription.setText(DESCRIPTION);
+			}
+		});
+		try {
+			dao = getActivity().getHelper().getDao(TimeEntry.class);
+			solo.clickOnButton(STOP);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+				assert (false);
+			}
+			TimeEntry t = dao.queryForAll().get(dao.queryForAll().size() - 1);
+			assertEquals(DESCRIPTION, t.getDescription());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
+	}
 }

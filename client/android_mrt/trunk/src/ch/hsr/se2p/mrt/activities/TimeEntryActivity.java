@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -75,6 +76,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		}
 	};
+	
+	public OnClickListener getLstnStartStopTime(){
+		return lstnStartStopTime;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -137,7 +142,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
-
 	}
 
 	private Customer getCustomer() {
