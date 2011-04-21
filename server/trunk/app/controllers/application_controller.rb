@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   return false if user.nil? or resource.nil?
   return true if user.user_type == User::TYPES[:ADMIN]
 
+
+
   acl = {
     "CustomersController" => [User::TYPES[:SECRETARY]],
     "UsersController" => [User::TYPES[:SECRETARY]],
@@ -13,10 +15,14 @@ class ApplicationController < ActionController::Base
     "TimeEntriesController" => [User::TYPES[:SECRETARY], User::TYPES[:EMPLOYEE]]
   }
 
-  return acl.fetch(resource, {}).include? user.user_type
+  acl.fetch(resource, {}).include? user.user_type
 end
 
 def authorize_user!
-  render :file => "#{Rails.root}/public/403.html", :status => :not_found unless has_writeaccess_to? current_user, self.class.name
+  render :file => "#{Rails.root}/public/403.html", :status => :not_found unless has_authorization?
+end
+
+def has_authorization?
+  has_writeaccess_to? current_user, self.class.name
 end
 end

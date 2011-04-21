@@ -18,8 +18,9 @@
     <td><%= user.email %></td>
     <td><%= @user_types.index(user.user_type) %></td>
     <td><%= link_to 'Show', user %></td>
-    <% if true %>
-      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td>
+    <% if controller.has_authorization? %>
+      <%= link_to 'Edit', edit_user_path(user) %></td>
     <% end -%>
     <td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

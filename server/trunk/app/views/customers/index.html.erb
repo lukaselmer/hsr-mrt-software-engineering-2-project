@@ -16,12 +16,21 @@
     <td><%= customer.last_name %></td>
     <td><%= customer.phone %></td>
     <td><%= link_to 'Show', customer %></td>
-    <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
-    <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <% if controller.has_authorization? %>
+        <%= link_to 'Edit', edit_customer_path(customer) %>
+      <% end %>
+    </td>
+    <td>
+      <% if controller.has_authorization? %>
+        <%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Customer', new_customer_path %>
+<% if controller.has_authorization? %>
+  <%= link_to 'New Customer', new_customer_path %>
+<% end %>
