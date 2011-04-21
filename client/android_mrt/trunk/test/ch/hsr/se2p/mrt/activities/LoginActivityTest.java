@@ -44,15 +44,26 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		 * Preferences für Autologin setzen
 		 */
 		// TODO: Automatisches Login, wie kann ich es testen?
-		// setUpAutoLogin();
+		// setPreferences();
 	}
 
-	public void setUpAutoLogin() {
+	public void setPreferences() {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				Editor edit = activity.preferences.edit();
 				edit.putString("email", "ttuechtig@mrt.ch");
 				edit.putString("password", "5678");
+				edit.commit();
+			}
+		});
+	}
+	
+	public void resetPreferences() {
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
+				Editor edit = activity.preferences.edit();
+				edit.putString("email", "");
+				edit.putString("password", "");
 				edit.commit();
 			}
 		});
@@ -81,10 +92,10 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertTrue("".equals(password));
 	}
 
-	@UiThreadTest
-	public void testAutoLogin() {
-		assertFalse(activity.equals(solo.getCurrentActivity()));
-	}
+//	@UiThreadTest
+//	public void testAutoLogin() {
+//		assertFalse(activity.equals(solo.getCurrentActivity()));
+//	}
 
 	public void testLoginSuccessfulWithPreferencesSaved() {
 		activity.runOnUiThread(new Runnable() {
@@ -107,14 +118,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		 */
 		// assertEquals(editPassword.getText().toString(), password);
 
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				Editor edit = activity.preferences.edit();
-				edit.putString("email", "");
-				edit.putString("password", "");
-				edit.commit();
-			}
-		});
+		resetPreferences();
 	}
 
 	public void testLoginSuccessfulWithoutPreferencesSaved() {
