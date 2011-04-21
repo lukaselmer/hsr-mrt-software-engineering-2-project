@@ -76,10 +76,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		}
 	};
-	
-	public OnClickListener getLstnStartStopTime(){
-		return lstnStartStopTime;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -139,17 +135,21 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinner.getSelectedItem()).getId());
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
+		try {
+			currentTimeEntry.setCustomerId(getCustomer().getId());
+		} catch (NullPointerException e){}
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
 	}
 
-	private Customer getCustomer() {
-		if (autoCompleteCustomers.getText().length() == 0) {
-			return null;
+	private Customer getCustomer() throws SQLException {
+		if (autoCompleteCustomers.getText().length() != 0) {
+			for (int i = 0; i < customers.size(); i++){
+				if (customers.get(i).toString().equals(autoCompleteCustomers.getText().toString()))
+					return customers.get(i);
+			}
 		}
-		String customerName = autoCompleteCustomers.getText().toString();
-		// TODO: this!!! Wuuuaaaaahhh!!!!!
 		return null;
 	}
 
