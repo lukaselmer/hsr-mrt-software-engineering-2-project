@@ -57,7 +57,6 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//showLoginData();
 				checkLoginData();
 			}
 		});
@@ -73,7 +72,8 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	
 	protected void checkLoginData() {
 		if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
-			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
+//			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
+			processLogin("admin@mrt.ch", editPassword.getText().toString());
 		} else {
 			ActivityHelper.displayAlertDialog("Fehler", "Bitte Emailadresse und Passwort angeben!", LoginActivity.this);
 		}
@@ -81,15 +81,16 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void processLogin(String email, String password) {
 		if (new UserHelper(mrtApplication.getHttpHelper()) 
-		{
-			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
-				return true;
-			};	
-		}
+//		{
+//			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
+//				return true;
+//			};	
+//		}
 		.login(email, password, mrtApplication.getCurrentUser())) {
 			saveLoginData(email, password);
 			ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 			startNewActivity();
+			finish();
 		}
 		ActivityHelper.displayAlertDialog(null, "Anmeldung schlug fehl!", this);
 		editPassword.setText("");
@@ -119,6 +120,5 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void startNewActivity() {
 		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
 		this.startActivity(intent);
-		finish();
 	}
 }

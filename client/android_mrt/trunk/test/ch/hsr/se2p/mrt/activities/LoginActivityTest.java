@@ -75,7 +75,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		}
 		getActivity().finish();
 		super.tearDown();
-		// getActivity().deleteDatabase(TEST_DB_NAME);
 	}
 
 	@UiThreadTest
