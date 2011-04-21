@@ -23,10 +23,18 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	private EditText editPassword;
 	private CheckBox checkbox;
 	private Button loginBtn;
+	
+	final private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben";
+	final private String LOGIN_FAILED = "Anmeldung schlug fehl!";
+	final private String PASSWORD = "password";
+	final private String EMAIL = "email";
+	final private String OK = "Ok";
+	
 
 	/* Anmerkung:
 	 * Ist der testLoginUnsuccessfulWithoutPreferencesSaved nicht auskommentiert, so wirft er
-	 * eine WindowManager$BadTokenException und die Testreihe bricht ab
+	 * eine WindowManager$BadTokenException geworfen und der nächste Test wird rot und die 
+	 * Testreihe bricht ab.
 	 */
 	
 	@Override
@@ -44,26 +52,15 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		 * Preferences für Autologin setzen
 		 */
 		// TODO: Automatisches Login, wie kann ich es testen?
-		// setPreferences();
-	}
-
-	public void setPreferences() {
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				Editor edit = activity.preferences.edit();
-				edit.putString("email", "ttuechtig@mrt.ch");
-				edit.putString("password", "5678");
-				edit.commit();
-			}
-		});
+		 
 	}
 	
 	public void resetPreferences() {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				Editor edit = activity.preferences.edit();
-				edit.putString("email", "");
-				edit.putString("password", "");
+				edit.putString(EMAIL, "");
+				edit.putString(PASSWORD, "");
 				edit.commit();
 			}
 		});
@@ -86,8 +83,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertEquals("", editEmail.getText().toString());
 		assertEquals("", editPassword.getText().toString());
 		assertEquals(true, checkbox.isChecked());
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
 		assertTrue("".equals(email));
 		assertTrue("".equals(password));
 	}
@@ -108,8 +105,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		});
 		assertFalse(activity.equals(solo.getCurrentActivity()));
 
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
 		assertEquals(editEmail.getText().toString(), email);
 		// TODO: Save password successful
 		/*
@@ -117,7 +114,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		 * für diesen Test nicht aus dem Feld "abgelesen" werden, Grund siehe oben
 		 */
 		// assertEquals(editPassword.getText().toString(), password);
-
 		resetPreferences();
 	}
 
@@ -132,8 +128,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		});
 		assertFalse(activity.equals(solo.getCurrentActivity()));
 
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
 		assertTrue("".equals(email));
 		assertTrue("".equals(password));
 	}
@@ -142,7 +138,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	 * Anmerkung Damit dieser Test funktioniert, muss in processLogin(email, password) die Überschreibung der Methode login(login, password, receivable) (das return true;) auskommentiert werden
 	 */
 //	public void testLoginUnsuccessfulWithoutPreferencesSaved() {
-//		assertFalse(solo.searchText("Anmeldung schlug fehl!", true));
+//		assertFalse(solo.searchText(LOGIN_FAILED, true));
 //		activity.runOnUiThread(new Runnable() {
 //			public void run() {
 //				editEmail.setText("ttuechtig@mrt.ch");
@@ -150,20 +146,20 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 //				loginBtn.performClick();
 //			}
 //		});
-//		assertTrue(solo.searchText("Anmeldung schlug fehl!", true));
-//		solo.clickOnButton("Ok");
-//		assertFalse(solo.searchText("Anmeldung schlug fehl!", true));
+//		assertTrue(solo.searchText(LOGIN_FAILED, true));
+//		solo.clickOnButton(OK);
+//		assertFalse(solo.searchText(LOGIN_FAILED, true));
 //		assertTrue("".equals(editPassword.getText().toString()));
 //		assertEquals(activity, solo.getCurrentActivity());
 //
-//		String email = activity.preferences.getString("email", null);
-//		String password = activity.preferences.getString("password", null);
+//		String email = activity.preferences.getString(EMAIL, null);
+//		String password = activity.preferences.getString(PASSWORD, null);
 //		assertTrue("".equals(email));
 //		assertTrue("".equals(password));
 //	}
 
 	public void testNoLoginDataSuppliedWithoutPreferencesSaved() {
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				editEmail.setText("");
@@ -171,19 +167,19 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 				loginBtn.performClick();
 			}
 		});
-		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
-		solo.clickOnButton("Ok");
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+		solo.clickOnButton(OK);
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		assertEquals(activity, solo.getCurrentActivity());
 
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
 		assertTrue("".equals(email));
 		assertTrue("".equals(password));
 	}
 
 	public void testNoPasswordSuppliedWithoutPreferencesSaved() {
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				editEmail.setText("aarglos@mrt.ch");
@@ -191,19 +187,19 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 				loginBtn.performClick();
 			}
 		});
-		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
-		solo.clickOnButton("Ok");
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+		solo.clickOnButton(OK);
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		assertEquals(activity, solo.getCurrentActivity());
 
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
 		assertTrue("".equals(email));
 		assertTrue("".equals(password));
 	}
 
 	public void testNoEmailSuppliedWithoutPreferencesSaved() {
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
 				editEmail.setText("");
@@ -211,14 +207,14 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 				loginBtn.performClick();
 			}
 		});
-		assertTrue(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
-		solo.clickOnButton("Ok");
-		assertFalse(solo.searchText("Bitte Emailadresse und Passwort angeben", true));
+		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+		solo.clickOnButton(OK);
+		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
 		assertEquals(activity, solo.getCurrentActivity());
 
-		String email = activity.preferences.getString("email", null);
-		String password = activity.preferences.getString("password", null);
-//		assertTrue("".equals(email));
-//		assertTrue("".equals(password));
+		String email = activity.preferences.getString(EMAIL, null);
+		String password = activity.preferences.getString(PASSWORD, null);
+		assertTrue("".equals(email));
+		assertTrue("".equals(password));
 	}
 }
