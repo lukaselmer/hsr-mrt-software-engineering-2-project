@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
-  TYPES = { :ADMIN => 1, :SECRETARY => 2, :EMPLOYEE => 3 }
+  # TODO: Remove admin type. Secretary type is admin
+  # TODO: Rename employee --> a secretary is a employee...
+  TYPES = { :ADMIN => 1, :SECRETARY => 2, :FIELD_WORKER => 3 }
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
@@ -11,5 +13,5 @@ class User < ActiveRecord::Base
 
   def admin?; user_type == TYPES[:ADMIN]; end
   def secretary?; user_type == TYPES[:SECRETARY]; end
-  def employee?; user_type == TYPES[:EMPLOYEE]; end
+  def field_worker?; user_type == TYPES[:FIELD_WORKER]; end
 end
