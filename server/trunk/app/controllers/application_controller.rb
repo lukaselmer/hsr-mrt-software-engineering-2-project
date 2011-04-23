@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_user!
-    render :file => "#{Rails.root}/public/403.html", :status => :not_found unless has_authorization?
+    # TODO: Maybe 401 would be better?
+    render :file => "#{Rails.root}/public/403.html", :status => 403 unless has_authorization?
   end
 
   def has_authorization?
