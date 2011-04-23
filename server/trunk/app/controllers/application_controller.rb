@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
 
-  def has_writeaccess_to?(user, resource)
-    return false if user.nil? or resource.nil?
+  def has_writeaccess_to?(user, class_name)
+    return false if user.nil? or class_name.nil?
     return true if user.admin?
 
     # TODO: Funktioniert so nicht, weil ein Mitarbeiter z.B. auf die Kunden Leseberechtigung besitzt, diese aber nicht editieren kann
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       "TimeEntriesController" => [User::TYPES[:SECRETARY], User::TYPES[:EMPLOYEE]]
     }
 
-    acl.fetch(resource, {}).include? user.user_type
+    acl.fetch(class_name, {}).include? user.user_type
   end
 
   def authorize_user!
