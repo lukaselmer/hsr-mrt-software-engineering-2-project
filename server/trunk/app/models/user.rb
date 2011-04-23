@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :remember_me, :first_name, :last_name, :user_type, :password_salt
   validates :password, :presence => true, :on => :create
+
+  def admin?; user_type == TYPES[:ADMIN]; end
+  def secretary?; user_type == TYPES[:SECRETARY]; end
+  def employee?; user_type == TYPES[:EMPLOYEE]; end
 end
