@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable
   
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :remember_me, :first_name, :last_name, :user_type, :password_salt
+  attr_accessible :email, :password, :remember_me, :first_name, :last_name, :user_type, :password_salt, :updated_at
   validates :password, :presence => true, :on => :create
 
   def secretary?; user_type == TYPE_SECRETARY; end
