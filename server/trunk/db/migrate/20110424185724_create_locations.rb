@@ -1,8 +1,8 @@
 class CreateLocations < ActiveRecord::Migration
   def self.up
     create_table :locations do |t|
-      t.double :latitude
-      t.double :logitude
+      t.float :latitude
+      t.float :logitude
 
       t.timestamps
     end
