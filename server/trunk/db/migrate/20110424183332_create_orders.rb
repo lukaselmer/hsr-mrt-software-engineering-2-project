@@ -1,8 +1,8 @@
 class CreateOrders < ActiveRecord::Migration
   def self.up
     create_table :orders do |t|
-      t.datetime :created_at
       t.text :description
+	  t.belongs_to :customer
 
       t.timestamps
     end

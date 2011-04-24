@@ -4,7 +4,7 @@ class CreateMaterials < ActiveRecord::Migration
       t.string :catalog_id
       t.text :description
       t.string :dimensions
-      t.double :price
+      t.decimal :price, :precision => 14, :scale => 2
       t.datetime :valid_until
 
       t.timestamps
