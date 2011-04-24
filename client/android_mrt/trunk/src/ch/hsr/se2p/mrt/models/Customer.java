@@ -13,9 +13,9 @@ import com.j256.ormlite.field.DatabaseField;
 
 public class Customer implements Receivable {
 	@DatabaseField(generatedId = true)
-	private Integer id;
+	private int id;
 	@DatabaseField
-	private Integer railsId;
+	private int railsId = 0;
 	@DatabaseField
 	private String firstName, lastName, phone;
 	//TODO: @DatabaseField
@@ -82,7 +82,7 @@ public class Customer implements Receivable {
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
 		position = parsePosition(customerObj);
-		updatedAt = Timestamp.valueOf(customerObj.getString("updated_at")).getTime();
+		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
 		deleted = customerObj.has("deleted_at");
 		return true;
 	}

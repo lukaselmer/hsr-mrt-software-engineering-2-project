@@ -90,7 +90,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 
 		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		// updateAutocompleteCustomers();
 		initSpinner();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);

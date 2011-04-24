@@ -77,8 +77,6 @@ public class CustomerHelper {
 		return httpHelper.doHttpPost(generateJSONRequest(receivables), NetworkConfig.SYNCHRONIZE_CUSTOMERS_URL);
 	}
 
-	// JSONArray ret = new JSONArray(); for (Receivable receivable : receivables) { JSONObject j = new JSONObject();
-	// j.put("id", receivable.getIdOnServer()); j.put("updated_at", receivable.getUpdatedAt()); ret.put(j); } return ret;
 	protected JSONObject generateJSONRequest(List<Receivable> receivables) throws JSONException {
 		JSONObject ret = new JSONObject();
 		Timestamp maxUpdatedAt = new Timestamp(0);

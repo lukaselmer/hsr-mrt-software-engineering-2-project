@@ -58,6 +58,8 @@ class SynchronizationServiceTask extends TimerTask {
 			synchronizeReceivables(dao, new CustomerHelper(mrtApplication.getHttpHelper()), receivables);
 		} catch (SQLException e) {
 			Log.e(TAG, "Database error", e);
+		} catch (Exception e) {
+			Log.e(TAG, "Customer sync error", e);
 		}
 	}
 
