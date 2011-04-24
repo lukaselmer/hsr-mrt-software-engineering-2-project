@@ -9,5 +9,16 @@ class ActiveSupport::TestCase
   # -- they do not yet inherit this setting
   fixtures :all
 
+  def login_with_secretary
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    secretary = users(:secretary)
+    #    @user = User.create! do |user|
+    #      user.email = 'test@test.com'
+    #      user.password = '12345'
+    #      user.user_type = User::TYPE_SECRETARY
+    #    end
+    sign_in secretary
+  end
+
   # Add more helper methods to be used by all tests here...
 end

@@ -17,12 +17,12 @@
     <td><%= customer.phone %></td>
     <td><%= link_to 'Show', customer %></td>
     <td>
-      <% if controller.has_authorization? %>
+      <% if write_access? customer %>
         <%= link_to 'Edit', edit_customer_path(customer) %>
       <% end %>
     </td>
     <td>
-      <% if controller.has_authorization? %>
+      <% if write_access? customer %>
         <%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %>
       <% end %>
     </td>
@@ -31,6 +31,6 @@
 </table>
 
 <br />
-<% if controller.has_authorization? %>
+<% if write_access? Customer.new %>
   <%= link_to 'New Customer', new_customer_path %>
 <% end %>

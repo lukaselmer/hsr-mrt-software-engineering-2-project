@@ -9,3 +9,8 @@ one:
   last_name: 'Steiner'
   email: 'filou.linux@gmail.com'
   
+secretary:
+  first_name: 'Sec'
+  last_name: 'Retary'
+  email: 'secretary@mrt.ch'
+  user_type: <%= User::TYPE_SECRETARY %>

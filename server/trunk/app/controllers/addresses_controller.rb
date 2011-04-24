@@ -1,5 +1,5 @@
 class AddressesController < ApplicationController
-  before_filter :authorize_user!, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :authorize_secretary!, :only => [:new, :create, :edit, :update, :destroy]
   # GET /addresses
   # GET /addresses.xml
   def index

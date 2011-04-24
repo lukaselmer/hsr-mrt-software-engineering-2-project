@@ -5,13 +5,7 @@ class UsersControllerTest < ActionController::TestCase
 
   setup do
     @user = users(:one)
-    @request.env["devise.mapping"] = Devise.mappings[:user]
-    @admin = User.create! do |user|
-      user.email = 'admin@test.com'
-      user.password = '12345'
-      user.user_type = 1
-    end
-    sign_in @admin
+    login_with_secretary
   end
 
   test "should get index" do
