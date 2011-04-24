@@ -1,0 +1,31 @@
+<h1>Listing materials</h1>
+
+<table>
+  <tr>
+    <th>Catalog</th>
+    <th>Description</th>
+    <th>Dimensions</th>
+    <th>Price</th>
+    <th>Valid until</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @materials.each do |material| %>
+  <tr>
+    <td><%= material.catalog_id %></td>
+    <td><%= material.description %></td>
+    <td><%= material.dimensions %></td>
+    <td><%= material.price %></td>
+    <td><%= material.valid_until %></td>
+    <td><%= link_to 'Show', material %></td>
+    <td><%= link_to 'Edit', edit_material_path(material) %></td>
+    <td><%= link_to 'Destroy', material, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Material', new_material_path %>

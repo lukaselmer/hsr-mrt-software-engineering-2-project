@@ -1,4 +1,14 @@
 Mrt::Application.routes.draw do
+  resources :locations
+
+  resources :applied_materials
+
+  resources :materials
+
+  resources :time_entry_types
+
+  resources :orders
+
   resources :addresses
 
   post 'customers/synchronize(.:format)' => 'customers#synchronize'

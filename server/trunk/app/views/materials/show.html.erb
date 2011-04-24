@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Catalog:</b>
+  <%= @material.catalog_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @material.description %>
+</p>
+
+<p>
+  <b>Dimensions:</b>
+  <%= @material.dimensions %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @material.price %>
+</p>
+
+<p>
+  <b>Valid until:</b>
+  <%= @material.valid_until %>
+</p>
+
+
+<%= link_to 'Edit', edit_material_path(@material) %> |
+<%= link_to 'Back', materials_path %>

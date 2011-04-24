@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  catalog_id: MyString
+  description: MyText
+  dimensions: MyString
+  price: 
+  valid_until: 2011-04-24 20:41:00
+
+two:
+  catalog_id: MyString
+  description: MyText
+  dimensions: MyString
+  price: 
+  valid_until: 2011-04-24 20:41:00

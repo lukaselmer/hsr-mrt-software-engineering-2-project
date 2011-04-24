@@ -1,0 +1,23 @@
+<h1>Listing applied_materials</h1>
+
+<table>
+  <tr>
+    <th>Amount</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @applied_materials.each do |applied_material| %>
+  <tr>
+    <td><%= applied_material.amount %></td>
+    <td><%= link_to 'Show', applied_material %></td>
+    <td><%= link_to 'Edit', edit_applied_material_path(applied_material) %></td>
+    <td><%= link_to 'Destroy', applied_material, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Applied material', new_applied_material_path %>

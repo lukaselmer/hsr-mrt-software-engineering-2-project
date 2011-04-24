@@ -1,0 +1,33 @@
+<%= form_for(@time_entry_type) do |f| %>
+  <% if @time_entry_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@time_entry_type.errors.count, "error") %> prohibited this time_entry_type from being saved:</h2>
+
+      <ul>
+      <% @time_entry_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :ancestor %><br />
+    <%= f.text_field :ancestor %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :updated_at %><br />
+    <%= f.datetime_select :updated_at %>
+  </div>
+  <div class="field">
+    <%= f.label :valid_until %><br />
+    <%= f.datetime_select :valid_until %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
