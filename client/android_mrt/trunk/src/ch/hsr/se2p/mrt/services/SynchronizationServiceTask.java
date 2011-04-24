@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimerTask;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
@@ -20,17 +21,28 @@ class SynchronizationServiceTask extends TimerTask {
 	private static final String TAG = SynchronizationService.class.getSimpleName();
 	private DatabaseHelper databaseHelper;
 	private MRTApplication mrtApplication;
+	private SynchronizationService service;
 
-	public SynchronizationServiceTask(DatabaseHelper databaseHelper, MRTApplication mrtApplication) {
-		this.databaseHelper = databaseHelper;
-		this.mrtApplication = mrtApplication;
+	public SynchronizationServiceTask(SynchronizationService service) {
+		this.service = service;
+		this.databaseHelper = service.getHelper();
+		this.mrtApplication = (MRTApplication) service.getApplication();
+		mrtApplication.setPreferences(PreferenceManager.getDefaultSharedPreferences(service));
 	}
 
 	@Override
 	public void run() {
-		login();
+		loadPreferences();
+		if (!login()) {
+			Log.e(TAG, "Login failed!");
+			return;
+		}
 		syncCustomers();
 		syncTimeEntryTypes();
+	}
+
+	private void loadPreferences() {
+		mrtApplication.setPreferences(PreferenceManager.getDefaultSharedPreferences(service));
 	}
 
 	private boolean login() {

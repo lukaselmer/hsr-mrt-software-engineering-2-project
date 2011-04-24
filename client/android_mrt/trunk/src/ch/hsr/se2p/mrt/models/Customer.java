@@ -21,9 +21,9 @@ public class Customer implements Receivable {
 	//TODO: @DatabaseField
 	private Location position;
 	@DatabaseField
-	private Long updatedAt;
+	private long updatedAt = 0;
 	@DatabaseField
-	private boolean deleted;
+	private boolean deleted = false;
 
 	public Customer() {
 		// Needed for ormlite

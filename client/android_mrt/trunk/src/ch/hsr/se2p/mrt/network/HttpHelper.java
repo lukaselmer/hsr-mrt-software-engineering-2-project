@@ -96,4 +96,8 @@ public class HttpHelper {
 		return responseString;
 	}
 
+	public String getCookie() {
+		return cookie;
+	}
+
 }

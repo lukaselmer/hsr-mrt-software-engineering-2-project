@@ -66,4 +66,9 @@ public class MRTApplication extends Application {
 	public SharedPreferences getPreferences() {
 		return preferences;
 	}
+
+	@Override
+	public String toString() {
+		return "Email: " + email + ", Password: " + password + ", Current user: " + currentUser + ", Cookie: " + httpHelper.getCookie();
+	}
 }

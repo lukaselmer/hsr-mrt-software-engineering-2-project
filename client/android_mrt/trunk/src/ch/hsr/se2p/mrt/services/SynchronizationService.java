@@ -5,6 +5,7 @@ import java.util.Timer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
@@ -25,8 +26,6 @@ public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 		});
 	}
 	private static final String TAG = SynchronizationService.class.getSimpleName();
-
-	private MRTApplication mrtApplication;
 
 	private Timer timer;
 	private SynchronizationServiceTask serviceTask;
@@ -52,8 +51,7 @@ public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 	public void onCreate() {
 		super.onCreate();
 		Log.i(TAG, "Service creating");
-		mrtApplication = (MRTApplication) getApplication();
-		serviceTask = new SynchronizationServiceTask(getHelper(), mrtApplication);
+		serviceTask = new SynchronizationServiceTask(this);
 		timer = new Timer("SynchronizationServiceTimer");
 		timer.schedule(serviceTask, START_DELAY, UPDATE_INTERVAL);
 	}
