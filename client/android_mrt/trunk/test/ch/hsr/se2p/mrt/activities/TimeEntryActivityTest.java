@@ -84,8 +84,8 @@ public class TimeEntryActivityTest extends
 	}
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
-		setDao();
 		try {
+			setDao();
 			assertEquals(count + 1, dao.queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,8 +113,8 @@ public class TimeEntryActivityTest extends
 
 	public void testCreateTimeEntryWithTimeEntryType() {
 		setSpinner();
-		setDao();
 		try {
+			setDao();
 			timeEntry = dao.queryForAll().get(count);
 			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
@@ -125,8 +125,8 @@ public class TimeEntryActivityTest extends
 
 	public void testCreateTimeEntryWithCustomer() {
 		setCustomerName();
-		setDao();
 		try {
+			setDao();
 			timeEntry = dao.queryForAll().get(count);
 			assertEquals(getActivity().getHelper().getCustomerDao().queryForAll().get(1).getId(), timeEntry.getCustomerId());
 		} catch (SQLException e) {
@@ -141,8 +141,8 @@ public class TimeEntryActivityTest extends
 				editCustomer.setText("Ungültiger Benutzer");
 			}
 		});
-		setDao();
 		try {
+			setDao();
 			timeEntry = dao.queryForAll().get(count);
 			assertEquals(null, timeEntry.getCustomerId());
 		} catch (SQLException e) {
@@ -152,9 +152,9 @@ public class TimeEntryActivityTest extends
 	}
 
 	public void testCreateTimeEntryWithDescription() {
-		setDescription();
-		setDao();		
+		setDescription();		
 		try {
+			setDao();
 			timeEntry = dao.queryForAll().get(count);
 			assertEquals(DESCRIPTION, timeEntry.getDescription());
 		} catch (SQLException e) {
@@ -163,9 +163,8 @@ public class TimeEntryActivityTest extends
 		}
 	}
 	
-	private void setDao() {
+	private void setDao() throws SQLException {
 		solo.clickOnButton(START);
-		try {
 			dao = getActivity().getHelper().getDao(TimeEntry.class);
 			count = dao.queryForAll().size();
 			solo.clickOnButton(STOP);
@@ -175,10 +174,6 @@ public class TimeEntryActivityTest extends
 				e.printStackTrace();
 				assert (false);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
 	}
 	
 	private void setDescription() {
