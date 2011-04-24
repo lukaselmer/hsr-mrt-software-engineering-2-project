@@ -1,9 +1,15 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import android.text.method.DateTimeKeyListener;
 
 import com.j256.ormlite.field.DatabaseField;
 
@@ -34,7 +40,7 @@ public class User implements Receivable {
 		firstName = userObj.getString("first_name");
 		lastName = userObj.getString("last_name");
 		email = userObj.getString("email");
-		updatedAt = Timestamp.parse(userObj.getString("updated_at"));
+		updatedAt = DateHelper.parse(userObj.getString("updated_at")).getTime();
 		return true;
 	}
 

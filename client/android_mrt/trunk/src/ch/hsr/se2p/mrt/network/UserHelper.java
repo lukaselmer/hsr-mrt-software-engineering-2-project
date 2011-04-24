@@ -17,6 +17,7 @@ public class UserHelper {
 	public boolean login(String email, String password, Receivable receivable) {
 		try {
 			String ret = httpHelper.doHttpPost(generateJSONObject(email, password), NetworkConfig.LOGIN_URL);
+			System.out.println(ret);
 			return receivable.fromJSON(new JSONObject(ret));
 		} catch (NullPointerException e) {
 			// Request failed, pass
@@ -29,9 +30,11 @@ public class UserHelper {
 	}
 
 	protected JSONObject generateJSONObject(String email, String password) throws JSONException {
-		JSONObject j = new JSONObject();
-		j.put("email", email);
-		j.put("password", password);
+		JSONObject j = new JSONObject(), u = new JSONObject();
+		u.put("email", email);
+		u.put("password", password);
+		u.put("remember_me", "1");
+		j.put("user", u);
 		return j;
 	}
 }
