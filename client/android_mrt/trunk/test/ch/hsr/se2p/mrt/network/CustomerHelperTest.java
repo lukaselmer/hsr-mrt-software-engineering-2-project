@@ -23,7 +23,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		customers.add(getCustomer("Bla", "Blub", 2, "", 33));
 	}
 
-	public void testInitialSynchronization() throws JSONException {
+	public void testInitialSynchronization() throws Exception {
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -31,7 +31,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		assertSameList(customers, l);
 	}
 
-	public void testAddCustomerSynchronization() throws JSONException {
+	public void testAddCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60).getTime()));
 		expectedResultFromTransmitter(responseFor(customers));
@@ -41,7 +41,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		assertSameList(customers, l);
 	}
 
-	public void testUpdateCustomerSynchronization() throws JSONException {
+	public void testUpdateCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
 		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", 77));
@@ -52,7 +52,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		assertSameList(customers, l);
 	}
 
-	public void testDeleteCustomerSynchronization() throws JSONException {
+	public void testDeleteCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
 		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", 77, true));

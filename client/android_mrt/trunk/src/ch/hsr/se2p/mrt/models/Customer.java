@@ -6,7 +6,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.location.Location;
-
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
@@ -83,7 +82,7 @@ public class Customer implements Receivable {
 		phone = customerObj.getString("phone");
 		position = parsePosition(customerObj);
 		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
-		deleted = customerObj.has("deleted_at");
+		deleted = !customerObj.isNull("deleted_at");
 		return true;
 	}
 

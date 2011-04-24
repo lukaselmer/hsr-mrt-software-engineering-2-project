@@ -29,32 +29,22 @@ public class CustomerHelper {
 		return list;
 	}
 
-	public boolean synchronize(List<Receivable> receivables, Class<? extends Receivable> clazz) {
+	public boolean synchronize(List<Receivable> receivables, Class<? extends Receivable> clazz) throws SynchronizationException {
 		try {
 			String ret = synchronizeRequest(receivables);
-			updateOrCreateReceivables(receivables, new JSONArray(ret), clazz);
+			JSONArray arr = new JSONArray(ret);
+			if (arr.length() == 0)
+				return false;
+			updateOrCreateReceivables(receivables, arr, clazz);
 			return true;
-		} catch (NullPointerException e) {
-			// Request failed, pass
-			e.printStackTrace();
-		} catch (IOException e) {
-			// Request failed, pass
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// Request failed, pass
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// Request failed, pass
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// Request failed, pass
-			e.printStackTrace();
+		} catch (Exception e) {
+			// Request failed, throw synchronization exception
+			throw new SynchronizationException(e);
 		}
-		return false;
 	}
 
-	private void updateOrCreateReceivables(List<Receivable> receivables, JSONArray arrayOfJSONReceivables, Class<? extends Receivable> clazz) throws JSONException,
-			IllegalAccessException, InstantiationException {
+	private void updateOrCreateReceivables(List<Receivable> receivables, JSONArray arrayOfJSONReceivables, Class<? extends Receivable> clazz)
+			throws JSONException, IllegalAccessException, InstantiationException {
 		for (int i = 0; i < arrayOfJSONReceivables.length(); i++) {
 			JSONObject o = arrayOfJSONReceivables.getJSONObject(i).getJSONObject("customer");
 			Receivable r = clazz.newInstance();

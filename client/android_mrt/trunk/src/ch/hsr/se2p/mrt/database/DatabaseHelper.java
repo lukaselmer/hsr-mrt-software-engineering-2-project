@@ -17,7 +17,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	private static final String DATABASE_NAME = "mrt.db";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 6;
 
 	// the DAO object we use to access the TimeEntry table
 	private Dao<TimeEntry, Integer> timeEntryDao;
@@ -33,12 +33,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			Log.i(TAG, "Creating database");
 			TableUtils.createTable(connectionSource, TimeEntry.class);
 			TableUtils.createTable(connectionSource, Customer.class);
-			getCustomerDao().create(new Customer(1, "Bla", "Blu"));
-			getCustomerDao().create(new Customer(2, "Peter", "Muster"));
-			getCustomerDao().create(new Customer(3, "Hans", "Bla"));
-			getCustomerDao().create(new Customer(4, "Buuuu", "Baaaa"));
-			getCustomerDao().create(new Customer(5, "Eufrosiene", "Katzenstein"));
-			getCustomerDao().create(new Customer(6, "Papa", "Moll"));
 		} catch (SQLException e) {
 			Log.e(TAG, "Can't create database", e);
 			throw new RuntimeException(e);
@@ -51,7 +45,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	}
 
 	public void reset() {
-		reset(getWritableDatabase(), getConnectionSource());
+		SQLiteDatabase w = getWritableDatabase();
+		reset(w, getConnectionSource());
+		w.close();
 	}
 
 	public void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
@@ -66,13 +62,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		}
 	}
 
-	public Dao<TimeEntry, Integer> getTimeEntryDao() throws SQLException {
+	public synchronized Dao<TimeEntry, Integer> getTimeEntryDao() throws SQLException {
 		if (timeEntryDao == null)
 			timeEntryDao = getDao(TimeEntry.class);
 		return timeEntryDao;
 	}
 
-	public Dao<Customer, Integer> getCustomerDao() throws SQLException {
+	public synchronized Dao<Customer, Integer> getCustomerDao() throws SQLException {
 		if (customerDao == null)
 			customerDao = getDao(Customer.class);
 		return customerDao;
@@ -80,8 +76,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	@Override
 	public void close() {
-		super.close();
 		timeEntryDao = null;
+		customerDao = null;
+		super.close();
 	}
 
 }
