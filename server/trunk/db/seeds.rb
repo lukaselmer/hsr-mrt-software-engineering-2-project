@@ -16,6 +16,6 @@ Pia Ligeia, Ásdís Eirene, Beatrix Afra, Rochus Rocco, Eirene Felicianus, Hrodg
 Sigimund Lóegaire, Friðþjófr Ramessu, Yima Philander, Enlil Prabhu, Owain Iovis, Týr Cronus, 
 Partha Pramoda, Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |name|
   f, l = name.strip.split(' ')
-  Customer.create!(:fist_name => f.strip, :last_name => l.strip)
+  Customer.create!(:first_name => f.strip, :last_name => l.strip)
 end
 
