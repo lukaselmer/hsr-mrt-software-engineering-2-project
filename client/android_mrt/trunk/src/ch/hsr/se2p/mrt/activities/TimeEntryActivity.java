@@ -7,15 +7,18 @@ import java.util.List;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -50,6 +53,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner spinner;
 	private List<Customer> customers;
+	private MRTApplication mrtApplication;
 
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
@@ -82,18 +86,23 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
 
-		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		updateAutocompleteCustomers();
+		ActivityHelper.startSyncService(this);
+		mrtApplication = (MRTApplication) getApplication();
 
+		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		// updateAutocompleteCustomers();
+		initSpinner();
+
+		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
+		updateView();
+	}
+
+	private void initSpinner() {
 		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(timeEntryTypeAdapater);
-
-		Button button = (Button) findViewById(R.id.btnStartStop);
-		button.setOnClickListener(lstnStartStopTime);
-		updateView();
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
@@ -137,7 +146,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 		try {
 			currentTimeEntry.setCustomerId(getCustomer().getId());
-		} catch (NullPointerException e){}
+		} catch (NullPointerException e) {
+		}
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
@@ -145,7 +155,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private Customer getCustomer() throws SQLException {
 		if (autoCompleteCustomers.getText().length() != 0) {
-			for (int i = 0; i < customers.size(); i++){
+			for (int i = 0; i < customers.size(); i++) {
 				if (customers.get(i).toString().equals(autoCompleteCustomers.getText().toString()))
 					return customers.get(i);
 			}
@@ -167,5 +177,34 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 3"));
 		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 4"));
 		return timeEntryTypes;
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.logout:
+			logout();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+	private void logout() {
+		mrtApplication.logout();
+		switchToLoginActivity();
+	}
+
+	private void switchToLoginActivity() {
+		this.startActivity(new Intent(this, LoginActivity.class));
+		finish();
 	}
 }

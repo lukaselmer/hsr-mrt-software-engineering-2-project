@@ -6,18 +6,18 @@
 	<application android:name="ch.hsr.se2p.mrt.activities.MRTApplication"
 		android:icon="@drawable/icon" android:label="@string/app_name">
 
-		<activity android:name=".activities.LoginActivity"
+		<activity android:name="ch.hsr.se2p.mrt.activities.LoginActivity"
 			android:label="@string/app_name">
 			<intent-filter>
-				<action android:name="android.intent.action.RUN" />
+				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
 
-		<activity android:name=".activities.TimeEntryActivity"
+		<activity android:name="ch.hsr.se2p.mrt.activities.TimeEntryActivity"
 			android:label="@string/app_name">
 			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
+				<action android:name="android.intent.action.RUN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>

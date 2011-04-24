@@ -2,6 +2,7 @@ package ch.hsr.se2p.mrt.services;
 
 import java.util.Timer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
@@ -9,9 +10,20 @@ import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.network.CustomerHelper;
 
+import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 
 public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
+	static {
+		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
+			@Override
+			public OrmLiteSqliteOpenHelper getHelper(Context context) {
+				return new DatabaseHelper(context);
+			}
+		});
+	}
 	private static final String TAG = SynchronizationService.class.getSimpleName();
 
 	private MRTApplication mrtApplication;

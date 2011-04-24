@@ -1,15 +1,7 @@
 package ch.hsr.se2p.mrt.activities;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -20,6 +12,11 @@ import android.widget.EditText;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.network.UserHelper;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
+import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
 public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
@@ -33,9 +30,8 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private EditText editEmail;
 	private EditText editPassword;
-	private CheckBox saveLogin;
+	private CheckBox chkbxSaveLogin;
 
-	SharedPreferences preferences;
 	private MRTApplication mrtApplication;
 
 	/** Called when the activity is first created. */
@@ -45,11 +41,11 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		setContentView(R.layout.login);
 
 		mrtApplication = (MRTApplication) getApplication();
-		preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		mrtApplication.setPreferences(PreferenceManager.getDefaultSharedPreferences(this));
 
 		editEmail = (EditText) findViewById(R.id.editEmail);
 		editPassword = (EditText) findViewById(R.id.editPassword);
-		saveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
+		chkbxSaveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
 
 		checkPreferencesForAutoLogin();
 
@@ -63,62 +59,38 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void checkPreferencesForAutoLogin() {
-		String email = preferences.getString("email", null);
-		String password = preferences.getString("password", null);
-		if (email.length() > 0 && password.length() > 0) {
-			processLogin(email, password);
+		if (mrtApplication.mayLogin()) {
+			processLogin(mrtApplication.getEmail(), mrtApplication.getPassword());
 		}
 	}
-	
+
 	protected void checkLoginData() {
 		if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
-//			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
-			processLogin("admin@mrt.ch", editPassword.getText().toString());
+			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
 		} else {
 			ActivityHelper.displayAlertDialog("Fehler", "Bitte Emailadresse und Passwort angeben!", LoginActivity.this);
 		}
 	}
 
 	private void processLogin(String email, String password) {
-		if (new UserHelper(mrtApplication.getHttpHelper()) 
-//		{
-//			public boolean login(String login, String password, ch.hsr.se2p.mrt.interfaces.Receivable receivable) {
-//				return true;
-//			};	
-//		}
-		.login(email, password, mrtApplication.getCurrentUser())) {
-			saveLoginData(email, password);
-			ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
-			startNewActivity();
-			finish();
-		}
-		ActivityHelper.displayAlertDialog(null, "Anmeldung schlug fehl!", this);
-		editPassword.setText("");
-	}
-
-	private void saveLoginData(String email, String password) {
-		if (saveLogin.isChecked()) {
-			saveLoginData();
+		if (new UserHelper(mrtApplication.getHttpHelper()).login(email, password, mrtApplication.getCurrentUser())) {
+			mrtApplication.login(email, password, chkbxSaveLogin.isChecked());
+			// ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
+			switchToTimeEntryActivity();
+		} else {
+			ActivityHelper.displayAlertDialog(null, "Anmeldung schlug fehl!", this);
+			editPassword.setText("");
 		}
 	}
 
-	private void showLoginData() {
-		String email = preferences.getString("email", null);
-		String password = preferences.getString("password", null);
-		ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
-	}
+	// private void showLoginData() {
+	// String email = mrtApplication.getEmail();
+	// String password = mrtApplication.getPassword();
+	// ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
+	// }
 
-	private void saveLoginData() {
-		String email = editEmail.getText().toString();
-		String password = editPassword.getText().toString();
-		Editor edit = preferences.edit();
-		edit.putString("email", email);
-		edit.putString("password", password);
-		edit.commit();
-	}
-	
-	private void startNewActivity() {
-		Intent intent = new Intent(LoginActivity.this, TimeEntryActivity.class);
-		this.startActivity(intent);
+	private void switchToTimeEntryActivity() {
+		this.startActivity(new Intent(this, TimeEntryActivity.class));
+		finish();
 	}
 }

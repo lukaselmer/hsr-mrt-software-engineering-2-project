@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">mrt</string>
+    <string name="app_name">MRT</string>
     <string name="btnCreateTimeEntryWithDescription">Create TimeEntry with description</string>
     <string name="btnCreateTimeEntryWithoutDescription">Create TimeEntry without description</string>
     <string name="btnSendTimeEntries">Send TimeEntries</string>
     <string name="txtWelcome" formatted="false">Welcome to MRT, %s\nThere are %d TimeEntries in the local database.</string>
+    <string name="logout">Abmelden</string>
 </resources>
