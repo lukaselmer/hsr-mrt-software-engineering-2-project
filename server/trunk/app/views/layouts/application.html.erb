@@ -8,12 +8,19 @@
   </head>
   <body>
     <div id="user_nav">
-      <% if user_signed_in? %>
-        Eingeloggt als <%= current_user.email %>
-        <%= link_to "Sign out", destroy_user_session_path %>
-      <% else %>
-        <%= link_to "sign in", new_user_session_path %>
-      <% end %>
+      <div>
+        <% if user_signed_in? %>
+          Angemeldet als <%= current_user.email %>
+          <%= link_to "Abmelden", destroy_user_session_path %>
+        <% else %>
+          <%= link_to "Anmelden", new_user_session_path %>
+        <% end %>
+      </div>
+      <ul>
+        <li><%= link_to "Benutzer", users_path %></li>
+        <li><%= link_to "Stundeneinträge", time_entries_path %></li>
+        <li><%= link_to "Kunden", customers_path %></li>
+      </ul>
     </div>
     <% if flash[:alert] -%>
       <p class='alert'><%=h flash[:alert] %></p>
