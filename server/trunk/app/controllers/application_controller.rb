@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   end
 
   def deny_access!
-    # TODO: Maybe 401 would be better?
     render :file => "/public/403.html", :status => 403, :layout => false
   end
 
