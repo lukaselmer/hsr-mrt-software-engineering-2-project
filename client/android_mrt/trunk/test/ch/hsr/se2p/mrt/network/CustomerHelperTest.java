@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.DateHelper;
 
 public class CustomerHelperTest extends HttpTestCase {
 
@@ -19,8 +20,8 @@ public class CustomerHelperTest extends HttpTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		customers = new ArrayList<Customer>();
-		customers.add(getCustomer("Peter", "Muster", 1, "", 27));
-		customers.add(getCustomer("Bla", "Blub", 2, "", 33));
+		customers.add(getCustomer("Peter", "Muster", 1, "", new Timestamp(27)));
+		customers.add(getCustomer("Bla", "Blub", 2, "", new Timestamp(33)));
 	}
 
 	public void testInitialSynchronization() throws Exception {
@@ -33,7 +34,7 @@ public class CustomerHelperTest extends HttpTestCase {
 
 	public void testAddCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
-		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60).getTime()));
+		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -44,7 +45,7 @@ public class CustomerHelperTest extends HttpTestCase {
 	public void testUpdateCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
-		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", 77));
+		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", new Timestamp(77)));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -55,7 +56,7 @@ public class CustomerHelperTest extends HttpTestCase {
 	public void testDeleteCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
-		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", 77, true));
+		customers.add(getCustomer("Peter", "SUPERMUSTER", 77, "", new Timestamp(10), true));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -97,31 +98,32 @@ public class CustomerHelperTest extends HttpTestCase {
 	private String responseFor(ArrayList<Customer> customers) throws JSONException {
 		JSONArray a = new JSONArray();
 		for (Customer customer : customers) {
-			a.put(getCustomerJSON(customer));
+			a.put(new JSONObject().put("customer", getCustomerJSON(customer)));
 		}
-		return new JSONObject().put("customers", a).toString();
+		return a.toString();
 	}
 
 	private JSONObject getCustomerJSON(Customer customer) throws JSONException {
 		return new JSONObject().put("first_name", customer.getFirstName()).put("last_name", customer.getLastName())
-				.put("id", customer.getIdOnServer()).put("phone", customer.getPhone()).put("updated_at", customer.getUpdatedAt());
+				.put("id", customer.getIdOnServer()).put("phone", customer.getPhone()).put("updated_at", DateHelper.format(customer.getUpdatedAt()));
 	}
 
-	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, long updatedAt) throws JSONException {
+	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, Timestamp updatedAt) throws JSONException {
 		return getCustomer(fistName, lastName, railsId, phone, updatedAt, false);
 
 	}
 
-	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, long updatedAt, boolean deleted) throws JSONException {
+	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, Timestamp updatedAt, boolean deleted)
+			throws JSONException {
 		JSONObject customerObj = new JSONObject();
 		customerObj.put("id", railsId);
 		customerObj.put("first_name", fistName);
 		customerObj.put("last_name", lastName);
 		customerObj.put("phone", phone);
-		customerObj.put("updated_at", new Timestamp(updatedAt));
+		customerObj.put("updated_at", DateHelper.format(updatedAt));
 		customerObj.put("position", "");
 		if (deleted)
-			customerObj.put("deleted_at", new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
+			customerObj.put("deleted_at", DateHelper.format(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		Customer c = new Customer();
 		c.fromJSON(customerObj);
 		return c;

@@ -47,7 +47,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public void reset() {
 		SQLiteDatabase w = getWritableDatabase();
 		reset(w, getConnectionSource());
-		w.close();
 	}
 
 	public void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
