@@ -3,6 +3,7 @@ package ch.hsr.se2p.mrt.database;
 import java.sql.SQLException;
 
 import android.content.Context;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import ch.hsr.se2p.mrt.models.Customer;
@@ -16,10 +17,9 @@ import com.j256.ormlite.table.TableUtils;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
-	private static final String DATABASE_NAME = "mrt.db";
-	private static final int DATABASE_VERSION = 6;
+	protected static final String DATABASE_NAME = "mrt.db";
+	protected static final int DATABASE_VERSION = 6;
 
-	// the DAO object we use to access the TimeEntry table
 	private Dao<TimeEntry, Integer> timeEntryDao;
 	private Dao<Customer, Integer> customerDao;
 

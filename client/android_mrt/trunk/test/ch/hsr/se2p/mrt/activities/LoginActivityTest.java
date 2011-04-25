@@ -1,7 +1,5 @@
 package ch.hsr.se2p.mrt.activities;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import android.content.SharedPreferences.Editor;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
@@ -79,6 +77,10 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		super.tearDown();
 	}
 
+	public void testAReset() {
+		resetPreferences();
+	}
+
 	@UiThreadTest
 	public void testPreconditions() {
 		resetPreferences();
@@ -146,7 +148,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 				loginBtn.performClick();
 			}
 		});
-		//solo.sleep(20000);
+		// solo.sleep(20000);
 		assertTrue(solo.searchText(LOGIN_FAILED, true));
 		solo.clickOnButton(OK);
 		assertFalse(solo.searchText(LOGIN_FAILED, true));
