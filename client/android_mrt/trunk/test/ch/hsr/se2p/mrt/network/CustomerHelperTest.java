@@ -2,6 +2,7 @@ package ch.hsr.se2p.mrt.network;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -20,8 +21,8 @@ public class CustomerHelperTest extends HttpTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		customers = new ArrayList<Customer>();
-		customers.add(getCustomer("Peter", "Muster", 1, "", new Timestamp(27)));
-		customers.add(getCustomer("Bla", "Blub", 2, "", new Timestamp(33)));
+		customers.add(getCustomer("Peter", "Muster", 1, "", getTimestamp(27)));
+		customers.add(getCustomer("Bla", "Blub", 2, "", getTimestamp(33)));
 	}
 
 	public void testInitialSynchronization() throws Exception {
@@ -34,7 +35,7 @@ public class CustomerHelperTest extends HttpTestCase {
 
 	public void testAddCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
-		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
+		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -45,7 +46,7 @@ public class CustomerHelperTest extends HttpTestCase {
 	public void testUpdateCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
-		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", new Timestamp(77)));
+		customers.add(getCustomer("Peter", "SUPERMUSTER", 1, "", getTimestamp(77)));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -56,7 +57,7 @@ public class CustomerHelperTest extends HttpTestCase {
 	public void testDeleteCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
 		customers.remove(0);
-		customers.add(getCustomer("Peter", "SUPERMUSTER", 77, "", new Timestamp(10), true));
+		customers.add(getCustomer("Peter", "SUPERMUSTER", 77, "", getTimestamp(10), true));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
@@ -123,10 +124,14 @@ public class CustomerHelperTest extends HttpTestCase {
 		customerObj.put("updated_at", DateHelper.format(updatedAt));
 		customerObj.put("position", "");
 		if (deleted)
-			customerObj.put("deleted_at", DateHelper.format(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
+			customerObj.put("deleted_at", DateHelper.format(getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		Customer c = new Customer();
 		c.fromJSON(customerObj);
 		return c;
+	}
+
+	private Timestamp getTimestamp(long l) {
+		return DateHelper.formatAndParseToTimestamp(new Timestamp(l));
 	}
 
 }
