@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110419191811) do
+ActiveRecord::Schema.define(:version => 20110425203731) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -18,6 +18,14 @@ ActiveRecord::Schema.define(:version => 20110419191811) do
     t.string   "line3"
     t.string   "place"
     t.integer  "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "applied_materials", :force => true do |t|
+    t.integer  "amount"
+    t.integer  "material_id"
+    t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,6 +39,30 @@ ActiveRecord::Schema.define(:version => 20110419191811) do
     t.datetime "deleted_at"
   end
 
+  create_table "locations", :force => true do |t|
+    t.float    "latitude"
+    t.float    "logitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "materials", :force => true do |t|
+    t.string   "catalog_id"
+    t.text     "description"
+    t.string   "dimensions"
+    t.decimal  "price",       :precision => 14, :scale => 2
+    t.datetime "valid_until"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", :force => true do |t|
+    t.text     "description"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "time_entries", :force => true do |t|
     t.integer  "customer_id"
     t.integer  "time_entry_type_id"
@@ -40,6 +72,21 @@ ActiveRecord::Schema.define(:version => 20110419191811) do
     t.datetime "time_stop"
     t.integer  "position_id"
     t.string   "audio_record_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_entry_type_materials", :force => true do |t|
+    t.integer  "time_entry_type_id"
+    t.integer  "material_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "time_entry_types", :force => true do |t|
+    t.text     "description"
+    t.datetime "valid_until"
+    t.integer  "time_entry_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

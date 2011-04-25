@@ -34,4 +34,10 @@ gem 'devise'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :development do
+   gem 'railroady' # make shure you have graphviz installed if you want to use this
+end
+
+# Test coverage
 gem 'rcov'

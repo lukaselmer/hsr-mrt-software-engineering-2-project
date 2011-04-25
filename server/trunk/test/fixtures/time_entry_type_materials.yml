@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  time_entry_type: 
+  material: 
+
+two:
+  time_entry_type: 
+  material: 

@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :time_entries
+  
   TYPE_SECRETARY = 1
   TYPE_FIELD_WORKER = 2
   TYPES = { :SECRETARY => TYPE_SECRETARY, :FIELD_WORKER => TYPE_FIELD_WORKER }
