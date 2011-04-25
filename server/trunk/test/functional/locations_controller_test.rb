@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class LocationsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @location = locations(:one)
+    login_with_secretary
   end
 
   test "should get index" do

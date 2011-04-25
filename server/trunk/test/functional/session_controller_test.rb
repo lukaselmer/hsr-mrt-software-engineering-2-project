@@ -7,8 +7,6 @@ class SessionsControllerTest < ActionController::TestCase
     # http://stackoverflow.com/questions/4291755/rspec-test-of-custom-devise-session-controller-fails-with-abstractcontrolleract
     setup_controller_for_warden
     request.env["devise.mapping"] = Devise.mappings[:user]
-
-
   end
 
   test "should get new" do

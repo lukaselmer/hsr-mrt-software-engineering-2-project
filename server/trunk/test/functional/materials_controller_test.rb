@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class MaterialsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @material = materials(:one)
+    login_with_secretary
   end
 
   test "should get index" do

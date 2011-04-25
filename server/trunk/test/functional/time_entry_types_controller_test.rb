@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class TimeEntryTypesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @time_entry_type = time_entry_types(:one)
+    login_with_secretary
   end
 
   test "should get index" do

@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  ancestor: 1
+  #time_entry_type_id: 1
   description: MyText
   updated_at: 2011-04-24 20:37:04
   valid_until: 2011-04-24 20:37:04
 
 two:
-  ancestor: 1
+  #time_entry_type_id: 1
   description: MyText
   updated_at: 2011-04-24 20:37:04
   valid_until: 2011-04-24 20:37:04

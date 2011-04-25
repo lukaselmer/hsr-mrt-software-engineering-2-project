@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class OrdersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @order = orders(:one)
+    login_with_secretary
   end
 
   test "should get index" do
