@@ -19,3 +19,9 @@ Partha Pramoda, Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |
   Customer.create!(:first_name => f.strip, :last_name => l.strip)
 end
 
+
+# It may be a good idea to have the same test data as the initial data? The use this command to load all fixtures!
+# system("rake db:fixtures:load")
+
+
+
