@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.database;
+package ch.hsr.se2p.mrt.database.mocks;
 
 import android.content.Context;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
