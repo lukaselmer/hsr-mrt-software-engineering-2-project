@@ -14,12 +14,17 @@
     <td><%= location.latitude %></td>
     <td><%= location.logitude %></td>
     <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    
+    <% if write_access? location %>
+      <td><%= link_to 'Edit', edit_location_path(location) %></td>
+      <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if write_access? %>
 <%= link_to 'New Location', new_location_path %>
+<%  end %>

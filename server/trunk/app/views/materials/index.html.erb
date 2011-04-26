@@ -20,12 +20,17 @@
     <td><%= material.price %></td>
     <td><%= material.valid_until %></td>
     <td><%= link_to 'Show', material %></td>
-    <td><%= link_to 'Edit', edit_material_path(material) %></td>
-    <td><%= link_to 'Destroy', material, :confirm => 'Are you sure?', :method => :delete %></td>
+
+     <% if write_access? material %>
+      <td><%= link_to 'Edit', edit_material_path(material) %></td>
+      <td><%= link_to 'Destroy', material, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Material', new_material_path %>
+<% if write_access? %>
+  <%= link_to 'New Material', new_material_path %>
+<% end %>

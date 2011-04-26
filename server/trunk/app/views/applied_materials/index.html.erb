@@ -14,11 +14,8 @@
     <td><%= link_to 'Show', applied_material %></td>
 
     <% if write_access? applied_material %>
-    <td><%= link_to 'Edit', edit_applied_material_path(applied_material) %></td>
-    <% end %>
-
-    <% if write_access? applied_material %>
-    <td><%= link_to 'Destroy', applied_material, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Edit', edit_applied_material_path(applied_material) %></td>
+      <td><%= link_to 'Destroy', applied_material, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>

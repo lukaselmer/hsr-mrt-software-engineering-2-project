@@ -28,12 +28,17 @@
       <!--  <td><%= time_entry.position_id %></td>
       <td><%= time_entry.audio_record_name %></td>-->
       <td><%= link_to 'Anzeigen', time_entry %></td>
-      <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
-      <td><%= link_to 'Löschen', time_entry, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+
+      <% if write_access? time_entry %>
+        <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
+        <td><%= link_to 'Löschen', time_entry, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
 
 <br />
 
-<%= link_to 'Neuer Stundeneintrag', new_time_entry_path %>
+<% if write_access? %>
+  <%= link_to 'Neuer Stundeneintrag', new_time_entry_path %>
+<% end %>

@@ -18,16 +18,16 @@
       <td><%= user.email %></td>
       <td><%= @user_types.index(user.user_type) %></td>
       <td><%= link_to 'Show', user %></td>
-      <td>
-        <% if write_access? user %>
-          <%= link_to 'Edit', edit_user_path(user) %></td>
-      <% end -%>
-      <td><%= link_to 'Destroy', user, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+
+      <% if write_access? user %>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+      <% end %>
     </tr>
   <% end %>
 </table>
 
 <br />
-<% if write_access? User.new %>
+<% if write_access? %>
   <%= link_to 'Neuer Benutzer anlegen', new_user_path %>
-<% end -%>
+<% end %>

@@ -16,16 +16,11 @@
     <td><%= customer.last_name %></td>
     <td><%= customer.phone %></td>
     <td><%= link_to 'Show', customer %></td>
-    <td>
-      <% if write_access? customer %>
-        <%= link_to 'Edit', edit_customer_path(customer) %>
-      <% end %>
-    </td>
-    <td>
-      <% if write_access? customer %>
-        <%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %>
-      <% end %>
-    </td>
+
+    <% if write_access? customer %>
+      <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+      <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

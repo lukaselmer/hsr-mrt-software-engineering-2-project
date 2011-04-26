@@ -18,12 +18,17 @@
     <td><%= time_entry_type.updated_at %></td>
     <td><%= time_entry_type.valid_until %></td>
     <td><%= link_to 'Show', time_entry_type %></td>
-    <td><%= link_to 'Edit', edit_time_entry_type_path(time_entry_type) %></td>
-    <td><%= link_to 'Destroy', time_entry_type, :confirm => 'Are you sure?', :method => :delete %></td>
+
+    <% if write_access? time_entry_type %>
+      <td><%= link_to 'Edit', edit_time_entry_type_path(time_entry_type) %></td>
+      <td><%= link_to 'Destroy', time_entry_type, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Time entry type', new_time_entry_type_path %>
+<% if write_access? %>
+  <%= link_to 'New Time entry type', new_time_entry_type_path %>
+<% end %>
