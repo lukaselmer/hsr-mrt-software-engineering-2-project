@@ -1,19 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>First name:</b>
+  <b>Vorname:</b>
   <%= @customer.first_name %>
 </p>
 
 <p>
-  <b>Last name:</b>
+  <b>Nachname:</b>
   <%= @customer.last_name %>
 </p>
 
 <p>
-  <b>Phone:</b>
+  <b>Telefonnummer:</b>
   <%= @customer.phone %>
 </p>
 
-<%= link_to 'Edit', edit_customer_path(@customer) %> |
-<%= link_to 'Back', customers_path %>
+<%= link_to 'Bearbeiten', edit_customer_path(@customer) %> |
+<%= link_to 'Zurück', customers_path %>

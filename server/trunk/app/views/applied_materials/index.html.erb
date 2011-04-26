@@ -1,8 +1,8 @@
-<h1>Listing applied_materials</h1>
+<h1>Übersicht verwendetes Material</h1>
 
 <table>
   <tr>
-    <th>Amount</th>
+    <th>Anzahl</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,11 +11,11 @@
 <% @applied_materials.each do |applied_material| %>
   <tr>
     <td><%= applied_material.amount %></td>
-    <td><%= link_to 'Show', applied_material %></td>
+    <td><%= link_to 'Anzeigen', applied_material %></td>
 
     <% if write_access? applied_material %>
-      <td><%= link_to 'Edit', edit_applied_material_path(applied_material) %></td>
-      <td><%= link_to 'Destroy', applied_material, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Bearbeiten', edit_applied_material_path(applied_material) %></td>
+      <td><%= link_to 'Löschen', applied_material, :confirm => 'VerwendetesMaterial wirklich löschen?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -24,5 +24,5 @@
 <br />
 
 <% if write_access? %>
-<%= link_to 'New Applied material', new_applied_material_path %>
+<%= link_to 'Neues verwendetes Material erstellen', new_applied_material_path %>
 <% end %>
