@@ -22,12 +22,20 @@
     <td><%= address.place %></td>
     <td><%= address.zip %></td>
     <td><%= link_to 'Show', address %></td>
+
+    <% if write_access? address %>
     <td><%= link_to 'Edit', edit_address_path(address) %></td>
+    <% end %>
+
+    <% if write_access? address %>
     <td><%= link_to 'Destroy', address, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if write_access? %>
 <%= link_to 'New Address', new_address_path %>
+<% end %>
