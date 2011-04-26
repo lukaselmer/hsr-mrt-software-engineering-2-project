@@ -1,11 +1,11 @@
-<h1>Listing time_entry_types</h1>
+<h1>Übersicht Zeiteinträge</h1>
 
 <table>
   <tr>
-    <th>Ancestor</th>
-    <th>Description</th>
-    <th>Updated at</th>
-    <th>Valid until</th>
+    <th>Vorgänger</th>
+    <th>Beschreibung</th>
+    <th>Aktualisiert am</th>
+    <th>Gültig bis</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,11 +17,11 @@
     <td><%= time_entry_type.description %></td>
     <td><%= time_entry_type.updated_at %></td>
     <td><%= time_entry_type.valid_until %></td>
-    <td><%= link_to 'Show', time_entry_type %></td>
+    <td><%= link_to 'Anzeigen', time_entry_type %></td>
 
     <% if write_access? time_entry_type %>
-      <td><%= link_to 'Edit', edit_time_entry_type_path(time_entry_type) %></td>
-      <td><%= link_to 'Destroy', time_entry_type, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Bearbeiten', edit_time_entry_type_path(time_entry_type) %></td>
+      <td><%= link_to 'Löschen', time_entry_type, :confirm => 'Zeiteintrag wirklich löschen?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -30,5 +30,5 @@
 <br />
 
 <% if write_access? %>
-  <%= link_to 'New Time entry type', new_time_entry_type_path %>
+  <%= link_to 'Neuer Zeiteintrag', new_time_entry_type_path %>
 <% end %>

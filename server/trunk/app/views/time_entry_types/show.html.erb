@@ -1,25 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Ancestor:</b>
+  <b>Vorgänger:</b>
   <%# = @time_entry_type.ancestor %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Beschreibung:</b>
   <%= @time_entry_type.description %>
 </p>
 
 <p>
-  <b>Updated at:</b>
+  <b>Aktualisiert am:</b>
   <%= @time_entry_type.updated_at %>
 </p>
 
 <p>
-  <b>Valid until:</b>
+  <b>Gültig bis:</b>
   <%= @time_entry_type.valid_until %>
 </p>
 
 
-<%= link_to 'Edit', edit_time_entry_type_path(@time_entry_type) %> |
-<%= link_to 'Back', time_entry_types_path %>
+<%= link_to 'Bearbeiten', edit_time_entry_type_path(@time_entry_type) %> |
+<%= link_to 'Zurück', time_entry_types_path %>

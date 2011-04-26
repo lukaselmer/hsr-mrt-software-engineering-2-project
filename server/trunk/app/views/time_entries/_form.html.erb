@@ -12,38 +12,38 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :customer_id %><br />
+    <%= f.label :Kunden_id %><br />
     <%= f.text_field :customer_id %>
   </div>
   <div class="field">
-    <%= f.label :time_entry_type_id %><br />
+    <%= f.label :Zeiteintrags_id %><br />
     <%= f.text_field :time_entry_type_id %>
   </div>
   <div class="field">
-    <%= f.label :hashcode %><br />
+    <%= f.label :Hashcode %><br />
     <%= f.text_field :hashcode %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
+    <%= f.label :Beschreibung %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :time_start %><br />
+    <%= f.label :Startzeitpunkt %><br />
     <%= f.datetime_select :time_start %>
   </div>
   <div class="field">
-    <%= f.label :time_stop %><br />
+    <%= f.label :Stoppzeitpunkt %><br />
     <%= f.datetime_select :time_stop %>
   </div>
   <div class="field">
-    <%= f.label :position_id %><br />
+    <%= f.label :Positionid %><br />
     <%= f.text_field :position_id %>
   </div>
   <div class="field">
-    <%= f.label :audio_record_name %><br />
+    <%= f.label :Tonaufnahme %><br />
     <%= f.text_field :audio_record_name %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Zeiteintrag ändern" %>
   </div>
 <% end %>

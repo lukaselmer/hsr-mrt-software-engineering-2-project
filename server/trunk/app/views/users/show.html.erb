@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>First name:</b>
+  <b>Vorname:</b>
   <%= @user.first_name %>
 </p>
 
 <p>
-  <b>Last name:</b>
+  <b>Nachname:</b>
   <%= @user.last_name %>
 </p>
 
@@ -21,5 +21,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Bearbeiten', edit_user_path(@user) %> |
+<%= link_to 'Zurück', users_path %>

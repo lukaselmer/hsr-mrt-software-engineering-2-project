@@ -1,9 +1,9 @@
-<h1>Listing users</h1>
+<h1>Benutzerübersicht</h1>
 
 <table>
   <tr>
-    <th>First name</th>
-    <th>Last name</th>
+    <th>Vorname</th>
+    <th>Nachname</th>
     <th>Email</th>
     <th>Type</th>
     <th></th>
@@ -17,11 +17,11 @@
       <td><%= user.last_name %></td>
       <td><%= user.email %></td>
       <td><%= @user_types.index(user.user_type) %></td>
-      <td><%= link_to 'Show', user %></td>
+      <td><%= link_to 'Anzeigen', user %></td>
 
       <% if write_access? user %>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+        <td><%= link_to 'Bearbeiten', edit_user_path(user) %></td>
+        <td><%= link_to 'Löschen', user, :confirm => 'Benutzer wirklich löschen?', :method => :delete %></td>
       <% end %>
     </tr>
   <% end %>
@@ -29,5 +29,5 @@
 
 <br />
 <% if write_access? %>
-  <%= link_to 'Neuer Benutzer anlegen', new_user_path %>
+  <%= link_to 'Neuen Benutzer anlegen', new_user_path %>
 <% end %>

@@ -1,4 +1,4 @@
-<h1>Stundeneinträge</h1>
+<h1>Übersicht Stundeneinträge</h1>
 
 <table>
   <tr>
@@ -31,7 +31,7 @@
 
       <% if write_access? time_entry %>
         <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
-        <td><%= link_to 'Löschen', time_entry, :confirm => 'Wirklich löschen?', :method => :delete %></td>
+        <td><%= link_to 'Löschen', time_entry, :confirm => 'Stundeneintrag Wirklich löschen?', :method => :delete %></td>
       <% end %>
     </tr>
   <% end %>
