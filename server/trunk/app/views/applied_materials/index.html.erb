@@ -12,12 +12,20 @@
   <tr>
     <td><%= applied_material.amount %></td>
     <td><%= link_to 'Show', applied_material %></td>
+
+    <% if write_access? applied_material %>
     <td><%= link_to 'Edit', edit_applied_material_path(applied_material) %></td>
+    <% end %>
+
+    <% if write_access? applied_material %>
     <td><%= link_to 'Destroy', applied_material, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
+<% if write_access? %>
 <%= link_to 'New Applied material', new_applied_material_path %>
+<% end %>
