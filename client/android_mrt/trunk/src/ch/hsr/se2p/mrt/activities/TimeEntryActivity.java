@@ -58,26 +58,32 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (!isStarted) {
-				currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-				isStarted = true;
-				updateView();
-			} else {
-				ProgressDialog dialog = ProgressDialog.show(TimeEntryActivity.this, "", "Creating TimeEntry. Please wait...", true);
-				dialog.show();
-				try {
-					saveTimeEntry();
-					dialog.dismiss();
-					Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
-				} catch (SQLException e) {
-					dialog.dismiss();
-					Log.e(TAG, "Database Exception", e);
-					ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
-							TimeEntryActivity.this);
-				}
-				isStarted = false;
-				updateView();
+			if (!isMeasurementStarted())
+				startTimeMeasurement();
+			else
+				stopTimeMeasurement();
+			updateView();
+		}
+
+		private void stopTimeMeasurement() {
+			try {
+				saveTimeEntry();
+				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
+			} catch (SQLException e) {
+				Log.e(TAG, "Database Exception", e);
+				ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
+						TimeEntryActivity.this);
 			}
+			setMeausurementStarted(false);
+		}
+
+		private void setMeausurementStarted(boolean bool) {
+			isStarted = bool;
+		}
+
+		private void startTimeMeasurement() {
+			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+			setMeausurementStarted(true);
 		}
 	};
 
@@ -94,6 +100,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
+	}
+
+	private boolean isMeasurementStarted() {
+		return isStarted;
 	}
 
 	private void initSpinner() {
@@ -117,21 +127,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected void updateView() {
-		TextView tv = (TextView) findViewById(R.id.txtTime);
-		Button button = (Button) findViewById(R.id.btnStartStop);
-		Drawable d = findViewById(R.id.btnStartStop).getBackground();
-		PorterDuffColorFilter filter;
-		if (isStarted) {
-			tv.setText("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString());
-			button.setText("Stop");
-			filter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
-		} else {
-			tv.setText("Zeit gestoppt");
-			button.setText("Start");
-			filter = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_ATOP);
-		}
-		d.setColorFilter(filter);
+		if (isMeasurementStarted())
+			setLayout("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString(), "Stop", Color.RED);
+		else
+			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 		updateAutocompleteCustomers();
+	}
+
+	private void setLayout(String textViewText, String buttonText, int color) {
+		((TextView) findViewById(R.id.txtTime)).setText(textViewText);
+		((Button) findViewById(R.id.btnStartStop)).setText(buttonText);
+		findViewById(R.id.btnStartStop).getBackground().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
 	}
 
 	private void updateAutocompleteCustomers() {

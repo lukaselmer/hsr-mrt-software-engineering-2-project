@@ -32,11 +32,8 @@ public class TimeEntryActivityTest extends
 	private TimeEntry timeEntry;
 	private Customer customer;
 
-	public static final String START = "Start";
-	public static final String STOP = "Stop";
-	public static final int INITIAL_POSITION = 0;
-	public static final int TEST_POSITION = 2;
-	public static final String DESCRIPTION = "Wasserhahn Reparatur";	
+	public static final String START = "Start", STOP = "Stop", DESCRIPTION = "Wasserhahn Reparatur";
+	public static final int INITIAL_POSITION = 0, TEST_POSITION = 2;	
 
 	public TimeEntryActivityTest() {
 		super("ch.hsr.se2p.mrt", TimeEntryActivity.class);
