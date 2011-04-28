@@ -14,7 +14,7 @@ Klaus Dietfried, Gotthilf Wieland, June Gretchen, Taryn Shelia, Tarah Dione,
 Angelica Xavia, Demontongue Catbroom, Silverbeam Blackmoon, Whirl Gnaw, Nike Medb, 
 Pia Ligeia, Ásdís Eirene, Beatrix Afra, Rochus Rocco, Eirene Felicianus, Hrodger Amantius, 
 Sigimund Lóegaire, Friðþjófr Ramessu, Yima Philander, Enlil Prabhu, Owain Iovis, Týr Cronus, 
-Partha Pramoda, Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |name|
+Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |name|
   f, l = name.strip.split(' ')
   Customer.create!(:first_name => f.strip, :last_name => l.strip)
 end
