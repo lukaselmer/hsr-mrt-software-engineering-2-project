@@ -12,7 +12,10 @@ def full_path(name = 'test.txt')
   f = File.join(Rails.root.to_s.gsub(' ', '\ '), 'doc', name)
   f.to_s
 end
-  
+
+def railroady_command
+  "\"ruby.exe\" \"#{Rails.root}/vendor/gems/railroady/bin/railroady\""
+end
 namespace :diagram do
  
   @MODELS_ALL_SVG = full_path('models_complete.svg').freeze
@@ -27,14 +30,15 @@ namespace :diagram do
       f = @MODELS_ALL_SVG
       puts "Generating #{f}"
       #sh "railroady -ilamM | dot -Tsvg > #{f}"
-      sh "railroady -ilamM --hide-magic | dot -Tsvg > #{f}"
+      sh "#{railroady_command} -ilamM --hide-magic | dot -Tsvg > #{f}"
+      #sh "railroady -ilamM --hide-magic | dot -Tsvg > #{f}"
     end
  
     desc 'Generates an abbreviated SVG class diagram for all models.'
     task :brief do
       f = @MODELS_BRIEF_SVG
       puts "Generating #{f}"
-      sh "railroady -bilamM | dot -Tsvg > #{f}"
+      sh "#{railroady_command} -bilamM | dot -Tsvg > #{f}"
     end
     
   end
@@ -45,14 +49,14 @@ namespace :diagram do
     task :complete do
       f = @CONTROLLERS_ALL_SVG
       puts "Generating #{f}"
-      sh "railroady -ilC | neato -Tsvg > #{f}"
+      sh "#{railroady_command} -ilC | neato -Tsvg > #{f}"
     end
  
     desc 'Generates an abbreviated SVG class diagram for all controllers.'
     task :brief do
       f = @CONTROLLERS_BRIEF_SVG
       puts "Generating #{f}"
-      sh "railroady -bilC | neato -Tsvg > #{f}"
+      sh "#{railroady_command} -bilC | neato -Tsvg > #{f}"
     end
  
   end
