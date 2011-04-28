@@ -16,18 +16,18 @@
     <%# = f.text_field :ancestor %>
   </div>
   <div class="field">
-    <%= f.label :Beschreibung %><br />
+    <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :Aktualisiert_am %><br />
+    <%= f.label :updated_at %><br />
     <%= f.datetime_select :updated_at %>
   </div>
   <div class="field">
-    <%= f.label :Gültig_bis %><br />
+    <%= f.label :valid_until %><br />
     <%= f.datetime_select :valid_until %>
   </div>
   <div class="actions">
-    <%= f.submit "Zeiteintrag ändern" %>
+    <%= f.submit %>
   </div>
 <% end %>

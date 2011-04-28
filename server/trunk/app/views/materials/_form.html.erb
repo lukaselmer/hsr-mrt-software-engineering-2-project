@@ -12,26 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :Katalogid %><br />
+    <%= f.label :catalog_id %><br />
     <%= f.text_field :catalog_id %>
   </div>
   <div class="field">
-    <%= f.label :Beschreibung %><br />
+    <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :Dimensionen %><br />
+    <%= f.label :dimensions %><br />
     <%= f.text_field :dimensions %>
   </div>
   <div class="field">
-    <%= f.label :Preis %><br />
+    <%= f.label :price %><br />
     <%= f.text_field :price %>
   </div>
   <div class="field">
-    <%= f.label :Gültig_bis %><br />
+    <%= f.label :valid_until %><br />
     <%= f.datetime_select :valid_until %>
   </div>
   <div class="actions">
-    <%= f.submit "Material ändern"%>
+    <%= f.submit %>
   </div>
 <% end %>

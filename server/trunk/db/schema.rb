@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110426184907) do
+ActiveRecord::Schema.define(:version => 20110425203731) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -23,22 +23,22 @@ ActiveRecord::Schema.define(:version => 20110426184907) do
   end
 
   create_table "applied_materials", :force => true do |t|
-    t.integer  "amount"
     t.integer  "material_id"
     t.integer  "order_id"
+    t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "customers", :force => true do |t|
+    t.integer  "address_id"
+    t.integer  "location_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
-    t.integer  "address_id"
-    t.integer  "location_id"
   end
 
   create_table "locations", :force => true do |t|
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(:version => 20110426184907) do
   end
 
   create_table "materials", :force => true do |t|
+    t.integer  "material_id"
     t.string   "catalog_id"
     t.text     "description"
     t.string   "dimensions"
@@ -59,8 +60,9 @@ ActiveRecord::Schema.define(:version => 20110426184907) do
   end
 
   create_table "orders", :force => true do |t|
-    t.text     "description"
     t.integer  "customer_id"
+    t.integer  "address_id"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,11 +70,12 @@ ActiveRecord::Schema.define(:version => 20110426184907) do
   create_table "time_entries", :force => true do |t|
     t.integer  "customer_id"
     t.integer  "time_entry_type_id"
+    t.integer  "user_id"
+    t.integer  "location_id"
     t.string   "hashcode"
     t.text     "description"
     t.datetime "time_start"
     t.datetime "time_stop"
-    t.integer  "position_id"
     t.string   "audio_record_name"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -86,9 +89,9 @@ ActiveRecord::Schema.define(:version => 20110426184907) do
   end
 
   create_table "time_entry_types", :force => true do |t|
+    t.integer  "time_entry_type_id"
     t.text     "description"
     t.datetime "valid_until"
-    t.integer  "time_entry_type_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
