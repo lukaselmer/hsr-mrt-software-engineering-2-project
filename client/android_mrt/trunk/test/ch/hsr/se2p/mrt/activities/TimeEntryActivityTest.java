@@ -6,6 +6,7 @@ import com.j256.ormlite.dao.Dao;
 import com.jayway.android.robotium.solo.Solo;
 
 import ch.hsr.se2p.mrt.R;
+import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
 import android.test.ActivityInstrumentationTestCase2;
@@ -29,13 +30,13 @@ public class TimeEntryActivityTest extends
 	private Dao<TimeEntry, ?> dao;
 	private int count;
 	private TimeEntry timeEntry;
+	private Customer customer;
 
 	public static final String START = "Start";
 	public static final String STOP = "Stop";
 	public static final int INITIAL_POSITION = 0;
 	public static final int TEST_POSITION = 2;
-	public static final String DESCRIPTION = "Wasserhahn Reparatur";
-	public static final String BEGINNING_NAME = "Mu";
+	public static final String DESCRIPTION = "Wasserhahn Reparatur";	
 
 	public TimeEntryActivityTest() {
 		super("ch.hsr.se2p.mrt", TimeEntryActivity.class);
@@ -50,6 +51,7 @@ public class TimeEntryActivityTest extends
 		editDescription = (TextView) activity.findViewById(R.id.txtDescription);
 		button = (Button) activity.findViewById(R.id.btnStartStop);
 		txtTime = (TextView) activity.findViewById(R.id.txtTime);
+		customer = getActivity().getHelper().getCustomerDao().queryForAll().get(0);
 		this.solo = new Solo(getInstrumentation(), getActivity());
 	}
 
@@ -102,7 +104,7 @@ public class TimeEntryActivityTest extends
 
 	public void testSelectionCustomer() {
 		setCustomerName();
-		assertEquals("Muster Peter", editCustomer.getText().toString());
+		assertEquals(customer.toString(), editCustomer.getText().toString());
 	}
 
 	@UiThreadTest
@@ -128,7 +130,7 @@ public class TimeEntryActivityTest extends
 		try {
 			setDao();
 			timeEntry = dao.queryForAll().get(count);
-			assertEquals(getActivity().getHelper().getCustomerDao().queryForAll().get(1).getId(), timeEntry.getCustomerId());
+			assertEquals(customer.getId(), timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -202,7 +204,7 @@ public class TimeEntryActivityTest extends
 	private void setCustomerName() {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
-				editCustomer.setText(BEGINNING_NAME);
+				editCustomer.setText(customer.toString());
 			}
 		});
 		solo.sendKey(KeyEvent.KEYCODE_DPAD_DOWN);
