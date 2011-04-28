@@ -17,7 +17,9 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-
+/** 
+ * Performs the user login. 
+ */
 public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
 		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
@@ -30,7 +32,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private EditText editEmail;
 	private EditText editPassword;
-	private CheckBox chkbxSaveLogin;
+	private CheckBox chbxSaveLogin;
 
 	private MRTApplication mrtApplication;
 
@@ -39,17 +41,26 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
+		
+		initApplication();
+		initData();
+		checkPreferencesForAutoLogin();
+		
+		createClickListener((Button) findViewById(R.id.loginButton));
+	}
 
+	private void initApplication() {
 		mrtApplication = (MRTApplication) getApplication();
 		mrtApplication.setPreferences(PreferenceManager.getDefaultSharedPreferences(this));
+	}
 
+	private void initData() {
 		editEmail = (EditText) findViewById(R.id.editEmail);
 		editPassword = (EditText) findViewById(R.id.editPassword);
-		chkbxSaveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
+		chbxSaveLogin = (CheckBox) findViewById(R.id.chbxSaveLogin);
+	}
 
-		checkPreferencesForAutoLogin();
-
-		Button loginBtn = (Button) findViewById(R.id.loginButton);
+	private void createClickListener(Button loginBtn) {
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -74,7 +85,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void processLogin(String email, String password) {
 		if (new UserHelper(mrtApplication.getHttpHelper()).login(email, password, mrtApplication.getCurrentUser())) {
-			mrtApplication.login(email, password, chkbxSaveLogin.isChecked());
+			mrtApplication.login(email, password, chbxSaveLogin.isChecked());
 			// ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 			switchToTimeEntryActivity();
 		} else {

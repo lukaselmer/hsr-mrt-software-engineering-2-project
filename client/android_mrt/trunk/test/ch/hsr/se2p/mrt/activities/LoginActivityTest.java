@@ -17,50 +17,45 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	}
 
 	private LoginActivity activity;
+	private MRTApplication testedApplication;
 	private Solo solo;
 
-	private EditText editEmail;
-	private EditText editPassword;
+	private EditText editEmail, editPassword;
 	private CheckBox checkbox;
 	private Button loginBtn;
 
-	final private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben";
-	final private String LOGIN_FAILED = "Anmeldung schlug fehl!";
-	final private String PASSWORD = "password";
-	final private String EMAIL = "email";
-	final private String OK = "Ok";
-
-	/*
-	 * Anmerkung: Ist der testLoginUnsuccessfulWithoutPreferencesSaved nicht auskommentiert, so wirft er eine WindowManager$BadTokenException und der
-	 * nächste Test wird rot und die Testreihe bricht ab.
-	 */
+	final static private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben";
+	final static private String LOGIN_ERROR = "Anmeldung schlug fehl!";
+	final static private String PASSWORD = "password";
+	final static private String EMAIL = "email";
+	final static private String OK = "Ok";
+	final static private String EMAIL_FIELD_WORKER = "field_worker@mrt.ch";
+	final static private String PASSWORD_MRT = "mrt";
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		// getActivity().getHelper().reset();
 		activity = getActivity();
+		testedApplication = (MRTApplication) activity.getApplication();
+
 		resetPreferences();
+		retrieveWidgetsById();
+
+		this.solo = new Solo(getInstrumentation(), activity);
+
+		// TODO: Automatisches Login, wie kann ich es testen?
+	}
+
+	private void retrieveWidgetsById() {
 		editEmail = (EditText) activity.findViewById(R.id.editEmail);
 		editPassword = (EditText) activity.findViewById(R.id.editPassword);
 		checkbox = (CheckBox) activity.findViewById(R.id.chbxSaveLogin);
 		loginBtn = (Button) activity.findViewById(R.id.loginButton);
-		this.solo = new Solo(getInstrumentation(), getActivity());
-
-		/*
-		 * Preferences für Autologin setzen
-		 */
-		// TODO: Automatisches Login, wie kann ich es testen?
-
-	}
-
-	private MRTApplication getApplication(LoginActivity activity) {
-		return (MRTApplication) activity.getApplication();
 	}
 
 	public void resetPreferences() {
-		getApplication(activity).logout();
-		Editor editor = getApplication(activity).getPreferences().edit();
+		testedApplication.logout();
+		Editor editor = testedApplication.getPreferences().edit();
 		editor.clear();
 		editor.commit();
 	}
@@ -73,7 +68,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		getActivity().finish();
+		activity.finish();
 		super.tearDown();
 	}
 
@@ -87,132 +82,133 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		assertEquals(0, editEmail.getText().length());
 		assertEquals(0, editPassword.getText().length());
 		assertEquals(true, checkbox.isChecked());
-		String email = getApplication(activity).getEmail();
-		String password = getApplication(activity).getPassword();
-		assertNull(email);
-		assertNull(password);
+		assertLoginDataIsNull();
 	}
-
-	// @UiThreadTest
-	// public void testAutoLogin() {
-	// assertFalse(activity.equals(solo.getCurrentActivity()));
-	// }
 
 	public void testZLoginSuccessfulWithPreferencesSaved() {
 		resetPreferences();
-		final String email = "field_worker@mrt.ch", password = "mrt";
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editEmail.setText(email);
-				editPassword.setText(password);
-				checkbox.setChecked(true);
-				loginBtn.performClick();
-			}
-		});
+
+		fillInLoginForm(EMAIL_FIELD_WORKER, PASSWORD_MRT, true);
+		performClickOnLoginButton();
+
 		assertFalse(activity.equals(solo.getCurrentActivity()));
 
-		assertEquals(email, getApplication(activity).getEmail());
-		assertEquals(password, getApplication(activity).getPassword());
-		assertEquals(getApplication(activity).getEmail(), getApplication(activity).getPreferences().getString(EMAIL, null));
-		assertEquals(getApplication(activity).getPassword(), getApplication(activity).getPreferences().getString(PASSWORD, null));
+		assertEquals(EMAIL_FIELD_WORKER, testedApplication.getEmail());
+		assertEquals(PASSWORD_MRT, testedApplication.getPassword());
+		assertEquals(testedApplication.getEmail(), testedApplication.getPreferences().getString(EMAIL, null));
+		assertEquals(testedApplication.getPassword(), testedApplication.getPreferences().getString(PASSWORD, null));
 
 		resetPreferences();
 	}
 
 	public void testZLoginSuccessfulWithoutPreferencesSaved() {
 		resetPreferences();
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editEmail.setText("field_worker@mrt.ch");
-				editPassword.setText("mrt");
-				checkbox.setChecked(false);
-				loginBtn.performClick();
-			}
-		});
+
+		fillInLoginForm(EMAIL_FIELD_WORKER, PASSWORD_MRT, false);
+		performClickOnLoginButton();
+
 		assertFalse(activity.equals(solo.getCurrentActivity()));
 
-		assertNotNull(getApplication(activity).getEmail());
-		assertNotNull(getApplication(activity).getPassword());
-		assertNull(getApplication(activity).getPreferences().getString(EMAIL, null));
-		assertNull(getApplication(activity).getPreferences().getString(PASSWORD, null));
+		assertNotNull(testedApplication.getEmail());
+		assertNotNull(testedApplication.getPassword());
+		assertNull(testedApplication.getPreferences().getString(EMAIL, null));
+		assertNull(testedApplication.getPreferences().getString(PASSWORD, null));
+
 		resetPreferences();
 	}
 
 	public void testLoginUnsuccessfulWithoutPreferencesSaved() {
 		resetPreferences();
-		assertFalse(solo.searchText(LOGIN_FAILED, true));
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editEmail.setText("wrong@mrt.ch");
-				editPassword.setText("credentials");
-				loginBtn.performClick();
-			}
-		});
-		// solo.sleep(20000);
-		assertTrue(solo.searchText(LOGIN_FAILED, true));
+		assertFalse(solo.searchText(LOGIN_ERROR, true));
+
+		fillInLoginForm("wrong@mrt.ch", "credentials", false);
+		performClickOnLoginButton();
+
+		assertTrue(solo.searchText(LOGIN_ERROR, true));
 		solo.clickOnButton(OK);
-		assertFalse(solo.searchText(LOGIN_FAILED, true));
+
+		assertFalse(solo.searchText(LOGIN_ERROR, true));
 		assertTrue("".equals(editPassword.getText().toString()));
 		assertEquals(activity, solo.getCurrentActivity());
-
-		assertNull(getApplication(activity).getEmail());
-		assertNull(getApplication(activity).getPassword());
+		assertLoginDataIsNull();
 	}
 
 	public void testNoLoginDataSuppliedWithoutPreferencesSaved() {
 		resetPreferences();
-		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editEmail.setText("");
-				editPassword.setText("");
-				loginBtn.performClick();
-			}
-		});
-		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+		assertLoginDataErrorIsNotDisplayed();
+
+		fillInLoginForm("", "", false);
+		performClickOnLoginButton();
+
+		assertLoginDataErrorIsDisplayed();
 		solo.clickOnButton(OK);
-		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
+
+		assertLoginDataErrorIsNotDisplayed();
 		assertEquals(activity, solo.getCurrentActivity());
 
-		assertNull(getApplication(activity).getEmail());
-		assertNull(getApplication(activity).getPassword());
+		assertLoginDataIsNull();
 	}
 
 	public void testNoPasswordSuppliedWithoutPreferencesSaved() {
 		resetPreferences();
-		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
-		activity.runOnUiThread(new Runnable() {
-			public void run() {
-				editEmail.setText("field_worker@mrt.ch");
-				editPassword.setText("");
-				loginBtn.performClick();
-			}
-		});
-		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+		assertLoginDataErrorIsNotDisplayed();
+
+		fillInLoginForm(EMAIL_FIELD_WORKER, "", false);
+		performClickOnLoginButton();
+
+		assertLoginDataErrorIsDisplayed();
 		solo.clickOnButton(OK);
-		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
+
+		assertLoginDataErrorIsNotDisplayed();
 		assertEquals(activity, solo.getCurrentActivity());
 
-		assertNull(getApplication(activity).getEmail());
-		assertNull(getApplication(activity).getPassword());
+		assertLoginDataIsNull();
 	}
 
 	public void testNoEmailSuppliedWithoutPreferencesSaved() {
 		resetPreferences();
+		assertLoginDataErrorIsNotDisplayed();
+
+		fillInLoginForm("", PASSWORD_MRT, false);
+		performClickOnLoginButton();
+
+		assertLoginDataErrorIsDisplayed();
+		solo.clickOnButton(OK);
+
+		assertLoginDataErrorIsNotDisplayed();
+		assertEquals(activity, solo.getCurrentActivity());
+
+		assertLoginDataIsNull();
+	}
+
+	private void assertLoginDataErrorIsNotDisplayed() {
 		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
+	}
+
+	private void assertLoginDataErrorIsDisplayed() {
+		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
+	}
+
+	private void assertLoginDataIsNull() {
+		assertNull(testedApplication.getEmail());
+		assertNull(testedApplication.getPassword());
+	}
+
+	private void fillInLoginForm(final String email, final String password, final boolean bool) {
 		activity.runOnUiThread(new Runnable() {
 			public void run() {
-				editEmail.setText("");
-				editPassword.setText("mrt");
+				editEmail.setText(email);
+				editPassword.setText(password);
+				checkbox.setChecked(bool);
+			}
+		});
+	}
+
+	private void performClickOnLoginButton() {
+		activity.runOnUiThread(new Runnable() {
+			public void run() {
 				loginBtn.performClick();
 			}
 		});
-		assertTrue(solo.searchText(LOGINDATA_ERROR, true));
-		solo.clickOnButton(OK);
-		assertFalse(solo.searchText(LOGINDATA_ERROR, true));
-		assertEquals(activity, solo.getCurrentActivity());
-
-		assertNull(getApplication(activity).getEmail());
-		assertNull(getApplication(activity).getPassword());
 	}
 }
