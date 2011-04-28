@@ -1,12 +1,15 @@
+
+<%# @customer.address = Address.new(:line1 => "XXXXX") %>
+
 <%= form_for(@customer) do |f| %>
   <% if @customer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
 
       <ul>
-      <% @customer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @customer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -24,7 +27,51 @@
     <%= f.text_field :phone %>
   </div>
 
+  <% f.fields_for :address do |address_fields| %>
+    <div class="field">
+      <%= address_fields.label :line1 %><br/>
+      <%= address_fields.text_field :line1 %>
+    </div>
+    Löschen: <%= address_fields.check_box :_destroy %>
+  <% end %>
+
+  <%# f.fields_for :address do |address_form| % >
+
+  <div class="field">
+  <%= adress_form.label :Adresszeile1 % ><br/>
+  <%= adress_form.text_field :line1 % >
+  </div>
+
+  <div class="field">
+  <%= adress_form.label :Adresszeile2 % ><br/>
+  <%= adress_form.text_field :line2 % >
+  </div>
+
+  <div class="field">
+  <%= adress_form.label :Adresszeile3 % ><br/>
+  <%= adress_form.text_field :line3 % >
+  </div>
+
+  <div class="field">
+  <%= adress_form.label :Ort % ><br/>
+  <%= adress_form.text_field :place % >
+  </div>
+
+  <div class="field">
+  <%= adress_form.label :zip % ><br/>
+  <%= adress_form.text_field :zip % >
+  </div>
+
+  <% unless adress_form.object.new_record? % >
+  <% # Don't forget to name both of these '_destroy' in Rails 3 % >
+  <%= adress_form.check_box '_destroy' % >
+  <%= child_form.label '_destroy', 'Remove' % >
+  <% end % >
+
+  <% end %>
+
+
   <div class="actions">
-    <%= f.submit "Kunde ändern"%>
+    <%= f.submit %>
   </div>
 <% end %>

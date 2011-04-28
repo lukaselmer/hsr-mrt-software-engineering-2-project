@@ -1,10 +1,12 @@
 class CreateCustomers < ActiveRecord::Migration
   def self.up
     create_table :customers do |t|
+      t.references :address
+      t.references :location
       t.string :first_name
       t.string :last_name
       t.string :phone
-
+      
       t.timestamps
       t.timestamp :deleted_at
     end

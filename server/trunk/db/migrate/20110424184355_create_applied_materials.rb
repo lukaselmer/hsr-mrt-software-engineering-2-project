@@ -1,10 +1,10 @@
 class CreateAppliedMaterials < ActiveRecord::Migration
   def self.up
     create_table :applied_materials do |t|
+      t.references :material
+      t.references :order
       t.integer :amount
-	  t.belongs_to :material
-	  t.belongs_to :order
-
+      
       t.timestamps
     end
   end
