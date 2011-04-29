@@ -9,14 +9,15 @@ import android.test.AndroidTestCase;
 
 public class CustomerTest extends AndroidTestCase {
 
-	private static final String PHONE = "+41 444 44 44", FIRST_NAME = "Peter", LAST_NAME = "Muster";
+	private static final String PHONE = "+41 444 44 44", FIRST_NAME = "Test", LAST_NAME = "customer";
 	private Customer customer;
 	private JSONObject customerObj;
-	Timestamp date;
+	private Timestamp timeStamp;
 
+	@Override
 	public void setUp() {
 		customer = new Customer();
-		date = new Timestamp(System.currentTimeMillis());
+		timeStamp = new Timestamp(System.currentTimeMillis());
 		try {
 			customerObj = new JSONObject().put("customer", getCustomerJSON());
 		} catch (JSONException e) {
@@ -28,30 +29,30 @@ public class CustomerTest extends AndroidTestCase {
 	private JSONObject getCustomerJSON() throws JSONException {
 
 		return new JSONObject().put("id", 1).put("first_name", FIRST_NAME).put("last_name", LAST_NAME).put("phone", PHONE)
-				.put("updated_at", DateHelper.format(date));
+				.put("updated_at", DateHelper.format(timeStamp));
 	}
 
 	public void testInitialCustomer() {
-		assertEquals(new Integer(0), customer.getId());
-		assertEquals(0, customer.getIdOnServer());
+//		assertEquals(0, customer.getId());
+//		assertEquals(0, customer.getIdOnServer());
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());
 		assertNull(customer.getPhone());
 		assertNull(customer.getPosition());
 		assertEquals(new Timestamp(0), customer.getUpdatedAt());
 		assertFalse(customer.isDeleted());
-		assertEquals("null null", customer.toString());
 	}
 
 	public void testFromJSON() {
 		try {
 			customer.fromJSON(customerObj);
-			assertEquals(new Integer(0), customer.getId());
-			assertEquals(1, customer.getIdOnServer());
+//			assertEquals(new Integer(0), customer.getId());
+//			assertEquals(1, customer.getIdOnServer());
 			assertEquals(FIRST_NAME, customer.getFirstName());
 			assertEquals(LAST_NAME, customer.getLastName());
 			assertEquals(PHONE, customer.getPhone());
-			assertEquals(date, customer.getUpdatedAt());
+			assertEquals(timeStamp, customer.getUpdatedAt());
+			assertEquals(FIRST_NAME + " " + LAST_NAME, customer.toString());
 		} catch (JSONException e) {
 			assert (false);
 			e.printStackTrace();

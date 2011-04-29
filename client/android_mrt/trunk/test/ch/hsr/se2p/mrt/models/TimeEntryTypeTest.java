@@ -1,5 +1,7 @@
 package ch.hsr.se2p.mrt.models;
 
-public class TimeEntryTypeTest {
+import android.test.AndroidTestCase;
+
+public class TimeEntryTypeTest extends AndroidTestCase{
 
 }

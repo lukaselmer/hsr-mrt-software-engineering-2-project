@@ -13,6 +13,7 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 import android.test.AndroidTestCase;
 
 public class TimeEntryTest extends AndroidTestCase {
+	private static final String DESCRIPTION = "text";
 	private Dao<TimeEntry, Integer> dao;
 	private DatabaseHelper dh;
 
@@ -46,7 +47,7 @@ public class TimeEntryTest extends AndroidTestCase {
 		try {
 			assertEquals(0, dao.queryForAll().size());
 			TimeEntry t = new TimeEntry(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60)); // 1h ago
-			t.setDescription("bla");
+			t.setDescription(DESCRIPTION);
 			Timestamp timeStop = new Timestamp(System.currentTimeMillis());
 			t.setTimeStop(timeStop);
 			int id = dao.create(t);
@@ -54,7 +55,7 @@ public class TimeEntryTest extends AndroidTestCase {
 			t = dao.queryForId(id);
 			assertNotNull(t);
 			assertEquals(id, (int) t.getId());
-			assertEquals("bla", t.getDescription());
+			assertEquals(DESCRIPTION, t.getDescription());
 			assertEquals(timeStop, t.getTimeStop());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -86,11 +87,11 @@ public class TimeEntryTest extends AndroidTestCase {
 			Timestamp timeStop = new Timestamp(System.currentTimeMillis()), timeStart = new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60);
 			TimeEntry t = new TimeEntry(timeStart);
 			t.setTimeStop(timeStop);
-			t.setDescription("bla");
+			t.setDescription(DESCRIPTION);
 			int id = dao.create(t);
 			t = dao.queryForId(id);
 			JSONObject j = t.toJSONObject();
-			assertEquals("bla", j.getString("description"));
+			assertEquals(DESCRIPTION, j.getString("description"));
 			assertEquals(timeStart, j.get("time_start"));
 			assertEquals(timeStop, j.get("time_stop"));
 			assertEquals(t.getHashcode(), j.getString("hashcode"));
