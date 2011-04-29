@@ -10,7 +10,7 @@ public class UserHelperTest extends HttpTestCase {
 	public void testLogin() {
 		User u = new User();
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
-		Integer id = 77;
+		int id = 77;
 		Timestamp updatedAt = DateHelper.formatAndParseToTimestamp(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
 		expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
 				+ "\",\"id\":" + id + ",\"updated_at\":\"" + DateHelper.format(updatedAt) + "\"}}");
@@ -44,7 +44,7 @@ public class UserHelperTest extends HttpTestCase {
 		assertEquals(firstName, u.getFirstName());
 		assertEquals(lastName, u.getLastName());
 		assertEquals(email, u.getEmail());
-		assertEquals(id, u.getRailsId());
+		assertSame(id, u.getRailsId());
 		// assertEquals(updatedAt, u.getUpdatedAt());
 	}
 

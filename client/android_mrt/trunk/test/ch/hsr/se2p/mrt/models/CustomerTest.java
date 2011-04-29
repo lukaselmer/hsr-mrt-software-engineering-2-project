@@ -33,8 +33,8 @@ public class CustomerTest extends AndroidTestCase {
 	}
 
 	public void testInitialCustomer() {
-//		assertEquals(0, customer.getId());
-//		assertEquals(0, customer.getIdOnServer());
+		assertEquals(new Integer(0), customer.getId());
+		assertEquals(0, customer.getIdOnServer());
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());
 		assertNull(customer.getPhone());
@@ -46,8 +46,8 @@ public class CustomerTest extends AndroidTestCase {
 	public void testFromJSON() {
 		try {
 			customer.fromJSON(customerObj);
-//			assertEquals(new Integer(0), customer.getId());
-//			assertEquals(1, customer.getIdOnServer());
+			assertEquals(new Integer(0), customer.getId());
+			assertEquals(1, customer.getIdOnServer());
 			assertEquals(FIRST_NAME, customer.getFirstName());
 			assertEquals(LAST_NAME, customer.getLastName());
 			assertEquals(PHONE, customer.getPhone());

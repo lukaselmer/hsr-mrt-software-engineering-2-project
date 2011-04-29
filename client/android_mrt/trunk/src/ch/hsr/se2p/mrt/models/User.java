@@ -18,9 +18,9 @@ import ch.hsr.se2p.mrt.interfaces.Receivable;
 public class User implements Receivable {
 
 	@DatabaseField(generatedId = true)
-	private Integer id;
+	private int id;
 	@DatabaseField
-	private Integer railsId;
+	private int railsId;
 	@DatabaseField
 	private String firstName, lastName, email;
 	@DatabaseField
@@ -44,7 +44,7 @@ public class User implements Receivable {
 		return true;
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -60,7 +60,7 @@ public class User implements Receivable {
 		return lastName;
 	}
 
-	public Integer getRailsId() {
+	public int getRailsId() {
 		return railsId;
 	}
 

@@ -50,7 +50,7 @@ public class UserTest extends AndroidTestCase {
 			assertEquals(FIRST_NAME, user.getFirstName());
 			assertEquals(LAST_NAME, user.getLastName());
 			assertEquals(EMAIL, user.getEmail());
-			assertEquals(DateHelper.format(timeStamp), user.getUpdatedAt());
+			assertEquals( DateHelper.format(timeStamp),  DateHelper.format((user.getUpdatedAt())));
 		} catch (JSONException e) {
 			e.printStackTrace();
 			assert(false);
