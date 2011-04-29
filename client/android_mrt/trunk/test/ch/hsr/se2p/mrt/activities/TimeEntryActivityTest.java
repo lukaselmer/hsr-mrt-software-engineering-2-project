@@ -43,13 +43,17 @@ public class TimeEntryActivityTest extends
 	protected void setUp() throws Exception {
 		super.setUp();
 		activity = getActivity();
+		retrieveWidgetsById();
+		customer = getActivity().getHelper().getCustomerDao().queryForAll().get(0);
+		this.solo = new Solo(getInstrumentation(), getActivity());
+	}
+
+	private void retrieveWidgetsById() {
 		editCustomer = (AutoCompleteTextView) activity.findViewById(R.id.autocompleteCustomer);
 		editTimeEntryType = (Spinner) activity.findViewById(R.id.spinnerTimeEntryType);
 		editDescription = (TextView) activity.findViewById(R.id.txtDescription);
 		button = (Button) activity.findViewById(R.id.btnStartStop);
 		txtTime = (TextView) activity.findViewById(R.id.txtTime);
-		customer = getActivity().getHelper().getCustomerDao().queryForAll().get(0);
-		this.solo = new Solo(getInstrumentation(), getActivity());
 	}
 
 	@Override
@@ -66,7 +70,7 @@ public class TimeEntryActivityTest extends
 	@UiThreadTest
 	public void testPreconditions() {
 		assertEquals("", editCustomer.getText().toString());
-		assertEquals(new Integer(1),
+		assertEquals(Integer.valueOf(1),
 				((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
 		assertEquals("", editDescription.getText().toString());
 		assertEquals(START, button.getText().toString());
