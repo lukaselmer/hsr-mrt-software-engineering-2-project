@@ -24,13 +24,9 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	private CheckBox checkbox;
 	private Button loginBtn;
 
-	final static private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben";
-	final static private String LOGIN_ERROR = "Anmeldung schlug fehl!";
-	final static private String PASSWORD = "password";
-	final static private String EMAIL = "email";
-	final static private String OK = "Ok";
-	final static private String EMAIL_FIELD_WORKER = "field_worker@mrt.ch";
-	final static private String PASSWORD_MRT = "mrt";
+	final static private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben", 
+	LOGIN_ERROR = "Anmeldung schlug fehl!", PASSWORD = "password", EMAIL = "email", OK = "Ok",
+	EMAIL_FIELD_WORKER = "field_worker@mrt.ch", PASSWORD_MRT = "mrt";
 
 	@Override
 	protected void setUp() throws Exception {
