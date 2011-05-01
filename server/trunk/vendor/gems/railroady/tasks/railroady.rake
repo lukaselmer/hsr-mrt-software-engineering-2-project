@@ -14,7 +14,7 @@ def full_path(name = 'test.txt')
 end
 
 def railroady_command
-  "\"ruby.exe\" \"#{Rails.root}/vendor/gems/railroady/bin/railroady\""
+  "\"ruby\" \"#{Rails.root}/vendor/gems/railroady/bin/railroady\""
 end
 namespace :diagram do
  
