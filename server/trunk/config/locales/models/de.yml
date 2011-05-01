@@ -1,0 +1,11 @@
+de:
+  activerecord:
+    models:
+      credential: Zugangsdaten
+      user: Mitglied
+    attributes:
+      credential:
+        password: Passwort
+        user_id: Mitglied
+      user:
+        fist_name: Vorname
