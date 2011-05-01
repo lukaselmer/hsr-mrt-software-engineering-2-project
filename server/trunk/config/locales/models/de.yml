@@ -1,11 +1,7 @@
 de:
   activerecord:
     models:
-      credential: Zugangsdaten
-      user: Mitglied
+      order: Auftrag
     attributes:
-      credential:
-        password: Passwort
-        user_id: Mitglied
-      user:
-        fist_name: Vorname
+      order:
+        description: Beschreibung
