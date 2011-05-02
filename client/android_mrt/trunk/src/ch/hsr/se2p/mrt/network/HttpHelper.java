@@ -36,8 +36,7 @@ public class HttpHelper {
 		HttpClient client = getHttpClient();
 		prepareRequest(url, jsonObject, httpRequest);
 		HttpResponse response = executeRequest(client, httpRequest);
-		String responseString = handleResponse(response);
-		return responseString;
+		return handleResponse(response);
 	}
 
 	protected HttpClient getHttpClient() {

@@ -23,17 +23,17 @@ public class DateHelper {
 		return null;
 	}
 
+	public static String format(Date date) {
+		setTimeZone();
+		return iso8601formatter.format(date);
+	}
+
 	private static void setTimeZone() {
 		setTimeZone(TimeZone.getDefault());
 	}
 
 	public static void setTimeZone(TimeZone tz) {
 		iso8601formatter.setTimeZone(tz);
-	}
-
-	public static String format(Date date) {
-		setTimeZone();
-		return iso8601formatter.format(date);
 	}
 
 	public static Date formatAndParse(Date date) {

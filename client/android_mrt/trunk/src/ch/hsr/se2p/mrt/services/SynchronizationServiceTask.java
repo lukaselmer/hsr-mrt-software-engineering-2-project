@@ -10,9 +10,7 @@ import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.network.CustomerHelper;
-import ch.hsr.se2p.mrt.network.SynchronizationException;
+import ch.hsr.se2p.mrt.models.TimeEntryType;
 import ch.hsr.se2p.mrt.network.UserHelper;
 
 import com.j256.ormlite.dao.Dao;
@@ -37,8 +35,11 @@ class SynchronizationServiceTask extends TimerTask {
 			Log.e(TAG, "Login failed!");
 			return;
 		}
-		syncCustomers();
-		// syncTimeEntryTypes();
+		Synchronizer[] synchronizers = { new TimeEntrySynchronizer(databaseHelper, mrtApplication),
+				new CustomerSynchronizer(databaseHelper, mrtApplication), new TimeEntryTypeSynchronizer(databaseHelper, mrtApplication) };
+		for (Synchronizer synchronizer : synchronizers) {
+			synchronizer.synchronize();
+		}
 	}
 
 	private void loadPreferences() {
@@ -46,63 +47,7 @@ class SynchronizationServiceTask extends TimerTask {
 	}
 
 	private boolean login() {
-		return new UserHelper(mrtApplication.getHttpHelper()).login(mrtApplication.getEmail(), mrtApplication.getPassword(),
-				mrtApplication.getCurrentUser());
+		return new UserHelper(mrtApplication.getHttpHelper()).login(mrtApplication);
 	}
 
-	protected void syncCustomers() {
-		Log.i(TAG, "Synchronizing customers");
-		try {
-			Dao<Customer, Integer> dao = databaseHelper.getCustomerDao();
-			List<Receivable> receivables = new ArrayList<Receivable>(dao.queryForAll());
-			synchronizeReceivables(dao, new CustomerHelper(mrtApplication.getHttpHelper()), receivables);
-		} catch (SQLException e) {
-			Log.e(TAG, "Database error", e);
-		} catch (Exception e) {
-			Log.e(TAG, "Customer sync error", e);
-		}
-	}
-
-	// protected void syncTimeEntryTypes() {
-	// if (true)
-	// return; // TODO: implement this
-	//
-	// Log.i(TAG, "Synchronizing time entry types");
-	// try {
-	// Dao<TimeEntryType, Integer> dao = databaseHelper.getDao(TimeEntryType.class);
-	// List<Receivable> receivables = new ArrayList<Receivable>(dao.queryForAll());
-	// // TODO: synchronizeReceivables(dao, new CustomerHelper(mrtApplication.getHttpHelper()), receivables);
-	// } catch (SQLException e) {
-	// Log.e(TAG, "Database error", e);
-	// }
-	// }
-
-	protected void synchronizeReceivables(Dao<Customer, Integer> dao, CustomerHelper ch, List<Receivable> receivables) throws SQLException {
-		try {
-			if (ch.synchronize(receivables, Customer.class)) {
-				for (Receivable receivable : receivables) {
-					processClient(dao, (Customer) receivable);
-				}
-			}
-		} catch (SynchronizationException e) {
-			Log.e(TAG, "Error synchronizing customers", e);
-		}
-	}
-
-	protected void processClient(Dao<Customer, Integer> dao, Customer c) throws SQLException {
-		if (c.isDeleted()) {
-			Log.i(TAG, "Deleting " + c);
-			if (c.getId() != null && c.getId() > 0) {
-				dao.delete(c);
-				return;
-			}
-		}
-		if (c.getId() != null && c.getId() > 0) {
-			Log.i(TAG, "Updating " + c);
-			dao.update(c);
-		} else {
-			Log.i(TAG, "Creating " + c);
-			dao.create(c);
-		}
-	}
 };
