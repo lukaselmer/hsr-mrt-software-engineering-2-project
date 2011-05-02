@@ -3,7 +3,7 @@ package ch.hsr.se2p.mrt.services;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 
-public class TimeEntryTypeSynchronizer implements Synchronizer {
+class TimeEntryTypeSynchronizer implements Synchronizer {
 	private static final String TAG = TimeEntryTypeSynchronizer.class.getSimpleName();
 
 	private final DatabaseHelper databaseHelper;
