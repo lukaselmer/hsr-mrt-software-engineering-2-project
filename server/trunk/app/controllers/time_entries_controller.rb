@@ -20,10 +20,10 @@ class TimeEntriesController < ApplicationController
 
   # GET /time_entries/new
   def new
-    @customers = Customer.all
-    @time_entry_types = TimeEntryType.all
     @time_entry = TimeEntry.new
     @orders = Order.all
+    @customers = Customer.all
+    @time_entry_types = TimeEntryType.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,15 +33,19 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries/1/edit
   def edit
     @time_entry = TimeEntry.find(params[:id])
+    @orders = Order.all
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
-    @orders = Order.all
     
     deny_access! and return unless write_access?(@time_entry)
   end
 
   # POST /time_entries
   def create
+    @orders = Order.all
+    @customers = Customer.all
+    @time_entry_types = TimeEntryType.all
+
     respond_to do |format|
       format.html { create_by_html }
       format.json { create_by_json }
@@ -75,6 +79,10 @@ class TimeEntriesController < ApplicationController
   # PUT /time_entries/1
   def update
     @time_entry = TimeEntry.find(params[:id])
+    @orders = Order.all
+    @customers = Customer.all
+    @time_entry_types = TimeEntryType.all
+    
     deny_access! and return unless write_access?(@time_entry)
 
     respond_to do |format|

@@ -27,6 +27,14 @@ class AddressesControllerTest < ActionController::TestCase
     assert_redirected_to address_path(assigns(:address))
   end
 
+  test "should not create address without line1" do
+    invalid_address = Address.new(:line2 => "Invalid Address")
+    assert_no_difference('Address.count') do
+      post :create, :address => invalid_address.attributes
+    end
+    assert_response :success
+  end
+
   test "should show address" do
     get :show, :id => @address.to_param
     assert_response :success
@@ -40,6 +48,12 @@ class AddressesControllerTest < ActionController::TestCase
   test "should update address" do
     put :update, :id => @address.to_param, :address => @address.attributes
     assert_redirected_to address_path(assigns(:address))
+  end
+
+  test "should not update address without line1" do
+    @address.line1 = nil
+    put :update, :id => @address.to_param, :address => @address.attributes
+    assert_response :success
   end
 
   test "should destroy address" do

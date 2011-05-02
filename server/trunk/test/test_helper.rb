@@ -20,5 +20,17 @@ class ActiveSupport::TestCase
     sign_in secretary
   end
 
+  def login_with_field_worker
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    worker = users(:field_worker)
+    #    @user = User.create! do |user|
+    #      user.email = 'test@test.com'
+    #      user.password = '12345'
+    #      user.user_type = User::TYPE_SECRETARY
+    #    end
+    sign_in worker
+    return worker
+  end
+
   # Add more helper methods to be used by all tests here...
 end

@@ -4,7 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
 
   setup do
-    @user = users(:one)
+    @user = users(:field_worker)
     login_with_secretary
   end
 

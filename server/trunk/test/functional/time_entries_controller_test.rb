@@ -5,7 +5,8 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   setup do
     @time_entry = time_entries(:one)
-    login_with_secretary
+    @time_entry_from_other_worker = time_entries(:two)
+    login_with_field_worker
   end
 
   test "should get index" do
@@ -73,9 +74,19 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not get edit from other worker" do
+    get :edit, :id => @time_entry_from_other_worker.to_param
+    assert_response :forbidden
+  end
+
   test "should update time_entry" do
     put :update, :id => @time_entry.to_param, :time_entry => @time_entry.attributes
     assert_redirected_to time_entry_path(assigns(:time_entry))
+  end
+
+  test "should not update time_entry from other worker" do
+    put :update, :id => @time_entry_from_other_worker.to_param, :time_entry => @time_entry_from_other_worker.attributes
+    assert_response :forbidden
   end
 
   test "should not update time_entry without start_time" do
@@ -97,5 +108,12 @@ class TimeEntriesControllerTest < ActionController::TestCase
       delete :destroy, :id => @time_entry.to_param
     end
     assert_redirected_to time_entries_path
+  end
+
+  test "should destroy time_entry from other worker" do
+    assert_no_difference('TimeEntry.count') do
+      delete :destroy, :id => @time_entry_from_other_worker.to_param
+    end
+    assert_response :forbidden
   end
 end

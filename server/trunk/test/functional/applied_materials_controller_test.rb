@@ -20,11 +20,20 @@ class AppliedMaterialsControllerTest < ActionController::TestCase
   end
 
   test "should create applied_material" do
+    valid_entry = AppliedMaterial.new(:order_id => 101, :material_id => 101, :amount => 1)
     assert_difference('AppliedMaterial.count') do
-      post :create, :applied_material => @applied_material.attributes
+      post :create, :applied_material => valid_entry.attributes
     end
 
     assert_redirected_to applied_material_path(assigns(:applied_material))
+  end
+
+  test "should not create address without material" do
+    invalid_applied_material = AppliedMaterial.new()
+    assert_no_difference('AppliedMaterial.count') do
+      post :create, :address => invalid_applied_material.attributes
+    end
+    assert_response :success
   end
 
   test "should show applied_material" do
@@ -40,6 +49,12 @@ class AppliedMaterialsControllerTest < ActionController::TestCase
   test "should update applied_material" do
     put :update, :id => @applied_material.to_param, :applied_material => @applied_material.attributes
     assert_redirected_to applied_material_path(assigns(:applied_material))
+  end
+
+  test "should not update address without material" do
+    @applied_material.material_id = nil
+    put :update, :id => @applied_material.to_param, :applied_material => @applied_material.attributes
+    assert_response :success
   end
 
   test "should destroy applied_material" do

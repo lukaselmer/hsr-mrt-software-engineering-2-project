@@ -9,6 +9,7 @@ one:
   time_stop: 2011-04-06 14:49:21
   position: 
   audio_record_name: MyString
+  user_id: 101
 
 two:
   customer: 
@@ -19,3 +20,4 @@ two:
   time_stop: 2011-04-06 14:49:21
   position: 
   audio_record_name: MyString
+  user_id: 102

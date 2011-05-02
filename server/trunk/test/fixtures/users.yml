@@ -4,12 +4,15 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one:
-  first_name: 'Diego'
-  last_name: 'Steiner'
-  email: 'filou.linux@gmail.com'
+field_worker:
+  id: 101
+  first_name: 'Field'
+  last_name: 'Worker'
+  email: 'field_worker@mrt.ch'
+  user_type: <%= User::TYPE_FIELD_WORKER %>
   
 secretary:
+  id: 100
   first_name: 'Sec'
   last_name: 'Retary'
   email: 'secretary@mrt.ch'
