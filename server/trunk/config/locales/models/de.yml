@@ -2,6 +2,53 @@ de:
   activerecord:
     models:
       order: Auftrag
+      address: Adresse
+      addresses: Adressen
+      customer: Kunde
+      time_entry: Zeiteintrag
+      material: Material
+      user: Benutzer
+      location: Position
+      applied_material: verwendetes Material
     attributes:
       order:
+        created_at: Erstellt am
         description: Beschreibung
+      address:
+        line1: Adresszeile1
+        line2: Adresszeile2
+        line3: Adresszeile3
+        place: Ort
+        zip: PLZ
+      customer:
+        first_name: Vorname
+        last_name: Nachname
+        phone: Telefonnummer
+      location:
+        latitude: Breitengrad
+        logitude: Längengrad
+      time_entry_type:
+        description: Beschreibung
+        valid_until: gültig bis
+      time_entry:
+        description: Beschreibung
+        hashcode: Hashcode
+        time_start: Startzeitpunkt
+        time_stop: Endzeitpunkt
+      applied_material:
+        amount: Anzahl
+      material:
+        catalog_id: Katalogid
+        description: Beschreibung
+        dimensions: Dimension
+        price: Preis
+        valid_until: Gültig bis
+      user:
+         email: Email
+         first_name: Vorname
+         last_name: Nachname
+         password: Passwort
+         phone: Telefonnummer
+         type: Typ
+
+        

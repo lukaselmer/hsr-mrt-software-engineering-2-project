@@ -2,7 +2,7 @@
 de:
   show: Anzeigen
   edit: Bearbeiten
-  delete: Löschen
+  destroy: Löschen
   confirm_delete: Wirklich löschen?
   back: Zurück
   
