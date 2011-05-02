@@ -15,6 +15,12 @@
     <%= f.label :customer_id %><br />
     <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }, { :include_blank => true }) %>
   </div>
+
+  <div class="field">
+    <%= f.label :order_id %><br />
+    <%= f.select(:order_id, @orders.collect {|o| [ o.id, o.id ] }, { :include_blank => true }) %>
+  </div>
+
   <div class="field">
     <%= f.label :time_entry_type_id %><br />
     <%= f.select(:time_entry_type_id, @time_entry_types.collect {|t| [ t.description, t.id ] }, { :include_blank => true }) %>

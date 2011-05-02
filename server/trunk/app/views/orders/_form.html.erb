@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :customer_id %><br />
+    <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }, { :include_blank => true }) %>
+  </div>
+
+  <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
   </div>

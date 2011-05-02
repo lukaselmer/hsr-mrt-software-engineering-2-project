@@ -1,13 +1,52 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Erstellt am:</b>
-  <%= @order.created_at %>
+  <b>Kunde:</b>
+  <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
 </p>
 
 <p>
   <b>Beschreibung:</b>
   <%= @order.description %>
+</p>
+
+<p>
+  <b>Stundeneinträge:</b>
+  <table>
+  <tr>
+    <th>Time entry type</th>
+    <th>Beschreibung</th>
+    <th>Startzeit</th>
+    <th>Endzeit</th>
+    <th>Dauer</th>
+    <!--<th>Position</th>
+    <th>Audio record name</th>-->
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @order.time_entries.each do |time_entry| %>
+    <tr>
+      <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
+      <td><%= time_entry.description %></td>
+      <td><%= l time_entry.time_start %></td>
+      <td><%= l time_entry.time_stop %></td>
+      <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
+
+      <td><%= link_to 'Anzeigen', time_entry %></td>
+
+      <% if write_access? time_entry %>
+        <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
+        <td><%= link_to 'Löschen', time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% else %>
+        <td></td>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
 </p>
 
 

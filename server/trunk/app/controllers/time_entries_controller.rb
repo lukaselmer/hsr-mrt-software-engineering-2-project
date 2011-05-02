@@ -23,6 +23,7 @@ class TimeEntriesController < ApplicationController
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
     @time_entry = TimeEntry.new
+    @orders = Order.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,6 +35,8 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.find(params[:id])
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
+    @orders = Order.all
+    
     deny_access! and return unless write_access?(@time_entry)
   end
 

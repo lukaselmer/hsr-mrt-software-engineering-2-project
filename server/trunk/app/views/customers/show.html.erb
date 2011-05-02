@@ -15,5 +15,31 @@
   <%= @customer.phone %>
 </p>
 
+<p>
+  <b>Aufträge:</b>
+  <table>
+    <tr>
+      <th>Erstellt am</th>
+      <th>Beschreibung</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @customer.orders.each do |order| %>
+    <tr>
+      <td><%= order.created_at %></td>
+      <td><%= order.description %></td>
+      <td><%= link_to 'Anzeigen', order %></td>
+
+       <% if write_access? order %>
+          <td><%= link_to 'Bearbeiten', edit_order_path(order) %></td>
+          <td><%= link_to 'Löschen', order, :confirm => 'Auftrag wirklich löschen?', :method => :delete %></td>
+       <% end %>
+    </tr>
+  <% end %>
+  </table>
+</p>
+
 <%= link_to 'Bearbeiten', edit_customer_path(@customer) %> |
 <%= link_to 'Zurück', customers_path %>

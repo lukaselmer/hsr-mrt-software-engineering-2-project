@@ -5,6 +5,7 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.references :time_entry_type
       t.references :user
       t.references :location
+      t.references :order
       t.string :hashcode
       t.text :description
       t.timestamp :time_start

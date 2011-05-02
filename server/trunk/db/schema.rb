@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(:version => 20110425203731) do
     t.integer  "time_entry_type_id"
     t.integer  "user_id"
     t.integer  "location_id"
+    t.integer  "order_id"
     t.string   "hashcode"
     t.text     "description"
     t.datetime "time_start"

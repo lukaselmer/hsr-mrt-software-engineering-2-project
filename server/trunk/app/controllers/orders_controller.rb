@@ -25,6 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
+    @customers = Customer.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
+    @customers = Customer.all
   end
 
   # POST /orders
