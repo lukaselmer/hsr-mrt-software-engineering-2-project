@@ -15,15 +15,11 @@ public class CustomerTest extends AndroidTestCase {
 	private Timestamp timeStamp;
 
 	@Override
-	public void setUp() {
+	protected void setUp() throws Exception {
+		super.setUp();
 		customer = new Customer();
 		timeStamp = new Timestamp(System.currentTimeMillis());
-		try {
-			customerObj = new JSONObject().put("customer", getCustomerJSON());
-		} catch (JSONException e) {
-			assert (false);
-			e.printStackTrace();
-		}
+		customerObj = new JSONObject().put("customer", getCustomerJSON());
 	}
 
 	private JSONObject getCustomerJSON() throws JSONException {
@@ -33,8 +29,8 @@ public class CustomerTest extends AndroidTestCase {
 	}
 
 	public void testInitialCustomer() {
-//		assertEquals(new Integer(0), customer.getId());
-//		assertEquals(0, customer.getIdOnServer());
+		// assertEquals(new Integer(0), customer.getId());
+		// assertEquals(0, customer.getIdOnServer());
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());
 		assertNull(customer.getPhone());
@@ -46,7 +42,7 @@ public class CustomerTest extends AndroidTestCase {
 	public void testFromJSON() {
 		try {
 			customer.fromJSON(customerObj);
-//			assertEquals(new Integer(0), customer.getId());
+			// assertEquals(new Integer(0), customer.getId());
 			assertEquals(1, customer.getIdOnServer());
 			assertEquals(FIRST_NAME, customer.getFirstName());
 			assertEquals(LAST_NAME, customer.getLastName());

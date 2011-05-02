@@ -16,9 +16,10 @@ public class TimeEntryTest extends AndroidTestCase {
 	private static final String DESCRIPTION = "text";
 	private Dao<TimeEntry, Integer> dao;
 	private DatabaseHelper dh;
-
+	
 	@Override
 	protected void setUp() throws Exception {
+		super.setUp();
 		dh = new DatabaseHelper(getContext());
 		dh.reset();
 		dao = dh.getDao(TimeEntry.class);
@@ -26,6 +27,7 @@ public class TimeEntryTest extends AndroidTestCase {
 
 	@Override
 	protected void tearDown() throws Exception {
+		super.tearDown();
 		dh.reset();
 	}
 
