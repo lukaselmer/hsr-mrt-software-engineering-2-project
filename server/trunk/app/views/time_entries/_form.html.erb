@@ -13,15 +13,11 @@
 
   <div class="field">
     <%= f.label :customer_id %><br />
-    <%= f.text_field :customer_id %>
+    <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }, { :include_blank => true }) %>
   </div>
   <div class="field">
     <%= f.label :time_entry_type_id %><br />
-    <%= f.text_field :time_entry_type_id %>
-  </div>
-  <div class="field">
-    <%= f.label :hashcode %><br />
-    <%= f.text_field :hashcode %>
+    <%= f.select(:time_entry_type_id, @time_entry_types.collect {|t| [ t.description, t.id ] }, { :include_blank => true }) %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
@@ -34,14 +30,6 @@
   <div class="field">
     <%= f.label :time_stop %><br />
     <%= f.datetime_select :time_stop %>
-  </div>
-  <div class="field">
-    <%= f.label :location_id %><br />
-    <%= f.text_field :location_id %>
-  </div>
-  <div class="field">
-    <%= f.label :audio_record_name %><br />
-    <%= f.text_field :audio_record_name %>
   </div>
   <div class="actions">
     <%= f.submit %>

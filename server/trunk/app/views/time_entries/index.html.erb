@@ -18,22 +18,22 @@
 
   <% @time_entries.each do |time_entry| %>
     <tr>
-      <!--<td><%= time_entry.customer_id %></td>
-      <td><%= time_entry.time_entry_type_id %></td>-->
-      <td><%= time_entry.hashcode %></td>
+      <td><%= [ time_entry.customer.last_name, time_entry.customer.first_name ].join(', ') unless time_entry.customer.nil? %></td>
+      <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
       <td><%= time_entry.description %></td>
       <td><%= l time_entry.time_start %></td>
       <td><%= l time_entry.time_stop %></td>
+      <td><%=  %></td>
       <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
-      <!--  <td><%= time_entry.position_id %></td>
-      <td><%= time_entry.audio_record_name %></td>-->
+
       <td><%= link_to 'Anzeigen', time_entry %></td>
 
       <% if write_access? time_entry %>
         <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
         <td><%= link_to 'Löschen', time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
       <% else %>
-        <td></td><td></td>
+        <td></td>
+        <td></td>
       <% end %>
     </tr>
   <% end %>
