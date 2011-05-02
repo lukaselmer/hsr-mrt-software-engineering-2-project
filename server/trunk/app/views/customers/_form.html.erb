@@ -27,13 +27,22 @@
     <%= f.text_field :phone %>
   </div>
 
-  <% f.fields_for :address do |address_fields| %>
-    <div class="field">
-      <%= address_fields.label :line1 %><br/>
-      <%= address_fields.text_field :line1 %>
-    </div>
-    Löschen: <%= address_fields.check_box :_destroy %>
-  <% end %>
+  <div class="field">
+    <%= f.label :address %><br/>
+    <%=  select("post", "address_id", Address.all.collect {|p| [ p.line1,p.line2, p.id ] }, { :include_blank => true }) %>
+  </div>
+
+
+  <%#*Versuch einer Nested Form mit Adressen%>
+  <%#*=============================================%>
+
+  <%# f.fields_for :address do |address_fields| %>
+  <%#*<div class="field">%>
+  <%#= address_fields.label :line1 %><br/>
+  <%#= address_fields.text_field :line1 %>
+  <%#*</div>%>
+  <%#*Löschen: <%= address_fields.check_box :_destroy %>
+  <%# end %>
 
   <%# f.fields_for :address do |address_form| % >
 
