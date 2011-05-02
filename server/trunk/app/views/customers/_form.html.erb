@@ -26,7 +26,7 @@
 
   <div class="field">
     <%= f.label :address %><br/>
-    <%=  select("post", "address_id", Address.all.collect {|p| [ p.line1,p.line2, p.id ] }, { :include_blank => true }) %>
+    <%= f.select("address_id", Address.all.collect {|p| [ p.line1,p.line2, p.id ] }) %>
   </div>
 
 

@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Breitengrad:</b>
+  <b>latitude:</b>
   <%= @location.latitude %>
 </p>
 
 <p>
-  <b>Längengrad:</b>
+  <b>logitude:</b>
   <%= @location.logitude %>
 </p>
 
 
-<%= link_to 'Bearbeiten', edit_location_path(@location) %> |
-<%= link_to 'Zurück', locations_path %>
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to t(:back), locations_path %>

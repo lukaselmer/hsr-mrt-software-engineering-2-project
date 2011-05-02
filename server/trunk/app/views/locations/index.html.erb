@@ -1,9 +1,9 @@
-<h1>Übersicht Koordinaten</h1>
+<h1>Listing locations</h1>
 
 <table>
   <tr>
-    <th>Breitengrad</th>
-    <th>Längengrad</th>
+    <th>latitude</th>
+    <th>logitude</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,11 +13,11 @@
   <tr>
     <td><%= location.latitude %></td>
     <td><%= location.logitude %></td>
-    <td><%= link_to 'Anzeigen', location %></td>
+    <td><%= link_to 'Show', location %></td>
     
     <% if write_access? location %>
-      <td><%= link_to 'Bearbeiten', edit_location_path(location) %></td>
-      <td><%= link_to 'Löschen', location, :confirm => 'Koordinaten wirklich löschen?', :method => :delete %></td>
+      <td><%= link_to 'Edit', edit_location_path(location) %></td>
+      <td><%= link_to 'Destroy', location, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -26,5 +26,5 @@
 <br />
 
 <% if write_access? %>
-<%= link_to 'Neue Koordinaten', new_location_path %>
+<%= link_to 'New location', new_location_path %>
 <%  end %>
