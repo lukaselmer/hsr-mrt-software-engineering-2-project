@@ -129,9 +129,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	protected void updateView() {
 		if (isMeasurementStarted())
 			setLayout("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString(), "Stop", Color.RED);
-		else
+		else{
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
+			removeText((TextView) findViewById(R.id.txtDescription));
+			removeText((TextView) findViewById(R.id.autocompleteCustomer));
+			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
+		}
 		updateAutocompleteCustomers();
+	}
+
+	private void removeText(TextView textView) {
+		textView.setText("");
 	}
 
 	private void setLayout(String textViewText, String buttonText, int color) {
