@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <!--<th>Customer</th>
-    <th>Time entry type</th>-->
-    <th>Hashcode</th>
+    <th>Customer</th>
+    <th>Time entry type</th>
     <th>Beschreibung</th>
     <th>Startzeit</th>
     <th>Endzeit</th>
@@ -23,7 +22,6 @@
       <td><%= time_entry.description %></td>
       <td><%= l time_entry.time_start %></td>
       <td><%= l time_entry.time_stop %></td>
-      <td><%=  %></td>
       <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
 
       <td><%= link_to 'Anzeigen', time_entry %></td>
