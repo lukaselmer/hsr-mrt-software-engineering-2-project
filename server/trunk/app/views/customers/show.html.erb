@@ -1,26 +1,26 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Vorname:</b>
+  <b>First_name:</b>
   <%= @customer.first_name %>
 </p>
 
 <p>
-  <b>Nachname:</b>
+  <b>Last_name:</b>
   <%= @customer.last_name %>
 </p>
 
 <p>
-  <b>Telefonnummer:</b>
+  <b>Phone:</b>
   <%= @customer.phone %>
 </p>
 
 <p>
-  <b>Aufträge:</b>
+  <b>Orders:</b>
   <table>
     <tr>
-      <th>Erstellt am</th>
-      <th>Beschreibung</th>
+      <th>created_at</th>
+      <th>description</th>
       <th></th>
       <th></th>
       <th></th>
@@ -30,16 +30,16 @@
     <tr>
       <td><%= order.created_at %></td>
       <td><%= order.description %></td>
-      <td><%= link_to 'Anzeigen', order %></td>
+      <td><%= link_to 'Show', order %></td>
 
        <% if write_access? order %>
-          <td><%= link_to 'Bearbeiten', edit_order_path(order) %></td>
-          <td><%= link_to 'Löschen', order, :confirm => 'Auftrag wirklich löschen?', :method => :delete %></td>
+          <td><%= link_to 'Edit', edit_order_path(order) %></td>
+          <td><%= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete %></td>
        <% end %>
     </tr>
   <% end %>
   </table>
 </p>
 
-<%= link_to 'Bearbeiten', edit_customer_path(@customer) %> |
-<%= link_to 'Zurück', customers_path %>
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>

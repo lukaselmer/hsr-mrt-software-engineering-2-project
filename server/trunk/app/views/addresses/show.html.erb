@@ -6,30 +6,30 @@
 </p>
 
 <p>
-  <b>Adresszeile1:</b>
+  <b>Line1:</b>
   <%= @address.line1 %>
 </p>
 
 <p>
-  <b>Adresszeile2:</b>
+  <b>Line2:</b>
   <%= @address.line2 %>
 </p>
 
 <p>
-  <b>Adresszeile3:</b>
+  <b>Line3:</b>
   <%= @address.line3 %>
 </p>
 
 <p>
-  <b>Ort:</b>
+  <b>Place:</b>
   <%= @address.place %>
 </p>
 
 <p>
-  <b>PLZ:</b>
+  <b>ZIP:</b>
   <%= @address.zip %>
 </p>
 
 
-<%= link_to 'Bearbeiten', edit_address_path(@address) %> |
-<%= link_to 'Zurück', addresses_path %>
+<%= link_to 'Edit', edit_address_path(@address) %> |
+<%= link_to 'Back', addresses_path %>

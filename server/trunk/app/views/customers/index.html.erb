@@ -1,10 +1,10 @@
-<h1>Übersicht Kunden</h1>
+<h1>Listing customers</h1>
 
 <table>
   <tr>
-    <th>Vorname</th>
-    <th>Nachname</th>
-    <th>Telefonnummer</th>
+    <th>First_name</th>
+    <th>Last_name</th>
+    <th>Phone</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,11 +15,11 @@
     <td><%= customer.first_name %></td>
     <td><%= customer.last_name %></td>
     <td><%= customer.phone %></td>
-    <td><%= link_to 'Anzeigen', customer %></td>
+    <td><%= link_to 'Show', customer %></td>
 
     <% if write_access? customer %>
-      <td><%= link_to 'Bearbeiten', edit_customer_path(customer) %></td>
-      <td><%= link_to 'Löschen', customer, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+      <td><%= link_to 'Destroy', customer, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -27,5 +27,5 @@
 
 <br />
 <% if write_access? %>
-  <%= link_to 'Neuen Kunden erstellen', new_customer_path %>
+  <%= link_to 'New customer', new_customer_path %>
 <% end %>

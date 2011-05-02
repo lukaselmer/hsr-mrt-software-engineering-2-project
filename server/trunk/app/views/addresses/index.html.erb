@@ -1,13 +1,13 @@
-<h1>Übersicht Adressen</h1>
+<h1>Listing addresses</h1>
 
 <table>
   <tr>
     <th>Id</th>
-    <th>Adresszeile1</th>
-    <th>Adresszeile2</th>
-    <th>Adresszeile3</th>
-    <th>Ort</th>
-    <th>PLZ</th>
+    <th>Line1</th>
+    <th>Line2</th>
+    <th>Line3</th>
+    <th>Place</th>
+    <th>ZIP</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,11 +21,11 @@
     <td><%= address.line3 %></td>
     <td><%= address.place %></td>
     <td><%= address.zip %></td>
-    <td><%= link_to 'Anzeigen', address %></td>
+    <td><%= link_to 'Show', address %></td>
 
     <% if write_access? address %>
-      <td><%= link_to 'Bearbeiten', edit_address_path(address) %></td>
-      <td><%= link_to 'Löschen', address, :confirm => 'Adresse wirklich löschen?', :method => :delete %></td>
+      <td><%= link_to 'Edit', edit_address_path(address) %></td>
+      <td><%= link_to 'Destroy', address, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
@@ -34,5 +34,5 @@
 <br />
 
 <% if write_access? %>
-<%= link_to 'Neue Adresse erstellen', new_address_path %>
+<%= link_to 'New Address', new_address_path %>
 <% end %>
