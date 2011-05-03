@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :time_entry_type_id %><br />
-    <%= f.select(:time_entry_type_id, @time_entry_type_materials.collect {|c| [c.material.description, c.id ] unless c.material.nil? }) %>
+    <%# TODO: Fix this!!! = f.select(:time_entry_type_id, @time_entry_type_materials.collect {|c| [c.material.description, c.id ] unless c.material.nil? }) %>
     <% if write_access? %>
       <%= link_to 'Neues ' + Material.model_name.human + ' erfassen', new_material_path %>
     <% end %>

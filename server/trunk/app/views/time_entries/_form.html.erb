@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= f.label :user_id %><br />
-    <%= f.select(:user_id, @users.collect {|u| [ [u.last_name,u.first_name].join(', '), u.id ] }) %>
+    <%# TODO: Fix this!!! f.select(:user_id, @users.collect {|u| [ [u.last_name,u.first_name].join(', '), u.id ] }) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
     <% end %>
@@ -37,7 +37,7 @@
 
   <div class="field">
     <%= f.label :location_id %><br />
-    <%= f.select(:location_id, @locations.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
+    <%# TODO: Fix this!!! f.select(:location_id, @locations.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + Location.model_name.human + ' erfassen', new_location_path %>
     <% end %>
