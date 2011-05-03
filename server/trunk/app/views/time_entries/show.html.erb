@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<% fields= [:description,:time_start,:time_stop] %>
+<% fields= [:description,:time_start,:time_stop,:created_at, :updated_at] %>
+
+<p>
+  <b><%= TimeEntry.human_attribute_name(:id)%>:</b>
+  <%= @time_entry.id %>
+</p>
 
 <p>
   <b><%= TimeEntry.human_attribute_name(:customer_id)%>:</b>
@@ -10,6 +15,21 @@
 <p>
   <b><%= TimeEntry.human_attribute_name(:time_entry_type_id)%>:</b>
   <%= @time_entry.time_entry_type.description unless @time_entry.time_entry_type.nil?  %>
+</p>
+
+<p>
+  <b><%= TimeEntry.human_attribute_name(:user_id)%>:</b>
+  <%= [@time_entry.user.first_name,@time_entry.user.last_name].join(', ') unless @time_entry.user.nil?  %>
+</p>
+
+<p>
+  <b><%= TimeEntry.human_attribute_name(:location_id)%>:</b>
+  <%= [@time_entry.location.latitude, @time_entry.location.logitude].join(', ') unless @time_entry.location.nil?  %>
+</p>
+
+<p>
+  <b><%= TimeEntry.human_attribute_name(:order_id)%>:</b>
+  <%= [@time_entry.order.created_at,@time_entry.order.description].join(', ') unless @time_entry.order.nil?  %>
 </p>
 
 
