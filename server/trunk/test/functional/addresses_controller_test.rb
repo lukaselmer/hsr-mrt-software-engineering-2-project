@@ -8,6 +8,24 @@ class AddressesControllerTest < ActionController::TestCase
     login_with_secretary
   end
 
+  #TODO: test geocoding
+  test "should update coordinates" do
+    assert_difference('Address.count') do
+      post :create, :address => addresses(:valid_geocoding_address).attributes
+    end
+
+    assert_redirected_to address_path(assigns(:address))
+  end
+  
+  #TODO: test geocoding
+  test "should not update coordinates" do
+    assert_difference('Address.count') do
+      post :create, :address => addresses(:invalid_geocoding_address).attributes
+    end
+
+    assert_redirected_to address_path(assigns(:address))
+  end
+
   test "should get index" do
     get :index
     assert_response :success
