@@ -1,36 +1,33 @@
-<h1>Listing materials</h1>
+<h1>Übersicht Materialien</h1>
+<% fields = [:id, :catalog_id, :description, :dimensions, :price, :valid_until] %>
 
 <table>
   <tr>
-    <th>Catalog_id</th>
-    <th>Description</th>
-    <th>Dimensions</th>
-    <th>Price</th>
-    <th>Valid_until</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @materials.each do |material| %>
-  <tr>
-    <td><%= material.catalog_id %></td>
-    <td><%= material.description %></td>
-    <td><%= material.dimensions %></td>
-    <td><%= material.price %></td>
-    <td><%= material.valid_until %></td>
-    <td><%= link_to 'Show', material %></td>
-
-     <% if write_access? material %>
-      <td><%= link_to 'Edit', edit_material_path(material) %></td>
-      <td><%= link_to 'Destroy', material, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% fields.each do |f| %>
+      <th><%= Customer.human_attribute_name(f) %></th>
     <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
-<% end %>
+
+  <% @materials.each do |material| %>
+    <tr>
+      <% fields.each do |f| %>
+        <td><%= material.send(f) %></td>
+      <% end %>
+      <td><%= link_to t(:show), material %></td>
+
+      <% if write_access? material %>
+        <td><%= link_to t(:edit), edit_material_path(material) %></td>
+        <td><%= link_to t(:destroy), material, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
 </table>
 
 <br />
 
 <% if write_access? %>
-  <%= link_to 'New material', new_material_path %>
+  <%= link_to 'Neues Material', new_material_path %>
 <% end %>

@@ -1,15 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>latitude:</b>
+  <b><%= Location.human_attribute_name(:latitude) %>:</b>
   <%= @location.latitude %>
 </p>
 
 <p>
-  <b>logitude:</b>
+  <b><%= Location.human_attribute_name(:latitude) %>:</b>
   <%= @location.logitude %>
 </p>
 
 
-<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to t(:edit), edit_location_path(@location) %> |
 <%= link_to t(:back), locations_path %>

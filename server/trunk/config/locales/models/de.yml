@@ -43,6 +43,8 @@ de:
         dimensions: Dimension
         price: Preis
         valid_until: Gültig bis
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
       user:
          email: Email
          first_name: Vorname

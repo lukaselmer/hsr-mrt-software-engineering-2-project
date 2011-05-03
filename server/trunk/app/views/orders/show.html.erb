@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <p>
   <b>Kunde:</b>
   <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
@@ -34,11 +36,11 @@
       <td><%= l time_entry.time_stop %></td>
       <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
 
-      <td><%= link_to 'Anzeigen', time_entry %></td>
+      <td><%= link_to t(:show), time_entry %></td>
 
       <% if write_access? time_entry %>
-        <td><%= link_to 'Bearbeiten', edit_time_entry_path(time_entry) %></td>
-        <td><%= link_to 'Löschen', time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
+        <td><%= link_to t(:edit), edit_time_entry_path(time_entry) %></td>
+        <td><%= link_to t(:destroy), time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
       <% else %>
         <td></td>
         <td></td>
@@ -50,5 +52,5 @@
 </p>
 
 
-<%= link_to 'Bearbeiten', edit_order_path(@order) %> |
-<%= link_to 'Zurück', orders_path %>
+<%= link_to t(:edit), edit_order_path(@order) %> |
+<%= link_to t(:back), orders_path %>
