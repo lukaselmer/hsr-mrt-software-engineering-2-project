@@ -40,8 +40,8 @@ import com.j256.ormlite.dao.Dao;
 /**
  * Creates new TimeEntry.
  * A new TimeEntry with the current time is created after the user presses the button start.
- * A Customer, TimeEntryType and a description about the given task can be added to the TimeEntry.
- * After the button stop is pressed another TimeStamp is added with the current time.
+ * A customer, a TimeEntry type and a description about the given task can be added to the TimeEntry.
+ * After the button stop is pressed the current time is added to the TimeEntry.
  * If the TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
  */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
@@ -115,6 +115,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void initSpinner() {
 		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+		//TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -189,6 +190,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return customers;
 	}
 
+	//TODO: Delete as soon as Class TimeEntryType is working
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
 		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
 		timeEntryTypes.add(new TimeEntryType(1, "Kein Stundeneintragstyp"));
