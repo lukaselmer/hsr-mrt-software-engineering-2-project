@@ -13,6 +13,11 @@ class AddressesControllerTest < ActionController::TestCase
     assert_difference('Address.count') do
       post :create, :address => addresses(:valid_geocoding_address).attributes
     end
+    a = Address.order("id DESC").first
+    gps_position = a.gps_position
+    assert_not_nil gps_position
+    assert_in_delta 47.4201566, gps_position.latitude, 0.00001
+    assert_in_delta 8.4998559, gps_position.longitude, 0.00001
 
     assert_redirected_to address_path(assigns(:address))
   end
@@ -22,6 +27,10 @@ class AddressesControllerTest < ActionController::TestCase
     assert_difference('Address.count') do
       post :create, :address => addresses(:invalid_geocoding_address).attributes
     end
+
+    a = Address.order("id DESC").first
+    gps_position = a.gps_position
+    assert_nil gps_position
 
     assert_redirected_to address_path(assigns(:address))
   end

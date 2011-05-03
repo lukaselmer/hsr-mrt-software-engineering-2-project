@@ -1,8 +1,8 @@
 class CreateGpsPositions < ActiveRecord::Migration
   def self.up
     create_table :gps_positions do |t|
-      t.float :latitude
-      t.float :longitude
+      t.decimal :latitude, :precision => 15, :scale => 10
+      t.decimal :longitude, :precision => 15, :scale => 10
 
       #t.datetime :time
       t.timestamps

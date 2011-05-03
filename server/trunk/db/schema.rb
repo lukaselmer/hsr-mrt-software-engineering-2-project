@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(:version => 20110503185724) do
 
   create_table "addresses", :force => true do |t|
+    t.integer  "gps_position_id"
     t.string   "line1"
     t.string   "line2"
     t.string   "line3"
@@ -32,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
 
   create_table "customers", :force => true do |t|
     t.integer  "address_id"
-    t.integer  "gps_position_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
   end
 
   create_table "gps_positions", :force => true do |t|
-    t.float    "latitude"
-    t.float    "longitude"
+    t.decimal  "latitude",   :precision => 15, :scale => 10
+    t.decimal  "longitude",  :precision => 15, :scale => 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "user_type"
-    t.integer  "phone"
+    t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
