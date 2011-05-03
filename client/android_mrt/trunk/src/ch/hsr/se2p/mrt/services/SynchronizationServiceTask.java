@@ -1,20 +1,17 @@
 package ch.hsr.se2p.mrt.services;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 import java.util.TimerTask;
 
 import android.preference.PreferenceManager;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.TimeEntryType;
 import ch.hsr.se2p.mrt.network.UserHelper;
 
-import com.j256.ormlite.dao.Dao;
-
+/**
+ * Each synchronization iteration, a synchronization service task is created and run.
+ */
 class SynchronizationServiceTask extends TimerTask {
 	private static final String TAG = SynchronizationService.class.getSimpleName();
 	private DatabaseHelper databaseHelper;
@@ -35,11 +32,25 @@ class SynchronizationServiceTask extends TimerTask {
 			Log.e(TAG, "Login failed!");
 			return;
 		}
-		Synchronizer[] synchronizers = { new TimeEntrySynchronizer(databaseHelper, mrtApplication),
-				new CustomerSynchronizer(databaseHelper, mrtApplication), new TimeEntryTypeSynchronizer(databaseHelper, mrtApplication) };
-		for (Synchronizer synchronizer : synchronizers) {
-			synchronizer.synchronize();
+		runSynchronizers();
+	}
+
+	private void runSynchronizers() {
+		Class<?>[] classes = { PositionSynchronizer.class, TimeEntrySynchronizer.class, CustomerSynchronizer.class, TimeEntryTypeSynchronizer.class };
+		for (Class<?> cls : classes) {
+			try {
+				@SuppressWarnings("unchecked")
+				Class<Synchronizer> syncCls = (Class<Synchronizer>) cls;
+				newSynchronizerInstance(syncCls).synchronize();
+				Log.e(TAG, "Synchronizer " + cls.getSimpleName() + " created :)");
+			} catch (Exception e) {
+				Log.e(TAG, "Synchronizer " + cls.getSimpleName() + " creation failed!", e);
+			}
 		}
+	}
+
+	private Synchronizer newSynchronizerInstance(Class<Synchronizer> syncCls) throws Exception {
+		return syncCls.getConstructor(DatabaseHelper.class, MRTApplication.class).newInstance(databaseHelper, mrtApplication);
 	}
 
 	private void loadPreferences() {

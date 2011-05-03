@@ -35,7 +35,6 @@ class TimeEntrySynchronizer implements Synchronizer {
 			Log.d(TAG, "Transmission finished");
 		} catch (SQLException e) {
 			Log.e(TAG, "Database excaeption", e);
-			return;
 		}
 	}
 
