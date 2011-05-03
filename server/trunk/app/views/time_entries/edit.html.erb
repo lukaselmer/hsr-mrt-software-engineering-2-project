@@ -1,6 +1,6 @@
-<h1>Ändere Zeiteintrag</h1>
+<h1><%= TimeEntry.model_name.human %> bearbeiten</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Anzeigen', @time_entry %> |
-<%= link_to 'Zurück', time_entries_path %>
+<%= link_to t(:show), @time_entry %> |
+<%= link_to t(:back), time_entries_path %>

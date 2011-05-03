@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+<% fields= [:description,:time_start,:time_stop] %>
+
 <p>
-  <b>Kunde:</b>
+  <b><%= TimeEntry.human_attribute_name(:customer_id)%>:</b>
   <%= [ @time_entry.customer.last_name, @time_entry.customer.first_name ].join(', ') unless @time_entry.customer.nil? %>
 </p>
 
 <p>
-  <b>Zeiteintragstyp:</b>
+  <b><%= TimeEntry.human_attribute_name(:time_entry_type_id)%>:</b>
   <%= @time_entry.time_entry_type.description unless @time_entry.time_entry_type.nil?  %>
 </p>
 
-<p>
-  <b>Beschreibung:</b>
-  <%= @time_entry.description %>
-</p>
 
-<p>
-  <b>Time start:</b>
-  <%= @time_entry.time_start %>
-</p>
+<% fields.each do |f| %>
+  <p>
+    <b><%= TimeEntry.human_attribute_name(f) %></b>
+    <%= @time_entry.send(f) %>
+  </p>
+<% end %>
 
-<p>
-  <b>Time stop:</b>
-  <%= @time_entry.time_stop %>
-</p>
-
-<%= link_to 'Bearbeiten', edit_time_entry_path(@time_entry) %> |
-<%= link_to 'Zurück', time_entries_path %>
+<%= link_to t(:edit), edit_time_entry_path(@time_entry) %> |
+<%= link_to t(:back), time_entries_path %>

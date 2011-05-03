@@ -1,12 +1,5 @@
 <p id="notice"><%= notice %></p>
 
-<% fields =  Order.column_names %>
-
-<% fields.each do |f| %>
-  <th><%= Order.human_attribute_name(f) %></th>
-<% end %>
-
-
 <p>
   <b><%= Order.human_attribute_name(:customer_id) %>:</b>
   <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
@@ -17,16 +10,15 @@
   <%= @order.description %>
 </p>
 
-
 <p>
   <b>Stundeneinträge:</b>
 <table>
   <tr>
-    <th>Time entry type</th>
-    <th>Beschreibung</th>
-    <th>Startzeit</th>
-    <th>Endzeit</th>
-    <th>Dauer</th>
+    <th><%=TimeEntryType.human_attribute_name(:description)%></th>
+    <th><%=TimeEntry.human_attribute_name(:description)%></th>
+    <th><%=TimeEntry.human_attribute_name(:time_start)%></th>
+    <th><%=TimeEntry.human_attribute_name(:time_stop)%></th>
+    <th><%= t(:duration)%></th>
     <!--<th>Position</th>
     <th>Audio record name</th>-->
     <th></th>

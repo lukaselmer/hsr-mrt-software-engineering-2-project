@@ -6,6 +6,7 @@ de:
       addresses: Adressen
       customer: Kunde
       time_entry: Zeiteintrag
+      time_entries: Zeiteinträge
       material: Material
       user: Benutzer
       location: Position
@@ -29,14 +30,19 @@ de:
         latitude: Breitengrad
         logitude: Längengrad
       time_entry_type:
-        description: Beschreibung
+        description: Kategorie
         valid_until: gültig bis
       time_entry:
         customer_id: Kunde
+        location_id: Position
+        order_id: Auftrag
+        time_entry_type_id: Zeiteintragstyp
+        user_id: Aussendienstmitarbeiter
         description: Beschreibung
-        hashcode: Hashcode
         time_start: Startzeitpunkt
         time_stop: Endzeitpunkt
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
       applied_material:
         amount: Anzahl
       material:
