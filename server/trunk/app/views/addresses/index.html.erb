@@ -1,4 +1,4 @@
-<h1>Übersicht Adressen</h1>
+<h1><%= t(:overview)%> Adressen</h1>
 <% fields = [:id, :line1, :line2, :line3, :place, :zip] %>
 <table>
   <tr>
@@ -29,5 +29,5 @@
 <br />
 
 <% if write_access? %>
-  <%= link_to 'Neue Adresse', new_address_path %>
+  <%= link_to 'Neue ' + Address.model_name.human, new_address_path %>
 <% end %>

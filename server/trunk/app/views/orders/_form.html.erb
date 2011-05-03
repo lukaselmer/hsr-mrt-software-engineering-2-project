@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :customer_id %><br />
-    <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }, { :include_blank => true }) %>
+    <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }) %>
   </div>
 
   <div class="field">

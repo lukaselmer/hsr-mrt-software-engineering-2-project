@@ -4,24 +4,28 @@
       <h2><%= pluralize(@time_entry_type.errors.count, "error") %> prohibited this time_entry_type from being saved:</h2>
 
       <ul>
-      <% @time_entry_type.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @time_entry_type.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%# = f.label :Vorgänger %><br />
-    <%# = f.text_field :ancestor %>
+    <%= f.label :time_entry_type_id %><br />
+    <%= f.select(:time_entry_type_id, @time_entry_type_materials.collect {|c| [c.material.description, c.id ] unless c.material.nil? }) %>
+    <% if write_access? %>
+      <%= link_to 'Neues ' + Material.model_name.human + ' erfassen', new_material_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+  <%# = f.label :Vorgänger %><br />
+  <%# = f.text_field :ancestor %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :updated_at %><br />
-    <%= f.datetime_select :updated_at %>
   </div>
   <div class="field">
     <%= f.label :valid_until %><br />

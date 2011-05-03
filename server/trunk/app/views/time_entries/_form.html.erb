@@ -4,27 +4,45 @@
       <h2><%= pluralize(@time_entry.errors.count, "error") %> prohibited this time_entry from being saved:</h2>
 
       <ul>
-      <% @time_entry.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @time_entry.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :customer_id %><br />
-    <%= f.select(:customer_id, @customers.collect {|c| [ [c.last_name, c.first_name].join(', '), c.id ] }, { :include_blank => true }) %>
-  </div>
-
-  <div class="field">
     <%= f.label :order_id %><br />
-    <%= f.select(:order_id, @orders.collect {|o| [ o.id, o.id ] }, { :include_blank => true }) %>
+    <%= f.select(:order_id, @orders.collect {|o| [ [o.created_at,o.description,o.customer.last_name].join(', '), o.id ]unless o.customer.nil? }) %>
+    <% if write_access? %>
+      <%= link_to 'Neuen ' + Order.model_name.human + ' erfassen', new_order_path %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :time_entry_type_id %><br />
-    <%= f.select(:time_entry_type_id, @time_entry_types.collect {|t| [ t.description, t.id ] }, { :include_blank => true }) %>
+    <%= f.select(:time_entry_type_id, @time_entry_types.collect {|t| [ [t.description,t.valid_until].join(', '), t.id ] }) %>
+    <% if write_access? %>
+      <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
+    <% end %>
   </div>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.select(:user_id, @users.collect {|u| [ [u.last_name,u.first_name].join(', '), u.id ] }) %>
+    <% if write_access? %>
+      <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :location_id %><br />
+    <%= f.select(:location_id, @locations.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
+    <% if write_access? %>
+      <%= link_to 'Neuen ' + Location.model_name.human + ' erfassen', new_location_path %>
+    <% end %>
+  </div>
+
   <div class="field">
     <%= f.label :description %><br />
     <%= f.text_area :description %>

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b><%= Order.human_attribute_name(:customer_id) %>:</b>
   <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
@@ -48,7 +46,6 @@
 </table>
 
 </p>
-
 
 <%= link_to t(:edit), edit_order_path(@order) %> |
 <%= link_to t(:back), orders_path %>

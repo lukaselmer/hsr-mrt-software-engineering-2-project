@@ -25,6 +25,7 @@ class TimeEntryTypesController < ApplicationController
   # GET /time_entry_types/new.xml
   def new
     @time_entry_type = TimeEntryType.new
+    @time_entry_type_materials = TimeEntryTypeMaterial.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +36,7 @@ class TimeEntryTypesController < ApplicationController
   # GET /time_entry_types/1/edit
   def edit
     @time_entry_type = TimeEntryType.find(params[:id])
+    @time_entry_type_materials = TimeEntryTypeMaterial.all
   end
 
   # POST /time_entry_types
@@ -44,7 +46,7 @@ class TimeEntryTypesController < ApplicationController
 
     respond_to do |format|
       if @time_entry_type.save
-        format.html { redirect_to(@time_entry_type, :notice => 'Time entry type was successfully created.') }
+        format.html { redirect_to(@time_entry_type, :notice => TimeEntryType.model_name.human + ' ' + t(:create_successful)) }
         format.xml  { render :xml => @time_entry_type, :status => :created, :location => @time_entry_type }
       else
         format.html { render :action => "new" }
@@ -60,7 +62,7 @@ class TimeEntryTypesController < ApplicationController
 
     respond_to do |format|
       if @time_entry_type.update_attributes(params[:time_entry_type])
-        format.html { redirect_to(@time_entry_type, :notice => 'Time entry type was successfully updated.') }
+        format.html { redirect_to(@time_entry_type, :notice => TimeEntryType.model_name.human + ' ' + t(:update_successful)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

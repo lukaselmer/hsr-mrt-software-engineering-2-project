@@ -1,15 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b><%= Location.human_attribute_name(:latitude) %>:</b>
-  <%= @location.latitude %>
-</p>
-
-<p>
-  <b><%= Location.human_attribute_name(:longitude) %>:</b>
-  <%= @location.longitude %>
-</p>
-
+<% fields =  Location.column_names %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= Location.human_attribute_name(f) %></b>
+    <%= @location.send(f) %>
+  </p>
+<% end %>
 
 <%= link_to t(:edit), edit_location_path(@location) %> |
 <%= link_to t(:back), locations_path %>

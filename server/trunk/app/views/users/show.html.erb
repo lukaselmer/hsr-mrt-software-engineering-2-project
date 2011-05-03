@@ -1,25 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% fields =  User.column_names %>
+<% fields.delete_if { |x| x=='encrypted_password' || x=='remember_created_at' || x== 'password_salt' || x=='user_type'} %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= User.human_attribute_name(f) %>:</b>
+    <%= @user.send(f) %>
+  </p>
+<% end %>
 
 <p>
-  <b>Vorname:</b>
-  <%= @user.first_name %>
-</p>
-
-<p>
-  <b>Nachname:</b>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<p>
-  <b>Type:</b>
+  <b><%= User.human_attribute_name(:user_type) %>:</b>
   <%= @user_types.index(@user.user_type) %>
 </p>
 
-
-<%= link_to 'Bearbeiten', edit_user_path(@user) %> |
-<%= link_to 'Zurück', users_path %>
+<%= link_to t(:edit), edit_user_path(@user) %> |
+<%= link_to t(:back), users_path %>

@@ -1,4 +1,4 @@
-<h1>Übersicht Materialien</h1>
+<h1><%= t(:overview)%> <%= Material.model_name.human %></h1>
 <% fields = [:id, :catalog_id, :description, :dimensions, :price, :valid_until] %>
 
 <table>
@@ -29,5 +29,5 @@
 <br />
 
 <% if write_access? %>
-  <%= link_to 'Neues Material', new_material_path %>
+  <%= link_to 'Neues ' + Material.model_name.human, new_material_path %>
 <% end %>

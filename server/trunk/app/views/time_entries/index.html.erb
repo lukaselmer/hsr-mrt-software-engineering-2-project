@@ -24,7 +24,7 @@
       <td><%= [ time_entry.customer.last_name, time_entry.customer.first_name ].join(', ') unless time_entry.customer.nil? %></td>
       <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
       <td><%= [ time_entry.user.last_name, time_entry.user.first_name ].join(', ') unless time_entry.user.nil? %></td>
-      <td><%= [ time_entry.location.latitude, time_entry.location.logitude ].join(', ') unless time_entry.location.nil? %></td>
+      <td><%= [ time_entry.location.latitude, time_entry.location.longitude ].join(', ') unless time_entry.location.nil? %></td>
       <td><%= [ time_entry.order.created_at, time_entry.order.description ].join(', ') unless time_entry.order.nil? %></td>
 
       <td><%= time_entry.description %></td>

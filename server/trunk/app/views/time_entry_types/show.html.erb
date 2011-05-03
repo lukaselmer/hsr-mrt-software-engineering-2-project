@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% fields =  TimeEntryType.column_names %>
 <% fields.delete('time_entry_type_id')%>
 <% fields.each do |f| %>
@@ -12,6 +10,40 @@
 <p>
   <b><%= TimeEntryType.human_attribute_name(:time_entry_type_id) %></b>
   <%= [@time_entry_type.time_entry_type.description, @time_entry_type.time_entry_type.valid_until].join(', ')unless @time_entry_type.time_entry_type.nil? %>
+</p>
+
+<p>
+  <b>Benötigtes Material:</b>
+<table>
+  <tr>
+    <th><%= Material.human_attribute_name(:id) %>:</th>
+    <th><%= Material.human_attribute_name(:description) %>:</th>
+    <th><%= Material.human_attribute_name(:price) %>:</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @time_entry_type.time_entry_type_materials.each do |type_material| %>
+    <tr>
+
+      <% material = type_material.material %>
+
+      <td><%= material.id %></td>
+      <td><%= material.description %></td>
+      <td><%= material.price %></td>
+
+      <td><%= link_to t(:show), material %></td>
+
+      <% if write_access? order %>
+        <td><%= link_to t(:edit), edit_material_path(order) %></td>
+        <td><%= link_to t(:destroy), material, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</table>
+<%= link_to 'Neues Material erfassen', new_material_path %> 
 </p>
 
 <%= link_to t(:edit), edit_time_entry_type_path(@time_entry_type) %> |

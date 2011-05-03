@@ -44,7 +44,7 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.save
-        format.html { redirect_to(@material, :notice => 'Material was successfully created.') }
+        format.html { redirect_to(@material, :notice => Material.model_name.human + ' ' + t(:create_successful)) }
         format.xml  { render :xml => @material, :status => :created, :location => @material }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,7 @@ class MaterialsController < ApplicationController
 
     respond_to do |format|
       if @material.update_attributes(params[:material])
-        format.html { redirect_to(@material, :notice => 'Material was successfully updated.') }
+        format.html { redirect_to(@material, :notice => Material.model_name.human + ' ' + t(:update_successful)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

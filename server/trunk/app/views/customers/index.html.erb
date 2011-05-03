@@ -1,4 +1,4 @@
-<h1>Übersicht Kunden</h1>
+<h1><%= t(:overview)%> Kunden</h1>
 <% fields = [:id, :first_name, :last_name, :phone] %>
 
 <table>
@@ -28,5 +28,5 @@
 
 <br />
 <% if write_access? %>
-  <%= link_to 'Neuer Kunde', new_customer_path %>
+  <%= link_to 'Neuer '+ Customer.model_name.human, new_customer_path %>
 <% end %>

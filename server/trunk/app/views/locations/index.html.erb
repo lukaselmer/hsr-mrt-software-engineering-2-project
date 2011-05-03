@@ -1,9 +1,9 @@
-<h1>Übersicht Positionen</h1>
+<h1><%= t(:overview)%> Positionen</h1>
 
 <table>
   <tr>
     <th><%= Location.human_attribute_name(:latitude) %></th>
-    <th><%= Location.human_attribute_name(:logitude) %></th>
+    <th><%= Location.human_attribute_name(:longitude) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -26,5 +26,5 @@
 <br />
 
 <% if write_access? %>
-<%= link_to 'Neue Position', new_location_path %>
+<%= link_to 'Neue ' + Location.model_name.human, new_location_path %>
 <%  end %>

@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user_types = User::TYPES
 
     if @user.save
-      redirect_to(@user, :notice => 'User was successfully created.')
+      redirect_to(@user, :notice => User.model_name.human + ' ' + t(:create_successful))
     else
       render :action => "new"
     end
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update_attributes(params[:user])
-      redirect_to(@user, :notice => 'User was successfully updated.')
+      redirect_to(@user, :notice => User.model_name.human + ' ' + t(:update_successful))
     else
       render :action => "edit"
     end

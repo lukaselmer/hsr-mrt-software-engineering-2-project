@@ -24,6 +24,8 @@ class TimeEntriesController < ApplicationController
     @orders = Order.all
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
+    @users = User.all
+    @locations = Location.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +38,8 @@ class TimeEntriesController < ApplicationController
     @orders = Order.all
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
+    @users = User.all
+    @locations = Location.all
     
     deny_access! and return unless write_access?(@time_entry)
   end
@@ -57,7 +61,7 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.new(params[:time_entry])
     @time_entry.hashcode = nil
     if @time_entry.save
-      redirect_to(@time_entry, :notice => 'Time entry was successfully created.')
+      redirect_to(@time_entry, :notice => TimeEntry.model_name.human + ' ' + t(:create_successful))
     else
       render :action => "new"
     end
@@ -87,7 +91,7 @@ class TimeEntriesController < ApplicationController
 
     respond_to do |format|
       if @time_entry.update_attributes(params[:time_entry])
-        format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully updated.') }
+        format.html { redirect_to(@time_entry, :notice => TimeEntry.model_name.human + ' ' + t(:update_successful)) }
       else
         format.html { render :action => "edit" }
       end
@@ -111,7 +115,7 @@ class TimeEntriesController < ApplicationController
     @time_entry.remove_hashcode
     
     respond_to do |format|
-      format.html { redirect_to(@time_entry, :notice => 'Time entry was successfully persisted.') }
+      format.html { redirect_to(@time_entry, :notice => TimeEntry.model_name.human + ' ' + t(:persist_successful)) }
       format.json { render :json => @time_entry, :status => :ok, :location => @time_entry  }
     end
   end

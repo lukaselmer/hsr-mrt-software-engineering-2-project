@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% fields= [:description,:time_start,:time_stop,:created_at, :updated_at] %>
 
 <p>
@@ -24,7 +22,7 @@
 
 <p>
   <b><%= TimeEntry.human_attribute_name(:location_id)%>:</b>
-  <%= [@time_entry.location.latitude, @time_entry.location.logitude].join(', ') unless @time_entry.location.nil?  %>
+  <%= [@time_entry.location.latitude, @time_entry.location.longitude].join(', ') unless @time_entry.location.nil?  %>
 </p>
 
 <p>

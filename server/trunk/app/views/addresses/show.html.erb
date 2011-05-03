@@ -1,35 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b><%= Address.human_attribute_name(:id) %></b>
-  <%= @address.id %>
-</p>
-
-<p>
-  <b><%= Address.human_attribute_name(:line1) %></b>
-  <%= @address.line1 %>
-</p>
-
-<p>
-  <b><%= Address.human_attribute_name(:line2) %></b>
-  <%= @address.line2 %>
-</p>
-
-<p>
-  <b><%= Address.human_attribute_name(:line3) %></b>
-  <%= @address.line3 %>
-</p>
-
-<p>
-  <b><%= Address.human_attribute_name(:place) %></b>
-  <%= @address.place %>
-</p>
-
-<p>
-  <b><%= Address.human_attribute_name(:zip) %></b>
-  <%= @address.zip %>
-</p>
-
+<% fields =  Address.column_names %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= Address.human_attribute_name(f) %></b>
+    <%= @address.send(f) %>
+  </p>
+<% end %>
 
 <%= link_to t(:edit), edit_address_path(@address) %> |
 <%= link_to t(:back), addresses_path %>

@@ -1,4 +1,4 @@
-<h1>Übersicht verwendete Materialien</h1>
+<h1><%= t(:overview)%> verwendete Materialien</h1>
 
 <table>
   <tr>
@@ -24,5 +24,5 @@
 <br />
 
 <% if write_access? %>
-<%= link_to 'Neues verwendetes Material', new_applied_material_path %>
+<%= link_to 'Neues ' + Location.model_name.human, new_applied_material_path %>
 <% end %>
