@@ -42,6 +42,7 @@ class AddressesController < ApplicationController
   # POST /addresses.xml
   def create
     @address = Address.new(params[:address])
+    # TODO: update geolocation
 
     respond_to do |format|
       if @address.save
@@ -58,7 +59,8 @@ class AddressesController < ApplicationController
   # PUT /addresses/1.xml
   def update
     @address = Address.find(params[:id])
-
+    # TODO: update geolocation
+    
     respond_to do |format|
       if @address.update_attributes(params[:address])
         format.html { redirect_to(@address, :notice => Address.model_name.human + ' ' + t(:update_successful)) }

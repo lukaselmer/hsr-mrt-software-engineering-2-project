@@ -1,14 +1,9 @@
 Mrt::Application.routes.draw do
-  resources :locations
-
+  
   resources :applied_materials
-
   resources :materials
-
   resources :time_entry_types
-
   resources :orders
-
   resources :addresses
 
   post 'customers/synchronize(.:format)' => 'customers#synchronize'
@@ -24,8 +19,8 @@ Mrt::Application.routes.draw do
 
   resources :time_entries do
     member do
-	  post 'remove_hashcode'
-	end
+      post 'remove_hashcode'
+    end
   end
 
   # The priority is based upon order of creation:

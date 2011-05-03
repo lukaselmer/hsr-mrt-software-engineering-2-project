@@ -36,11 +36,11 @@
   </div>
 
   <div class="field">
-    <%= f.label :location_id %><br />
-    <%# TODO: Fix this!!! f.select(:location_id, @locations.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
-    <% if write_access? %>
-      <%= link_to 'Neuen ' + Location.model_name.human + ' erfassen', new_location_path %>
-    <% end %>
+    <%= f.label :gps_position_id %><br />
+    <%# TODO: Fix this!!! f.select(:gps_position_id, @gps_positions.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
+    <%# if write_access? %>
+      <%# = link_to 'Neuen ' + GpsPosition.model_name.human + ' erfassen', new_gps_position_path %>
+    <%# end %>
   </div>
 
   <div class="field">

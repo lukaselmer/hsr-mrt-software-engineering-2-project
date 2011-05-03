@@ -20,4 +20,13 @@ class GeocoderTest < ActiveSupport::TestCase
     res = Geocoder.translate("bubububu")
     assert_not_nil res[:error]
   end
+
+  test "address to gps position" do
+    a = Address.create(:line1 => "Hungerbergstrasse 16", :zip => 8046, :place => "Zürich")
+    gps_position = Geocoder.address_to_gps_position(a)
+    assert_not_nil gps_position
+    assert_in_delta 47.4201566, gps_position.latitude, 0.00001
+    assert_in_delta 8.4998559, gps_position.longitude, 0.00001
+    assert gps_position.new_record?
+  end
 end

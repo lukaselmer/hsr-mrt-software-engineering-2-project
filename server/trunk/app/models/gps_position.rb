@@ -1,4 +1,4 @@
-class Location < ActiveRecord::Base
+class GpsPosition < ActiveRecord::Base
   has_one :time_entry
   has_one :customer
 

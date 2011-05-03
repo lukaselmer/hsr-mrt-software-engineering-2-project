@@ -25,7 +25,7 @@ class TimeEntriesController < ApplicationController
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
     @users = User.all
-    @locations = Location.all
+    @gps_positions = GpsPosition.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -39,7 +39,7 @@ class TimeEntriesController < ApplicationController
     @customers = Customer.all
     @time_entry_types = TimeEntryType.all
     @users = User.all
-    @locations = Location.all
+    @gps_positions = GpsPosition.all
     
     deny_access! and return unless write_access?(@time_entry)
   end

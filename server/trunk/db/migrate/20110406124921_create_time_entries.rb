@@ -4,7 +4,7 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.references :customer
       t.references :time_entry_type
       t.references :user
-      t.references :location
+      t.references :gps_position
       t.references :order
       t.string :hashcode
       t.text :description

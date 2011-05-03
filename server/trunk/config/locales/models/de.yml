@@ -9,7 +9,7 @@ de:
       time_entries: Zeiteinträge
       material: Material
       user: Benutzer
-      location: Position
+      gps_position: GPS Position
       applied_material: verwendetes Material
       time_entry_type: Zeiteintragstyp
     attributes:
@@ -29,7 +29,7 @@ de:
         first_name: Vorname
         last_name: Nachname
         phone: Telefonnummer
-      location:
+      gps_position:
         latitude: Breitengrad
         longitude: Längengrad
         created_at: Erstellt am
@@ -42,7 +42,7 @@ de:
         time_entry_type_id: Vorgänger
       time_entry:
         customer_id: Kunde
-        location_id: Position
+        gps_position_id: GPS Position
         order_id: Auftrag
         time_entry_type_id: Zeiteintragstyp
         user_id: Aussendienstmitarbeiter

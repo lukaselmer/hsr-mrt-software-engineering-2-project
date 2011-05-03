@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110425203731) do
+ActiveRecord::Schema.define(:version => 20110503185724) do
 
   create_table "addresses", :force => true do |t|
     t.string   "line1"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(:version => 20110425203731) do
 
   create_table "customers", :force => true do |t|
     t.integer  "address_id"
-    t.integer  "location_id"
+    t.integer  "gps_position_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone"
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20110425203731) do
     t.datetime "deleted_at"
   end
 
-  create_table "locations", :force => true do |t|
+  create_table "gps_positions", :force => true do |t|
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20110425203731) do
     t.integer  "customer_id"
     t.integer  "time_entry_type_id"
     t.integer  "user_id"
-    t.integer  "location_id"
+    t.integer  "gps_position_id"
     t.integer  "order_id"
     t.string   "hashcode"
     t.text     "description"

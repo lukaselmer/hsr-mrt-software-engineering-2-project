@@ -21,8 +21,8 @@
 </p>
 
 <p>
-  <b><%= TimeEntry.human_attribute_name(:location_id)%>:</b>
-  <%= [@time_entry.location.latitude, @time_entry.location.longitude].join(', ') unless @time_entry.location.nil?  %>
+  <b><%= TimeEntry.human_attribute_name(:gps_position_id)%>:</b>
+  <%= [@time_entry.gps_position.latitude, @time_entry.gps_position.longitude].join(', ') unless @time_entry.gps_position.nil?  %>
 </p>
 
 <p>

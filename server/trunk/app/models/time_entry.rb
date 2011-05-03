@@ -1,7 +1,7 @@
 class TimeEntry < ActiveRecord::Base
   belongs_to :customer
   belongs_to :time_entry_type
-  belongs_to :location
+  belongs_to :gps_position
   belongs_to :user
   belongs_to :order
 
