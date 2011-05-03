@@ -19,6 +19,14 @@ class CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create customer without last_name" do
+    invalid_customer = Customer.new(:first_name => "Invalid Name")
+    assert_no_difference('Customer.count') do
+      post :create, :customer => invalid_customer.attributes
+    end
+    assert_response :success
+  end
+
   test "should create customer" do
     assert_difference('Customer.count') do
       post :create, :customer => @customer.attributes
@@ -34,6 +42,12 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @customer.to_param
+    assert_response :success
+  end
+
+  test "should not update customer without last_name" do
+    @customer.last_name = nil
+    put :update, :id => @customer.to_param, :customer => @customer.attributes
     assert_response :success
   end
 
