@@ -2,10 +2,12 @@
 
 one:
   id: 101
+  customer_id: 101
   created_at: 2011-04-24 20:33:32
   description: MyText
 
 two:
   id: 102
+  customer_id: 102
   created_at: 2011-04-24 20:33:32
   description: MyText

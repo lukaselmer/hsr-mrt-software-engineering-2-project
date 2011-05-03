@@ -19,6 +19,14 @@ class OrdersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create order without customer_id" do
+    invalid_order = Order.new()
+    assert_no_difference('Order.count') do
+      post :create, :order => invalid_order.attributes
+    end
+    assert_response :success
+  end
+
   test "should create order" do
     assert_difference('Order.count') do
       post :create, :order => @order.attributes
@@ -34,6 +42,12 @@ class OrdersControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @order.to_param
+    assert_response :success
+  end
+
+ test "should not update order without customer_id" do
+    @order.customer = nil
+    put :update, :id => @order.to_param, :order => @order.attributes
     assert_response :success
   end
 

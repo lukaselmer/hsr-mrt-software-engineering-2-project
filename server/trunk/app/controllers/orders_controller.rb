@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
+    @customers = Customer.all
 
     respond_to do |format|
       if @order.save
@@ -59,6 +60,7 @@ class OrdersController < ApplicationController
   # PUT /orders/1.xml
   def update
     @order = Order.find(params[:id])
+    @customers = Customer.all
 
     respond_to do |format|
       if @order.update_attributes(params[:order])
