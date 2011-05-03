@@ -105,4 +105,6 @@ public class TimeEntryTest extends AndroidTestCase {
 			assertTrue(false);
 		}
 	}
+	
+	//TODO: Test processTransmission & processConfirmation
 }

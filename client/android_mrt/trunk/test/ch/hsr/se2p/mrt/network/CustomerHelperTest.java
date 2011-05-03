@@ -22,7 +22,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		super.setUp();
 		customers = new ArrayList<Customer>();
 		customers.add(getCustomer("Peter", "Muster", 1, "", getTimestamp(27)));
-		customers.add(getCustomer("Bla", "Blub", 2, "", getTimestamp(33)));
+		customers.add(getCustomer("Hans", "Meier", 2, "", getTimestamp(33)));
 	}
 
 	public void testInitialSynchronization() throws Exception {
@@ -35,7 +35,7 @@ public class CustomerHelperTest extends HttpTestCase {
 
 	public void testAddCustomerSynchronization() throws Exception {
 		testInitialSynchronization();
-		customers.add(getCustomer("huuuuiii", "baaaaaa", 77, "777", getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
+		customers.add(getCustomer("Maria", "Müller", 77, "777", getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		expectedResultFromTransmitter(responseFor(customers));
 		CustomerHelper ch = new CustomerHelper(httpHelper);
 		List<Receivable> l = new ArrayList<Receivable>();
