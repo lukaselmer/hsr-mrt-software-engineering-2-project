@@ -19,6 +19,14 @@ class LocationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create location without latitude" do
+    invalid_location = Location.new(:longitude => "6.1234")
+    assert_no_difference('Location.count') do
+      post :create, :location => invalid_location.attributes
+    end
+    assert_response :success
+  end
+
   test "should create location" do
     assert_difference('Location.count') do
       post :create, :location => @location.attributes
@@ -34,6 +42,12 @@ class LocationsControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @location.to_param
+    assert_response :success
+  end
+
+  test "should not update address without latitude" do
+    @location.latitude = nil
+    put :update, :id => @location.to_param, :location => @location.attributes
     assert_response :success
   end
 

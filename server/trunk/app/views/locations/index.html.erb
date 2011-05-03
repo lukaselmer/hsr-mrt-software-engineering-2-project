@@ -12,7 +12,7 @@
 <% @locations.each do |location| %>
   <tr>
     <td><%= location.latitude %></td>
-    <td><%= location.logitude %></td>
+    <td><%= location.longitude %></td>
     <td><%= link_to t(:show), location %></td>
     
     <% if write_access? location %>

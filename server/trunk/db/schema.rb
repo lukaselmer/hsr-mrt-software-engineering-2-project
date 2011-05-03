@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20110425203731) do
 
   create_table "locations", :force => true do |t|
     t.float    "latitude"
-    t.float    "logitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
