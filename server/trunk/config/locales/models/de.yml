@@ -11,6 +11,7 @@ de:
       user: Benutzer
       location: Position
       applied_material: verwendetes Material
+      time_entry_type: Zeiteintragstyp
     attributes:
       order:
         customer_id: Kunde
@@ -30,8 +31,11 @@ de:
         latitude: Breitengrad
         logitude: Längengrad
       time_entry_type:
-        description: Kategorie
-        valid_until: gültig bis
+        description: Typ
+        valid_until: Gültig bis
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+        time_entry_type_id: Vorgänger
       time_entry:
         customer_id: Kunde
         location_id: Position

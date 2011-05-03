@@ -1,25 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Vorgänger:</b>
-  <%# = @time_entry_type.ancestor %>
-</p>
+<% fields =  TimeEntryType.column_names %>
+<% fields.delete('time_entry_type_id')%>
+<% fields.each do |f| %>
+  <p>
+    <b><%= TimeEntryType.human_attribute_name(f) %></b>
+    <%= @time_entry_type.send(f) %>
+  </p>
+<% end %>
 
 <p>
-  <b>Beschreibung:</b>
-  <%= @time_entry_type.description %>
+  <b><%= TimeEntryType.human_attribute_name(:time_entry_type_id) %></b>
+  <%= [@time_entry_type.time_entry_type.description, @time_entry_type.time_entry_type.valid_until].join(', ')unless @time_entry_type.time_entry_type.nil? %>
 </p>
 
-<p>
-  <b>Aktualisiert am:</b>
-  <%= @time_entry_type.updated_at %>
-</p>
-
-<p>
-  <b>Gültig bis:</b>
-  <%= @time_entry_type.valid_until %>
-</p>
-
-
-<%= link_to 'Bearbeiten', edit_time_entry_type_path(@time_entry_type) %> |
-<%= link_to 'Zurück', time_entry_types_path %>
+<%= link_to t(:edit), edit_time_entry_type_path(@time_entry_type) %> |
+<%= link_to t(:back), time_entry_types_path %>

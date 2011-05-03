@@ -1,6 +1,6 @@
-<h1>Benutzer bearbeiten</h1>
+<h1><%= User.model_name.human %> bearbeiten</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @user %> |
+<%= link_to t(:show), @user %> |
 <%= link_to t(:back), users_path %>
