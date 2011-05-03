@@ -174,7 +174,7 @@ public class TimeEntryActivityDemo extends OrmLiteBaseActivity<DatabaseHelper> {
 			timeEntries = getTimeEntriesToTransmit();
 		} catch (SQLException e) {
 			dialog.dismiss();
-			Log.e(TAG, "Database excaeption", e);
+			Log.e(TAG, "Database exception", e);
 			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "For further details, see log.", this);
 			return;
 		}
