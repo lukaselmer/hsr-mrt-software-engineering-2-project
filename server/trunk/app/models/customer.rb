@@ -7,5 +7,7 @@ class Customer < ActiveRecord::Base
   scope :updated_after, lambda {|last_update| where("updated_at > :last_update OR created_at > :last_update OR deleted_at > :last_update",
     :last_update => last_update) }
 
+  validates :first_name, :last_name, :presence => true
+
   accepts_nested_attributes_for :address, :allow_destroy => true
 end
