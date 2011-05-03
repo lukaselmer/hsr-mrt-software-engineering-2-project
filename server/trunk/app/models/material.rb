@@ -5,4 +5,6 @@ class Material < ActiveRecord::Base
   has_many :time_entry_types, :through => :time_entry_type_materials
   belongs_to :material
   has_one :material
+
+  validates :description, :presence => true
 end

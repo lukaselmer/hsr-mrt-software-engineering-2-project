@@ -19,6 +19,14 @@ class MaterialsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create material without description" do
+    invalid_material = Material.new
+    assert_no_difference('Material.count') do
+      post :create, :material => invalid_material.attributes
+    end
+    assert_response :success
+  end
+
   test "should create material" do
     assert_difference('Material.count') do
       post :create, :material => @material.attributes
@@ -34,6 +42,12 @@ class MaterialsControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @material.to_param
+    assert_response :success
+  end
+
+  test "should not update material without description" do
+    @material.description = nil
+    put :update, :id => @material.to_param, :material => @material.attributes
     assert_response :success
   end
 
