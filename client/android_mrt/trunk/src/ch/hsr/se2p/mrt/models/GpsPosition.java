@@ -2,11 +2,15 @@ package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
 
+import android.location.Location;
+
 import com.j256.ormlite.field.DatabaseField;
 
 public class GpsPosition {
 	@DatabaseField(generatedId = true)
 	private int id;
+	@DatabaseField
+	private long time = 0;
 	@DatabaseField
 	private long createdAt = 0;
 	@DatabaseField
@@ -18,16 +22,15 @@ public class GpsPosition {
 		// Needed for ormlite
 	}
 
-	public GpsPosition(double latitude, double longitude) {
-		this.createdAt = System.currentTimeMillis();
+	public GpsPosition(long time, double latitude, double longitude) {
+		createdAt = System.currentTimeMillis();
+		this.time = time;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
-	public GpsPosition(long createdAt, double latitude, double longitude) {
-		this.createdAt = createdAt;
-		this.latitude = latitude;
-		this.longitude = longitude;
+	public GpsPosition(Location location) {
+		this(location.getTime(), location.getLatitude(), location.getLongitude());
 	}
 
 	public Integer getId() {
