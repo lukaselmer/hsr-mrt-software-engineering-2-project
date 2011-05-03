@@ -19,6 +19,15 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create time_entry_type without material_id" do
+    invalid_time_entry_type = TimeEntryType.new
+    assert_no_difference('TimeEntryType.count') do
+      post :create, :time_entry_type => invalid_time_entry_type.attributes
+    end
+    assert_response :success
+  end
+
+
   test "should create time_entry_type" do
     assert_difference('TimeEntryType.count') do
       post :create, :time_entry_type => @time_entry_type.attributes
@@ -34,6 +43,12 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @time_entry_type.to_param
+    assert_response :success
+  end
+
+  test "should not update time_entry_type without description" do
+    @time_entry_type.description = nil
+    put :update, :id => @time_entry_type.to_param, :time_entry_type => @time_entry_type.attributes
     assert_response :success
   end
 
