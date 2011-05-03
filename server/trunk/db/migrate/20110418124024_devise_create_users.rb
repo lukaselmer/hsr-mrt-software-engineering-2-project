@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.integer :user_type
-      t.string :phone
+      t.integer :phone
 
       t.timestamps
     end
