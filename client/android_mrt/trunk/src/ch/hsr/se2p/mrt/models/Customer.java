@@ -17,8 +17,8 @@ public class Customer implements Receivable {
 	private int railsId = 0;
 	@DatabaseField
 	private String firstName, lastName, phone;
-	//TODO: @DatabaseField
-	private Location position;
+	// TODO: @DatabaseField
+	private GpsPosition position;
 	@DatabaseField
 	private long updatedAt = 0;
 	@DatabaseField
@@ -26,13 +26,6 @@ public class Customer implements Receivable {
 
 	public Customer() {
 		// Needed for ormlite
-	}
-
-	// TODO: remove this!!
-	public Customer(Integer id, String firstName, String lastName) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.id = id;
 	}
 
 	public Integer getId() {
@@ -55,7 +48,7 @@ public class Customer implements Receivable {
 		return phone;
 	}
 
-	public Location getPosition() {
+	public GpsPosition getPosition() {
 		return position;
 	}
 
@@ -86,7 +79,7 @@ public class Customer implements Receivable {
 		return true;
 	}
 
-	private Location parsePosition(JSONObject customerObj) throws JSONException {
+	private GpsPosition parsePosition(JSONObject customerObj) throws JSONException {
 		// customerObj.getLong("position");
 		// TODO: Parse position
 		return null;

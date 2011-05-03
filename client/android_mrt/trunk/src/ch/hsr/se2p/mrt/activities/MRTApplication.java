@@ -5,12 +5,14 @@ import ch.hsr.se2p.mrt.network.HttpHelper;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.location.LocationManager;
 
 public class MRTApplication extends Application {
 	private final HttpHelper httpHelper;
 	private String email, password;
 	private final User currentUser;
 	private SharedPreferences preferences;
+	private LocationManager locationManager;
 
 	public MRTApplication() {
 		httpHelper = new HttpHelper();
@@ -72,5 +74,13 @@ public class MRTApplication extends Application {
 	@Override
 	public String toString() {
 		return "Email: " + email + ", Password: " + password + ", Current user: " + currentUser + ", Cookie: " + httpHelper.getCookie();
+	}
+
+	public void setLocationManager(LocationManager locationManager) {
+		this.locationManager = locationManager;
+	}
+
+	public LocationManager getLocationManager() {
+		return locationManager;
 	}
 }

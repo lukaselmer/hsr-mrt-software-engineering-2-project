@@ -19,16 +19,6 @@ public class CustomerHelper {
 		this.httpHelper = httpHelper;
 	}
 
-	public static List<Customer> hackForTest() {
-		List<Customer> list = new ArrayList<Customer>();
-		list.add(new Customer(1, "Peter", "Muster"));
-		list.add(new Customer(2, "Hans", "Bla"));
-		list.add(new Customer(3, "Buuuu", "Baaaa"));
-		list.add(new Customer(4, "Eufrosiene", "Katzenstein"));
-		list.add(new Customer(5, "Papa", "Moll"));
-		return list;
-	}
-
 	public boolean synchronize(List<Receivable> receivables, Class<? extends Receivable> clazz) throws SynchronizationException {
 		try {
 			String ret = synchronizeRequest(receivables);

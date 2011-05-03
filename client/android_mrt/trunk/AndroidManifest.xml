@@ -33,7 +33,10 @@
 		<uses-library android:name="android.test.runner" />
 
 	</application>
+
 	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
 	<!-- For tests -->
 	<instrumentation android:targetPackage="ch.hsr.se2p.mrt"

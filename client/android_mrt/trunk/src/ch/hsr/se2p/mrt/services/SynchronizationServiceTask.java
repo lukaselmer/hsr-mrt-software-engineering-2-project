@@ -2,6 +2,8 @@ package ch.hsr.se2p.mrt.services;
 
 import java.util.TimerTask;
 
+import android.content.Context;
+import android.location.LocationManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
@@ -22,6 +24,15 @@ class SynchronizationServiceTask extends TimerTask {
 		this.databaseHelper = service.getHelper();
 		this.mrtApplication = (MRTApplication) service.getApplication();
 		mrtApplication.setPreferences(PreferenceManager.getDefaultSharedPreferences(service));
+		initGpsListener();
+	}
+
+	private void initGpsListener() {
+		LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
+		long locationUpdateInterval = 77; // update location maximal every 1 minute TODO: update this!! 1 * 60 * 1000
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, locationUpdateInterval, 0, new LocationListenerAdapter());
+		locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		mrtApplication.setLocationManager(locationManager);
 	}
 
 	@Override
