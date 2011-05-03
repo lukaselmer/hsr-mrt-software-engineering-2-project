@@ -7,6 +7,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -18,7 +19,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	protected static final String DATABASE_NAME = "mrt.db";
-	protected static final int DATABASE_VERSION = 6;
+	protected static final int DATABASE_VERSION = 1;
+	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, GpsPosition.class };
 
 	private Dao<TimeEntry, Integer> timeEntryDao;
 	private Dao<Customer, Integer> customerDao;
@@ -31,8 +33,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Creating database");
-			TableUtils.createTable(connectionSource, TimeEntry.class);
-			TableUtils.createTable(connectionSource, Customer.class);
+			for (Class<?> modelClass : MODEL_CLASSES) {
+				TableUtils.createTable(connectionSource, modelClass);
+			}
 		} catch (SQLException e) {
 			Log.e(TAG, "Can't create database", e);
 			throw new RuntimeException(e);

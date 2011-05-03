@@ -22,7 +22,7 @@ public class GpsPosition {
 		// Needed for ormlite
 	}
 
-	public GpsPosition(long time, double latitude, double longitude) {
+	private GpsPosition(long time, double latitude, double longitude) {
 		createdAt = System.currentTimeMillis();
 		this.time = time;
 		this.latitude = latitude;
@@ -43,6 +43,10 @@ public class GpsPosition {
 
 	public double getLongitude() {
 		return longitude;
+	}
+
+	public long getTime() {
+		return time;
 	}
 
 	public Timestamp getCreatedAt() {

@@ -22,7 +22,7 @@ public class PositionSynchronizer implements Synchronizer {
 
 	@Override
 	public void synchronize() {
-		// TODO: save GPS position
+		// TODO: test this???
 		try {
 			Location location = mrtApplication.getLocationManager().getLastKnownLocation(LocationManager.GPS_PROVIDER);
 			Log.i(TAG, "New location is " + location);

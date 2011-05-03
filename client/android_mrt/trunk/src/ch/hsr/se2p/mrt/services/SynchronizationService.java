@@ -4,22 +4,14 @@ import java.util.Timer;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
 import android.util.Log;
-import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.network.CustomerHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 
 public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 	static {
