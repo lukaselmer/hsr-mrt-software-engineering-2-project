@@ -6,6 +6,10 @@ import android.location.Location;
 
 import com.j256.ormlite.field.DatabaseField;
 
+/**
+ * A GpsPosition contains the geographical coordinates (latitude and longitude). Additionally, time is the time when the position was fixed and the
+ * createdAt is the time when the position was saved the first time.
+ */
 public class GpsPosition {
 	@DatabaseField(generatedId = true)
 	private int id;
