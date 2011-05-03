@@ -18,7 +18,8 @@ import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFacto
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 /** 
- * Performs the user login. 
+ * Performs the user login.
+ * Requires email and password. Preferences saving is available. Shows warnings when data is incomplete or incorrect.
  */
 public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
