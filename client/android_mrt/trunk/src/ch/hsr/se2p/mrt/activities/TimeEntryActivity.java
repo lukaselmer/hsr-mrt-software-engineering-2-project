@@ -37,6 +37,13 @@ import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 
+/**
+ * Creates new TimeEntry.
+ * A new TimeEntry with the current time is created after the user presses the button start.
+ * A Customer, TimeEntryType and a description about the given task can be added to the TimeEntry.
+ * After the button stop is pressed another TimeStamp is added with the current time.
+ * If the TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
+ */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
 		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
@@ -129,7 +136,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	protected void updateView() {
 		if (isMeasurementStarted())
 			setLayout("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString(), "Stop", Color.RED);
-		else{
+		else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			removeText((TextView) findViewById(R.id.txtDescription));
 			removeText((TextView) findViewById(R.id.autocompleteCustomer));
