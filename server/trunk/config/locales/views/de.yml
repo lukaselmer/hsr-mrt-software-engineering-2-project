@@ -6,5 +6,10 @@ de:
   confirm_delete: Wirklich löschen?
   back: Zurück
   overview: Übersicht
+  editing: bearbeiten
   duration: Dauer
-  
+  login: Anmelden
+  create_successful: wurde erfolgreich erstellt.
+  update_successful: wurde erfolgreich geändert.
+  persist_successful: wurde erfolgreich persistent gespeichert.
+

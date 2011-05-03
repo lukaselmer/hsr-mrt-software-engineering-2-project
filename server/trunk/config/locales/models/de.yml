@@ -23,13 +23,17 @@ de:
         line3: Adresszeile3
         place: Ort
         zip: PLZ
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
       customer:
         first_name: Vorname
         last_name: Nachname
         phone: Telefonnummer
       location:
         latitude: Breitengrad
-        logitude: Längengrad
+        longitude: Längengrad
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
       time_entry_type:
         description: Typ
         valid_until: Gültig bis
@@ -62,7 +66,7 @@ de:
          first_name: Vorname
          last_name: Nachname
          phone: Telefonnummer
-         type: Typ
+         user_type: Typ
          created_at: Erstellt am
          updated_at: Aktualisiert am
 
