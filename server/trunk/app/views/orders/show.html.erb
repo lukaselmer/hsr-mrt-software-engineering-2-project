@@ -1,20 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<% fields =  Order.column_names %>
+
+<% fields.each do |f| %>
+  <th><%= Order.human_attribute_name(f) %></th>
+<% end %>
 
 
 <p>
-  <b>Kunde:</b>
+  <b><%= Order.human_attribute_name(:customer_id) %>:</b>
   <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
 </p>
 
 <p>
-  <b>Beschreibung:</b>
+  <b><%= Order.human_attribute_name(:description) %>:</b>
   <%= @order.description %>
 </p>
 
+
 <p>
   <b>Stundeneinträge:</b>
-  <table>
+<table>
   <tr>
     <th>Time entry type</th>
     <th>Beschreibung</th>

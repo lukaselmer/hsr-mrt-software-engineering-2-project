@@ -12,6 +12,7 @@ de:
       applied_material: verwendetes Material
     attributes:
       order:
+        customer_id: Kunde
         created_at: Erstellt am
         description: Beschreibung
       address:
@@ -31,6 +32,7 @@ de:
         description: Beschreibung
         valid_until: gültig bis
       time_entry:
+        customer_id: Kunde
         description: Beschreibung
         hashcode: Hashcode
         time_start: Startzeitpunkt
