@@ -7,6 +7,7 @@ import ch.hsr.se2p.mrt.database.mocks.DatabaseHelperMock;
 import android.test.AndroidTestCase;
 
 public class DatabaseHelperTest extends AndroidTestCase {
+	
 	public void testCreateDatabase() throws SQLException {
 		{
 			DatabaseHelperMock d = new DatabaseHelperMock(getContext());

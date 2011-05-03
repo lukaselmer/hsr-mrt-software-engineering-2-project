@@ -28,7 +28,7 @@ public class MRTApplication extends Application {
 	public void login(String email, String password, boolean saveCredentials) {
 		this.email = email;
 		this.password = password;
-		if (saveCredentials) {
+		if (saveCredentials && preferences != null) {
 			Editor edit = preferences.edit();
 			edit.putString("email", this.email);
 			edit.putString("password", this.password);
@@ -39,10 +39,12 @@ public class MRTApplication extends Application {
 	public void logout() {
 		email = null;
 		password = null;
-		Editor edit = preferences.edit();
-		edit.remove("email");
-		edit.remove("password");
-		edit.commit();
+		if (preferences != null){
+			Editor edit = preferences.edit();
+			edit.remove("email");
+			edit.remove("password");
+			edit.commit();	
+		}
 	}
 
 	public String getPassword() {
