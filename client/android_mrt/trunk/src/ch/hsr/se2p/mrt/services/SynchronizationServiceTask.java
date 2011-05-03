@@ -1,6 +1,5 @@
 package ch.hsr.se2p.mrt.services;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.TimerTask;
 
 import android.preference.PreferenceManager;
@@ -42,7 +41,7 @@ class SynchronizationServiceTask extends TimerTask {
 				@SuppressWarnings("unchecked")
 				Class<Synchronizer> syncCls = (Class<Synchronizer>) cls;
 				newSynchronizerInstance(syncCls).synchronize();
-				Log.e(TAG, "Synchronizer " + cls.getSimpleName() + " created :)");
+				Log.d(TAG, "Synchronizer " + cls.getSimpleName() + " created!");
 			} catch (Exception e) {
 				Log.e(TAG, "Synchronizer " + cls.getSimpleName() + " creation failed!", e);
 			}
