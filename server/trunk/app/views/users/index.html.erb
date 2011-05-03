@@ -1,11 +1,12 @@
-<h1>Benutzerübersicht</h1>
+<h1><%= t(:overview)%> <%= User.model_name.human %></h1>
 
+<% fields =  User.column_names %>
+<% fields.delete_if { |x| x=='encrypted_password' || x=='remember_created_at' || x== 'password_salt' || x=='user_type'} %>
 <table>
   <tr>
-    <th>Vorname</th>
-    <th>Nachname</th>
-    <th>Email</th>
-    <th>Type</th>
+    <% fields.each do |f| %>
+      <th><%= User.human_attribute_name(f) %></th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -17,11 +18,11 @@
       <td><%= user.last_name %></td>
       <td><%= user.email %></td>
       <td><%= @user_types.index(user.user_type) %></td>
-      <td><%= link_to 'Anzeigen', user %></td>
+      <td><%= link_to t(:show), user %></td>
 
       <% if write_access? user %>
-        <td><%= link_to 'Bearbeiten', edit_user_path(user) %></td>
-        <td><%= link_to 'Löschen', user, :confirm => 'Benutzer wirklich löschen?', :method => :delete %></td>
+        <td><%= link_to t(:edit), edit_user_path(user) %></td>
+        <td><%= link_to t(:destroy), user, :confirm => :confirm_delete, :method => :delete %></td>
       <% end %>
     </tr>
   <% end %>
@@ -29,5 +30,5 @@
 
 <br />
 <% if write_access? %>
-  <%= link_to 'Neuen Benutzer anlegen', new_user_path %>
+  <%= link_to 'Neuen ' + User.model_name.human, new_user_path %>
 <% end %>

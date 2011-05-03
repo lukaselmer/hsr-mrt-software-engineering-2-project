@@ -61,8 +61,9 @@ de:
          email: Email
          first_name: Vorname
          last_name: Nachname
-         password: Passwort
          phone: Telefonnummer
          type: Typ
+         created_at: Erstellt am
+         updated_at: Aktualisiert am
 
         
