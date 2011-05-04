@@ -9,6 +9,8 @@
 	<AutoCompleteTextView android:layout_height="wrap_content"
 		android:id="@+id/autocompleteCustomer" android:layout_width="fill_parent"
 		android:hint="Kunde"></AutoCompleteTextView>
+	<Spinner android:layout_width="fill_parent" android:id="@+id/spinnerGPSSelection"
+		android:layout_height="wrap_content"></Spinner>
 	<Spinner android:layout_width="fill_parent" android:id="@+id/spinnerTimeEntryType"
 		android:layout_height="wrap_content"></Spinner>
 	<EditText android:id="@+id/txtDescription" android:hint="Beschreibung"

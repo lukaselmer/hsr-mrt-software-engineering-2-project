@@ -58,7 +58,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
 	private AutoCompleteTextView autoCompleteCustomers;
-	private Spinner spinner;
+	private Spinner timeEntryType;
+	private Spinner gpsSelection;
 	private List<Customer> customers;
 	private MRTApplication mrtApplication;
 
@@ -103,7 +104,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 
 		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		initSpinner();
+		initSpinnerGPSSelection();
+		initSpinnerTimeEntryType();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
@@ -113,15 +115,22 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return isStarted;
 	}
 
-	private void initSpinner() {
-		spinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+	private void initSpinnerTimeEntryType() {
+		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		//TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(timeEntryTypeAdapater);
+		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
 
+	private void initSpinnerGPSSelection() {
+		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
+		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
+		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gpsSelection.setAdapter(gpsSelectionAdapter);
+	}
+	
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
 		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 	}
@@ -141,6 +150,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			removeText((TextView) findViewById(R.id.txtDescription));
 			removeText((TextView) findViewById(R.id.autocompleteCustomer));
+			((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 		}
 		updateAutocompleteCustomers();
@@ -163,15 +173,23 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	protected void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinner.getSelectedItem()).getId());
+		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
-		try {
-			currentTimeEntry.setCustomerId(getCustomer().getId());
-		} catch (NullPointerException e) {
-		}
+		setCustomer();
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
+	}
+	
+	private void setCustomer() throws SQLException {
+		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
+			//currentTimeEntry.setCustomerId(gpsSelection.getId());
+		} else {
+			try {
+				currentTimeEntry.setCustomerId(getCustomer().getId()); //ursprünglicher Code
+			} catch (NullPointerException e) {
+			}
+		}
 	}
 
 	private Customer getCustomer() throws SQLException {
@@ -199,6 +217,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 3"));
 		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 4"));
 		return timeEntryTypes;
+	}
+	
+	final static List<Customer> hackForGPSSelection() {
+		ArrayList<Customer> gpsSelection = new ArrayList<Customer>();
+		Customer c = new Customer();
+//		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
+//		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
+//		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
+		return gpsSelection;
 	}
 
 	@Override
