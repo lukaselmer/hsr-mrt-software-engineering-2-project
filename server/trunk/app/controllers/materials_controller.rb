@@ -46,10 +46,11 @@ class MaterialsController < ApplicationController
 
   # PUT /materials/1
   def update
-    @material = Material.find(params[:id])
+    old_material = Material.find(params[:id])
+    @material = Material.new(params[:material])
 
     respond_to do |format|
-      if @material.update_attributes(params[:material])
+      if old_material.update_attribute(:valid_until, Time.now) && @material.save
         format.html { redirect_to(@material, :notice => Material.model_name.human + ' ' + t(:update_successful)) }
       else
         format.html { render :action => "edit" }
