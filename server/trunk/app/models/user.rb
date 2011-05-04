@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   
   TYPE_SECRETARY = 1
   TYPE_FIELD_WORKER = 2
-  TYPES = { :SECRETARY => TYPE_SECRETARY, :FIELD_WORKER => TYPE_FIELD_WORKER }
+  TYPES = { :secretary => TYPE_SECRETARY, :field_worker => TYPE_FIELD_WORKER }
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable

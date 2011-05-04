@@ -1,7 +1,6 @@
 <h1><%= t(:overview)%> <%= User.model_name.human %></h1>
 
-<% fields =  User.column_names %>
-<% fields.delete_if { |x| x=='encrypted_password' || x=='remember_created_at' || x== 'password_salt' || x=='user_type'} %>
+<% fields =  User.column_names - %w(encrypted_password remember_created_at password_salt user_type)%>
 <table>
   <tr>
     <% fields.each do |f| %>
