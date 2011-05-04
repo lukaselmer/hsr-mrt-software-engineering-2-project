@@ -1,3 +1,4 @@
+<h1><%= t(:detail)%> Kunde</h1>
 <p>
   <b><%= Customer.human_attribute_name(:id) %>:</b>
   <%= @customer.id %>
@@ -20,7 +21,10 @@
 
 <p>
   <b>Address:</b><br />
-  <%= render :partial => "addresses/address", :locals => { :address => @customer.address } %>
+    <% unless @customer.address.nil? %>
+    <%= render :partial => "addresses/address", :locals => { :address => @customer.address } %>
+    <%= render :partial => "addresses/map", :locals => { :gps_position => @customer.address.gps_position } %>
+  <% end %>
 </p>
 
 <p>

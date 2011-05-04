@@ -1,4 +1,6 @@
-<% fields =  Material.column_names %>
+<h1><%= t(:detail)%> Material</h1>
+
+<% fields = [:id, :catalog_number, :description, :dimensions, :price] %>
 <% fields.each do |f| %>
   <p>
     <b><%= Material.human_attribute_name(f) %></b>

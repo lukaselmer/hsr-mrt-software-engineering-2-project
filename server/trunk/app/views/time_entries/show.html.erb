@@ -1,5 +1,6 @@
-<% fields= [:id, :customer, :time_entry_type, :user, :order, :description] %>
+<h1><%= t(:detail)%> Stundeneintrag</h1>
 
+<% fields= [:id, :customer, :time_entry_type, :user, :order, :description] %>
 <% fields.each do |f| %>
   <p>
     <b><%= TimeEntry.human_attribute_name(f) %>:</b>

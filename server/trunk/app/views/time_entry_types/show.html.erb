@@ -1,5 +1,6 @@
-<% fields =  TimeEntryType.column_names %>
-<% fields.delete('time_entry_type_id')%>
+<h1><%= t(:detail)%> Stundeneintragstyp</h1>
+
+<% fields = [:id, :description] %>
 <% fields.each do |f| %>
   <p>
     <b><%= TimeEntryType.human_attribute_name(f) %></b>

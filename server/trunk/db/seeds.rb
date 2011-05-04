@@ -4,26 +4,21 @@
 # Examples:
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Daley', :city => cities.first)
-[User, Material, TimeEntryType, TimeEntry].each do |cls|
+#   Mayor.create(:name => 'Daley', :city => cities[0])
+
+### Clear all
+[User, Material, TimeEntryType, TimeEntry, Address, Customer, Order, TimeEntry].each do |cls|
   cls.delete_all
 end
-#User.create!(:first_name => "Sec", :last_name => "Retary", :email => 'secretary@mrt.ch', :password => 'mrt', :type => User::TYPES[:secretary])
-#User.create!(:first_name => "Field", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt', :type => User::TYPES[:field_worker])
+
+### Users
 Secretary.create!(:first_name => "Sec", :last_name => "Retary", :email => 'secretary@mrt.ch', :password => 'mrt')
-FieldWorker.create!(:first_name => "Field", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt')
+FieldWorker.create!([
+    { :first_name => "Fredi", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt'},
+    { :first_name => "Benny", :last_name => "Büezer", :email => 'bbuezer@mrt.ch', :password => 'mrt'},
+  ])
 
-Customer.delete_all
-"Waldemar Lamprecht, Otto Traugott, Hermann Elmo, Veit Ingolf, Björn Simon, 
-Klaus Dietfried, Gotthilf Wieland, June Gretchen, Taryn Shelia, Tarah Dione, 
-Angelica Xavia, Demontongue Catbroom, Silverbeam Blackmoon, Whirl Gnaw, Nike Medb, 
-Pia Ligeia, Ásdís Eirene, Beatrix Afra, Rochus Rocco, Eirene Felicianus, Hrodger Amantius, 
-Sigimund Lóegaire, Friðþjófr Ramessu, Yima Philander, Enlil Prabhu, Owain Iovis, Týr Cronus, 
-Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |name|
-  f, l = name.strip.split(' ')
-  Customer.create!(:first_name => f.strip, :last_name => l.strip)
-end
-
+### Materials
 Material.create!([
     {:catalog_number => "3951.100", :description => "Füllventil Universal zu Spülkasten Geberit", :dimensions => "", :price => 34.0},
     {:catalog_number => "865005-336", :description => "Spültisch-Garnitur GEBERIT 1-teilig", :dimensions => "1 1/2 x 56mm", :price => 30.0},
@@ -37,6 +32,7 @@ Material.create!([
     {:catalog_number => "aa", :description => "Einsatz Servicewagen", :dimensions => "", :price => 18},
   ])
 
+### TimeEntryTypes
 materials = Material.all
 TimeEntryType.create!(:description => "Heizung ansehen", :time_entry_type_materials => [
     TimeEntryTypeMaterial.new(:material => materials[9]),
@@ -52,11 +48,49 @@ TimeEntryType.create!(:description => "Wasserzähler ersetzen", :time_entry_type
     TimeEntryTypeMaterial.new(:material => materials[9]),
   ])
 
+### Addresses
 Address.create!([
-  { :line1 => "Hungerbergstr. 1", :zip => "8046", :place => "Zürich" },
-  { :line1 => "Oberseestrasse 10", :zip => "8640", :place => "Rapperswil" },
-  { :line1 => "Bundesgasse 3", :zip => "3005", :place => "Bern" },
-  { :line1 => "Hungerbergstr. 4", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Hungerbergstr. 1", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Oberseestrasse 10", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Bundesgasse 3", :zip => "3005", :place => "Bern" },
+    { :line1 => "Hungerbergstr. 4", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Hungerbergstr. 100", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Oberseestrasse 11", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Bundesgasse 1", :zip => "3005", :place => "Bern" },
+    { :line1 => "Hungerbergstr. 40", :zip => "8046", :place => "Zürich" },
+  ])
+
+### Customers
+addresses = Address.all
+"Waldemar Lamprecht, Otto Traugott, Hermann Elmo, Veit Ingolf, Björn Simon,
+Klaus Dietfried, Gotthilf Wieland, June Gretchen, Taryn Shelia, Tarah Dione,
+Angelica Xavia, Demontongue Catbroom, Silverbeam Blackmoon, Whirl Gnaw, Nike Medb,
+Pia Ligeia, Ásdís Eirene, Beatrix Afra, Rochus Rocco, Eirene Felicianus, Hrodger Amantius,
+Sigimund Lóegaire, Friðþjófr Ramessu, Yima Philander, Enlil Prabhu, Owain Iovis, Týr Cronus,
+Partha Pramoda, Gawain Jarl, Cupid Amulius".split(',').each do |name|
+  f, l = name.strip.split(' ')
+  Customer.create!(:first_name => f.strip, :last_name => l.strip, :address => addresses[rand(addresses.length)], :phone => "0#{rand(899999999) + 10**8}")
+end
+
+### Orders
+customers = Customer.all
+Order.create!([
+    {:customer => customers[0], :address => addresses[0], :description => "Lavabo wechseln"},
+    {:customer => customers[1], :address => addresses[1], :description => "WC wechseln"},
+    {:customer => customers[2], :address => addresses[2], :description => "Bad wechseln"},
+  ])
+
+### TimeEntries
+users = User.field_workers
+time_entry_types = TimeEntryType.all
+orders = Order.all
+TimeEntry.create!([
+    { :user => users[0], :gps_position => addresses[0].gps_position, :customer => customers[0], :time_entry_type => time_entry_types[0], :order => orders[0], :description => "Lavabo wechseln", :time_start => 10.hours.ago, :time_stop => 8.hours.ago },
+    { :user => users[0], :gps_position => addresses[0].gps_position, :customer => customers[0], :time_entry_type => time_entry_types[0], :order => orders[0], :description => "Hanen wechseln", :time_start => 8.hours.ago, :time_stop => 7.hours.ago },
+    { :user => users[0], :gps_position => addresses[0].gps_position, :customer => customers[0], :time_entry_type => time_entry_types[0], :order => orders[0], :description => "Siphon wechseln", :time_start => 6.hours.ago, :time_stop => 5.hours.ago },
+    { :user => users[1], :gps_position => addresses[1].gps_position, :customer => customers[1], :time_entry_type => time_entry_types[1], :order => orders[1], :description => "Schüssel wechseln", :time_start => 10.hours.ago, :time_stop => 8.hours.ago },
+    { :user => users[1], :gps_position => addresses[1].gps_position, :customer => customers[1], :time_entry_type => time_entry_types[1], :order => orders[1], :description => "Spülkasten wechseln", :time_start => 8.hours.ago, :time_stop => 7.hours.ago },
+    { :user => users[1], :gps_position => addresses[1].gps_position, :customer => customers[2], :time_entry_type => time_entry_types[2], :order => orders[2], :description => "Wanne wechseln", :time_start => 10.hours.ago, :time_stop => 8.hours.ago },
   ])
 
 # It may be a good idea to have the same test data as the initial data? The use this command to load all fixtures!
