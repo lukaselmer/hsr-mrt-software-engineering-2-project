@@ -4,7 +4,7 @@
   <div class="field">
     <%= f.label :order_id %>
     <%= f.select(:order_id, Order.for_select, {:include_blank => true}) %>
-    <% if write_access? %>
+    <% if write_access? Order.new %>
       <%= link_to 'Neuen ' + Order.model_name.human + ' erfassen', new_order_path %>
     <% end %>
   </div>
@@ -12,15 +12,15 @@
   <div class="field">
     <%= f.label :customer_id %>
     <%= f.select(:customer_id, Customer.for_select, {:include_blank => true}) %>
-    <% if write_access? %>
-      <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_order_path %>
+    <% if write_access? Customer.new %>
+      <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_customer_path %>
     <% end %>
   </div>
 
   <div class="field">
     <%= f.label :time_entry_type_id %>
     <%= f.select(:time_entry_type_id, TimeEntryType.for_select, {:include_blank => true}) %>
-    <% if write_access? %>
+    <% if write_access? TimeEntry.new %>
       <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
     <% end %>
   </div>
@@ -28,7 +28,7 @@
   <div class="field">
     <%= f.label :user_id %>
     <%=  f.select(:user_id, User.for_select(User::TYPE_FIELD_WORKER), {:include_blank => true}) %>
-    <% if write_access? %>
+    <% if write_access? User.new %>
       <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
     <% end %>
   </div>

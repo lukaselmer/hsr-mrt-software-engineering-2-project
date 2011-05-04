@@ -17,6 +17,9 @@
   <div class="field">
     <%= f.label :address %>
     <%= f.select("address_id", Address.for_select, {:include_blank => true}) %>
+    <% if write_access? Address.new %>
+      <%= link_to 'Neue ' + Address.model_name.human + ' erfassen', new_address_path %>
+    <% end %>
   </div>
 
 

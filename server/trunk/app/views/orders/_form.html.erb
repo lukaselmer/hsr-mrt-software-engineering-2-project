@@ -4,11 +4,17 @@
   <div class="field">
     <%= f.label :customer_id %>
     <%= f.select(:customer_id, Customer.for_select, { :include_blank => true }) %>
+    <% if write_access? Customer.new %>
+      <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_customer_path %>
+    <% end %>
   </div>
 
   <div class="field">
     <%= f.label :address_id %>
     <%= f.select(:address_id, Address.for_select, { :include_blank => true }) %>
+    <% if write_access? Address.new %>
+      <%= link_to 'Neue ' + Address.model_name.human + ' erfassen', new_address_path %>
+    <% end %>
   </div>
 
   <div class="field">
