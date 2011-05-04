@@ -1,12 +1,13 @@
 <h1><%= t(:overview) %> Stundeneintragstypen</h1>
 
-<% fields =  TimeEntryType.column_names %>
+<% fields = [:id, :description] %>
 
 <table>
   <tr>
     <% fields.each do |f| %>
       <th><%= TimeEntryType.human_attribute_name(f) %></th>
     <% end %>
+    <th><%= TimeEntryType.human_attribute_name(:materials) %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
       <% fields.each do |f| %>
         <td><%= time_entry_type.send(f) %></td>
       <% end %>
+      <td><%= render 'time_entry_type_materials', :time_entry_type_materials => time_entry_type.time_entry_type_materials %></td>
 
       <td><%= link_to t(:show), time_entry_type %></td>
       <% if write_access? time_entry_type %>

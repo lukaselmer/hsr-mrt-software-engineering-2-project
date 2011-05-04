@@ -5,7 +5,9 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-User.delete_all
+[User, Material, TimeEntryType, TimeEntry].each do |cls|
+  cls.delete_all
+end
 #User.create!(:first_name => "Sec", :last_name => "Retary", :email => 'secretary@mrt.ch', :password => 'mrt', :type => User::TYPES[:secretary])
 #User.create!(:first_name => "Field", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt', :type => User::TYPES[:field_worker])
 Secretary.create!(:first_name => "Sec", :last_name => "Retary", :email => 'secretary@mrt.ch', :password => 'mrt')
@@ -42,7 +44,7 @@ TimeEntryType.create!(:description => "Heizung ansehen", :time_entry_type_materi
 TimeEntryType.create!(:description => "Lavabo wechseln", :time_entry_type_materials => [
     TimeEntryTypeMaterial.new(:material => materials[0]),
     TimeEntryTypeMaterial.new(:material => materials[1]),
-    TimeEntryTypeMaterial.new(:material => materials[4]),
+    TimeEntryTypeMaterial.new(:material => materials[4], :amount => 5),
     TimeEntryTypeMaterial.new(:material => materials[9]),
   ])
 TimeEntryType.create!(:description => "Wasserzähler ersetzen", :time_entry_type_materials => [

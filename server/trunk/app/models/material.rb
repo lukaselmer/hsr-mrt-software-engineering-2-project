@@ -9,4 +9,8 @@ class Material < ActiveRecord::Base
   validates :description, :presence => true
 
   scope :active, where(:valid_until => nil)
+
+  def to_s
+    [catalog_number, description, dimensions].compact.delete_if{|v| v.to_s.strip.blank?}.join(", ")
+  end
 end

@@ -1,0 +1,10 @@
+<ul>
+  <% time_entry_type_materials.each do |time_entry_type_material| %>
+    <% material = time_entry_type_material.material %>
+    <li>
+      <%= link_to material do %>
+        <%= material %>, <%= number_to_currency material.price %> (<%= time_entry_type_material.amount %> Stück)
+      <% end %>
+    </li>
+  <% end %>
+</ul>

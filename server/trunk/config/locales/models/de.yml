@@ -48,6 +48,7 @@ de:
         created_at: Erstellt am
         updated_at: Aktualisiert am
         time_entry_type_id: Vorgänger
+        materials: Materialien
       time_entry:
         id: ID
         customer_id: Kunde
