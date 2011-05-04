@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   has_many :applied_materials
   has_many :time_entries
+
+  belongs_to :address
   belongs_to :customer
 
   validates :customer_id, :presence => true
@@ -10,6 +12,6 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    [customer.to_s, created_at.to_s(:short)].join('; ')
+    "#" << id.to_s << ": " << [customer.to_s, created_at.to_s(:short)].join('; ')
   end
 end

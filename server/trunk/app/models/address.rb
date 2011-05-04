@@ -1,6 +1,6 @@
 class Address < ActiveRecord::Base
-  has_one :order
-  has_one :customer
+  has_many :order
+  has_many :customer
   belongs_to :gps_position
 
   validates :line1, :place, :zip, :presence => true
