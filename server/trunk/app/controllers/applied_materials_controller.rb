@@ -65,10 +65,5 @@ class AppliedMaterialsController < ApplicationController
   def destroy
     @applied_material = AppliedMaterial.find(params[:id])
     @applied_material.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(applied_materials_url) }
-      format.xml  { head :ok }
-    end
   end
 end

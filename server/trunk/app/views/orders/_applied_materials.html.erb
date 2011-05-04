@@ -2,9 +2,8 @@
   <% applied_materials.each do |applied_material| %>
     <% material = applied_material.material %>
     <li>
-      <%= link_to material do %>
-        <%= material %>, <%= number_to_currency material.price %> (<%= applied_material.amount %> Stück)
-      <% end %>
+      <%= link_to material do %><%= material %>, <%= number_to_currency material.price %> (<%= applied_material.amount %> Stück)<% end -%>
+      &nbsp;<%= link_to t(:destroy), applied_material, :confirm => t(:confirm_delete), :remote => true, :method => :delete %>
     </li>
   <% end %>
 </ul>
