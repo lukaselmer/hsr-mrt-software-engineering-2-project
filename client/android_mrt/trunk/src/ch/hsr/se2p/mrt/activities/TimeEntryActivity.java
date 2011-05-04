@@ -5,6 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
 
@@ -59,7 +63,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private TimeEntry currentTimeEntry;
 	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner timeEntryType;
-	private Spinner gpsSelection;
+//	private Spinner gpsSelection;
 	private List<Customer> customers;
 	private MRTApplication mrtApplication;
 
@@ -104,7 +108,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 
 		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		initSpinnerGPSSelection();
+//		initSpinnerGPSSelection();
 		initSpinnerTimeEntryType();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
@@ -124,12 +128,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
 
-	private void initSpinnerGPSSelection() {
-		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
-		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
-		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gpsSelection.setAdapter(gpsSelectionAdapter);
-	}
+//	private void initSpinnerGPSSelection() {
+//		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
+//		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
+//		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		gpsSelection.setAdapter(gpsSelectionAdapter);
+//	}
 	
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
 		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
@@ -150,7 +154,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			removeText((TextView) findViewById(R.id.txtDescription));
 			removeText((TextView) findViewById(R.id.autocompleteCustomer));
-			((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
+			//((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 		}
 		updateAutocompleteCustomers();
@@ -182,14 +186,14 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 	
 	private void setCustomer() throws SQLException {
-		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
-			//currentTimeEntry.setCustomerId(gpsSelection.getId());
-		} else {
+//		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
+//			//currentTimeEntry.setCustomerId(gpsSelection.getId());
+//		} else {
 			try {
 				currentTimeEntry.setCustomerId(getCustomer().getId()); //ursprünglicher Code
 			} catch (NullPointerException e) {
 			}
-		}
+//		}
 	}
 
 	private Customer getCustomer() throws SQLException {
@@ -221,11 +225,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	
 	final static List<Customer> hackForGPSSelection() {
 		ArrayList<Customer> gpsSelection = new ArrayList<Customer>();
-		Customer c = new Customer();
-//		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
-//		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
-//		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
+		//TODO: Customer Konstruktor mit Parameter löschen
+		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
+		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
+		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
 		return gpsSelection;
+	}
+	
+	private void calculateCustomerPositionsFrom(GpsPosition position) {
+		
 	}
 
 	@Override
