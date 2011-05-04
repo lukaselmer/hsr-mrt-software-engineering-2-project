@@ -1,11 +1,8 @@
 <h1><%= t(:overview)%> <%= User.model_name.human %></h1>
-
-<% fields =  User.column_names - %w(encrypted_password remember_created_at password_salt type)%>
 <table>
   <tr>
-    <% fields.each do |f| %>
-      <th><%= User.human_attribute_name(f) %></th>
-    <% end %>
+    <th><%= User.human_attribute_name(:id) %> </th>
+    <th><%= t (:name) %> </th>
     <th><%= User.human_attribute_name(:type) %> </th>
     <th></th>
     <th></th>
@@ -14,9 +11,8 @@
 
   <% @users.each do |user| %>
     <tr>
-      <% fields.each do |f| %>
-        <td><%= user.send(f) %></td>
-      <% end %>
+      <td><%= user.id %></td>
+      <td><%= user %></td>
       <td><%= user.type %></td>
       <td><%= link_to t(:show), user_path(user) %></td>
 

@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :on => :create
   validates :email, :presence => true
 
+  scope :field_workers, where(:type => TYPE_FIELD_WORKER)
+  scope :secretaries, where(:type => TYPE_SECRETARY)
+
   def secretary?; type == TYPE_SECRETARY; end
   def field_worker?; type == TYPE_FIELD_WORKER; end
 
@@ -30,4 +33,14 @@ class User < ActiveRecord::Base
 
   def self.secretary_human_name; human_attribute_name(:user_type_secretary); end
   def self.field_worker_human_name; human_attribute_name(:user_type_field_worker); end
+
+  def self.for_select(type=nil)
+    set = all
+    set = find_all_by_type type if TYPES.has_value?(type)
+    set.to_a.collect { |u| [u, u.id] }
+  end
+
+  def to_s
+    [first_name, last_name].join(' ')
+  end
 end

@@ -19,15 +19,26 @@
 </p>
 
 <p>
+  <b>Address:</b><br />
+  <% unless @customer.address.nil? %>
+    <% a = @customer.address %>
+    <% [a.line1, a.line2, a.line3].compact.delete_if { |v| v.strip.blank? }.each do |line| %>
+      <span><%= line %></span><br />
+    <% end %>
+    <span><%= a.zip %> <%= a.place %></span>
+  <% end %>
+</p>
+
+<p>
   <b>Aufträge:</b>
-  <table>
-    <tr>
-      <th><%= Order.human_attribute_name(:created_at) %>:</th>
-      <th><%= Order.human_attribute_name(:description) %>:</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+<table>
+  <tr>
+    <th><%= Order.human_attribute_name(:created_at) %>:</th>
+    <th><%= Order.human_attribute_name(:description) %>:</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
   <% @customer.orders.each do |order| %>
     <tr>
@@ -35,13 +46,13 @@
       <td><%= order.description %></td>
       <td><%= link_to t(:show), order %></td>
 
-       <% if write_access? order %>
-          <td><%= link_to t(:edit), edit_order_path(order) %></td>
-          <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>
-       <% end %>
+      <% if write_access? order %>
+        <td><%= link_to t(:edit), edit_order_path(order) %></td>
+        <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
     </tr>
   <% end %>
-  </table>
+</table>
 </p>
 
 <%= link_to t(:edit), edit_customer_path(@customer) %> |
