@@ -84,12 +84,29 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
-		try {
-			assertEquals(count + 1, getDao().queryForAll().size());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
+//		try { //das gebaschtel gaht
+//			timeEntry = getDao().queryForAll().get(count);
+//			assertEquals("", timeEntry.getDescription());
+//			assertEquals(null, timeEntry.getCustomerId());
+//			assertEquals(new Integer(1), timeEntry.getTimeEntryTypeId());
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			assert (false);
+			//das isch mis gebaschtel, gaht aber nöd
+			try {
+				assertEquals(count + 1, activity.getHelper().getDao(TimeEntry.class).queryForAll().size());
+			} catch (SQLException e) {
+				e.printStackTrace();
+				assert(false);
+			}
+		
+			//so isch es nach em Refactoring vom Lukas
+			try {
+				assertEquals(count + 1, getDao().queryForAll().size());
+			} catch (SQLException e) {
+				e.printStackTrace();
+				assert(false);
+			}
 	}
 
 	public void testSpinnerSelection() {
@@ -125,6 +142,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			timeEntry = getDao().queryForAll().get(count);
 			assertEquals(customer.getId(), timeEntry.getCustomerId());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -146,6 +164,8 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 
+	//TODO: create Test for TimeEntryTyp
+	
 	public void testCreateTimeEntryWithDescription() {
 		setDescription();
 		try {
