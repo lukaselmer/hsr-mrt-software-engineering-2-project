@@ -116,6 +116,13 @@ public class CustomerHelperTest extends HttpTestCase {
 
 	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, Timestamp updatedAt, boolean deleted)
 			throws JSONException {
+		Customer c = new Customer();
+		c.fromJSON(getCustomerInJson(fistName, lastName, railsId, phone, updatedAt, deleted));
+		return c;
+	}
+
+	private JSONObject getCustomerInJson(String fistName, String lastName, int railsId, String phone, Timestamp updatedAt, boolean deleted)
+			throws JSONException {
 		JSONObject customerObj = new JSONObject();
 		customerObj.put("id", railsId);
 		customerObj.put("first_name", fistName);
@@ -125,9 +132,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		customerObj.put("position", "");
 		if (deleted)
 			customerObj.put("deleted_at", DateHelper.format(getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
-		Customer c = new Customer();
-		c.fromJSON(customerObj);
-		return c;
+		return customerObj;
 	}
 
 	private Timestamp getTimestamp(long l) {

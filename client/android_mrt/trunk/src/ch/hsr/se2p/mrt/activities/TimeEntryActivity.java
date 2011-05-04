@@ -15,6 +15,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -42,11 +43,9 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 
 /**
- * Creates new TimeEntry.
- * A new TimeEntry with the current time is created after the user presses the button start.
- * A customer, a TimeEntry type and a description about the given task can be added to the TimeEntry.
- * After the button stop is pressed the current time is added to the TimeEntry.
- * If the TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
+ * Creates new TimeEntry. A new TimeEntry with the current time is created after the user presses the button start. A customer, a TimeEntry type and a
+ * description about the given task can be added to the TimeEntry. After the button stop is pressed the current time is added to the TimeEntry. If the
+ * TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
  */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
@@ -121,7 +120,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void initSpinnerTimeEntryType() {
 		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		//TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
+		// TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				hackForTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -197,11 +196,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private Customer getCustomer() throws SQLException {
-		if (autoCompleteCustomers.getText().length() != 0) {
-			for (int i = 0; i < customers.size(); i++) {
-				if (customers.get(i).toString().equals(autoCompleteCustomers.getText().toString()))
-					return customers.get(i);
-			}
+		Editable text = autoCompleteCustomers.getText();
+		if (text.length() == 0)
+			return null;
+		return findCustomer(text.toString());
+	}
+
+	private Customer findCustomer(String customerStr) {
+		for (int i = 0; i < customers.size(); i++) {
+			if (customers.get(i).toString().equals(customerStr.toString()))
+				return customers.get(i);
 		}
 		return null;
 	}
@@ -212,7 +216,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return customers;
 	}
 
-	//TODO: Delete as soon as Class TimeEntryType is working
+	// TODO: Delete as soon as Class TimeEntryType is working
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
 		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
 		timeEntryTypes.add(new TimeEntryType(1, "Kein Stundeneintragstyp"));
@@ -226,9 +230,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	final static List<Customer> hackForGPSSelection() {
 		ArrayList<Customer> gpsSelection = new ArrayList<Customer>();
 		//TODO: Customer Konstruktor mit Parameter löschen
-		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
-		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
-		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
+		// gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
+		// gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
+		// gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
 		return gpsSelection;
 	}
 	
