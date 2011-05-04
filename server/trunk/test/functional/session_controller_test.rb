@@ -14,8 +14,27 @@ class SessionsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "sould login by json" do
-    #post :create, {:email => 'p.muster@elmermx.ch', :password => '1234' } , :format => :json
-    #assert_response :success
-  end
+  #test "sould login by json" do
+  #  post :create, { :email => 'secretary@mrt.ch', :password => 'mrt' } , :format => :json
+  #  assert_response :success
+  #end
+
+  #test "sould not login by json with invalid credentials" do
+  #  post :create, { :email => 'secretar@mrt.ch', :password => 'mrt' } , :format => :json
+  #  assert_response :success
+  #end
+
+
+  #test "sould login" do
+  #  post :create, :user => {
+  #    :email => "nosuchuser@example.com",
+  #    :password => "wevdude"
+  #  }
+  #  assert_response :success
+  #end
+
+  #test "sould not login invalid credentials" do
+  #  post :create, { :email => 'secretar@mrt.ch', :password => 'mrt' }
+  #  assert_response :success
+  #end
 end

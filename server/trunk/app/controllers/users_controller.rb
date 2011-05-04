@@ -44,6 +44,7 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     @user = User.find(params[:id])
+    @user_types = User::TYPES
 
     if @user.update_attributes(params[:user])
       redirect_to(@user, :notice => User.model_name.human + ' ' + t(:update_successful))

@@ -19,6 +19,14 @@ class UsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not create user without email" do
+    invalid_user = User.new( :password => '12345' )
+    assert_no_difference('User.count') do
+      post :create, :user => invalid_user.attributes
+    end
+    assert_response :success
+  end
+
   test "should create user" do
     valid_user = { :email => 'test@test.com', :password => '12345' }
     assert_difference('User.count') do
@@ -35,6 +43,12 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get edit" do
     get :edit, :id => @user.to_param
+    assert_response :success
+  end
+
+  test "should not update user without email" do
+    @user.email = nil
+    put :update, :id => @user.to_param, :user => @user.attributes
     assert_response :success
   end
 
