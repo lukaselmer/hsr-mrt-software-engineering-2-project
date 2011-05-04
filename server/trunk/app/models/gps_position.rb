@@ -5,6 +5,6 @@ class GpsPosition < ActiveRecord::Base
   validates :latitude, :longitude, :presence => true
 
   def to_s
-    "#{latitude} / #{longitude}"
+    "#{latitude}, #{longitude}"
   end
 end
