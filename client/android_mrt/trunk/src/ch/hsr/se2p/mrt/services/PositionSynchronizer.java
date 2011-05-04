@@ -10,7 +10,7 @@ import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 
 public class PositionSynchronizer implements Synchronizer {
-	private static final String TAG = PositionSynchronizer.class.getSimpleName();
+	private static final String TAG = PositionSynchronizerTest.class.getSimpleName();
 
 	private final DatabaseHelper databaseHelper;
 	private final MRTApplication mrtApplication;
