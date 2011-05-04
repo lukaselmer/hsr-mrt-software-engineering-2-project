@@ -20,7 +20,7 @@ class TimeEntriesController < ApplicationController
 
   # GET /time_entries/new
   def new
-    @time_entry = TimeEntry.new
+    @time_entry = TimeEntry.new(:order_id => params[:order_id])
 
     respond_to do |format|
       format.html # new.html.erb

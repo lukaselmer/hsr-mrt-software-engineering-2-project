@@ -1,3 +1,9 @@
 <h1><%= t(:overview) %> Stundeneinträge</h1>
 
 <%= render :partial => "table", :locals => { :time_entries => @time_entries } %>
+
+<br />
+
+<% if write_access? TimeEntry.new %>
+  <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path %>
+<% end %>

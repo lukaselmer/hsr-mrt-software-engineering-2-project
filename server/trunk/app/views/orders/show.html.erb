@@ -19,6 +19,13 @@
 <p>
   <b>Stundeneinträge:</b>
   <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :order => @order } %>
+
+  <br />
+
+  <% if write_access? TimeEntry.new %>
+    <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path(:order_id => @order.id) %>
+  <% end %>
+
 </p>
 
 <%= link_to t(:edit), edit_order_path(@order) %> |
