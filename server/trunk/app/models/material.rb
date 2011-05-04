@@ -10,6 +10,10 @@ class Material < ActiveRecord::Base
 
   scope :active, where(:valid_until => nil)
 
+  def self.for_select
+    all.collect { |o| [o, o.id] }
+  end
+  
   def to_s
     [catalog_number, description, dimensions].compact.delete_if{|v| v.to_s.strip.blank?}.join(", ")
   end

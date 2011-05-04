@@ -3,7 +3,7 @@ Mrt::Application.routes.draw do
   resources :applied_materials
   resources :materials
   resources :time_entry_types
-  resources :orders
+  
   resources :addresses
 
   post 'customers/synchronize(.:format)' => 'customers#synchronize'
@@ -20,6 +20,12 @@ Mrt::Application.routes.draw do
   resources :time_entries do
     member do
       post 'remove_hashcode'
+    end
+  end
+  
+  resources :orders do
+    member do
+      get 'add_material'
     end
   end
 

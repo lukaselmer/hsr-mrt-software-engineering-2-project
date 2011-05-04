@@ -41,16 +41,7 @@ class AppliedMaterialsController < ApplicationController
   # POST /applied_materials.xml
   def create
     @applied_material = AppliedMaterial.new(params[:applied_material])
-
-    respond_to do |format|
-      if @applied_material.save
-        format.html { redirect_to(@applied_material, :notice => AppliedMaterial.model_name.human + ' ' + t(:create_successful)) }
-        format.xml  { render :xml => @applied_material, :status => :created, :location => @applied_material }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @applied_material.errors, :status => :unprocessable_entity }
-      end
-    end
+    @saved = @applied_material.save
   end
 
   # PUT /applied_materials/1

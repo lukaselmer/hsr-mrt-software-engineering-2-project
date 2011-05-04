@@ -9,15 +9,17 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
 
     <% orders.each do |order| %>
-      <tr>
+      <tr id="<%= dom_id(order) %>">
         <% fields.each do |f| %>
           <td><%= order.send(f) %></td>
         <% end %>
-        <td><%= link_to t(:show), order %></td>
+        <td><%= link_to "Material hinzufügen", add_material_order_path(order), :remote => true %></td>
 
+        <td><%= link_to t(:show), order %></td>
         <% if write_access? order %>
           <td><%= link_to t(:edit), edit_order_path(order) %></td>
           <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>

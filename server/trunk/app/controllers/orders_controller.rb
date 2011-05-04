@@ -68,4 +68,9 @@ class OrdersController < ApplicationController
       format.html { redirect_to(orders_url) }
     end
   end
+
+  def add_material
+    @order = Order.find(params[:id])
+    @applied_material = AppliedMaterial.new(:order => @order)
+  end
 end
