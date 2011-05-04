@@ -19,4 +19,12 @@ class Address < ActiveRecord::Base
   def to_google_maps_address
     [line1, line2, line3, "#{zip} #{place}"].compact.delete_if{|v| v.strip.blank?}.join(", ")
   end
+
+  def self.for_select
+    all.collect { |a| [a, a.id] }
+  end
+
+  def to_s
+    [line1, line2, line3, "#{zip} #{place}"].compact.delete_if{|v| v.strip.blank?}.join(", ")
+  end
 end

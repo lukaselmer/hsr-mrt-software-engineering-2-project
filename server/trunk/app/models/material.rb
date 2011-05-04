@@ -7,4 +7,6 @@ class Material < ActiveRecord::Base
   has_one :material
 
   validates :description, :presence => true
+
+  scope :active, where(:valid_until => nil)
 end

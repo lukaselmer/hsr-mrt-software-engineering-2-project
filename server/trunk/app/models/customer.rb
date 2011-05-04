@@ -9,4 +9,12 @@ class Customer < ActiveRecord::Base
   validates :first_name, :last_name, :presence => true
 
   accepts_nested_attributes_for :address, :allow_destroy => true
+
+  def self.for_select
+    all.collect { |c| [c, c.id] }
+  end
+
+  def to_s
+    [ last_name, first_name ].join(', ')
+  end
 end

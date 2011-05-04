@@ -1,7 +1,7 @@
 <% fields =  Address.column_names + ['gps_position'] %>
 <% fields.each do |f| %>
   <p>
-    <b><%= Address.human_attribute_name(f) %></b>
+    <b><%= Address.human_attribute_name(f) %>:</b>
     <%= @address.send(f) %>
   </p>
 <% end %>

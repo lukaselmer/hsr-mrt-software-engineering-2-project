@@ -21,11 +21,6 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries/new
   def new
     @time_entry = TimeEntry.new
-    @orders = Order.all
-    @customers = Customer.all
-    @time_entry_types = TimeEntryType.all
-    @users = User.all
-    @gps_positions = GpsPosition.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,11 +30,6 @@ class TimeEntriesController < ApplicationController
   # GET /time_entries/1/edit
   def edit
     @time_entry = TimeEntry.find(params[:id])
-    @orders = Order.all
-    @customers = Customer.all
-    @time_entry_types = TimeEntryType.all
-    @users = User.all
-    @gps_positions = GpsPosition.all
     
     deny_access! and return unless write_access?(@time_entry)
   end
@@ -47,8 +37,6 @@ class TimeEntriesController < ApplicationController
   # POST /time_entries
   def create
     @orders = Order.all
-    @customers = Customer.all
-    @time_entry_types = TimeEntryType.all
 
     respond_to do |format|
       format.html { create_by_html }
@@ -83,9 +71,6 @@ class TimeEntriesController < ApplicationController
   # PUT /time_entries/1
   def update
     @time_entry = TimeEntry.find(params[:id])
-    @orders = Order.all
-    @customers = Customer.all
-    @time_entry_types = TimeEntryType.all
     
     deny_access! and return unless write_access?(@time_entry)
 

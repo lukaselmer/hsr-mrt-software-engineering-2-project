@@ -1,5 +1,5 @@
 <h1><%= t(:overview)%> <%= Material.model_name.human %></h1>
-<% fields = [:id, :catalog_id, :description, :dimensions, :price, :valid_until] %>
+<% fields = [:id, :catalog_id, :description, :dimensions, :price] %>
 
 <table>
   <tr>
@@ -16,6 +16,8 @@
       <% fields.each do |f| %>
         <td><%= material.send(f) %></td>
       <% end %>
+
+
       <td><%= link_to t(:show), material %></td>
 
       <% if write_access? material %>

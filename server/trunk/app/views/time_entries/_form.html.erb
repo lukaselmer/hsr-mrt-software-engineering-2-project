@@ -37,10 +37,7 @@
 
   <div class="field">
     <%= f.label :gps_position_id %><br />
-    <%# TODO: Fix this!!! f.select(:gps_position_id, @gps_positions.collect {|l| [ [l.latitude,l.longitude].join(', '), l.id ] }) %>
-    <%# if write_access? %>
-      <%# = link_to 'Neuen ' + GpsPosition.model_name.human + ' erfassen', new_gps_position_path %>
-    <%# end %>
+    <%= @time_entry.gps_position.nil? ? "-" : @time_entry.gps_position %>
   </div>
 
   <div class="field">
