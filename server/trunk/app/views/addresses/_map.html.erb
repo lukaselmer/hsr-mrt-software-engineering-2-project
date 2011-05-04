@@ -1,4 +1,6 @@
-<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<% content_for :head do %>
+  <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<% end %>
 <script type="text/javascript">
   function initialize() {
     var myLatlng = new google.maps.LatLng(<%= address.gps_position %> );
@@ -10,9 +12,9 @@
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
     var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title:"Hello World!"
+      position: myLatlng,
+      map: map,
+      title:"Hello World!"
     });
   }
 </script>
