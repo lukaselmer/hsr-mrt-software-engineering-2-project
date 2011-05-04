@@ -16,7 +16,7 @@
 
     <%= yield(:head) %>
   </head>
-  <body>
+  <body onload="<%= yield(:on_load) %>">
     <div class="outer-main">
       <div class="navigation">
         <ul class="fl">

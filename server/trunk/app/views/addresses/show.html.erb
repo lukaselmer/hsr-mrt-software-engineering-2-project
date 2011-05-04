@@ -5,7 +5,7 @@
     <%= @address.send(f) %>
   </p>
 <% end %>
-  <%= render :partial => "map", :locals => { :address => @address } %>
+<%= render :partial => "map", :gps_position => @address.gps_position %>
 
 <%= link_to t(:edit), edit_address_path(@address) %> |
 <%= link_to t(:back), addresses_path %>

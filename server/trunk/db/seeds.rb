@@ -52,6 +52,12 @@ TimeEntryType.create!(:description => "Wasserzähler ersetzen", :time_entry_type
     TimeEntryTypeMaterial.new(:material => materials[9]),
   ])
 
+Address.create!([
+  { :line1 => "Hungerbergstr. 1", :zip => "8046", :place => "Zürich" },
+  { :line1 => "Oberseestrasse 10", :zip => "8640", :place => "Rapperswil" },
+  { :line1 => "Bundesgasse 3", :zip => "3005", :place => "Bern" },
+  { :line1 => "Hungerbergstr. 4", :zip => "8046", :place => "Zürich" },
+  ])
 
 # It may be a good idea to have the same test data as the initial data? The use this command to load all fixtures!
 # system("rake db:fixtures:load")

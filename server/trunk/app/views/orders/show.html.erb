@@ -4,13 +4,16 @@
 </p>
 
 <p>
-  <b><%= Order.human_attribute_name(:address) %>:</b>
-  <%= render :partial => "addresses/address", :locals => { :address => @order.address } %>
+  <b><%= Order.human_attribute_name(:description) %>:</b>
+  <%= @order.description %>
 </p>
 
 <p>
-  <b><%= Order.human_attribute_name(:description) %>:</b>
-  <%= @order.description %>
+  <b><%= Order.human_attribute_name(:address) %>:</b>
+  <% unless @order.address.nil? %>
+    <%= render :partial => "addresses/address", :locals => { :address => @order.address } %>
+    <%= render :partial => "addresses/map", :gps_position => @order.address.gps_position %>
+  <% end %>
 </p>
 
 <p>
