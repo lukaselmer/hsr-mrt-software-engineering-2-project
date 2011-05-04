@@ -14,34 +14,39 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <div id="user_nav">
-      <div>
-        <% if user_signed_in? %>
-          Angemeldet als <%= current_user.email %>
-          <%= link_to "Abmelden", destroy_user_session_path %>
-        <% else %>
-          <%= link_to "Anmelden", new_user_session_path %>
-        <% end %>
+    <div class="outer-main">
+      <div class="navigation">
+        <ul class="fl">
+          <li><%= link_to "Stundeneinträge", time_entries_path %></li>
+          <li><%= link_to "Aufträge", orders_path %></li>
+        </ul>
+        <ul class="fl">
+          <li><%= link_to "Kunden", customers_path %></li>
+          <li><%= link_to "Adressen", addresses_path %></li>
+        </ul>
+        <ul class="fl">
+          <li><%= link_to "Stundeneintragstypen", time_entry_types_path %></li>
+          <li><%= link_to "Materialien", materials_path %></li>
+        </ul>
+        <ul class="fl">
+          <li><%= link_to "Benutzer", users_path %></li>
+        </ul>
+        <div class="fr">
+          <% if user_signed_in? %>
+            Angemeldet als <%= link_to current_user.email, user_path(current_user) %> | <%= link_to "Abmelden", destroy_user_session_path %>
+          <% else %>
+            <%= link_to "Anmelden", new_user_session_path %>
+          <% end %>
+        </div>
+        <div class="clearer"></div>
       </div>
-      <ul>
-        <li><%= link_to "Benutzer", users_path %></li>
-        <li><%= link_to "Stundeneinträge", time_entries_path %></li>
-        <li><%= link_to "Kunden", customers_path %></li>
-        <li><%= link_to "Materialien", materials_path %></li>
-        <li><%= link_to "Aufträge", orders_path %></li>
-        <li><%= link_to "Adressen", addresses_path %></li>
-        <li><%= link_to "Stundeneintragstypen", time_entry_types_path %></li>
-      </ul>
+      <% if flash[:alert] -%>
+        <p id='alert'><%=h flash[:alert] %></p>
+      <% end -%>
+      <% if flash[:notice] -%>
+        <p id='notice'><%=h flash[:notice] %></p>
+      <% end -%>
+      <div><%= yield %></div>
     </div>
-    <% if flash[:alert] -%>
-      <p id='alert'><%=h flash[:alert] %></p>
-    <% end -%>
-    <% if flash[:notice] -%>
-      <p id='notice'><%=h flash[:notice] %></p>
-    <% end -%>
-    <div class="main_container">
-      <%= yield %>
-    </div>
-
   </body>
 </html>
