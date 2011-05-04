@@ -74,7 +74,8 @@ h2 img, h3 img, h4 img, h5 img, h6 img {
 }
 
 p {
-    margin: 0 0 1.5em;
+    /*margin: 0 0 1.5em;*/
+    margin: 0.5em 0 0.5em 0;
 }
 
 

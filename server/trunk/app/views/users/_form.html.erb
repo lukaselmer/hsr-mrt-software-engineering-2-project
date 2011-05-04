@@ -20,6 +20,10 @@
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
+    <%= f.label :phone %><br />
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email %>
   </div>
@@ -29,7 +33,7 @@
   </div>
   <div class="field">
     <%= f.label :type %><br />
-    <%= f.select :type, @types %>
+    <%= f.select :type, User.type_for_select %>
   </div>
   <div class="actions">
     <%= f.submit %>

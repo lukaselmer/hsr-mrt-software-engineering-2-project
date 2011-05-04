@@ -1,9 +1,10 @@
 <h1><%= t(:overview)%> <%= User.model_name.human %></h1>
+<% fields = [:id, :first_name, :last_name, :phone, :email, :human_model_name] %>
 <table>
   <tr>
-    <th><%= User.human_attribute_name(:id) %> </th>
-    <th><%= t (:name) %> </th>
-    <th><%= User.human_attribute_name(:type) %> </th>
+    <% fields.each do |f| %>
+      <th><%= User.human_attribute_name(f) %></th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -11,9 +12,9 @@
 
   <% @users.each do |user| %>
     <tr>
-      <td><%= user.id %></td>
-      <td><%= user %></td>
-      <td><%= user.type %></td>
+      <% fields.each do |f| %>
+        <td><%= user.send(f) %></td>
+      <% end %>
       <td><%= link_to t(:show), user_path(user) %></td>
 
       <% if write_access? user %>

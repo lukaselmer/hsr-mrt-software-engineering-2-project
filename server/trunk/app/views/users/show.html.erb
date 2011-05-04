@@ -1,16 +1,11 @@
 <% fields =  User.column_names %>
-<% fields.delete_if { |x| x=='encrypted_password' || x=='remember_created_at' || x== 'password_salt' || x=='type'} %>
+<% fields = [:id, :first_name, :last_name, :phone, :email, :human_model_name] %>
 <% fields.each do |f| %>
   <p>
     <b><%= User.human_attribute_name(f) %>:</b>
     <%= @user.send(f) %>
   </p>
 <% end %>
-
-<p>
-  <b><%= User.human_attribute_name(:user_type) %>:</b>
-  <%= @user.type %>
-</p>
 
 <%= link_to t(:edit), edit_user_path(@user) %> |
 <%= link_to t(:back), users_path %>

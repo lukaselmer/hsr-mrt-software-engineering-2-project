@@ -18,21 +18,13 @@ class User < ActiveRecord::Base
   scope :field_workers, where(:type => TYPE_FIELD_WORKER)
   scope :secretaries, where(:type => TYPE_SECRETARY)
 
-  def secretary?; type == TYPE_SECRETARY; end
-  def field_worker?; type == TYPE_FIELD_WORKER; end
-
-  def type_human_name
-    return secretary_human_name if secretary?
-    return field_worker_human_name if field_worker?
-    raise 'Invalid user type'
-  end
+  def secretary?; is_a? Secretary; end
+  def field_worker?; is_a? FieldWorker; end
+  def human_model_name; self.class.model_name.human; end
 
   def self.type_for_select
-    [[secretary_human_name, TYPE_SECRETARY], [field_worker_human_name, TYPE_FIELD_WORKER]]
+    [[Secretary.model_name.human, TYPE_SECRETARY], [FieldWorker.model_name.human, TYPE_FIELD_WORKER]]
   end
-
-  def self.secretary_human_name; human_attribute_name(:user_type_secretary); end
-  def self.field_worker_human_name; human_attribute_name(:user_type_field_worker); end
 
   def self.for_select(type=nil)
     set = all

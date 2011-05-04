@@ -12,12 +12,16 @@ de:
       gps_position: GPS Position
       applied_material: verwendetes Material
       time_entry_type: Stundeneintragstyp
+      secretary: Sekretärin
+      field_worker: Aussendienstmitarbeiter
     attributes:
       order:
+        id: ID
         customer_id: Kunde
         created_at: Erstellt am
         description: Beschreibung
       address:
+        id: ID
         line1: Adresszeile1
         line2: Adresszeile2
         line3: Adresszeile3
@@ -26,21 +30,25 @@ de:
         created_at: Erstellt am
         updated_at: Aktualisiert am
       customer:
+        id: ID
         first_name: Vorname
         last_name: Nachname
         phone: Telefonnummer
       gps_position:
+        id: ID
         latitude: Breitengrad
         longitude: Längengrad
         created_at: Erstellt am
         updated_at: Aktualisiert am
       time_entry_type:
+        id: ID
         description: Typ
         valid_until: Gültig bis
         created_at: Erstellt am
         updated_at: Aktualisiert am
         time_entry_type_id: Vorgänger
       time_entry:
+        id: ID
         customer_id: Kunde
         gps_position_id: GPS Position
         order_id: Auftrag
@@ -52,8 +60,10 @@ de:
         created_at: Erstellt am
         updated_at: Aktualisiert am
       applied_material:
+        id: ID
         amount: Anzahl
       material:
+        id: ID
         catalog_id: Katalogid
         description: Beschreibung
         dimensions: Dimension
@@ -62,14 +72,13 @@ de:
         created_at: Erstellt am
         updated_at: Aktualisiert am
       user:
-         email: Email
-         first_name: Vorname
-         last_name: Nachname
-         phone: Telefonnummer
-         type: Typ
-         user_type_secretary: Sekretärin
-         user_type_field_worker: Aussendienstmitarbeiter
-         created_at: Erstellt am
-         updated_at: Aktualisiert am
-
-        
+        id: ID
+        email: Email
+        first_name: Vorname
+        last_name: Nachname
+        phone: Telefonnummer
+        type: Typ
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+        human_model_name: Benutzertyp
+        password: Passwort
