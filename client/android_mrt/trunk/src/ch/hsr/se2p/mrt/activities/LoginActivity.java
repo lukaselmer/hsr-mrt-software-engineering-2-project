@@ -64,7 +64,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void createClickListener(Button loginBtn) {
 		loginBtn.setOnClickListener(new OnClickListener() {
 			@Override
-			public void onClick(View v) {
+			public void onClick(final View v) {
 				checkLoginData();
 			}
 		});

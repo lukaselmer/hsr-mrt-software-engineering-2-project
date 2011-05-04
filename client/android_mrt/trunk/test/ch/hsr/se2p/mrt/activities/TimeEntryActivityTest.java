@@ -26,7 +26,6 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	private Solo solo;
 	private Button button;
 	private TextView txtTime;
-	private Dao<TimeEntry, ?> dao;
 	private int count;
 	private TimeEntry timeEntry;
 	private Customer customer;
@@ -44,7 +43,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		activity = getActivity();
 		retrieveWidgetsById();
 		customer = activity.getHelper().getCustomerDao().queryForAll().get(0);
-		this.solo = new Solo(getInstrumentation(), activity);
+		solo = new Solo(getInstrumentation(), activity);
 	}
 
 	private void retrieveWidgetsById() {
@@ -86,8 +85,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
 		try {
-			setDao();
-			assertEquals(count + 1, dao.queryForAll().size());
+			assertEquals(count + 1, getDao().queryForAll().size());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -114,8 +112,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	public void testCreateTimeEntryWithTimeEntryType() {
 		setSpinner();
 		try {
-			setDao();
-			timeEntry = dao.queryForAll().get(count);
+			timeEntry = getDao().queryForAll().get(count);
 			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -126,8 +123,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	public void testCreateTimeEntryWithCustomer() {
 		setCustomerName();
 		try {
-			setDao();
-			timeEntry = dao.queryForAll().get(count);
+			timeEntry = getDao().queryForAll().get(count);
 			assertEquals(customer.getId(), timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,8 +138,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 			}
 		});
 		try {
-			setDao();
-			timeEntry = dao.queryForAll().get(count);
+			timeEntry = getDao().queryForAll().get(count);
 			assertEquals(null, timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -154,8 +149,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	public void testCreateTimeEntryWithDescription() {
 		setDescription();
 		try {
-			setDao();
-			timeEntry = dao.queryForAll().get(count);
+			timeEntry = getDao().queryForAll().get(count);
 			assertEquals(DESCRIPTION, timeEntry.getDescription());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,9 +157,9 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 
-	private void setDao() throws SQLException {
+	private Dao<TimeEntry, ?> getDao() throws SQLException {
 		performClickOnButton(START);
-		dao = activity.getHelper().getDao(TimeEntry.class);
+		Dao<TimeEntry, ?> dao = activity.getHelper().getDao(TimeEntry.class);
 		count = dao.queryForAll().size();
 		performClickOnButton(STOP);
 		try {
@@ -174,6 +168,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 			e.printStackTrace();
 			assert (false);
 		}
+		return dao;
 	}
 
 	private void performClickOnButton(String button) {
