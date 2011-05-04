@@ -65,7 +65,7 @@ de:
         amount: Anzahl
       material:
         id: ID
-        catalog_id: Katalogid
+        catalog_number: Katalognummer
         description: Beschreibung
         dimensions: Dimension
         price: Preis

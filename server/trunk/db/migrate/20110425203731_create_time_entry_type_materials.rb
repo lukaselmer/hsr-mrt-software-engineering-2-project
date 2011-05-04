@@ -3,7 +3,7 @@ class CreateTimeEntryTypeMaterials < ActiveRecord::Migration
     create_table :time_entry_type_materials do |t|
       t.references :time_entry_type
       t.references :material
-      t.integer :amount
+      t.integer :amount, :default => 1
       
       t.timestamps
     end

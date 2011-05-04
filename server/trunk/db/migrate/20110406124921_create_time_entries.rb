@@ -10,7 +10,6 @@ class CreateTimeEntries < ActiveRecord::Migration
       t.text :description
       t.timestamp :time_start
       t.timestamp :time_stop
-      t.string :audio_record_name
       
       t.timestamps
     end

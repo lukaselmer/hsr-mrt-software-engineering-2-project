@@ -3,7 +3,7 @@ class CreateAppliedMaterials < ActiveRecord::Migration
     create_table :applied_materials do |t|
       t.references :material
       t.references :order
-      t.integer :amount
+      t.integer :amount, :default => 1
       
       t.timestamps
     end

@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
   create_table "applied_materials", :force => true do |t|
     t.integer  "material_id"
     t.integer  "order_id"
-    t.integer  "amount"
+    t.integer  "amount",      :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
 
   create_table "materials", :force => true do |t|
     t.integer  "material_id"
-    t.string   "catalog_id"
+    t.string   "catalog_number"
     t.text     "description"
     t.string   "dimensions"
-    t.decimal  "price",       :precision => 14, :scale => 2
+    t.decimal  "price",          :precision => 14, :scale => 2
     t.datetime "valid_until"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
     t.text     "description"
     t.datetime "time_start"
     t.datetime "time_stop"
-    t.string   "audio_record_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -85,13 +84,14 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
   create_table "time_entry_type_materials", :force => true do |t|
     t.integer  "time_entry_type_id"
     t.integer  "material_id"
+    t.integer  "amount",             :default => 1
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "time_entry_types", :force => true do |t|
     t.integer  "time_entry_type_id"
-    t.text     "description"
+    t.string   "description"
     t.datetime "valid_until"
     t.datetime "created_at"
     t.datetime "updated_at"
