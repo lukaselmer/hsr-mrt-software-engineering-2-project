@@ -1,6 +1,11 @@
 <p>
   <b><%= Order.human_attribute_name(:customer_id) %>:</b>
-  <%= [ @order.customer.last_name, @order.customer.first_name ].join(', ') unless @order.customer.nil? %>
+  <%= @order.customer %>
+</p>
+
+<p>
+  <b><%= Order.human_attribute_name(:address) %>:</b>
+  <%= render :partial => "addresses/address", :locals => { :address => @order.address } %>
 </p>
 
 <p>
@@ -10,41 +15,7 @@
 
 <p>
   <b>Stundeneinträge:</b>
-<table>
-  <tr>
-    <th><%=TimeEntryType.human_attribute_name(:description)%></th>
-    <th><%=TimeEntry.human_attribute_name(:description)%></th>
-    <th><%=TimeEntry.human_attribute_name(:time_start)%></th>
-    <th><%=TimeEntry.human_attribute_name(:time_stop)%></th>
-    <th><%= t(:duration)%></th>
-    <!--<th>Position</th>
-    <th>Audio record name</th>-->
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @order.time_entries.each do |time_entry| %>
-    <tr>
-      <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
-      <td><%= time_entry.description %></td>
-      <td><%= l time_entry.time_start %></td>
-      <td><%= l time_entry.time_stop %></td>
-      <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
-
-      <td><%= link_to t(:show), time_entry %></td>
-
-      <% if write_access? time_entry %>
-        <td><%= link_to t(:edit), edit_time_entry_path(time_entry) %></td>
-        <td><%= link_to t(:destroy), time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
-      <% else %>
-        <td></td>
-        <td></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-
+  <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :order => @order } %>
 </p>
 
 <%= link_to t(:edit), edit_order_path(@order) %> |

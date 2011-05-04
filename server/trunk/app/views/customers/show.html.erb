@@ -20,13 +20,7 @@
 
 <p>
   <b>Address:</b><br />
-  <% unless @customer.address.nil? %>
-    <% a = @customer.address %>
-    <% [a.line1, a.line2, a.line3].compact.delete_if { |v| v.strip.blank? }.each do |line| %>
-      <span><%= line %></span><br />
-    <% end %>
-    <span><%= a.zip %> <%= a.place %></span>
-  <% end %>
+  <%= render :partial => "addresses/address", :locals => { :address => @customer.address } %>
 </p>
 
 <p>
