@@ -1,5 +1,5 @@
 <h1><%= t(:overview)%> Adressen</h1>
-<% fields = Address.column_names + ['gps_position'] %>
+<% fields = [:id, :line1, :line2, :line3, :zip, :place] %>
 <table>
   <tr>
     <% fields.each do |f| %>

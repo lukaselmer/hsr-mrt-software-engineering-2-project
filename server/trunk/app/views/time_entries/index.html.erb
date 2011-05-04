@@ -1,18 +1,13 @@
 <h1><%= t(:overview) %>
   Stundeneinträge</h1>
 
-<% fields = TimeEntry.column_names %>
-<% fields.delete('audio_record_name') %>
-<% fields.delete('hashcode') %>
+<% fields = [:id, :customer, :time_entry_type, :user, :order, :description, :duration ] %>
 
 <table>
   <tr>
     <% fields.each do |f| %>
       <th><%= TimeEntry.human_attribute_name(f) %></th>
     <% end %>
-    <th><%= t(:duration)%></th>
-    <!--<th>Position</th>
-    <th>Audio record name</th>-->
     <th></th>
     <th></th>
     <th></th>
@@ -21,19 +16,12 @@
   <% @time_entries.each do |time_entry| %>
     <tr>
       <td><%= time_entry.id %></td>
-      <td><%= [ time_entry.customer.last_name, time_entry.customer.first_name ].join(', ') unless time_entry.customer.nil? %></td>
+      <td><%= time_entry.customer.to_s unless time_entry.customer.nil? %></td>
       <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
-      <td><%= [ time_entry.user.last_name, time_entry.user.first_name ].join(', ') unless time_entry.user.nil? %></td>
-      <td><%= [ time_entry.gps_position.latitude, time_entry.gps_position.longitude ].join(', ') unless time_entry.gps_position.nil? %></td>
-      <td><%= [ time_entry.order.created_at, time_entry.order.description ].join(', ') unless time_entry.order.nil? %></td>
-
+      <td><%= time_entry.user.to_s unless time_entry.user.nil? %></td>
+      <td><%= time_entry.order.to_s unless time_entry.order.nil? %></td>
       <td><%= time_entry.description %></td>
-      <td><%= l time_entry.time_start %></td>
-      <td><%= l time_entry.time_stop %></td>
-      <td><%= l time_entry.created_at %></td>
-      <td><%= l time_entry.updated_at %></td>
-      <td><%= l Time.at(time_entry.time_stop - time_entry.time_start).gmtime, :format => :time %></td>
-
+      <td><%= l time_entry.duration, :format => :time %></td>
       <td><%= link_to t(:show), time_entry %></td>
 
       <% if write_access? time_entry %>

@@ -11,4 +11,8 @@ class TimeEntry < ActiveRecord::Base
   def remove_hashcode
     update_attribute(:hashcode, nil)
   end
+
+  def duration
+    Time.at(time_stop - time_start).gmtime
+  end
 end
