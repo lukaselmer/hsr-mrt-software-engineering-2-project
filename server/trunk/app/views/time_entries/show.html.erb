@@ -1,41 +1,23 @@
-<% fields= [:description,:time_start,:time_stop,:created_at, :updated_at] %>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:id)%>:</b>
-  <%= @time_entry.id %>
-</p>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:customer_id)%>:</b>
-  <%= [ @time_entry.customer.last_name, @time_entry.customer.first_name ].join(', ') unless @time_entry.customer.nil? %>
-</p>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:time_entry_type_id)%>:</b>
-  <%= @time_entry.time_entry_type.description unless @time_entry.time_entry_type.nil?  %>
-</p>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:user_id)%>:</b>
-  <%= [@time_entry.user.first_name,@time_entry.user.last_name].join(', ') unless @time_entry.user.nil?  %>
-</p>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:gps_position_id)%>:</b>
-  <%= [@time_entry.gps_position.latitude, @time_entry.gps_position.longitude].join(', ') unless @time_entry.gps_position.nil?  %>
-</p>
-
-<p>
-  <b><%= TimeEntry.human_attribute_name(:order_id)%>:</b>
-  <%= [@time_entry.order.created_at,@time_entry.order.description].join(', ') unless @time_entry.order.nil?  %>
-</p>
-
+<% fields= [:id, :customer, :time_entry_type, :user, :order, :description] %>
 
 <% fields.each do |f| %>
   <p>
-    <b><%= TimeEntry.human_attribute_name(f) %></b>
+    <b><%= TimeEntry.human_attribute_name(f) %>:</b>
     <%= @time_entry.send(f) %>
   </p>
+<% end %>
+
+  <p>
+    <b><%= TimeEntry.human_attribute_name(:time_start) %>:</b>
+    <%= l @time_entry.time_start %>
+  </p>
+  <p>
+    <b><%= TimeEntry.human_attribute_name(:time_stop) %>:</b>
+    <%= l @time_entry.time_stop %>
+  </p>
+
+<% unless @time_entry.gps_position.nil? %>
+  <%= render :partial => "addresses/map", :locals => { :gps_position => @time_entry.gps_position } %>
 <% end %>
 
 <%= link_to t(:edit), edit_time_entry_path(@time_entry) %> |

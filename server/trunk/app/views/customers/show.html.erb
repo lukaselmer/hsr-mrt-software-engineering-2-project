@@ -25,28 +25,7 @@
 
 <p>
   <b>Aufträge:</b>
-<table>
-  <tr>
-    <th><%= Order.human_attribute_name(:created_at) %>:</th>
-    <th><%= Order.human_attribute_name(:description) %>:</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-  <% @customer.orders.each do |order| %>
-    <tr>
-      <td><%= order.created_at %></td>
-      <td><%= order.description %></td>
-      <td><%= link_to t(:show), order %></td>
-
-      <% if write_access? order %>
-        <td><%= link_to t(:edit), edit_order_path(order) %></td>
-        <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
+  <%= render :partial => "orders/table", :locals => { :orders => @customer.orders } %>
 </p>
 
 <%= link_to t(:edit), edit_customer_path(@customer) %> |

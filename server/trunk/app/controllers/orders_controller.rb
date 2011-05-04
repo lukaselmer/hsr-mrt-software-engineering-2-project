@@ -9,7 +9,6 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1
-  # GET /orders/1.xml
   def show
     @order = Order.find(params[:id])
 
@@ -24,7 +23,6 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @order }
     end
   end
 

@@ -1,11 +1,11 @@
-<% fields =  Address.column_names + ['gps_position'] %>
+<% fields =  [:id, :line1, :line2, :line3, :zip, :place] %>
 <% fields.each do |f| %>
   <p>
     <b><%= Address.human_attribute_name(f) %>:</b>
     <%= @address.send(f) %>
   </p>
 <% end %>
-<%= render :partial => "map", :gps_position => @address.gps_position %>
+<%= render :partial => "map", :locals => { :gps_position => @address.gps_position } %>
 
 <%= link_to t(:edit), edit_address_path(@address) %> |
 <%= link_to t(:back), addresses_path %>

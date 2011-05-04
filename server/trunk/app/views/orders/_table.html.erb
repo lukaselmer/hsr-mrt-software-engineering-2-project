@@ -1,0 +1,34 @@
+<% unless orders.nil? %>
+  <% fields =  [:id, :customer, :address] %>
+
+  <table>
+    <tr>
+      <% fields.each do |f| %>
+        <th><%= Order.human_attribute_name(f) %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% orders.each do |order| %>
+      <tr>
+        <% fields.each do |f| %>
+          <td><%= order.send(f) %></td>
+        <% end %>
+        <td><%= link_to t(:show), order %></td>
+
+        <% if write_access? order %>
+          <td><%= link_to t(:edit), edit_order_path(order) %></td>
+          <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+  <% if write_access? %>
+    <%= link_to 'Neuer ' + Order.model_name.human, new_order_path %>
+  <% end %>
+<% end %>

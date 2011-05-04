@@ -12,7 +12,7 @@
   <b><%= Order.human_attribute_name(:address) %>:</b>
   <% unless @order.address.nil? %>
     <%= render :partial => "addresses/address", :locals => { :address => @order.address } %>
-    <%= render :partial => "addresses/map", :gps_position => @order.address.gps_position %>
+    <%= render :partial => "addresses/map", :locals => { :gps_position => @order.address.gps_position } %>
   <% end %>
 </p>
 
