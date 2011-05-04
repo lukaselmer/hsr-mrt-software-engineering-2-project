@@ -26,7 +26,6 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	private Solo solo;
 	private Button button;
 	private TextView txtTime;
-	private int count;
 	private TimeEntry timeEntry;
 	private Customer customer;
 
@@ -43,7 +42,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		activity = getActivity();
 		retrieveWidgetsById();
 		customer = activity.getHelper().getCustomerDao().queryForAll().get(0);
-		solo = new Solo(getInstrumentation(), activity);
+		this.solo = new Solo(getInstrumentation(), activity);
 	}
 
 	private void retrieveWidgetsById() {
@@ -84,29 +83,14 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 
 	public void testCreateTimeEntryWithoutAnyInformation() {
-//		try { //das gebaschtel gaht
-//			timeEntry = getDao().queryForAll().get(count);
-//			assertEquals("", timeEntry.getDescription());
-//			assertEquals(null, timeEntry.getCustomerId());
-//			assertEquals(new Integer(1), timeEntry.getTimeEntryTypeId());
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			assert (false);
-			//das isch mis gebaschtel, gaht aber nöd
-			try {
-				assertEquals(count + 1, activity.getHelper().getDao(TimeEntry.class).queryForAll().size());
-			} catch (SQLException e) {
-				e.printStackTrace();
-				assert(false);
-			}
-		
-			//so isch es nach em Refactoring vom Lukas
-			try {
-				assertEquals(count + 1, getDao().queryForAll().size());
-			} catch (SQLException e) {
-				e.printStackTrace();
-				assert(false);
-			}
+		try {
+			int count = getDaoCount();
+			startAndStopTimeMeasurement();
+			assertEquals(count + 1, getDao().queryForAll().size());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			assert (false);
+		}
 	}
 
 	public void testSpinnerSelection() {
@@ -129,7 +113,8 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	public void testCreateTimeEntryWithTimeEntryType() {
 		setSpinner();
 		try {
-			timeEntry = getDao().queryForAll().get(count);
+			startAndStopTimeMeasurement();
+			timeEntry = getTimeEntry(getDaoCount()-1);
 			assertEquals(TimeEntryActivity.hackForTimeEntryTypes().get(TEST_POSITION).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -140,9 +125,9 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	public void testCreateTimeEntryWithCustomer() {
 		setCustomerName();
 		try {
-			timeEntry = getDao().queryForAll().get(count);
+			startAndStopTimeMeasurement();
+			timeEntry = getTimeEntry(getDaoCount()-1);
 			assertEquals(customer.getId(), timeEntry.getCustomerId());
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -156,7 +141,8 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 			}
 		});
 		try {
-			timeEntry = getDao().queryForAll().get(count);
+			startAndStopTimeMeasurement();
+			timeEntry = getTimeEntry(getDaoCount()-1);
 			assertEquals(null, timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,12 +150,11 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 
-	//TODO: create Test for TimeEntryTyp
-	
 	public void testCreateTimeEntryWithDescription() {
 		setDescription();
 		try {
-			timeEntry = getDao().queryForAll().get(count);
+			startAndStopTimeMeasurement();
+			timeEntry = getTimeEntry(getDaoCount()-1);
 			assertEquals(DESCRIPTION, timeEntry.getDescription());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -177,10 +162,8 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 
-	private Dao<TimeEntry, ?> getDao() throws SQLException {
+	private void startAndStopTimeMeasurement() throws SQLException {
 		performClickOnButton(START);
-		Dao<TimeEntry, ?> dao = activity.getHelper().getDao(TimeEntry.class);
-		count = dao.queryForAll().size();
 		performClickOnButton(STOP);
 		try {
 			Thread.sleep(1000);
@@ -188,7 +171,18 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 			e.printStackTrace();
 			assert (false);
 		}
-		return dao;
+	}
+	
+	private Dao<TimeEntry, ?> getDao() throws SQLException{
+		return activity.getHelper().getDao(TimeEntry.class);
+	}
+	
+	private int getDaoCount() throws SQLException{
+		return getDao().queryForAll().size();
+	}
+	
+	private TimeEntry getTimeEntry(int index) throws SQLException{
+		return getDao().queryForAll().get(index);
 	}
 
 	private void performClickOnButton(String button) {
