@@ -5,13 +5,13 @@ de:
       address: Adresse
       addresses: Adressen
       customer: Kunde
-      time_entry: Zeiteintrag
-      time_entries: Zeiteinträge
+      time_entry: Stundeneintrag
+      time_entries: Stundeneinträge
       material: Material
       user: Benutzer
       gps_position: GPS Position
       applied_material: verwendetes Material
-      time_entry_type: Zeiteintragstyp
+      time_entry_type: Stundeneintragstyp
     attributes:
       order:
         customer_id: Kunde
@@ -44,7 +44,7 @@ de:
         customer_id: Kunde
         gps_position_id: GPS Position
         order_id: Auftrag
-        time_entry_type_id: Zeiteintragstyp
+        time_entry_type_id: Stundeneintragstyp
         user_id: Aussendienstmitarbeiter
         description: Beschreibung
         time_start: Startzeitpunkt
