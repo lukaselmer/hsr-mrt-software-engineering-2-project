@@ -1,4 +1,4 @@
-<% fields = [:id, :customer, :time_entry_type, :user, :order, :description, :duration ] %>
+<% fields = [:id, :customer, :time_entry_type, :user, :order, :description, :duration ] if fields.nil? %>
 
 <table>
   <tr>
@@ -12,13 +12,13 @@
 
   <% time_entries.each do |time_entry| %>
     <tr id="<%= dom_id(time_entry) %>">
-      <td><%= time_entry.id %></td>
-      <td><%= time_entry.customer %></td>
-      <td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td>
-      <td><%= time_entry.user %></td>
-      <td><%= time_entry.order %></td>
-      <td><%= time_entry.description %></td>
-      <td><%= l time_entry.duration, :format => :time %></td>
+      <% if fields.include? :id %><td><%= time_entry.id %></td><% end %>
+      <% if fields.include? :customer %><td><%= time_entry.customer %></td><% end %>
+      <% if fields.include? :time_entry_type %><td><%= time_entry.time_entry_type.description unless time_entry.time_entry_type.nil? %></td><% end %>
+      <% if fields.include? :user %><td><%= time_entry.user %></td><% end %>
+      <% if fields.include? :order %><td><%= time_entry.order %></td><% end %>
+      <% if fields.include? :description %><td><%= time_entry.description %></td><% end %>
+      <% if fields.include? :duration %><td><%= l time_entry.duration, :format => :time %></td><% end %>
       <td><%= link_to t(:show), time_entry %></td>
 
       <% if write_access? time_entry %>

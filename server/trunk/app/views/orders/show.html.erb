@@ -20,7 +20,7 @@
 
 <p>
   <b>Stundeneinträge:</b>
-  <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :order => @order } %>
+  <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :fields => [ :id, :time_entry_type, :user, :duration ] } %>
 
   <br />
 
