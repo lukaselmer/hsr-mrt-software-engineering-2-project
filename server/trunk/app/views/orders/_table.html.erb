@@ -6,6 +6,7 @@
       <% fields.each do |f| %>
         <th><%= Order.human_attribute_name(f) %></th>
       <% end %>
+      <th><%= Order.human_attribute_name(:material) %></th>
       <th></th>
       <th></th>
       <th></th>
@@ -17,6 +18,8 @@
         <% fields.each do |f| %>
           <td><%= order.send(f) %></td>
         <% end %>
+        <td><%= render 'applied_materials', :applied_materials => order.applied_materials %></td>
+
         <td><%= link_to "Material hinzufügen", add_material_order_path(order), :remote => true %></td>
 
         <td><%= link_to t(:show), order %></td>

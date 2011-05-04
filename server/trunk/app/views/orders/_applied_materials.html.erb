@@ -1,0 +1,10 @@
+<ul>
+  <% applied_materials.each do |applied_material| %>
+    <% material = applied_material.material %>
+    <li>
+      <%= link_to material do %>
+        <%= material %>, <%= number_to_currency material.price %> (<%= applied_material.amount %> Stück)
+      <% end %>
+    </li>
+  <% end %>
+</ul>
