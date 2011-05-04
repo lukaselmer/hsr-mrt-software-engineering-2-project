@@ -1,12 +1,12 @@
 <h1><%= t(:overview)%> <%= User.model_name.human %></h1>
 
-<% fields =  User.column_names - %w(encrypted_password remember_created_at password_salt user_type)%>
+<% fields =  User.column_names - %w(encrypted_password remember_created_at password_salt type)%>
 <table>
   <tr>
     <% fields.each do |f| %>
       <th><%= User.human_attribute_name(f) %></th>
     <% end %>
-    <th><%= User.human_attribute_name(:user_type) %> </th>
+    <th><%= User.human_attribute_name(:type) %> </th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,12 +17,12 @@
       <% fields.each do |f| %>
         <td><%= user.send(f) %></td>
       <% end %>
-      <td><%= @user_types.index(user.user_type) %></td>
-      <td><%= link_to t(:show), user %></td>
+      <td><%= user.type %></td>
+      <td><%= link_to t(:show), user_path(user) %></td>
 
       <% if write_access? user %>
         <td><%= link_to t(:edit), edit_user_path(user) %></td>
-        <td><%= link_to t(:destroy), user, :confirm => :confirm_delete, :method => :delete %></td>
+        <td><%= link_to t(:destroy), user_path(user), :confirm => :confirm_delete, :method => :delete %></td>
       <% end %>
     </tr>
   <% end %>

@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
   before_filter :authorize_secretary!, :only => [:new, :create, :edit, :update, :destroy]
+  before_filter :init_type
+  
+  def init_type
+    @types = User.type_for_select
+  end
 
   # GET /users
   def index
     @users = User.all
-    @user_types = User::TYPES
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,28 +18,25 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     @user = User.find(params[:id])
-    @user_types = User::TYPES
   end
 
   # GET /users/new
   def new
     @user = User.new
-    @user_types = User::TYPES
   end
 
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-    @user_types = User::TYPES
   end
 
   # POST /users
   def create
     @user = User.new(params[:user])
-    @user_types = User::TYPES
+    @user.type = params[:user][:type]
 
     if @user.save
-      redirect_to(@user, :notice => User.model_name.human + ' ' + t(:create_successful))
+      redirect_to(user_path(@user), :notice => User.model_name.human + ' ' + t(:create_successful))
     else
       render :action => "new"
     end
@@ -44,10 +45,10 @@ class UsersController < ApplicationController
   # PUT /users/1
   def update
     @user = User.find(params[:id])
-    @user_types = User::TYPES
+    @user.type = params[:user][:type]
 
     if @user.update_attributes(params[:user])
-      redirect_to(@user, :notice => User.model_name.human + ' ' + t(:update_successful))
+      redirect_to(user_path(@user), :notice => User.model_name.human + ' ' + t(:update_successful))
     else
       render :action => "edit"
     end

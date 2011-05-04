@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20110503185724) do
     t.string   "password_salt"
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "user_type"
+    t.string   "type"
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"

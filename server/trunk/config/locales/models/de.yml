@@ -66,7 +66,9 @@ de:
          first_name: Vorname
          last_name: Nachname
          phone: Telefonnummer
-         user_type: Typ
+         type: Typ
+         user_type_secretary: Sekretärin
+         user_type_field_worker: Aussendienstmitarbeiter
          created_at: Erstellt am
          updated_at: Aktualisiert am
 
