@@ -67,4 +67,9 @@ class TimeEntryTypesController < ApplicationController
       format.html { redirect_to(time_entry_types_url) }
     end
   end
+
+  def add_material
+    @time_entry_type = TimeEntryType.find(params[:id])
+    @time_entry_type_material = TimeEntryTypeMaterial.new(:time_entry_type => @time_entry_type)
+  end
 end

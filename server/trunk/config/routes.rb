@@ -1,8 +1,8 @@
 Mrt::Application.routes.draw do
   
+  resources :time_entry_type_materials
   resources :applied_materials
   resources :materials
-  resources :time_entry_types
   
   resources :addresses
 
@@ -24,6 +24,12 @@ Mrt::Application.routes.draw do
   end
   
   resources :orders do
+    member do
+      get 'add_material'
+    end
+  end
+  
+  resources :time_entry_types do
     member do
       get 'add_material'
     end
