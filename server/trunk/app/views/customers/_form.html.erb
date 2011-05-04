@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name %>
     <%= f.text_field :first_name %>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br />
+    <%= f.label :last_name %>
     <%= f.text_field :last_name %>
   </div>
   <div class="field">
-    <%= f.label :phone %><br />
+    <%= f.label :phone %>
     <%= f.text_field :phone %>
   </div>
 
   <div class="field">
-    <%= f.label :address %><br/>
+    <%= f.label :address %>
     <%= f.select("address_id", Address.for_select, {:include_blank => true}) %>
   </div>
 

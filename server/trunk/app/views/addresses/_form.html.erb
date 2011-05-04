@@ -1,34 +1,24 @@
 <%= form_for(@address) do |f| %>
-  <% if @address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this address from being saved:</h2>
-
-      <ul>
-      <% @address.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_error_messages f %>
 
   <div class="field">
-    <%= f.label :line1 %><br />
+    <%= f.label :line1 %>
     <%= f.text_field :line1 %>
   </div>
   <div class="field">
-    <%= f.label :line2 %><br />
+    <%= f.label :line2 %>
     <%= f.text_field :line2 %>
   </div>
   <div class="field">
-    <%= f.label :line3 %><br />
+    <%= f.label :line3 %>
     <%= f.text_field :line3 %>
   </div>
   <div class="field">
-    <%= f.label :place %><br />
+    <%= f.label :place %>
     <%= f.text_field :place %>
   </div>
   <div class="field">
-    <%= f.label :zip %><br />
+    <%= f.label :zip %>
     <%= f.text_field :zip %>
   </div>
   <div class="actions">
