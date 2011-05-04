@@ -34,19 +34,25 @@ Material.create!([
 
 ### TimeEntryTypes
 materials = Material.all
-TimeEntryType.create!(:description => "Heizung ansehen", :time_entry_type_materials => [
-    TimeEntryTypeMaterial.new(:material => materials[9]),
-  ])
-TimeEntryType.create!(:description => "Lavabo wechseln", :time_entry_type_materials => [
-    TimeEntryTypeMaterial.new(:material => materials[0]),
-    TimeEntryTypeMaterial.new(:material => materials[1]),
-    TimeEntryTypeMaterial.new(:material => materials[4], :amount => 5),
-    TimeEntryTypeMaterial.new(:material => materials[9]),
-  ])
-TimeEntryType.create!(:description => "Wasserzähler ersetzen", :time_entry_type_materials => [
-    TimeEntryTypeMaterial.new(:material => materials[8]),
-    TimeEntryTypeMaterial.new(:material => materials[9]),
-  ])
+t = TimeEntryType.create!(:description => "Heizung ansehen")
+t.time_entry_type_materials = [
+    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+  ]
+t.save
+t = TimeEntryType.create!(:description => "Lavabo wechseln")
+t.time_entry_type_materials = [
+    TimeEntryTypeMaterial.new(:material => materials[0], :time_entry_type => t),
+    TimeEntryTypeMaterial.new(:material => materials[1], :time_entry_type => t),
+    TimeEntryTypeMaterial.new(:material => materials[4], :time_entry_type => t, :amount => 5),
+    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+  ]
+t.save
+t = TimeEntryType.create!(:description => "Wasserzähler ersetzen")
+t.time_entry_type_materials = [
+    TimeEntryTypeMaterial.new(:material => materials[8], :time_entry_type => t),
+    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+  ]
+t.save
 
 ### Addresses
 Address.create!([
