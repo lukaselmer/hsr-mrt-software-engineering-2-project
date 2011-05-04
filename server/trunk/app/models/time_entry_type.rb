@@ -14,6 +14,8 @@ class TimeEntryType < ActiveRecord::Base
   end
   
   def to_s
-    [description, valid_until].join(', ')
+    s = [description]
+    s << valid_until unless valid_until.nil?
+    s.join(', ')
   end
 end

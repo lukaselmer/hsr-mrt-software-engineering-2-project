@@ -4,4 +4,12 @@ class Order < ActiveRecord::Base
   belongs_to :customer
 
   validates :customer_id, :presence => true
+
+  def self.for_select
+    all.collect { |o| [o, o.id] }
+  end
+
+  def to_s
+    [customer.to_s, created_at]
+  end
 end
