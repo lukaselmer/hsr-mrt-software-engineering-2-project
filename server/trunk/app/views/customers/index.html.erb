@@ -1,11 +1,11 @@
 <h1><%= t(:overview)%> Kunden</h1>
+<% fields = [:id, :first_name, :last_name, :phone, :address] %>
 
 <table>
   <tr>
-    <th><%= Customer.human_attribute_name(:id) %></th>
-    <th><%= t :name %></th>
-    <th><%= Customer.human_attribute_name(:phone) %></th>
-    <th><%= Customer.human_attribute_name(:address) %></th>
+    <% fields.each do |f| %>
+      <th><%= Customer.human_attribute_name(f) %></th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -13,10 +13,9 @@
 
   <% @customers.each do |customer| %>
     <tr>
-      <td><%= customer.id %></td>
-      <td><%= customer %></td>
-      <td><%= customer.phone %></td>
-      <td><%= customer.address unless customer.address.nil? %></td>
+      <% fields.each do |f| %>
+        <td><%= customer.send(f) %></td>
+      <% end %>
       <td><%= link_to t(:show), customer %></td>
 
       <% if write_access? customer %>

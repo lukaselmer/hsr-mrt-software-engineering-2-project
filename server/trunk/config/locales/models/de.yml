@@ -34,6 +34,7 @@ de:
         first_name: Vorname
         last_name: Nachname
         phone: Telefonnummer
+        address: Adresse
       gps_position:
         id: ID
         latitude: Breitengrad
