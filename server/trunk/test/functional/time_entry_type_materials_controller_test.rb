@@ -24,7 +24,7 @@ class TimeEntryTypeMaterialsControllerTest < ActionController::TestCase
       post :create, :time_entry_type_material => @time_entry_type_material.attributes
     end
 
-    assert_redirected_to time_entry_type_material_path(assigns(:time_entry_type_material))
+    assert_response :success
   end
 
   test "should show time_entry_type_material" do
@@ -39,14 +39,13 @@ class TimeEntryTypeMaterialsControllerTest < ActionController::TestCase
 
   test "should update time_entry_type_material" do
     put :update, :id => @time_entry_type_material.to_param, :time_entry_type_material => @time_entry_type_material.attributes
-    assert_redirected_to time_entry_type_material_path(assigns(:time_entry_type_material))
+    assert_response :success
   end
 
   test "should destroy time_entry_type_material" do
     assert_difference('TimeEntryTypeMaterial.count', -1) do
       delete :destroy, :id => @time_entry_type_material.to_param
     end
-
-    assert_redirected_to time_entry_type_materials_path
+    assert_response :success
   end
 end
