@@ -1,15 +1,5 @@
 <%= form_for(@time_entry_type) do |f| %>
-  <% if @time_entry_type.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@time_entry_type.errors.count, "error") %> prohibited this time_entry_type from being saved:</h2>
-
-      <ul>
-        <% @time_entry_type.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_error_messages f %>
 
   <div class="field">
     <%= f.label :description %>

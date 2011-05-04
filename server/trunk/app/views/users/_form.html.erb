@@ -1,15 +1,5 @@
 <%= form_for(@user, :as => :user, :url => (@user.new_record? ? users_path : user_path(@user))) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% @user.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_error_messages f %>
 
   <div class="field">
     <%= f.label :first_name %>

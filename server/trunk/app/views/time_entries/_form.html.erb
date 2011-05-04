@@ -1,18 +1,8 @@
 <%= form_for(@time_entry) do |f| %>
-  <% if @time_entry.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@time_entry.errors.count, "error") %> prohibited this time_entry from being saved:</h2>
-
-      <ul>
-        <% @time_entry.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_error_messages f %>
 
   <div class="field">
-    <%= f.label :order_id %>:<br />
+    <%= f.label :order_id %>
     <%= f.select(:order_id, Order.for_select, {:include_blank => true}) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + Order.model_name.human + ' erfassen', new_order_path %>
@@ -20,7 +10,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :customer_id %>:<br />
+    <%= f.label :customer_id %>
     <%= f.select(:customer_id, Customer.for_select, {:include_blank => true}) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_order_path %>
@@ -28,7 +18,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :time_entry_type_id %>:<br />
+    <%= f.label :time_entry_type_id %>
     <%= f.select(:time_entry_type_id, TimeEntryType.for_select, {:include_blank => true}) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
@@ -36,7 +26,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :user_id %>:<br />
+    <%= f.label :user_id %>
     <%=  f.select(:user_id, User.for_select(User::TYPE_FIELD_WORKER), {:include_blank => true}) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
@@ -44,20 +34,20 @@
   </div>
 
   <div class="field">
-    <%= f.label :gps_position_id %>:<br />
+    <%= f.label :gps_position_id %>
     <%= @time_entry.gps_position.nil? ? "-" : @time_entry.gps_position %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>:<br />
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
   <div class="field">
-    <%= f.label :time_start %>:<br />
+    <%= f.label :time_start %>
     <%= f.datetime_select :time_start %>
   </div>
   <div class="field">
-    <%= f.label :time_stop %>:<br />
+    <%= f.label :time_stop %>
     <%= f.datetime_select :time_stop %>
   </div>
   <div class="actions">

@@ -1,28 +1,18 @@
 <%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
-
-      <ul>
-        <% @order.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_error_messages f %>
 
   <div class="field">
-    <%= f.label :customer_id %>:<br />
+    <%= f.label :customer_id %>
     <%= f.select(:customer_id, Customer.for_select, { :include_blank => true }) %>
   </div>
 
   <div class="field">
-    <%= f.label :address_id %>:<br />
+    <%= f.label :address_id %>
     <%= f.select(:address_id, Address.for_select, { :include_blank => true }) %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>:<br />
+    <%= f.label :description %>
     <%= f.text_area :description %>
   </div>
   <div class="actions">
