@@ -4,12 +4,12 @@ one:
   catalog_number: MyString
   description: MyText
   dimensions: MyString
-  price: 
+  price: 52
   valid_until: 2011-04-24 20:41:00
 
 two:
   catalog_number: MyString
   description: MyText
   dimensions: MyString
-  price: 
+  price: 100
   valid_until: 2011-04-24 20:41:00
