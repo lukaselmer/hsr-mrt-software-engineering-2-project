@@ -21,7 +21,7 @@
 
   <div class="field">
     <%= f.label :time_entry_type_id %><br />
-    <%= f.select(:time_entry_type_id, @time_entry_types.collect {|t| [ [t.description,t.valid_until].join(', '), t.id ] }) %>
+    <%= f.select(:time_entry_type_id, TimeEntryType.for_select) %>
     <% if write_access? %>
       <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
     <% end %>
