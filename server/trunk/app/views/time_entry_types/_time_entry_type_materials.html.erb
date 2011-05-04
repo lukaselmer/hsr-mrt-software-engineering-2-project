@@ -3,9 +3,8 @@
     <% material = time_entry_type_material.material %>
     <% next if material.nil? %>
     <li>
-      <%= link_to material do %>
-        <%= material %>, <%= number_to_currency material.price unless material.price.nil? %> (<%= time_entry_type_material.amount %> Stück)
-      <% end %>
+      <%= link_to material do %><%= material %>, <%= number_to_currency material.price unless material.price.nil? %> (<%= time_entry_type_material.amount %> Stück)<% end %>
+      &nbsp;<%= link_to t(:destroy), time_entry_type_material, :confirm => t(:confirm_delete), :remote => true, :method => :delete %>
     </li>
   <% end %>
 </ul>
