@@ -147,11 +147,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initSpinnerTimeEntryType() {
-		loadTimeEntryTypes();
+//		loadTimeEntryTypes();
 		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		// TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
-				getTimeEntryTypes());
+				hackForTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}

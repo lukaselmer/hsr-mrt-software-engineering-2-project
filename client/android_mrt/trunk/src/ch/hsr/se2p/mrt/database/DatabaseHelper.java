@@ -21,7 +21,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 	protected static final String DATABASE_NAME = "mrt.db";
 	protected static final int DATABASE_VERSION = 1;
-	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, GpsPosition.class };
+	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, TimeEntryType.class, GpsPosition.class };
 
 	private Dao<TimeEntry, Integer> timeEntryDao;
 	private Dao<Customer, Integer> customerDao;
