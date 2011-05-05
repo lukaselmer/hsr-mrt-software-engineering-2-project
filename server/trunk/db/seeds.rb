@@ -14,8 +14,8 @@ end
 ### Users
 Secretary.create!(:first_name => "Sec", :last_name => "Retary", :email => 'secretary@mrt.ch', :password => 'mrt')
 FieldWorker.create!([
-    { :first_name => "Fredi", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt'},
-    { :first_name => "Benny", :last_name => "Büezer", :email => 'bbuezer@mrt.ch', :password => 'mrt'},
+    { :first_name => "Fredi", :last_name => "Worker", :email => 'field_worker@mrt.ch', :password => 'mrt', :type => User::TYPE_FIELD_WORKER },
+    { :first_name => "Benny", :last_name => "Büezer", :email => 'bbuezer@mrt.ch', :password => 'mrt', :type => User::TYPE_FIELD_WORKER },
   ])
 
 ### Materials

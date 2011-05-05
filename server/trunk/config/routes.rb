@@ -28,7 +28,9 @@ Mrt::Application.routes.draw do
       get 'add_material'
     end
   end
-  
+
+  post 'time_entry_types/synchronize(.:format)' => 'time_entry_types#synchronize'
+  get 'time_entry_types/synchronize(.:format)' => 'time_entry_types#synchronize'
   resources :time_entry_types do
     member do
       get 'add_material'

@@ -8,6 +8,8 @@ class TimeEntryType < ActiveRecord::Base
   validates :description, :presence => true
   
   scope :active, where(:valid_until => nil)
+  scope :updated_after, lambda {|last_update| where("updated_at > :last_update OR created_at > :last_update OR valid_until > :last_update",
+    :last_update => last_update) }
   
   def self.for_select
     active.collect {|t| [ t, t.id ] }

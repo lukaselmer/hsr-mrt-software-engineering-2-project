@@ -72,4 +72,9 @@ class TimeEntryTypesController < ApplicationController
     @time_entry_type = TimeEntryType.find(params[:id])
     @time_entry_type_material = TimeEntryTypeMaterial.new(:time_entry_type => @time_entry_type)
   end
+
+  def synchronize
+    @updated_time_entry_types = TimeEntryType.updated_after(params[:last_update])
+    render :json => @updated_time_entry_types
+  end
 end
