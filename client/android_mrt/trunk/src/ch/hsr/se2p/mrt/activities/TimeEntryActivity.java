@@ -102,6 +102,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				public void onLocationChanged(Location location) {
 					// Called when a new location is found by the network location provider.
 					((TextView) findViewById(R.id.txtDescription)).setText(location.toString());
+					ActivityHelper.displayAlertDialog("Location changed", "Lat: " + location.getLatitude() + " Lng: " 
+					        + location.getLongitude(), TimeEntryActivity.this);
 				}
 
 				public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -115,7 +117,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			};
 
 			// Register the listener with the Location Manager to receive location updates
-			locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, locationListener);
+			locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 			((TextView) findViewById(R.id.txtDescription)).setText("Suche GPS........");
 
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
