@@ -5,9 +5,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+
 /**
- * Creates the standard alert dialog for other activities.
- * Does not have its own testing class. Gets tested in the LoginActivityTest.
+ * Creates the standard alert dialog for other activities. Does not have its own testing class. Gets tested in the LoginActivityTest.
  */
 class ActivityHelper {
 

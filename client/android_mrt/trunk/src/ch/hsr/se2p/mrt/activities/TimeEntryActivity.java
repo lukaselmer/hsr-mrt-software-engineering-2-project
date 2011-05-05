@@ -63,6 +63,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private Spinner timeEntryType;
 	private Spinner gpsSelection;
 	private List<Customer> customers;
+	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
 
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
@@ -146,10 +147,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initSpinnerTimeEntryType() {
+		loadTimeEntryTypes();
 		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		// TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
-				hackForTimeEntryTypes());
+				getTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
@@ -170,6 +172,20 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			customers = getHelper().getCustomerDao().queryForAll();
 		} catch (SQLException e) {
 			Log.e(TAG, "Init customers", e);
+		}
+	}
+	
+	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter(){
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, getTimeEntryTypes()); 
+		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		return timeEntryTypeAdapater;
+	}
+	
+	private void loadTimeEntryTypes() {
+		try {
+			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
+		} catch (SQLException e) {
+			Log.e(TAG, "Init timeentry types", e);
 		}
 	}
 
@@ -243,6 +259,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			loadCustomers();
 		return customers;
 	}
+	
+	private synchronized List<TimeEntryType> getTimeEntryTypes() {
+		if (timeEntryTypes == null)
+			loadTimeEntryTypes();
+		return timeEntryTypes;
+	}
+
 
 	// TODO: Delete as soon as Class TimeEntryType is working
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
