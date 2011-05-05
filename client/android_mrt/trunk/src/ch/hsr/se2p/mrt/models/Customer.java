@@ -28,6 +28,12 @@ public class Customer implements Receivable {
 		// Needed for ormlite
 	}
 
+	public Customer(int i, String string, String string2) {
+		id = i;
+		firstName = string;
+		lastName = string2;
+	}
+
 	public Integer getId() {
 		return id;
 	}

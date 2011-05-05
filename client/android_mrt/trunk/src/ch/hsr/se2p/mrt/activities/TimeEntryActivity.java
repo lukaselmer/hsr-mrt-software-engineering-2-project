@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -58,7 +61,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private TimeEntry currentTimeEntry;
 	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner timeEntryType;
-//	private Spinner gpsSelection;
+	private Spinner gpsSelection;
 	private List<Customer> customers;
 	private MRTApplication mrtApplication;
 
@@ -89,6 +92,32 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
+
+			// Acquire a reference to the system Location Manager
+			LocationManager locman = (LocationManager) mrtApplication.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+			// locman.getLastKnownLocation(null);
+
+			// Define a listener that responds to location updates
+			LocationListener locationListener = new LocationListener() {
+				public void onLocationChanged(Location location) {
+					// Called when a new location is found by the network location provider.
+					((TextView) findViewById(R.id.txtDescription)).setText(location.toString());
+				}
+
+				public void onStatusChanged(String provider, int status, Bundle extras) {
+				}
+
+				public void onProviderEnabled(String provider) {
+				}
+
+				public void onProviderDisabled(String provider) {
+				}
+			};
+
+			// Register the listener with the Location Manager to receive location updates
+			locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 0, locationListener);
+			((TextView) findViewById(R.id.txtDescription)).setText("Suche GPS........");
+
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
 		}
@@ -103,7 +132,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 
 		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-//		initSpinnerGPSSelection();
+		initSpinnerGPSSelection();
 		initSpinnerTimeEntryType();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
@@ -123,13 +152,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
 
-//	private void initSpinnerGPSSelection() {
-//		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
-//		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
-//		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		gpsSelection.setAdapter(gpsSelectionAdapter);
-//	}
-	
+	private void initSpinnerGPSSelection() {
+		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
+		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
+		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		gpsSelection.setAdapter(gpsSelectionAdapter);
+	}
+
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
 		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 	}
@@ -143,15 +172,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected void updateView() {
-		if (isMeasurementStarted()){
+		if (isMeasurementStarted()) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
-		}
-		else {
+		} else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			removeText((TextView) findViewById(R.id.txtDescription));
 			removeText((TextView) findViewById(R.id.autocompleteCustomer));
-			//((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
+			// ((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
+
 		}
 		updateAutocompleteCustomers();
 	}
@@ -180,16 +209,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
 	}
-	
+
 	private void setCustomer() throws SQLException {
-//		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
-//			//currentTimeEntry.setCustomerId(gpsSelection.getId());
-//		} else {
+		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
+			// currentTimeEntry.setCustomerId(gpsSelection.getId());
+		} else {
 			try {
-				currentTimeEntry.setCustomerId(getCustomer().getId()); //ursprünglicher Code
+				currentTimeEntry.setCustomerId(getCustomer().getId()); // ursprünglicher Code
 			} catch (NullPointerException e) {
 			}
-//		}
+		}
 	}
 
 	private Customer getCustomer() throws SQLException {
@@ -223,18 +252,26 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 4"));
 		return timeEntryTypes;
 	}
-	
+
 	final static List<Customer> hackForGPSSelection() {
 		ArrayList<Customer> gpsSelection = new ArrayList<Customer>();
-		//TODO: Customer Konstruktor mit Parameter löschen
-		// gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
-		// gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
-		// gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
+		// TODO: Customer Konstruktor mit Parameter löschen
+		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
+		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
+		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
 		return gpsSelection;
 	}
-	
+
+	protected GpsPosition getCurrentPostition() {
+		Location l = new Location("h");
+		l.getLatitude();
+
+		GpsPosition currentPosition = new GpsPosition(l);
+		return currentPosition;
+	}
+
 	private void calculateCustomerPositionsFrom(GpsPosition position) {
-		
+
 	}
 
 	@Override
