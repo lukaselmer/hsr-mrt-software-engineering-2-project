@@ -64,6 +64,7 @@ class TimeEntriesController < ApplicationController
     render :json => @time_entry, :status => :created, :location => @time_entry and return if !@time_entry.nil?
     # Case 3: TimeEntry does not exists and is created
     @time_entry = TimeEntry.new(params[:time_entry])
+    @time_entry.user = current_user
     render :json => @time_entry.errors, :status => :unprocessable_entity and return if !@time_entry.save
     render :json => @time_entry, :status => :created, :location => @time_entry
   end
