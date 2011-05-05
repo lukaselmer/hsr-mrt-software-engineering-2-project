@@ -87,19 +87,12 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void processLogin(String email, String password) {
 		if (new UserHelper(mrtApplication.getHttpHelper()).login(email, password, mrtApplication.getCurrentUser())) {
 			mrtApplication.login(email, password, chbxSaveLogin.isChecked());
-			// ProgressDialog.show(LoginActivity.this, "", "Ladevorgang. Bitte warten...", true);
 			switchToTimeEntryActivity();
 		} else {
 			ActivityHelper.displayAlertDialog(null, "Anmeldung schlug fehl!", this);
 			editPassword.setText("");
 		}
 	}
-
-	// private void showLoginData() {
-	// String email = mrtApplication.getEmail();
-	// String password = mrtApplication.getPassword();
-	// ActivityHelper.displayAlertDialog(null, "Email: " + email + " Passwort: " + password, this);
-	// }
 
 	private void switchToTimeEntryActivity() {
 		this.startActivity(new Intent(this, TimeEntryActivity.class));

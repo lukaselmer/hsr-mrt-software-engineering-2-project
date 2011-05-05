@@ -48,6 +48,13 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		checkbox = (CheckBox) activity.findViewById(R.id.chbxSaveLogin);
 		loginBtn = (Button) activity.findViewById(R.id.loginButton);
 	}
+	
+	public void setPreferences() {
+		Editor editor = testedApplication.getPreferences().edit();
+		editor.putString("email", EMAIL_FIELD_WORKER);
+		editor.putString("password", PASSWORD_MRT);
+		editor.commit();
+	}
 
 	public void resetPreferences() {
 		testedApplication.logout();
