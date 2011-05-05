@@ -1,4 +1,5 @@
 class TimeEntriesController < ApplicationController
+
   # GET /time_entries
   def index
     @time_entries = TimeEntry.all
