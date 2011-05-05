@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -56,6 +57,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 	public static final String TAG = TimeEntryActivity.class.getSimpleName();
+	private static LocationManager locman;
 
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
@@ -93,34 +95,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
-
-			// Acquire a reference to the system Location Manager
-			LocationManager locman = (LocationManager) mrtApplication.getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-			// locman.getLastKnownLocation(null);
-
-			// Define a listener that responds to location updates
-			LocationListener locationListener = new LocationListener() {
-				public void onLocationChanged(Location location) {
-					// Called when a new location is found by the network location provider.
-					((TextView) findViewById(R.id.txtDescription)).setText(location.toString());
-					ActivityHelper.displayAlertDialog("Location changed", "Lat: " + location.getLatitude() + " Lng: " 
-					        + location.getLongitude(), TimeEntryActivity.this);
-				}
-
-				public void onStatusChanged(String provider, int status, Bundle extras) {
-				}
-
-				public void onProviderEnabled(String provider) {
-				}
-
-				public void onProviderDisabled(String provider) {
-				}
-			};
-
-			// Register the listener with the Location Manager to receive location updates
-			locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-			((TextView) findViewById(R.id.txtDescription)).setText("Suche GPS........");
-
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
 		}
@@ -133,13 +107,51 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
+		
+        locman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        criteria.setAccuracy(Criteria.ACCURACY_FINE);
+        criteria.setAltitudeRequired(false);
+        criteria.setBearingRequired(false);
+        criteria.setCostAllowed(true);
+        criteria.setPowerRequirement(Criteria.POWER_LOW);
+        
+        String provider = locman.getBestProvider(criteria, true);
+        ActivityHelper.displayAlertDialog("GPS status", "" + locman.getGpsStatus(null), TimeEntryActivity.this);
+        
 
-		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		initSpinnerGPSSelection();
-		initSpinnerTimeEntryType();
+        final LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                updateWithNewLocation(location);
+            }
+            
+            public void onProviderDisabled(String provider){
+                ActivityHelper.displayAlertDialog("Location disabled", "Aaaaaaaaaahhhhhhhhh", TimeEntryActivity.this);
+            }
+            
+            public void onProviderEnabled(String provider){ }
+            public void onStatusChanged(String provider, int status, 
+                    Bundle extras){ }
+        };
+        
+        locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        
+		initData();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
+	}
+
+	private void updateWithNewLocation(Location location) {
+	    ActivityHelper.displayAlertDialog("Location changed", "Lat: " + location.getLatitude() + " Lng: " 
+                + location.getLongitude(), TimeEntryActivity.this);
+		
+	}
+
+	private void initData() {
+		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+		initSpinnerGPSSelection();
+		initSpinnerTimeEntryType();
 	}
 
 	private boolean isMeasurementStarted() {
