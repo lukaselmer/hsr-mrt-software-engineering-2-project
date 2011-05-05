@@ -26,6 +26,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<TimeEntry, Integer> timeEntryDao;
 	private Dao<Customer, Integer> customerDao;
 	private Dao<TimeEntryType, Integer> timeEntryTypeDao;
+	private Dao<GpsPosition, Integer> gpsPositionDao;
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -78,6 +79,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			customerDao = getDao(Customer.class);
 		return customerDao;
 	}
+	
+	public synchronized Dao<GpsPosition, Integer> getGpsPositionDao() throws SQLException {
+        if (gpsPositionDao == null)
+            gpsPositionDao = getDao(GpsPosition.class);
+        return gpsPositionDao;
+    }
 
 	public synchronized Dao<TimeEntryType, Integer> getTimeEntryTypeDao() throws SQLException {
 		if (timeEntryTypeDao == null)

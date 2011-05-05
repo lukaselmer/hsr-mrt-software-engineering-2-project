@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.location.Location;
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Confirmable;
 import ch.hsr.se2p.mrt.interfaces.Transmittable;
@@ -19,16 +20,13 @@ public class TimeEntry implements Transmittable, Confirmable {
 	@DatabaseField(generatedId = true)
 	private Integer id;
 	@DatabaseField
-	private Integer railsId, customerId, timeEntryTypeId;
+	private Integer railsId, customerId, timeEntryTypeId, gpsPositionId;
 	@DatabaseField
 	private boolean transmitted;
 	@DatabaseField
 	private String hashcode, description;
 	@DatabaseField
 	private long timeStart, timeStop;
-	// TODO: Add location
-	// @DatabaseField
-	// private Location position;
 	// TODO: Add audio record
 	// @DatabaseField
 	// private Blob audioRecord;
@@ -60,10 +58,6 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return id;
 	}
 
-	// public Location getPosition() {
-	// return position;
-	// }
-
 	public int getIdOnServer() {
 		return railsId;
 	}
@@ -83,6 +77,10 @@ public class TimeEntry implements Transmittable, Confirmable {
 	public boolean isTransmitted() {
 		return transmitted;
 	}
+	
+	public Integer getGpsPositionId() {
+	    return gpsPositionId;
+	}
 
 	// public void setAudioRecord(Blob audioRecord) {
 	// this.audioRecord = audioRecord;
@@ -96,9 +94,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 		this.description = description;
 	}
 
-	// public void setPosition(Location position) {
-	// this.position = position;
-	// }
+	public void setGpsPositionId(Integer gpsPositionId) {
+	    this.gpsPositionId = gpsPositionId;
+	}
 
 	public void setRailsId(Integer railsId) {
 		this.railsId = railsId;

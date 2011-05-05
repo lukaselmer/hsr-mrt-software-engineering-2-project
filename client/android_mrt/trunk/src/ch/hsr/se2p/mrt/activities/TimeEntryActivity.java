@@ -57,10 +57,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 	public static final String TAG = TimeEntryActivity.class.getSimpleName();
-	private static LocationManager locman;
+	private static LocationManager locationManager;
+	private LocationListener locationListener;
+	private String locationProvider;
 
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
+	private GpsPosition currentPosition;
 	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner timeEntryType;
 	private Spinner gpsSelection;
@@ -80,6 +83,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		private void stopTimeMeasurement() {
 			try {
+			    
+			    
 				saveTimeEntry();
 				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			} catch (SQLException e) {
@@ -97,6 +102,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		private void startTimeMeasurement() {
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
+			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
 		}
 	};
 
@@ -108,7 +114,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
 		
-        locman = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
@@ -116,17 +122,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
         criteria.setCostAllowed(true);
         criteria.setPowerRequirement(Criteria.POWER_LOW);
         
-        String provider = locman.getBestProvider(criteria, true);
-        ActivityHelper.displayAlertDialog("GPS status", "" + locman.getGpsStatus(null), TimeEntryActivity.this);
+        locationProvider = locationManager.getBestProvider(criteria, true);
+//        ActivityHelper.displayAlertDialog("GPS status", "" + locationManager.getGpsStatus(null), TimeEntryActivity.this);
         
-
-        final LocationListener locationListener = new LocationListener() {
+        locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
-                updateWithNewLocation(location);
+                currentPosition = new GpsPosition(location);
             }
             
             public void onProviderDisabled(String provider){
-                ActivityHelper.displayAlertDialog("Location disabled", "Aaaaaaaaaahhhhhhhhh", TimeEntryActivity.this);
+                
             }
             
             public void onProviderEnabled(String provider){ }
@@ -134,18 +139,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
                     Bundle extras){ }
         };
         
-        locman.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         
 		initData();
 
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
-	}
-
-	private void updateWithNewLocation(Location location) {
-	    ActivityHelper.displayAlertDialog("Location changed", "Lat: " + location.getLatitude() + " Lng: " 
-                + location.getLongitude(), TimeEntryActivity.this);
-		
 	}
 
 	private void initData() {
@@ -210,7 +208,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			removeText((TextView) findViewById(R.id.autocompleteCustomer));
 			// ((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
-
 		}
 		updateAutocompleteCustomers();
 	}
@@ -234,10 +231,22 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
+		if (currentPosition != null)
+		    currentTimeEntry.setGpsPositionId(saveGpsData());
 		setCustomer();
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
+	}
+	
+	protected int saveGpsData() throws SQLException {
+	    if (currentPosition == null)
+	        return -1;
+	    
+	    Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
+	    gpsPositionDao.create(currentPosition);
+	    
+	    return currentPosition.getId();
 	}
 
 	private void setCustomer() throws SQLException {
@@ -278,7 +287,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return timeEntryTypes;
 	}
 
-
 	// TODO: Delete as soon as Class TimeEntryType is working
 	final static List<TimeEntryType> hackForTimeEntryTypes() {
 		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
@@ -307,7 +315,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return currentPosition;
 	}
 
-	private void calculateCustomerPositionsFrom(GpsPosition position) {
+	private void calculateDistanceFromCurrentPositionTo(GpsPosition position) {
 
 	}
 
