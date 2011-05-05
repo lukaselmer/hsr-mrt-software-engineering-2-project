@@ -31,9 +31,12 @@
 </p>
 
 <p>
+
+<div id="<%= dom_id(@order) %>">
   <b><%= Order.human_attribute_name(:applied_materials) %>:</b>
   <%= render :partial => "orders/applied_materials", :locals => { :applied_materials => @order.applied_materials } %>
-
+  <%= link_to "Material hinzufügen", add_material_order_path(@order), :remote => true %>
+</div>
 </p>
 
 <%= link_to t(:edit), edit_order_path(@order) %> |
