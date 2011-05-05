@@ -1,19 +1,16 @@
 package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -30,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
@@ -147,8 +143,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected void updateView() {
-		if (isMeasurementStarted())
-			setLayout("Zeit gestartet um " + currentTimeEntry.getTimeStart().toLocaleString(), "Stop", Color.RED);
+		if (isMeasurementStarted()){
+			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
+		}
 		else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			removeText((TextView) findViewById(R.id.txtDescription));
