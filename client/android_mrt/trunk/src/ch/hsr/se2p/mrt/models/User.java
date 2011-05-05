@@ -32,7 +32,7 @@ public class User implements Receivable {
 
 	@Override
 	public boolean fromJSON(JSONObject jsonObject) throws JSONException {
-		JSONObject userObj = jsonObject.optJSONObject("user");
+		JSONObject userObj = jsonObject.optJSONObject("field_worker");
 		int id = userObj.getInt("id");
 		if (id <= 0)
 			return false;
