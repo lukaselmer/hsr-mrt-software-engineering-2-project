@@ -19,7 +19,7 @@
 </p>
 
 <p>
-  <b>Stundeneinträge:</b>
+  <b><%= Order.human_attribute_name(:time_entries) %>:</b>
   <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :fields => [ :id, :time_entry_type, :user, :duration ] } %>
 
   <br />
@@ -27,6 +27,12 @@
   <% if write_access? TimeEntry.new %>
     <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path(:order_id => @order.id) %>
   <% end %>
+
+</p>
+
+<p>
+  <b><%= Order.human_attribute_name(:applied_materials) %>:</b>
+  <%= render :partial => "orders/applied_materials", :locals => { :applied_materials => @order.applied_materials } %>
 
 </p>
 
