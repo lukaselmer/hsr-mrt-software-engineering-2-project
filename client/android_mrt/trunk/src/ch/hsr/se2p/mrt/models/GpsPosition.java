@@ -22,10 +22,10 @@ public class GpsPosition {
 	@DatabaseField
 	private double longitude = 0.0;
 
-	GpsPosition() {
+	public GpsPosition() {
 		// Needed for ormlite
 	}
-
+	
 	private GpsPosition(long time, double latitude, double longitude) {
 		createdAt = System.currentTimeMillis();
 		this.time = time;
@@ -34,7 +34,13 @@ public class GpsPosition {
 	}
 
 	public GpsPosition(Location location) {
-		this(location.getTime(), location.getLatitude(), location.getLongitude());
+		this.from(location);
+	}
+	
+	public void from(Location location) {
+	    time = location.getTime();
+	    latitude = location.getLatitude();
+	    longitude = location.getLongitude();
 	}
 
 	public Integer getId() {

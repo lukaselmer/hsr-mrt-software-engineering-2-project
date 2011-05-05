@@ -83,8 +83,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		private void stopTimeMeasurement() {
 			try {
-			    
-			    
+			    locationManager.removeUpdates(locationListener);
 				saveTimeEntry();
 				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			} catch (SQLException e) {
@@ -100,6 +99,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
+		    currentPosition = new GpsPosition();
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
 			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
