@@ -159,16 +159,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initSpinnerTimeEntryType() {
 		loadTimeEntryTypes();
 		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		// TODO: Remove hackForTimeEntryTypes() as soon as TimeEntryType is working
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
-				hackForTimeEntryTypes());
+				timeEntryTypes);
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
 
 	private void initSpinnerGPSSelection() {
+		loadCustomers();
 		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
-		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, hackForGPSSelection());
+		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, customers);
 		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		gpsSelection.setAdapter(gpsSelectionAdapter);
 	}
@@ -251,7 +251,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void setCustomer() throws SQLException {
 		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
-			// currentTimeEntry.setCustomerId(gpsSelection.getId());
+			currentTimeEntry.setCustomerId(gpsSelection.getId());
 		} else {
 			try {
 				currentTimeEntry.setCustomerId(getCustomer().getId()); // ursprünglicher Code

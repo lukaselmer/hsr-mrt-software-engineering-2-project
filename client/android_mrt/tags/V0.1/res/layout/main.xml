@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<TextView android:id="@+id/textview" android:text="@string/txtWelcome"
+		android:layout_weight="1" android:layout_gravity="center_horizontal"
+		android:gravity="center" android:layout_height="wrap_content"
+		android:layout_width="wrap_content"></TextView>
+	<Button android:text="@string/btnCreateTimeEntryWithDescription"
+		android:id="@+id/btnCreateTimeEntryWithDescription"
+		android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+		android:layout_width="fill_parent" android:layout_weight="1"></Button>
+	<Button android:text="@string/btnCreateTimeEntryWithoutDescription"
+		android:id="@+id/btnCreateTimeEntryWithoutDescription"
+		android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+		android:layout_width="fill_parent" android:layout_weight="1"></Button>
+	<Button android:text="@string/btnSendTimeEntries" android:id="@+id/btnSendTimeEntries"
+		android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+		android:layout_width="fill_parent" android:layout_weight="1"></Button>
+</LinearLayout>

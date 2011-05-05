@@ -77,8 +77,11 @@ public class TimeEntryType implements Receivable {
 		name = timeEntryTypeObj.getString("description");
 		createdAt = DateHelper.parse(timeEntryTypeObj.getString("created_at")).getTime();
 		updatedAt = DateHelper.parse(timeEntryTypeObj.getString("updated_at")).getTime();
-		validUntil = DateHelper.parse(timeEntryTypeObj.getString("valid_until")).getTime();
 		deleted = !timeEntryTypeObj.isNull("valid_until");
+		
+		if (deleted) {
+			validUntil = DateHelper.parse(timeEntryTypeObj.getString("valid_until")).getTime();
+		}
 		return true;
 	}
 }
