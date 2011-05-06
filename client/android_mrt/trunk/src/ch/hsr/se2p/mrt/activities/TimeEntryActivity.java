@@ -60,10 +60,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static LocationManager locationManager;
 	private LocationListener locationListener;
 	private String locationProvider;
+	private GpsPosition currentPosition;
 
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
-	private GpsPosition currentPosition;
 	private AutoCompleteTextView autoCompleteCustomers;
 	private Spinner timeEntryType;
 	private Spinner gpsSelection;
@@ -115,36 +115,35 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 		
         locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
+//        ActivityHelper.displayAlertDialog("GPS status", "" + locationManager.getGpsStatus(null), TimeEntryActivity.this);
+        initLocationListener();
+        
+		initData();
+		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
+		updateView();
+	}
+
+    private void initLocationListener() {
+        locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                currentPosition = new GpsPosition(location);
+            }
+            public void onProviderDisabled(String provider){ }
+            public void onProviderEnabled(String provider){ }
+            public void onStatusChanged(String provider, int status, Bundle extras){ }
+        };
+    }
+
+    private Criteria getInitializedCriteria() {
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
         criteria.setBearingRequired(false);
         criteria.setCostAllowed(true);
         criteria.setPowerRequirement(Criteria.POWER_LOW);
-        
-        locationProvider = locationManager.getBestProvider(criteria, true);
-//        ActivityHelper.displayAlertDialog("GPS status", "" + locationManager.getGpsStatus(null), TimeEntryActivity.this);
-        
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                currentPosition = new GpsPosition(location);
-            }
-            
-            public void onProviderDisabled(String provider){
-                
-            }
-            
-            public void onProviderEnabled(String provider){ }
-            public void onStatusChanged(String provider, int status, 
-                    Bundle extras){ }
-        };
-        
-        
-		initData();
-
-		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
-		updateView();
-	}
+        return criteria;
+    }
 
 	private void initData() {
 		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
