@@ -2,5 +2,13 @@
 
 <%= render 'form' %>
 
+<div id="<%= dom_id(@time_entry_type) %>">
+  <b><%= TimeEntryType.human_attribute_name(:materials) %>:</b>
+
+  <%= render 'time_entry_type_materials', :time_entry_type_materials => @time_entry_type.time_entry_type_materials %>
+  <%= link_to Material.model_name.human  + " hinzufügen", add_material_time_entry_type_path(@time_entry_path), :remote => true %> |
+  <%= link_to 'Neues ' +  Material.model_name.human +   ' erfassen', new_material_path %>
+</div>
+
 <%= link_to t(:show), @time_entry_type %> |
 <%= link_to t(:back), time_entry_types_path %>
