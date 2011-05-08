@@ -32,10 +32,10 @@
 
 <p>
 
-<div id="<%= dom_id(@order) %>">
-  <b><%= Order.human_attribute_name(:applied_materials) %>:</b>
-  <%= render :partial => "orders/applied_materials", :locals => { :applied_materials => @order.applied_materials } %>
-  <%= link_to "Material hinzufügen", add_material_order_path(@order), :remote => true %>
+<div id="<%= dom_id(@time_entry_type) %>">
+  <b><%= TimeEntryType.human_attribute_name(:materials) %>:</b>
+  <%= render 'time_entry_type_materials', :time_entry_type_materials => @time_entry_type.time_entry_type_materials %>
+  <%= link_to "Material hinzufügen", add_material_order_path(@time_entry_type), :remote => true %>
 </div>
 </p>
 

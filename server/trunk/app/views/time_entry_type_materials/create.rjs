@@ -1,4 +1,4 @@
-if @saved
+if @saved && !$test
   page.redirect_to(time_entry_types_path)
 else
   page.replace_html 'time_entry_type_material_form', :partial => 'form'

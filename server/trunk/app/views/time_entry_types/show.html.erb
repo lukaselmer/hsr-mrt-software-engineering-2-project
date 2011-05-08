@@ -36,16 +36,27 @@
 
       <td><%= link_to t(:show), material %></td>
 
-      <% if write_access? order %>
-        <td><%= link_to t(:edit), edit_material_path(order) %></td>
+      <% if write_access? type_material %>
+        <td><%= link_to t(:edit), edit_material_path(type_material) %></td>
         <td><%= link_to t(:destroy), material, :confirm => t(:confirm_delete), :method => :delete %></td>
       <% end %>
 
     </tr>
   <% end %>
 </table>
-<%= link_to 'Neues Material erfassen', new_material_path %> 
+
+<div id="<%= dom_id(@time_entry_type) %>">
+  <b><%= TimeEntryType.human_attribute_name(:materials) %>:</b>
+
+  <%= render 'time_entry_type_materials', :time_entry_type_materials => @time_entry_type.time_entry_type_materials %>
+  <%= link_to "Material hinzufügen", add_material_time_entry_type_path(@time_entry_path), :remote => true %> |
+  <%= link_to 'Neues Material erfassen', new_material_path %>
+</div>
+
 </p>
 
+<br>
 <%= link_to t(:edit), edit_time_entry_type_path(@time_entry_type) %> |
 <%= link_to t(:back), time_entry_types_path %>
+</br>
+
