@@ -9,7 +9,7 @@ public interface Transmittable {
 	public boolean isTransmitted();
 
 	/**
-	 * @param jsonObject
+	 * @param jsonObject 
 	 *            the object obtained by the request
 	 * @return whether response was valid or not
 	 * @throws JSONException

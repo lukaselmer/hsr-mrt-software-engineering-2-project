@@ -6,7 +6,10 @@ import java.util.List;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
+import ch.hsr.se2p.mrt.models.TimeEntryType;
 import ch.hsr.se2p.mrt.network.TimeEntryHelper;
 
 import com.j256.ormlite.dao.Dao;
@@ -40,10 +43,19 @@ class TimeEntrySynchronizer implements Synchronizer {
 
 	private void transmitTimeEnties(List<TimeEntry> timeEntries) throws SQLException {
 		Dao<TimeEntry, Integer> timeEntryDao = databaseHelper.getTimeEntryDao();
+		Dao<GpsPosition, Integer> gpsPositionDao = databaseHelper.getGpsPositionDao();
+		Dao<Customer, Integer> customerDao = databaseHelper.getCustomerDao();
+		Dao<TimeEntryType, Integer> timeEntryTypeDao = databaseHelper.getTimeEntryTypeDao();
 		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(mrtApplication.getHttpHelper());
+		
 		for (TimeEntry timeEntry : timeEntries) {
+			
+			GpsPosition pos = gpsPositionDao.queryForId(timeEntry.getGpsPositionId());
+			Customer cus = customerDao.queryForId(timeEntry.getCustomerId());
+			TimeEntryType tet = timeEntryTypeDao.queryForId(timeEntry.getTimeEntryTypeId());
+			
 			Log.d(TAG, "Transmitting " + timeEntry + "...");
-			if (timeEntryHelper.transmit(timeEntry)) {
+			if (timeEntryHelper.transmit(timeEntry, pos, cus, tet)) {
 				handleTransmittedTimeEntry(timeEntryDao, timeEntryHelper, timeEntry);
 			} else
 				break;

@@ -2,7 +2,11 @@ package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.location.Location;
+import android.util.Log;
 
 import com.j256.ormlite.field.DatabaseField;
 
@@ -11,6 +15,8 @@ import com.j256.ormlite.field.DatabaseField;
  * createdAt is the time when the position was saved the first time.
  */
 public class GpsPosition {
+	private static final String TAG = TimeEntry.class.getSimpleName();
+	
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -41,6 +47,19 @@ public class GpsPosition {
 	    time = location.getTime();
 	    latitude = location.getLatitude();
 	    longitude = location.getLongitude();
+	}
+	
+	public JSONObject toJSONObject() {
+		JSONObject j = new JSONObject();
+		
+		try {
+			//j.put("time", time);
+			j.put("latitude", latitude);
+			j.put("longitude", longitude);
+		} catch (JSONException e) {
+			Log.e(TAG, "Error creating JSON Object", e);
+		}
+		return j;
 	}
 
 	public Integer getId() {
