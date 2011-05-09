@@ -68,7 +68,7 @@ public class Customer implements Receivable {
 	}
 
 	public String toString() {
-		return lastName + " " + firstName + " (" + railsId +")";
+		return lastName + " " + firstName;
 	}
 
 	@Override
@@ -77,8 +77,6 @@ public class Customer implements Receivable {
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
-		Log.e("Helööööööööööw", customerObj.toString());
-		Log.e("Railsid", railsId + "");
 		firstName = customerObj.getString("first_name");
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");

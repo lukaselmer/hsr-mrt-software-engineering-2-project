@@ -228,12 +228,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected void saveTimeEntry() throws SQLException {
+		
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
+		
 		if (!(timeEntryType.getSelectedItem().equals(timeEntryType.getItemAtPosition(0))))
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
+		
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
+		
 		if (currentPosition != null)
 		    currentTimeEntry.setGpsPositionId(saveGpsData());
+		
 		setCustomer();
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
@@ -252,7 +257,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void setCustomer() throws SQLException {
 		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
-			currentTimeEntry.setCustomerId(gpsSelection.getId());
+			currentTimeEntry.setCustomerId(((Customer) gpsSelection.getSelectedItem()).getId());
 		} else {
 			try {
 				currentTimeEntry.setCustomerId(getCustomer().getId()); // ursprünglicher Code
