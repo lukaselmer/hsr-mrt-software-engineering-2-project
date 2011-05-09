@@ -50,9 +50,13 @@ class TimeEntrySynchronizer implements Synchronizer {
 		
 		for (TimeEntry timeEntry : timeEntries) {
 			
-			GpsPosition pos = gpsPositionDao.queryForId(timeEntry.getGpsPositionId());
-			Customer cus = customerDao.queryForId(timeEntry.getCustomerId());
-			TimeEntryType tet = timeEntryTypeDao.queryForId(timeEntry.getTimeEntryTypeId());
+			GpsPosition pos = null;
+			Customer cus = null;
+			TimeEntryType tet = null;
+			
+			if (timeEntry.hasCustomer()) cus = customerDao.queryForId(timeEntry.getCustomerId());
+			if (timeEntry.hasGpsPosition()) pos = gpsPositionDao.queryForId(timeEntry.getGpsPositionId());
+			if (timeEntry.hasTimeEntryType()) tet = timeEntryTypeDao.queryForId(timeEntry.getTimeEntryTypeId());
 			
 			Log.d(TAG, "Transmitting " + timeEntry + "...");
 			if (timeEntryHelper.transmit(timeEntry, pos, cus, tet)) {

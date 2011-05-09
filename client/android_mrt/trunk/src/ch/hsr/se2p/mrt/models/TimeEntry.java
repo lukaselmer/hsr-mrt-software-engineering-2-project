@@ -41,6 +41,18 @@ public class TimeEntry implements Transmittable, Confirmable {
 		hashcode = new BigInteger(130, random).toString(32);
 		this.timeStart = timeStart.getTime();
 	}
+	
+	public boolean hasCustomer() {
+		return customerId != null && customerId != 0;
+	}
+	
+	public boolean hasTimeEntryType() {
+		return timeEntryTypeId != null && timeEntryTypeId != 0;
+	}
+	
+	public boolean hasGpsPosition() {
+		return gpsPositionId != null && gpsPositionId != 0;
+	}
 
 	public Integer getCustomerId() {
 		return customerId;
