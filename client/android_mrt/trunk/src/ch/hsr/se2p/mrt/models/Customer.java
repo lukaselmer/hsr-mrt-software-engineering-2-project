@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.location.Location;
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
@@ -17,13 +18,16 @@ public class Customer implements Receivable {
 	@DatabaseField
 	private int railsId = 0;
 	@DatabaseField
+	private Integer gpsPositionId;
+	@DatabaseField
 	private String firstName, lastName, phone;
-	// TODO: @DatabaseField
-	private GpsPosition position;
 	@DatabaseField
 	private long updatedAt = 0;
 	@DatabaseField
 	private boolean deleted = false;
+	
+	//Caches gps_position for creation or update as it has to be stored in a separate table
+	public GpsPosition position;
 
 	public Customer() {
 		// Needed for ormlite
@@ -33,6 +37,10 @@ public class Customer implements Receivable {
 		id = i;
 		firstName = string;
 		lastName = string2;
+	}
+	
+	public boolean hasGpsPosition() {
+		return gpsPositionId != null && gpsPositionId != 0;
 	}
 
 	public Integer getId() {
@@ -55,8 +63,8 @@ public class Customer implements Receivable {
 		return phone;
 	}
 
-	public GpsPosition getPosition() {
-		return position;
+	public Integer getGpsPositionId() {
+		return gpsPositionId;
 	}
 
 	public Timestamp getUpdatedAt() {
@@ -73,23 +81,27 @@ public class Customer implements Receivable {
 
 	@Override
 	public boolean fromJSON(JSONObject customerObj) throws JSONException {
+		
 		int railsId = customerObj.getInt("id");
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
+		
 		firstName = customerObj.getString("first_name");
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
-		position = parsePosition(customerObj);
 		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
 		deleted = !customerObj.isNull("deleted_at");
-		Log.e("Railsid", railsId + "");
+		
+		JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
+		position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
+		
 		return true;
 	}
-
-	private GpsPosition parsePosition(JSONObject customerObj) throws JSONException {
-		// customerObj.getLong("position");
-		// TODO: Parse position
-		return null;
+	
+	
+	
+	public void setGpsPositionId(Integer id) {
+		gpsPositionId = id;
 	}
 }

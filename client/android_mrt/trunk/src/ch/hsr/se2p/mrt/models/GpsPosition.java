@@ -43,6 +43,10 @@ public class GpsPosition {
 		this.from(location);
 	}
 	
+	public GpsPosition(double latitude, double longitude) {
+		this(0L, latitude, longitude);
+	}
+	
 	public void from(Location location) {
 	    time = location.getTime();
 	    latitude = location.getLatitude();

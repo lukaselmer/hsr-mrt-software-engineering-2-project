@@ -12,6 +12,7 @@ import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.network.CustomerHelper;
 import ch.hsr.se2p.mrt.network.SynchronizationException;
 
@@ -31,8 +32,10 @@ class CustomerSynchronizer implements Synchronizer {
 		Log.d(TAG, "Synchronizing customers");
 		try {
 			Dao<Customer, Integer> dao = databaseHelper.getCustomerDao();
+
 			List<Receivable> receivables = new ArrayList<Receivable>(dao.queryForAll());
 			synchronizeCustomers(dao, new CustomerHelper(mrtApplication.getHttpHelper()), receivables);
+
 		} catch (SQLException e) {
 			Log.e(TAG, "Database error", e);
 		} catch (Exception e) {
@@ -68,6 +71,16 @@ class CustomerSynchronizer implements Synchronizer {
 	}
 
 	private void handleUpdate(Dao<Customer, Integer> dao, Customer c) throws SQLException {
+
+		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
+		
+		if (c.hasGpsPosition()) {
+			GpsPosition old_position = positionDao.queryForId(c.getGpsPositionId());
+			positionDao.delete(old_position);
+			positionDao.create(c.position);
+			c.setGpsPositionId(c.position.getId());
+		}
+		
 		Log.d(TAG, "Updating " + c);
 		dao.update(c);
 	}

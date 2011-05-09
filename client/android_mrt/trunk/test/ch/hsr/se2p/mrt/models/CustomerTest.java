@@ -34,7 +34,7 @@ public class CustomerTest extends AndroidTestCase {
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());
 		assertNull(customer.getPhone());
-		assertNull(customer.getPosition());
+		assertNull(customer.getGpsPositionId());
 		assertEquals(new Timestamp(0), customer.getUpdatedAt());
 		assertFalse(customer.isDeleted());
 	}

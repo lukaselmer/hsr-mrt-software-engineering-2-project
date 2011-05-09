@@ -37,6 +37,7 @@ public class CustomerHelper {
 			JSONObject o = arrayOfJSONReceivables.getJSONObject(i).getJSONObject("customer");
 			Receivable r = clazz.newInstance();
 			r.fromJSON(o);
+			
 			updateOrCreateReceivable(r, receivables, o);
 		}
 	}

@@ -93,7 +93,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		assertEquals(c1.getPhone(), c2.getPhone());
 		assertEquals(c1.getUpdatedAt(), c2.getUpdatedAt());
 		assertEquals(c1.getId(), c2.getId());
-		assertEquals(c1.getPosition(), c2.getPosition());
+		assertEquals(c1.getGpsPositionId(), c2.getGpsPositionId());
 	}
 
 	private String responseFor(ArrayList<Customer> customers) throws JSONException {
