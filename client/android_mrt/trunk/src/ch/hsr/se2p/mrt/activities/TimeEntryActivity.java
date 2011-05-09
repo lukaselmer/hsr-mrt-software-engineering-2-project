@@ -99,7 +99,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
-		    currentPosition = new GpsPosition();
+		    currentPosition = null;
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
 			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
