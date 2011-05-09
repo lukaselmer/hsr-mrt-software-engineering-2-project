@@ -193,6 +193,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void loadTimeEntryTypes() {
 		try {
 			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
+			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
 		} catch (SQLException e) {
 			Log.e(TAG, "Init timeentry types", e);
 		}
@@ -228,7 +229,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	protected void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-		currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
+		if (!(timeEntryType.getSelectedItem().equals(timeEntryType.getItemAtPosition(0))))
+			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 		if (currentPosition != null)
 		    currentTimeEntry.setGpsPositionId(saveGpsData());
