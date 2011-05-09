@@ -8,6 +8,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -105,6 +106,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
 		}
 	};
+	private AndroidComboBox comboBox;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -146,9 +148,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
     }
 
 	private void initData() {
-		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-		initSpinnerGPSSelection();
+//		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
+//		initSpinnerGPSSelection();
+		initComboBox();
 		initSpinnerTimeEntryType();
+	}
+
+	private void initComboBox() {
+		loadCustomers();
+		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
+		comboBox.setSuggestionSource(getCustomerAdapter(), "Kunden");
 	}
 
 	private boolean isMeasurementStarted() {
@@ -164,13 +173,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryType.setAdapter(timeEntryTypeAdapater);
 	}
 
-	private void initSpinnerGPSSelection() {
-		loadCustomers();
-		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
-		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, customers);
-		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		gpsSelection.setAdapter(gpsSelectionAdapter);
-	}
+//	private void initSpinnerGPSSelection() {
+//		loadCustomers();
+//		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
+//		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, customers);
+//		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//		gpsSelection.setAdapter(gpsSelectionAdapter);
+//	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
 		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
@@ -204,16 +213,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
 		} else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
-			removeText((TextView) findViewById(R.id.txtDescription));
-			removeText((TextView) findViewById(R.id.autocompleteCustomer));
-			// ((Spinner) findViewById(R.id.spinnerGPSSelection)).setSelection(0);
+			
+			((TextView) findViewById(R.id.txtDescription)).setText("");
+			((AndroidComboBox) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 		}
-		updateAutocompleteCustomers();
-	}
-
-	private void removeText(TextView textView) {
-		textView.setText("");
+//		updateAutocompleteCustomers();
 	}
 
 	private void setLayout(String textViewText, String buttonText, int color) {
@@ -256,18 +261,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void setCustomer() throws SQLException {
-		if ((autoCompleteCustomers.getText().length() == 0) && (gpsSelection.getId() != 0)) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
-			currentTimeEntry.setCustomerId(((Customer) gpsSelection.getSelectedItem()).getId());
-		} else {
-			try {
-				currentTimeEntry.setCustomerId(getCustomer().getId()); // ursprünglicher Code
-			} catch (NullPointerException e) {
+		if (comboBox.getText().length() == 0) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
+			currentTimeEntry.setCustomerId(getCustomer().getId());
 			}
-		}
 	}
 
 	private Customer getCustomer() throws SQLException {
-		Editable text = autoCompleteCustomers.getText();
+		String text = comboBox.getText();
 		if (text.length() == 0)
 			return null;
 		return findCustomer(text.toString());
