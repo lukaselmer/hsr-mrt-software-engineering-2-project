@@ -20,7 +20,7 @@
         <% end %>
         <td><%= render 'orders/applied_materials', :applied_materials => order.applied_materials %></td>
 
-        <td><%= link_to Material.model_name.human + "hinzufügen", add_material_order_path(order), :remote => true %></td>
+        <td><%= link_to Material.model_name.human + " hinzufügen", add_material_order_path(order), :remote => true %></td>
 
         <td><%= link_to t(:show), order %></td>
         <% if write_access? order %>
