@@ -60,7 +60,11 @@ class CustomersController < ApplicationController
   end
 
   def synchronize
-    @updated_customers = Customer.updated_after(params[:last_update])
-    render :json => @updated_customers
+    if params[:last_update].nil?
+      @updated_customers = Customer.all
+    else
+      @updated_customers = Customer.updated_after(params[:last_update])
+    end
+    render :json => @updated_customers.to_json(:include => { :address => {:include => :gps_position } } )
   end
 end

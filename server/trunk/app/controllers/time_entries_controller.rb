@@ -45,8 +45,7 @@ class TimeEntriesController < ApplicationController
 
   # POST /time_entries
   def create
-    @orders = Order.all
-
+    
     respond_to do |format|
       format.html { create_by_html }
       format.json { create_by_json }
