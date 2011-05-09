@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.location.Location;
+import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
@@ -67,7 +68,7 @@ public class Customer implements Receivable {
 	}
 
 	public String toString() {
-		return lastName + " " + firstName;
+		return lastName + " " + firstName + " (" + railsId +")";
 	}
 
 	@Override
@@ -76,12 +77,15 @@ public class Customer implements Receivable {
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
+		Log.e("Helööööööööööw", customerObj.toString());
+		Log.e("Railsid", railsId + "");
 		firstName = customerObj.getString("first_name");
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
 		position = parsePosition(customerObj);
 		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
 		deleted = !customerObj.isNull("deleted_at");
+		Log.e("Railsid", railsId + "");
 		return true;
 	}
 
