@@ -3,7 +3,6 @@ package ch.hsr.se2p.mrt.database;
 import java.sql.SQLException;
 
 import android.content.Context;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import ch.hsr.se2p.mrt.models.Customer;

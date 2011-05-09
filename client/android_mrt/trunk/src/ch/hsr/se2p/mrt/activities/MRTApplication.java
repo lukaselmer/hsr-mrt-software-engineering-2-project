@@ -1,15 +1,14 @@
 package ch.hsr.se2p.mrt.activities;
 
 import ch.hsr.se2p.mrt.models.User;
-/**
- * MRTApplication operates as the main application and also 
- */
 import ch.hsr.se2p.mrt.network.HttpHelper;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.location.LocationManager;
-
+/**
+ * MRTApplication operates as the main application and also saves the login preferences if wanted.
+ */
 public class MRTApplication extends Application {
 	private final HttpHelper httpHelper;
 	private String email, password;

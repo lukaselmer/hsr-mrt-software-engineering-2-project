@@ -2,7 +2,6 @@ package ch.hsr.se2p.mrt.network;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -10,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.Customer;
 
 public class CustomerHelper {
 	protected HttpHelper httpHelper;
