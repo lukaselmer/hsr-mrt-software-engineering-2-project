@@ -18,7 +18,9 @@ de:
     attributes:
       order:
         id: ID
-        customer_id: Kunde
+        customer: Kunde
+        time_entries: Zeiteinträge
+        address: Adresse
         created_at: Erstellt am
         description: Beschreibung
       address:
@@ -51,15 +53,16 @@ de:
         valid_until: Gültig bis
         created_at: Erstellt am
         updated_at: Aktualisiert am
-        time_entry_type_id: Vorgänger
+        time_entry_type: Vorgänger
         materials: Materialien
       time_entry:
         id: ID
-        customer_id: Kunde
+        customer: Kunde
         gps_position_id: GPS Position
-        order_id: Auftrag
-        time_entry_type_id: Stundeneintragstyp
-        user_id: Aussendienstmitarbeiter
+        order: Auftrag
+        time_entry_type: Stundeneintragstyp
+        user: Aussendienstmitarbeiter
+        duration: Dauer
         description: Beschreibung
         time_start: Startzeitpunkt
         time_stop: Endzeitpunkt

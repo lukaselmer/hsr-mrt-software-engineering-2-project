@@ -2,7 +2,7 @@
   <%= form_error_messages f %>
 
   <div class="field">
-    <%= f.label :order_id %>
+    <%= f.label :order %>
     <%= f.select(:order_id, Order.for_select, {:include_blank => true}) %>
     <% if write_access? Order.new %>
       <%= link_to 'Neuen ' + Order.model_name.human + ' erfassen', new_order_path %>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :customer_id %>
+    <%= f.label :customer %>
     <%= f.select(:customer_id, Customer.for_select, {:include_blank => true}) %>
     <% if write_access? Customer.new %>
       <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_customer_path %>
@@ -18,7 +18,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :time_entry_type_id %>
+    <%= f.label :time_entry_type %>
     <%= f.select(:time_entry_type_id, TimeEntryType.for_select, {:include_blank => true}) %>
     <% if write_access? TimeEntry.new %>
       <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
@@ -26,7 +26,7 @@
   </div>
 
   <div class="field">
-    <%= f.label :user_id %>
+    <%= f.label :user %>
     <%=  f.select(:user_id, User.for_select(User::TYPE_FIELD_WORKER), {:include_blank => true}) %>
     <% if write_access? User.new %>
       <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>

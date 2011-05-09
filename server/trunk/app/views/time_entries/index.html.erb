@@ -5,8 +5,8 @@
 <br />
 
 <% if write_access? TimeEntry.new %>
-  <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path %>
+  <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path %> |
 <% end %>
 
-  <%= link_to 'Nur unzugewiesene ' + TimeEntry.model_name.human, time_entries_unassigned_path %>
-  <%= link_to 'Alle ' + TimeEntry.model_name.human, time_entries_path %>
+<%= link_to 'Nur unzugewiesene Stundeneinträge', time_entries_unassigned_path %> |
+<%= link_to 'Alle Stundeneinträge', time_entries_path %>
