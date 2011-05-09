@@ -9,6 +9,14 @@ class TimeEntriesController < ApplicationController
     end
   end
 
+  def unassigned
+    @time_entries = TimeEntry.unassigned
+
+    respond_to do |format|
+      format.html { render :template => "time_entries/index", :time_entries => @time_entries }
+    end
+  end
+
   # GET /time_entries/1
   # GET /time_entries/1.xml
   def show

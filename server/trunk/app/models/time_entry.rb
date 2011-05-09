@@ -8,6 +8,8 @@ class TimeEntry < ActiveRecord::Base
   #validates :hashcode, :presence => true, :on => :create
   validates :time_start, :time_stop, :presence => true
 
+  scope :unassigned, where(:order_id => nil)
+
   def remove_hashcode
     update_attribute(:hashcode, nil)
   end
