@@ -46,7 +46,7 @@ class SynchronizationServiceTask extends TimerTask {
 	}
 
 	private void runSynchronizers() {
-		Class<?>[] classes = { PositionSynchronizerTest.class, TimeEntrySynchronizer.class, CustomerSynchronizer.class, TimeEntryTypeSynchronizer.class };
+		Class<?>[] classes = { TimeEntrySynchronizer.class, CustomerSynchronizer.class, TimeEntryTypeSynchronizer.class };
 		for (Class<?> cls : classes) {
 			try {
 				@SuppressWarnings("unchecked")
