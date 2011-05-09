@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  time_entry_type: 
-  material: 
+  amount: 1
+  time_entry_type_id: 101
+  material_id: 101
 
 two:
-  time_entry_type: 
-  material: 
+  amount: 2
+  time_entry_type_id: 102
+  material_id: 102

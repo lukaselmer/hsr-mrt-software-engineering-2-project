@@ -21,7 +21,7 @@ class AppliedMaterialsControllerTest < ActionController::TestCase
 
   #TODO: Repair this test
   #test "should create applied_material" do
-    #valid_entry = AppliedMaterial.new(:order_id => 103, :material_id => 103, :amount => 3)
+  #valid_entry = AppliedMaterial.new(:order_id => 103, :material_id => 103, :amount => 3)
   #  assert_difference('AppliedMaterial.count', 0) do
   #    post :create, :applied_material => @applied_material
   #  end
@@ -37,20 +37,20 @@ class AppliedMaterialsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  #test "should show applied_material" do
-  #  get :show, :id => @applied_material.to_param
-  #  assert_response :success
-  #end
+#  test "should show applied_material" do
+#    get :show, :id => @applied_material.to_param
+#    assert_response :success
+#  end
 
   test "should get edit" do
     get :edit, :id => @applied_material.to_param
     assert_response :success
   end
 
-  #test "should update applied_material" do
-  #  put :update, :id => @applied_material.to_param, :applied_material => @applied_material.attributes
-  #  assert_redirected_to applied_material_path(assigns(:applied_material))
-  #end
+#  test "should update applied_material" do
+#    put :update, :id => @applied_material.to_param, :applied_material => @applied_material.attributes
+#    assert_redirected_to applied_material_path(assigns(:applied_material))
+#  end
 
   test "should not update address without material" do
     @applied_material.material_id = nil

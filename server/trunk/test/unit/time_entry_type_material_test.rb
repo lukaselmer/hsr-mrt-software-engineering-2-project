@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class TimeEntryTypeMaterialTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  setup do
+    @time_entry_type_material = time_entry_type_materials :two
+  end
+
+  test "correct String representation" do
+    assert_equal " (2x)", @time_entry_type_material.to_s
   end
 end
