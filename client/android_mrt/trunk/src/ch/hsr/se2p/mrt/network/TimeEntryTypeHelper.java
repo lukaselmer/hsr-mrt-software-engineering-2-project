@@ -34,7 +34,7 @@ public class TimeEntryTypeHelper {
 	private void updateOrCreateReceivables(List<Receivable> receivables, JSONArray arrayOfJSONReceivables, Class<? extends Receivable> clazz)
 			throws JSONException, IllegalAccessException, InstantiationException {
 		for (int i = 0; i < arrayOfJSONReceivables.length(); i++) {
-			JSONObject o = arrayOfJSONReceivables.getJSONObject(i).getJSONObject("time_entry_type");
+			JSONObject o = arrayOfJSONReceivables.getJSONObject(i).getJSONObject("timeentrytype");
 			Receivable r = clazz.newInstance();
 			r.fromJSON(o);
 			updateOrCreateReceivable(r, receivables, o);
