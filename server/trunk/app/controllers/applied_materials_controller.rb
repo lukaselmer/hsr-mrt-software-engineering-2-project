@@ -10,17 +10,6 @@ class AppliedMaterialsController < ApplicationController
     end
   end
 
-  # GET /applied_materials/1
-  # GET /applied_materials/1.xml
-  def show
-    @applied_material = AppliedMaterial.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @applied_material }
-    end
-  end
-
   # GET /applied_materials/new
   # GET /applied_materials/new.xml
   def new
