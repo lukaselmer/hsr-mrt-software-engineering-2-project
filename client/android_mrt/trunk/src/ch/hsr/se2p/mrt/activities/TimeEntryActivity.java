@@ -72,7 +72,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private TimeEntry currentTimeEntry;
 	private Spinner timeEntryTypeSpinner;
 	private AndroidComboBox comboBox;
-	private Set<Customer> customers;
+	private List<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
 
@@ -139,6 +139,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				currentPosition = new GpsPosition(location);
 				try {
 					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
+					updateComboboxCustomers();
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -173,7 +175,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initComboBox() {
-		loadCustomers();
 		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
 		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
@@ -181,6 +182,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private boolean isMeasurementStarted() {
 		return isStarted;
 	}
+
 
 	private void initSpinnerTimeEntryType() {
 		loadTimeEntryTypes();
@@ -197,7 +199,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void loadCustomers() {
 		try {
-			customers = new TreeSet(getHelper().getCustomerDao().queryForAll());
+			customers = getHelper().getCustomerDao().queryForAll();
 		} catch (SQLException e) {
 			Log.e(TAG, "Init customers", e);
 		}
@@ -239,7 +241,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void updateComboboxCustomers() {
-		loadCustomers();
 		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
@@ -306,7 +307,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return null;
 	}
 
-	private synchronized Set<Customer> getCustomers() {
+	private synchronized List<Customer> getCustomers() {
 		if (customers == null)
 			loadCustomers();
 		return customers;
