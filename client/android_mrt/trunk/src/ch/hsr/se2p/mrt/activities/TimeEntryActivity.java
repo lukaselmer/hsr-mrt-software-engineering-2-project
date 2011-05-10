@@ -90,7 +90,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		private void stopTimeMeasurement() {
 			try {
-				//TODO: Remove after gps is found works
 				setGPSImage(false);
 				locationManager.removeUpdates(locationListener);
 				saveTimeEntry();
@@ -148,7 +147,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 					e.printStackTrace();
 				}
 				locationManager.removeUpdates(locationListener);
-				// TODO: Change gps icon
+				setGPSImage(true);
 			}
 
 			public void onProviderDisabled(String provider) {
