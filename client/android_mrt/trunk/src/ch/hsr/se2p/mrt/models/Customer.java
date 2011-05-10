@@ -11,7 +11,9 @@ import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
-
+/**
+ * Saves needed information about the customer, which was received from the server.
+ */
 public class Customer implements Receivable {
 	@DatabaseField(generatedId = true)
 	private int id;

@@ -14,6 +14,11 @@ import ch.hsr.se2p.mrt.interfaces.Transmittable;
 
 import com.j256.ormlite.field.DatabaseField;
 
+/**
+ * TimeEntry stores information about a given customer, timeentry type and the gps position. Furthermore it saves the time when the TimeEntry was
+ * first created (started) and a stop time can be set too.
+ * 
+ */
 public class TimeEntry implements Transmittable, Confirmable {
 	private static final String TAG = TimeEntry.class.getSimpleName();
 
@@ -36,20 +41,23 @@ public class TimeEntry implements Transmittable, Confirmable {
 	TimeEntry() {
 		// Needed for ormlite
 	}
-
+/**
+ * 
+ * @param timeStart
+ */
 	public TimeEntry(Timestamp timeStart) {
 		hashcode = new BigInteger(130, random).toString(32);
 		this.timeStart = timeStart.getTime();
 	}
-	
+
 	public boolean hasCustomer() {
 		return customerId != null && customerId != 0;
 	}
-	
+
 	public boolean hasTimeEntryType() {
 		return timeEntryTypeId != null && timeEntryTypeId != 0;
 	}
-	
+
 	public boolean hasGpsPosition() {
 		return gpsPositionId != null && gpsPositionId != 0;
 	}
@@ -89,9 +97,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 	public boolean isTransmitted() {
 		return transmitted;
 	}
-	
+
 	public Integer getGpsPositionId() {
-	    return gpsPositionId;
+		return gpsPositionId;
 	}
 
 	// public void setAudioRecord(Blob audioRecord) {
@@ -107,7 +115,7 @@ public class TimeEntry implements Transmittable, Confirmable {
 	}
 
 	public void setGpsPositionId(Integer gpsPositionId) {
-	    this.gpsPositionId = gpsPositionId;
+		this.gpsPositionId = gpsPositionId;
 	}
 
 	public void setRailsId(Integer railsId) {
@@ -129,9 +137,9 @@ public class TimeEntry implements Transmittable, Confirmable {
 	@Override
 	public JSONObject toJSONObject() {
 		JSONObject j = new JSONObject();
-		
+
 		try {
-			//j.put("customer_id", customerId);
+			// j.put("customer_id", customerId);
 			j.put("time_entry_type_id", timeEntryTypeId);
 			j.put("hashcode", hashcode);
 			j.put("description", description);

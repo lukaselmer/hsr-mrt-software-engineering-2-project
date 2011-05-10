@@ -12,7 +12,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
-
+/**
+ * Creates a combobox with a autocomplete text and a button.
+ */
 public class AndroidComboBox extends LinearLayout {
 
 	private AutoCompleteTextView textView;
@@ -49,12 +51,6 @@ public class AndroidComboBox extends LinearLayout {
                 LayoutParams.WRAP_CONTENT));
 	}
 	
-	 /**
-	    * Sets the source for DDLB suggestions.
-	    * Cursor MUST be managed by supplier!!
-	    * @param source Source of suggestions.
-	    * @param column Which column from source to show.
-	    */
 	   public void setArrayAdapter(ArrayAdapter<Customer> customers) {
 	       textView.setAdapter(customers);
 	   }
