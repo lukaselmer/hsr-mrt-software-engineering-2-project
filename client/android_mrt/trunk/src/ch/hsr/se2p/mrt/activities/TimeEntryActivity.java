@@ -65,9 +65,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
-	private AutoCompleteTextView autoCompleteCustomers;
-	private Spinner timeEntryType;
-	private Spinner gpsSelection;
+	private Spinner timeEntryTypeSpinner;
+	private AndroidComboBox comboBox;
 	private List<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
@@ -106,7 +105,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
 		}
 	};
-	private AndroidComboBox comboBox;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -148,8 +146,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
     }
 
 	private void initData() {
-//		autoCompleteCustomers = (AutoCompleteTextView) findViewById(R.id.autocompleteCustomer);
-//		initSpinnerGPSSelection();
 		initComboBox();
 		initSpinnerTimeEntryType();
 	}
@@ -157,7 +153,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initComboBox() {
 		loadCustomers();
 		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
-		comboBox.setSuggestionSource(getCustomerAdapter(), "Kunden");
+		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
 	private boolean isMeasurementStarted() {
@@ -166,20 +162,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void initSpinnerTimeEntryType() {
 		loadTimeEntryTypes();
-		timeEntryType = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+		timeEntryTypeSpinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				timeEntryTypes);
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		timeEntryType.setAdapter(timeEntryTypeAdapater);
+		timeEntryTypeSpinner.setAdapter(timeEntryTypeAdapater);
 	}
-
-//	private void initSpinnerGPSSelection() {
-//		loadCustomers();
-//		gpsSelection = (Spinner) findViewById(R.id.spinnerGPSSelection);
-//		ArrayAdapter<Customer> gpsSelectionAdapter = new ArrayAdapter<Customer>(this, android.R.layout.simple_spinner_item, customers);
-//		gpsSelectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		gpsSelection.setAdapter(gpsSelectionAdapter);
-//	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
 		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
@@ -218,7 +206,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((AndroidComboBox) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 		}
-//		updateAutocompleteCustomers();
+		updateComboboxCustomers();
 	}
 
 	private void setLayout(String textViewText, String buttonText, int color) {
@@ -227,17 +215,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		findViewById(R.id.btnStartStop).getBackground().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
 	}
 
-	private void updateAutocompleteCustomers() {
+	private void updateComboboxCustomers() {
 		loadCustomers();
-		autoCompleteCustomers.setAdapter(getCustomerAdapter());
+		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
 	protected void saveTimeEntry() throws SQLException {
 		
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 		
-		if (!(timeEntryType.getSelectedItem().equals(timeEntryType.getItemAtPosition(0))))
-			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryType.getSelectedItem()).getId());
+		if (!(timeEntryTypeSpinner.getSelectedItem().equals(timeEntryTypeSpinner.getItemAtPosition(0))))
+			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryTypeSpinner.getSelectedItem()).getId());
 		
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 		
@@ -261,7 +249,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void setCustomer() throws SQLException {
-		if (comboBox.getText().length() == 0) { // kein Kunde in Autocomplete, aber Kunde in GPS-Auswahl
+		if (comboBox.getText().length() != 0) {
 			currentTimeEntry.setCustomerId(getCustomer().getId());
 			}
 	}
@@ -270,7 +258,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		String text = comboBox.getText();
 		if (text.length() == 0)
 			return null;
-		return findCustomer(text.toString());
+		return findCustomer(text);
 	}
 
 	private Customer findCustomer(String customerStr) {
@@ -291,26 +279,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		if (timeEntryTypes == null)
 			loadTimeEntryTypes();
 		return timeEntryTypes;
-	}
-
-	// TODO: Delete as soon as Class TimeEntryType is working
-	final static List<TimeEntryType> hackForTimeEntryTypes() {
-		ArrayList<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
-		timeEntryTypes.add(new TimeEntryType(1, "Kein Stundeneintragstyp"));
-		timeEntryTypes.add(new TimeEntryType(2, "Stundeneintragstyp 1"));
-		timeEntryTypes.add(new TimeEntryType(3, "Stundeneintragstyp 2"));
-		timeEntryTypes.add(new TimeEntryType(4, "Stundeneintragstyp 3"));
-		timeEntryTypes.add(new TimeEntryType(5, "Stundeneintragstyp 4"));
-		return timeEntryTypes;
-	}
-
-	final static List<Customer> hackForGPSSelection() {
-		ArrayList<Customer> gpsSelection = new ArrayList<Customer>();
-		// TODO: Customer Konstruktor mit Parameter löschen
-		gpsSelection.add(new Customer(0, "Kunde", "GPS-Auswahl"));
-		gpsSelection.add(new Customer(1, "Hadalbert", "Zwahlen"));
-		gpsSelection.add(new Customer(2, "Kunigunde", "Heller"));
-		return gpsSelection;
 	}
 
 	protected GpsPosition getCurrentPostition() {

@@ -55,21 +55,12 @@ public class AndroidComboBox extends LinearLayout {
 	    * @param source Source of suggestions.
 	    * @param column Which column from source to show.
 	    */
-	   public void setSuggestionSource(ArrayAdapter<Customer> customers, String column) {
-	       String[] from = new String[] { column };
-	       int[] to = new int[] { android.R.id.text1 };
-	       
-//	       SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this.getContext(),
-//	                       android.R.layout.simple_dropdown_item_1line, source, from, to);
-	       // this is to ensure that when suggestion is selected
-	       // it provides the value to the textbox
-//	       cursorAdapter.setStringConversionColumn(source.getColumnIndex(column));
+	   public void setArrayAdapter(ArrayAdapter<Customer> customers) {
 	       textView.setAdapter(customers);
 	   }
 
 	   /**
 	    * Gets the text in the combo box.
-	    *
 	    * @return Text.
 	    */
 	   public String getText() {
