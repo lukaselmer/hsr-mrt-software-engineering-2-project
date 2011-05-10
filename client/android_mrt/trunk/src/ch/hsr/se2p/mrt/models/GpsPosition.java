@@ -55,7 +55,6 @@ public class GpsPosition {
 	
 	public JSONObject toJSONObject() {
 		JSONObject j = new JSONObject();
-		
 		try {
 			//j.put("time", time);
 			j.put("latitude", latitude);
