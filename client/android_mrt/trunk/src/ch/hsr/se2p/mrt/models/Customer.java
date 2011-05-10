@@ -1,6 +1,8 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.util.Formatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -135,7 +137,8 @@ public class Customer implements Receivable, Comparable<Customer> {
 		String s = firstName + " " + lastName;
 		
 		if (distance != null) {
-			s += " (" + distance + "m)"; 
+			DecimalFormat f = new DecimalFormat(" (0m)");
+			s += f.format(distance); 
 		}
 		
 		return s;

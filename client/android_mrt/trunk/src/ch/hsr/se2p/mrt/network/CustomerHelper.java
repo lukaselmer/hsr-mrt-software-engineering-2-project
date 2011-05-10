@@ -85,8 +85,10 @@ public class CustomerHelper {
 					customerPosition = dao.queryForId(c.getGpsPositionId());
 					double distance = currentPosition.distanceTo(customerPosition);
 					
-					if (distance <= 100) c.setDistance(distance);
+					// Circle 1000m
+					if (distance <= 1000) c.setDistance(distance);
 					else c.setDistance(null);
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

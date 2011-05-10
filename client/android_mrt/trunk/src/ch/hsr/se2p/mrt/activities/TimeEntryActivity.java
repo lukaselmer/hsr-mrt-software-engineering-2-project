@@ -93,6 +93,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			try {
 				setGPSImage(false);
 				locationManager.removeUpdates(locationListener);
+				
+				if (currentPosition == null) {
+					
+					Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+					
+					if (location == null) {
+						currentPosition = new GpsPosition(location);
+					}
+				}
+				
 				saveTimeEntry();
 				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			} catch (SQLException e) {
@@ -108,8 +118,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
-			//TODO: Remove after gps is found works
-			setGPSImage(true);
 			currentPosition = null;
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
@@ -140,8 +148,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			public void onLocationChanged(Location location) {
 				currentPosition = new GpsPosition(location);
 				try {
-					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
-					Collections.sort(customers, new Comparator<Customer>() {
+					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
+					Collections.sort(getCustomers(), new Comparator<Customer>() {
 
 						@Override
 						public int compare(Customer one, Customer another) {
@@ -215,7 +223,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-		return new ArrayAdapter<Customer>(this, R.layout.list_item, new ArrayList<Customer>(getCustomers()));
+		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 	}
 
 	private void loadCustomers() {
