@@ -10,6 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.j256.ormlite.dao.Dao;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
@@ -74,19 +76,23 @@ public class CustomerHelper {
 		return ret;
 	}
 	
-	public static void calculateDistances(Dao<GpsPosition, Integer> dao, Set<Customer> customers, GpsPosition currentPosition) {
+	public static void calculateDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition) {
 		
 		for (Customer c : customers) {
 			if (c.hasGpsPosition()){
 				GpsPosition customerPosition;
 				try {
 					customerPosition = dao.queryForId(c.getGpsPositionId());
-					c.setDistance(currentPosition.distanceTo(customerPosition));
+					double distance = currentPosition.distanceTo(customerPosition);
+					
+					if (distance <= 100) c.setDistance(distance);
+					else c.setDistance(null);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+			} else {
+				c.setDistance(null);
 			}
-			c.setDistance(null);
 		}
 	}
 }
