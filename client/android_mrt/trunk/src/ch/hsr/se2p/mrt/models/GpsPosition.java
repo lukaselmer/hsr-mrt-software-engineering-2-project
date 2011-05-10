@@ -1,6 +1,7 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,8 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class GpsPosition {
 	private static final String TAG = TimeEntry.class.getSimpleName();
+	private static final int EAST_COORDINATE = 0;
+	private static final int NORTH_COORDINATE = 1;
 	
 	@DatabaseField(generatedId = true)
 	private int id;
@@ -84,5 +87,18 @@ public class GpsPosition {
 
 	public Timestamp getCreatedAt() {
 		return new Timestamp(createdAt);
+	}
+	
+	/**
+	 * Calculates the distance in meters from one to another GPS Position.
+	 */
+	public double distanceTo(GpsPosition otherPos) {
+		List<Double> oneList = GpsPositionConversion.calculateWGSToLV03(latitude, longitude, 0);
+		List<Double> otherList = GpsPositionConversion.calculateWGSToLV03(otherPos.getLatitude(), otherPos.getLongitude(), 0);
+		
+		double eastDistance = Math.abs(oneList.get(EAST_COORDINATE) - otherList.get(EAST_COORDINATE));
+		double northDistance = Math.abs(oneList.get(NORTH_COORDINATE) - otherList.get(NORTH_COORDINATE));
+		
+		return Math.hypot(eastDistance, northDistance);	
 	}
 }
