@@ -26,7 +26,7 @@
 
       <div class="field">
         <%= f.label :user_id %>
-        <%=  f.select(:user_id, User.for_select(User::TYPE_FIELD_WORKER), {:include_blank => true}) %>
+        <%=  f.select(:user_id, FieldWorker.for_select, {:include_blank => true}) %>
         <% if write_access? %>
           <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
         <% end %>

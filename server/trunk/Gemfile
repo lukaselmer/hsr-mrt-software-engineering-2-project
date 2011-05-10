@@ -38,6 +38,7 @@ gem 'devise'
 group :development do
   #gem 'railroady' # make shure you have graphviz installed if you want to use this
   gem 'railroady', :path => "vendor/gems/railroady"
+  gem 'sqlite3'
 end
 
 # Test coverage

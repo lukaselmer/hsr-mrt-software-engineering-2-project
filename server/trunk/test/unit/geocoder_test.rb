@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class GeocoderTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "valid address translation" do
     res = Geocoder.translate("Hungerbergstrasse 16, 8046 Zuerich")
     assert_nil res[:error]

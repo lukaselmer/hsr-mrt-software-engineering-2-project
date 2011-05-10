@@ -26,10 +26,8 @@ class User < ActiveRecord::Base
     [[Secretary.model_name.human, TYPE_SECRETARY], [FieldWorker.model_name.human, TYPE_FIELD_WORKER]]
   end
 
-  def self.for_select(type=nil)
-    set = all
-    set = find_all_by_type type if TYPES.has_value?(type)
-    set.to_a.collect { |u| [u, u.id] }
+  def self.for_select
+    all.collect { |u| [u, u.id] }
   end
 
   def to_s
