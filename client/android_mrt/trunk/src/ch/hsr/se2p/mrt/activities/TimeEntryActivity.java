@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -139,6 +141,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				currentPosition = new GpsPosition(location);
 				try {
 					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
+					Collections.sort(customers, Comparators<Customer>.distanceComparator());
 					updateComboboxCustomers();
 					
 				} catch (SQLException e) {
