@@ -114,11 +114,18 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public int compareTo(Customer another) {
-		if (this.distance.equals(another.distance))
-			return this.lastName.compareTo(another.lastName);
-		if (this.distance.equals(null) || this.distance > another.distance) 
+		if (this.distance == null) {
+			if (another.distance == null) 
+				return this.lastName.compareTo(another.lastName);
+			return 1;
+		}
+		if (another.distance == null) {
 			return -1;
-		//if (another.distance.equals(null) || this.distance < another.distance) 
-		return 1;
+		}
+		if (this.distance > another.distance)
+			return 1;
+		if (this.distance.equals(another.distance)) 
+			return this.lastName.compareTo(another.lastName);
+		return -1;
 	}
 }

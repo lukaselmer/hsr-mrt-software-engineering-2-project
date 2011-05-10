@@ -1,6 +1,8 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,5 +55,21 @@ public class CustomerTest extends AndroidTestCase {
 			assert (false);
 			e.printStackTrace();
 		}
+	}
+	public void testCustomerSort() {
+		Set<Customer> set = new TreeSet<Customer>();
+		set.add(new Customer("Jasper", "Zazoo", "+41 444 44 11", null));
+		set.add(new Customer("Duelue", "Anton", "+41 444 44 22", null));
+		set.add(new Customer("The", "Zombie", "+41 444 44 33", 100.0));
+		set.add(new Customer("Klara", "Wayne", "+41 444 44 44", 500.0));
+		set.add(new Customer("Fritz", "Arnold", "+41 444 44 55", 800.0));
+		set.add(new Customer("Hans", "Peter", "+41 444 44 66", 500.0));
+		Object[] custArray = set.toArray();
+		assertEquals("Zombie", ((Customer) custArray[0]).getLastName());
+		assertEquals("Peter", ((Customer) custArray[1]).getLastName());
+		assertEquals("Wayne", ((Customer) custArray[2]).getLastName());
+		assertEquals("Arnold", ((Customer) custArray[3]).getLastName());
+		assertEquals("Anton", ((Customer) custArray[4]).getLastName());
+		assertEquals("Zazoo", ((Customer) custArray[5]).getLastName());
 	}
 }
