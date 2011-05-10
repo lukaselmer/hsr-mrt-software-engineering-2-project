@@ -69,4 +69,10 @@ class CustomersControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:updated_customers)
   end
+
+  test "should get all customers when synchronizing with last_update" do
+    post :synchronize, :format => :json, :last_update => Time.now
+    assert_response :success
+    assert_not_nil assigns(:updated_customers)
+  end
 end
