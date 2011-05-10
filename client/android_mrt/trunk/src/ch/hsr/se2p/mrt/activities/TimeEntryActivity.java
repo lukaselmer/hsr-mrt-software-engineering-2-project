@@ -191,9 +191,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			Log.e(TAG, "Init customers", e);
 		}
 	}
-	
-	
-	
+
 	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter(){
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, getTimeEntryTypes()); 
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
