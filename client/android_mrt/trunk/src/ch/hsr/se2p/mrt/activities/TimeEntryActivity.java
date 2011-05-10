@@ -302,7 +302,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void setCustomer() throws SQLException {
-		if (comboBox.getText().length() != 0) {
+		if (comboBox.getText().length() != 0 && getCustomer() != null) {
 			currentTimeEntry.setCustomerId(getCustomer().getId());
 		}
 	}

@@ -20,7 +20,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	protected static final String DATABASE_NAME = "mrt.db";
-	protected static final int DATABASE_VERSION = 5;
+	protected static final int DATABASE_VERSION = 6;
 	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, TimeEntryType.class, GpsPosition.class };
 
 	private Dao<TimeEntry, Integer> timeEntryDao;
@@ -58,9 +58,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Upgrading database -> drop + create");
-			TableUtils.dropTable(connectionSource, TimeEntry.class, true);
-			TableUtils.dropTable(connectionSource, Customer.class, true);
-			TableUtils.dropTable(connectionSource, TimeEntryType.class, true);
+			for (Class<?> modelClass : MODEL_CLASSES) {
+				TableUtils.dropTable(connectionSource, modelClass, true);
+			}
 			onCreate(db, connectionSource);
 		} catch (SQLException e) {
 			Log.e(TAG, "Can't drop databases", e);

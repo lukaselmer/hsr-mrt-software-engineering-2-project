@@ -179,7 +179,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 	
-	private Dao<TimeEntry, Integer> getTimeEntryDao() throws SQLException{
+	private Dao<TimeEntry, ?> getTimeEntryDao() throws SQLException{
 		return activity.getHelper().getDao(TimeEntry.class);
 	}
 	
@@ -192,11 +192,11 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 	
 	private int getTimeEntryDaoCount() throws SQLException{
-		return getTimeEntryDao().queryForAll().size();
+		return activity.getHelper().getTimeEntryDao().queryForAll().size();
 	}
 	
 	private TimeEntry getTimeEntry(int index) throws SQLException{
-		return getTimeEntryDao().queryForAll().get(index);
+		return activity.getHelper().getTimeEntryDao().queryForAll().get(index);
 	}
 
 	private void performClickOnButton(String button) {
