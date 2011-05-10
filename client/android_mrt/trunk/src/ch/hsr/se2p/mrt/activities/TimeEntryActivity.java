@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -140,7 +141,25 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				currentPosition = new GpsPosition(location);
 				try {
 					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
-					Collections.sort(customers, Comparators<Customer>.distanceComparator());
+					Collections.sort(customers, new Comparator<Customer>() {
+
+						@Override
+						public int compare(Customer one, Customer another) {
+							if (one.getDistance() == null) {
+								if (another.getDistance() == null) 
+									return one.getLastName().compareTo(another.getLastName());
+								return 1;
+							}
+							if (another.getDistance() == null) {
+								return -1;
+							}
+							if (one.getDistance() > another.getDistance())
+								return 1;
+							if (one.getDistance().equals(another.getDistance())) 
+								return one.getLastName().compareTo(another.getLastName());
+							return -1;
+						}
+					});
 					updateComboboxCustomers();
 					
 				} catch (SQLException e) {
