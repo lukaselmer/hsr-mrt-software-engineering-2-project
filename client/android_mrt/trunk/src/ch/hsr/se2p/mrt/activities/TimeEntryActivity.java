@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -87,7 +88,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		private void stopTimeMeasurement() {
 			try {
-			    locationManager.removeUpdates(locationListener);
+				//TODO: Remove after gps is found works
+				setGPSImage(false);
+				locationManager.removeUpdates(locationListener);
 				saveTimeEntry();
 				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			} catch (SQLException e) {
@@ -103,7 +106,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 
 		private void startTimeMeasurement() {
-		    currentPosition = null;
+			//TODO: Remove after gps is found works
+			setGPSImage(true);
+			currentPosition = null;
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
 			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
@@ -117,44 +122,50 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
-		
-        locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
-//        ActivityHelper.displayAlertDialog("GPS status", "" + locationManager.getGpsStatus(null), TimeEntryActivity.this);
-        initLocationListener();
-        
+
+		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
+		// ActivityHelper.displayAlertDialog("GPS status", "" + locationManager.getGpsStatus(null), TimeEntryActivity.this);
+		initLocationListener();
+
 		initData();
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
 	}
 
-    private void initLocationListener() {
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                currentPosition = new GpsPosition(location);
-                try {
+	private void initLocationListener() {
+		locationListener = new LocationListener() {
+			public void onLocationChanged(Location location) {
+				currentPosition = new GpsPosition(location);
+				try {
 					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-                locationManager.removeUpdates(locationListener);
-                //TODO: Change gps icon
-            }
-            public void onProviderDisabled(String provider){ }
-            public void onProviderEnabled(String provider){ }
-            public void onStatusChanged(String provider, int status, Bundle extras){ }
-        };
-    }
+				locationManager.removeUpdates(locationListener);
+				// TODO: Change gps icon
+			}
 
-    private Criteria getInitializedCriteria() {
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_FINE);
-        criteria.setAltitudeRequired(false);
-        criteria.setBearingRequired(false);
-        criteria.setCostAllowed(true);
-        criteria.setPowerRequirement(Criteria.POWER_LOW);
-        return criteria;
-    }
+			public void onProviderDisabled(String provider) {
+			}
+
+			public void onProviderEnabled(String provider) {
+			}
+
+			public void onStatusChanged(String provider, int status, Bundle extras) {
+			}
+		};
+	}
+
+	private Criteria getInitializedCriteria() {
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setCostAllowed(true);
+		criteria.setPowerRequirement(Criteria.POWER_LOW);
+		return criteria;
+	}
 
 	private void initData() {
 		initComboBox();
@@ -192,12 +203,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter(){
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, getTimeEntryTypes()); 
+	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter() {
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
+				getTimeEntryTypes());
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		return timeEntryTypeAdapater;
 	}
-	
+
 	private void loadTimeEntryTypes() {
 		try {
 			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
@@ -212,7 +224,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
 		} else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
-			
+
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((AndroidComboBox) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
@@ -231,38 +243,46 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
+	private void setGPSImage(boolean bool) {
+		ImageView view = (ImageView) findViewById(R.id.image_gps);
+		if (bool)
+			view.setImageResource(R.drawable.gps_on);
+		else
+			view.setImageResource(R.drawable.gps_off);
+	}
+
 	protected void saveTimeEntry() throws SQLException {
-		
+
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-		
+
 		if (!(timeEntryTypeSpinner.getSelectedItem().equals(timeEntryTypeSpinner.getItemAtPosition(0))))
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryTypeSpinner.getSelectedItem()).getId());
-		
+
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
-		
+
 		if (currentPosition != null)
-		    currentTimeEntry.setGpsPositionId(saveGpsData());
-		
+			currentTimeEntry.setGpsPositionId(saveGpsData());
+
 		setCustomer();
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
 	}
-	
+
 	protected int saveGpsData() throws SQLException {
-	    if (currentPosition == null)
-	        return -1;
-	    
-	    Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
-	    gpsPositionDao.create(currentPosition);
-	    
-	    return currentPosition.getId();
+		if (currentPosition == null)
+			return -1;
+
+		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
+		gpsPositionDao.create(currentPosition);
+
+		return currentPosition.getId();
 	}
 
 	private void setCustomer() throws SQLException {
 		if (comboBox.getText().length() != 0) {
 			currentTimeEntry.setCustomerId(getCustomer().getId());
-			}
+		}
 	}
 
 	private Customer getCustomer() throws SQLException {
@@ -274,15 +294,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private Customer findCustomer(String customerStr) {
 		Iterator<Customer> i = customers.iterator();
-		
+
 		while (i.hasNext()) {
 			Customer c = i.next();
-			
-			if(c.toString().equals(customerStr.toString())) {
+
+			if (c.toString().equals(customerStr.toString())) {
 				return c;
 			}
 		}
-		
+
 		return null;
 	}
 
@@ -291,7 +311,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			loadCustomers();
 		return customers;
 	}
-	
+
 	private synchronized List<TimeEntryType> getTimeEntryTypes() {
 		if (timeEntryTypes == null)
 			loadTimeEntryTypes();
