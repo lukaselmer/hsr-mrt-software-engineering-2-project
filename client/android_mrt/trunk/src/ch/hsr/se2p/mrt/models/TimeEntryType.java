@@ -8,7 +8,9 @@ import org.json.JSONObject;
 import com.j256.ormlite.field.DatabaseField;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-
+/**
+ * Saves needed information about the timeentrytype, which was received from the server. 
+ */
 public class TimeEntryType implements Receivable {
 	@DatabaseField(generatedId = true)
 	private int id;

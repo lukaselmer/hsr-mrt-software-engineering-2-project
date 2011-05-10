@@ -1,7 +1,9 @@
 package ch.hsr.se2p.mrt.models;
 
 import com.j256.ormlite.field.DatabaseField;
-
+/**
+ * Stores the information about the user settings.
+ */
 public class UserSettings {
 	@DatabaseField(generatedId = true)
 	private Integer id;

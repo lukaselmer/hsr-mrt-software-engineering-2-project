@@ -42,8 +42,8 @@ public class TimeEntry implements Transmittable, Confirmable {
 		// Needed for ormlite
 	}
 /**
- * 
- * @param timeStart
+ * Creates a new TimeEntry.
+ * A hashcode is created to make sure that an TimeEntry is not saved on the server more then once.
  */
 	public TimeEntry(Timestamp timeStart) {
 		hashcode = new BigInteger(130, random).toString(32);

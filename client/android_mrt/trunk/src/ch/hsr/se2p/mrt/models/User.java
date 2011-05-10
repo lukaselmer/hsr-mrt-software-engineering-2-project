@@ -14,7 +14,9 @@ import android.text.method.DateTimeKeyListener;
 import com.j256.ormlite.field.DatabaseField;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-
+/**
+ * 
+ */
 public class User implements Receivable {
 
 	@DatabaseField(generatedId = true)
