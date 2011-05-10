@@ -79,10 +79,6 @@ public class Customer implements Receivable, Comparable<Customer> {
 	public boolean isDeleted() {
 		return deleted;
 	}
-
-	public String toString() {
-		return lastName + " " + firstName;
-	}
 	
 	public void setDistance(Double distance) {
 		this.distance = distance;
@@ -127,5 +123,15 @@ public class Customer implements Receivable, Comparable<Customer> {
 		if (this.distance.equals(another.distance)) 
 			return this.lastName.compareTo(another.lastName);
 		return -1;
+	}
+	
+	public String toString() {
+		String s = firstName + " " + lastName;
+		
+		if (distance != null) {
+			s += " (" + distance + "m)"; 
+		}
+		
+		return s;
 	}
 }
