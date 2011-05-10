@@ -7,7 +7,9 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "correct String representation" do
-    assert_equal "Field Worker", @field_worker.to_s
+
+    expected_string = @field_worker.first_name + " " + @field_worker.last_name
+    assert_equal expected_string, @field_worker.to_s
   end
 
   test "return correct array for Selection" do
@@ -17,11 +19,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "return appropriate array for given Type" do
 
-    exp_array_secretary = [[@secretary, @secretary.id]]
-    exp_Array_Field_Worker = [[@field_worker, @field_worker.id]]
-
-    assert_equal exp_array_secretary, Secretary.for_select
-    assert_equal exp_Array_Field_Worker, FieldWorker.for_select
+    assert_equal [[@secretary, @secretary.id]], Secretary.for_select
+    assert_equal [[@field_worker, @field_worker.id]], FieldWorker.for_select
   end
-
 end
