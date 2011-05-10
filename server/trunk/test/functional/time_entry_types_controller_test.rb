@@ -64,4 +64,15 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
 
     assert_redirected_to time_entry_types_path
   end
+
+  test "should add material time_entry_types" do
+    get :add_material, :id => @time_entry_type.to_param
+    assert_not_nil assigns(:time_entry_type)
+    assert_not_nil assigns(:time_entry_type_material)
+  end
+
+  test "should synchronize time_entry_types" do
+    get :synchronize, :last_update => Time.now
+    assert_not_nil assigns(:updated_time_entry_types)
+  end
 end
