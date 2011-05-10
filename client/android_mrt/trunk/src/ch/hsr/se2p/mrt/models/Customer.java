@@ -80,7 +80,7 @@ public class Customer implements Receivable, Comparable<Customer> {
 		return deleted;
 	}
 
-	public double getDistance() {
+	public Double getDistance() {
 		return distance;
 	}
 	
