@@ -79,6 +79,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 	public boolean isDeleted() {
 		return deleted;
 	}
+
+	public double getDistance() {
+		return distance;
+	}
 	
 	public void setDistance(Double distance) {
 		this.distance = distance;
@@ -98,8 +102,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
 		deleted = !customerObj.isNull("deleted_at");
 		
-		JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
-		position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
+		if (customerObj.has("address")) {
+			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
+			position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
+		}
 		
 		return true;
 	}
