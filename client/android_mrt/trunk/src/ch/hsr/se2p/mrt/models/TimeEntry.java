@@ -139,7 +139,7 @@ public class TimeEntry implements Transmittable, Confirmable {
 		JSONObject j = new JSONObject();
 
 		try {
-			// j.put("customer_id", customerId);
+			 j.put("customer_id", customerId);
 			j.put("time_entry_type_id", timeEntryTypeId);
 			j.put("hashcode", hashcode);
 			j.put("description", description);

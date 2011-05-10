@@ -68,7 +68,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	@UiThreadTest
 	public void testPreconditions() {
 		assertEquals("", editCustomer.getText());
-		assertEquals(Integer.valueOf(1), ((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
+		assertEquals(Integer.valueOf(0), ((TimeEntryType) editTimeEntryType.getSelectedItem()).getId());
 		assertEquals("", editDescription.getText().toString());
 		assertEquals(START, button.getText().toString());
 	}
@@ -87,7 +87,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			int count = getTimeEntryDaoCount();
 			startAndStopTimeMeasurement();
-			assertEquals(count + 1, getTimeEntryDao().queryForAll().size());
+			assertEquals(count + 1, getTimeEntryDaoCount());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -98,7 +98,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		setSpinner();
 		TimeEntryType timeEntryType = (TimeEntryType) editTimeEntryType.getSelectedItem();
 		try {
-			assertEquals(getTimeEntryType(INITIAL_POSITION).getName(), timeEntryType.getName());
+			assertEquals(getTimeEntryType(TEST_POSITION-1).getName(), timeEntryType.getName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert(false);
@@ -121,7 +121,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			startAndStopTimeMeasurement();
 			timeEntry = getTimeEntry(getTimeEntryDaoCount()-1);
-			assertEquals(getTimeEntryType(TEST_POSITION).getId(), timeEntry.getTimeEntryTypeId());
+			assertEquals(getTimeEntryType(TEST_POSITION-1).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
