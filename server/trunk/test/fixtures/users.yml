@@ -10,6 +10,7 @@ field_worker:
   last_name: 'Worker'
   email: 'field_worker@mrt.ch'
   type: <%= User::TYPE_FIELD_WORKER %>
+  encrypted_password: $2a$10$quf5zVz5P7pkhZl64IMto.KRG4vaX575yW4kyjO9jnxVpKsR9Yd2O
   
 secretary:
   id: 100
@@ -17,3 +18,4 @@ secretary:
   last_name: 'Retary'
   email: 'secretary@mrt.ch'
   type: <%= User::TYPE_SECRETARY %>
+  encrypted_password: $2a$10$quf5zVz5P7pkhZl64IMto.KRG4vaX575yW4kyjO9jnxVpKsR9Yd2O

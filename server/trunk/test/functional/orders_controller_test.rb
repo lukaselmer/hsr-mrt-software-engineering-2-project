@@ -63,4 +63,10 @@ class OrdersControllerTest < ActionController::TestCase
 
     assert_redirected_to orders_path
   end
+
+  test "should add material to order" do
+    get :add_material, :id => @order.to_param
+    assert_not_nil assigns(:applied_material)
+    assert_not_nil assigns(:order)
+  end
 end
