@@ -14,7 +14,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Saves needed information about the customer, which was received from the server.
  */
-public class Customer implements Receivable {
+public class Customer implements Receivable, Comparable<Customer> {
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -28,6 +28,8 @@ public class Customer implements Receivable {
 	@DatabaseField
 	private boolean deleted = false;
 	
+	private double distance;
+	
 	//Caches gps_position for creation or update as it has to be stored in a separate table
 	public GpsPosition position;
 
@@ -35,12 +37,6 @@ public class Customer implements Receivable {
 		// Needed for ormlite
 	}
 
-	public Customer(int i, String string, String string2) {
-		id = i;
-		firstName = string;
-		lastName = string2;
-	}
-	
 	public boolean hasGpsPosition() {
 		return gpsPositionId != null && gpsPositionId != 0;
 	}
@@ -101,9 +97,14 @@ public class Customer implements Receivable {
 		return true;
 	}
 	
-	
-	
 	public void setGpsPositionId(Integer id) {
 		gpsPositionId = id;
+	}
+
+	@Override
+	public int compareTo(Customer another) {
+		if (this.distance < another.distance) return -1;
+		if (this.distance > another.distance) return 1;
+		return this.lastName.compareTo(another.lastName);
 	}
 }

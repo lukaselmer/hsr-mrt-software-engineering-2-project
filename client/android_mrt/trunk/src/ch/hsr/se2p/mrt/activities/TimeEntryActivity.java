@@ -289,10 +289,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return currentPosition;
 	}
 
-	private void calculateDistanceFromCurrentPositionTo(GpsPosition position) {
-
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
