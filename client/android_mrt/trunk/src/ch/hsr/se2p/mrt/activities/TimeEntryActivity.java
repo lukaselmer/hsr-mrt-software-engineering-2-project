@@ -4,7 +4,10 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +71,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private TimeEntry currentTimeEntry;
 	private Spinner timeEntryTypeSpinner;
 	private AndroidComboBox comboBox;
-	private List<Customer> customers;
+	private Set<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
 
@@ -130,7 +133,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
             public void onLocationChanged(Location location) {
                 currentPosition = new GpsPosition(location);
                 try {
-					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(),customers, currentPosition);
+					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), customers, currentPosition);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -178,12 +181,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+		return new ArrayAdapter<Customer>(this, R.layout.list_item, new ArrayList<Customer>(getCustomers()));
 	}
 
 	private void loadCustomers() {
 		try {
-			customers = getHelper().getCustomerDao().queryForAll();
+			customers = new TreeSet(getHelper().getCustomerDao().queryForAll());
 		} catch (SQLException e) {
 			Log.e(TAG, "Init customers", e);
 		}
@@ -272,14 +275,20 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private Customer findCustomer(String customerStr) {
-		for (int i = 0; i < customers.size(); i++) {
-			if (customers.get(i).toString().equals(customerStr.toString()))
-				return customers.get(i);
+		Iterator<Customer> i = customers.iterator();
+		
+		while (i.hasNext()) {
+			Customer c = i.next();
+			
+			if(c.toString().equals(customerStr.toString())) {
+				return c;
+			}
 		}
+		
 		return null;
 	}
 
-	private synchronized List<Customer> getCustomers() {
+	private synchronized Set<Customer> getCustomers() {
 		if (customers == null)
 			loadCustomers();
 		return customers;
