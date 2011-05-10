@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,7 +74,7 @@ public class CustomerHelper {
 		return ret;
 	}
 	
-	public static void calculateDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition) {
+	public static void calculateDistances(Dao<GpsPosition, Integer> dao, Set<Customer> customers, GpsPosition currentPosition) {
 		
 		for (Customer c : customers) {
 			if (c.hasGpsPosition()){
