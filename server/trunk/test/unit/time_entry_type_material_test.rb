@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class TimeEntryTypeMaterialTest < ActiveSupport::TestCase
-
   setup do
     @time_entry_type_material = time_entry_type_materials :two
   end

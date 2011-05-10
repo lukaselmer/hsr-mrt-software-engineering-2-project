@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  setup do
+    @user = users :field_worker
+  end
+
+  test "correct String representation" do
+    assert_equal "Field Worker", @user.to_s
   end
 end
