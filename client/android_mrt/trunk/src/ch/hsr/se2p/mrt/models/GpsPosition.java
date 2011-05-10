@@ -90,7 +90,7 @@ public class GpsPosition {
 		return new Timestamp(createdAt);
 	}
 	
-	private double gps2m(double lat_a, double lng_a, double lat_b, double lng_b) {
+	private static double distance(double lat_a, double lng_a, double lat_b, double lng_b) {
 	    double pk = (180/3.14169);
 
 	    double a1 = lat_a / pk;
@@ -106,11 +106,12 @@ public class GpsPosition {
 	    return 6366000*tt;
 	}
 	
+	
 	/**
 	 * Calculates the distance in meters from one to another GPS Position.
 	 */
 	public double distanceTo(GpsPosition otherPos) {
-		return gps2m(latitude, longitude, otherPos.getLatitude(), otherPos.getLongitude());
+		return distance(latitude, longitude, otherPos.getLatitude(), otherPos.getLongitude());
 		
 //		List<Double> oneList = GpsPositionConversion.calculateWGSToLV03(latitude, longitude, 0);
 //		List<Double> otherList = GpsPositionConversion.calculateWGSToLV03(otherPos.getLatitude(), otherPos.getLongitude(), 0);

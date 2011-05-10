@@ -1,6 +1,7 @@
 package ch.hsr.se2p.mrt.network;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -8,7 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.j256.ormlite.dao.Dao;
+
 import ch.hsr.se2p.mrt.interfaces.Receivable;
+import ch.hsr.se2p.mrt.models.Customer;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 
 public class CustomerHelper {
 	protected HttpHelper httpHelper;
@@ -66,5 +71,21 @@ public class CustomerHelper {
 		}
 		ret.put("last_update", maxUpdatedAt);
 		return ret;
+	}
+	
+	public static void calculateDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition) {
+		
+		for (Customer c : customers) {
+			if (c.hasGpsPosition()){
+				GpsPosition customerPosition;
+				try {
+					customerPosition = dao.queryForId(c.getGpsPositionId());
+					c.setDistance(currentPosition.distanceTo(customerPosition));
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			c.setDistance(null);
+		}
 	}
 }

@@ -36,6 +36,7 @@ import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
+import ch.hsr.se2p.mrt.network.CustomerHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -128,6 +129,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
         locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 currentPosition = new GpsPosition(location);
+                try {
+					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(),customers, currentPosition);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+                locationManager.removeUpdates(locationListener);
+                //TODO: Change gps icon
             }
             public void onProviderDisabled(String provider){ }
             public void onProviderEnabled(String provider){ }
@@ -180,6 +188,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			Log.e(TAG, "Init customers", e);
 		}
 	}
+	
+	
 	
 	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter(){
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, getTimeEntryTypes()); 

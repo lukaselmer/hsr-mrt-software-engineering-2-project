@@ -28,13 +28,20 @@ public class Customer implements Receivable, Comparable<Customer> {
 	@DatabaseField
 	private boolean deleted = false;
 	
-	private double distance;
+	private Double distance;
 	
 	//Caches gps_position for creation or update as it has to be stored in a separate table
 	public GpsPosition position;
 
 	public Customer() {
 		// Needed for ormlite
+	}
+	
+	public Customer(String firstname, String lastname, String phone, Double distance) {
+		firstName = firstname;
+		lastName = lastname;
+		this.phone = phone;
+		this.distance = distance;
 	}
 
 	public boolean hasGpsPosition() {
@@ -76,6 +83,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 	public String toString() {
 		return lastName + " " + firstName;
 	}
+	
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
 
 	@Override
 	public boolean fromJSON(JSONObject customerObj) throws JSONException {
@@ -103,8 +114,11 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public int compareTo(Customer another) {
-		if (this.distance < another.distance) return -1;
-		if (this.distance > another.distance) return 1;
-		return this.lastName.compareTo(another.lastName);
+		if (this.distance.equals(another.distance))
+			return this.lastName.compareTo(another.lastName);
+		if (this.distance.equals(null) || this.distance > another.distance) 
+			return -1;
+		//if (another.distance.equals(null) || this.distance < another.distance) 
+		return 1;
 	}
 }
