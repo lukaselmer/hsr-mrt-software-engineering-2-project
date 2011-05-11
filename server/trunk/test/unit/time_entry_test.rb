@@ -4,6 +4,7 @@ class TimeEntryTest < ActiveSupport::TestCase
 
   setup do
     @time_entry = time_entries :one
+    @time_entry_2 = time_entries :two
   end
 
   test "remove_hashcode removes hashcode" do
@@ -22,10 +23,9 @@ class TimeEntryTest < ActiveSupport::TestCase
     assert !invalid_record.valid?
   end
 
-#  test "correct duration of time_entry" do
-#
-##    TODO expected Wert überarbeiten
-#    assert_equal Thu Jan 01 07:46:24 UTC 1970, @time_entry.duration
-#
-#  end
+  test "correct duration of time_entry" do
+#    TODO Test überarbeiten
+    assert_equal Time.at(@time_entry.time_stop - @time_entry.time_start).gmtime, @time_entry.duration
+    assert_equal Time.at(@time_entry_2.time_stop - @time_entry_2.time_start).gmtime, @time_entry_2.duration
+  end
 end
