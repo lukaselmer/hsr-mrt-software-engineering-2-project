@@ -357,6 +357,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		case R.id.logout:
 			logout();
 			return true;
+		case R.id.refreshMenu:
+			updateView();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
