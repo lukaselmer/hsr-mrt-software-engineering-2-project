@@ -21,7 +21,7 @@ public class UserTest extends AndroidTestCase {
 		super.setUp();
 		user = new User();
 		timeStamp = new Timestamp(System.currentTimeMillis());
-		userObj = new JSONObject().put("user", getUserJSON());
+		userObj = new JSONObject().put("field_worker", getUserJSON());
 	}
 
 	private JSONObject getUserJSON() throws JSONException {
