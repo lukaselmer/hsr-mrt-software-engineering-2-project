@@ -80,8 +80,6 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.new(params[:time_entry])
     @time_entry.gps_position = @gps_position;
     @time_entry.user = current_user
-
-    Rails.logger.debug params.inspect
     
     render :json => @time_entry.errors, :status => :unprocessable_entity and return if !@time_entry.save
     render :json => @time_entry, :status => :created, :location => @time_entry
