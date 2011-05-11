@@ -32,19 +32,16 @@ public class TimeEntry implements Transmittable, Confirmable {
 	private String hashcode, description;
 	@DatabaseField
 	private long timeStart, timeStop;
-	// TODO: Add audio record
-	// @DatabaseField
-	// private Blob audioRecord;
 
 	private static SecureRandom random = new SecureRandom();
 
 	TimeEntry() {
 		// Needed for ormlite
 	}
-/**
- * Creates a new TimeEntry.
- * A hashcode is created to make sure that an TimeEntry is not saved on the server more then once.
- */
+
+	/**
+	 * Creates a new TimeEntry. A hashcode is created to make sure that an TimeEntry is not saved on the server more then once.
+	 */
 	public TimeEntry(Timestamp timeStart) {
 		hashcode = new BigInteger(130, random).toString(32);
 		this.timeStart = timeStart.getTime();
@@ -102,10 +99,6 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return gpsPositionId;
 	}
 
-	// public void setAudioRecord(Blob audioRecord) {
-	// this.audioRecord = audioRecord;
-	// }
-
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
 	}
@@ -139,14 +132,12 @@ public class TimeEntry implements Transmittable, Confirmable {
 		JSONObject j = new JSONObject();
 
 		try {
-			 j.put("customer_id", customerId);
+			j.put("customer_id", customerId);
 			j.put("time_entry_type_id", timeEntryTypeId);
 			j.put("hashcode", hashcode);
 			j.put("description", description);
-			j.put("time_start", getTimeStart());
-			j.put("time_stop", getTimeStop());
-			// j.put("position", position);
-			// j.put("audio_record", audioRecord);
+			j.put("time_start", DateHelper.format(getTimeStart()));
+			j.put("time_stop", DateHelper.format(getTimeStop()));
 		} catch (JSONException e) {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
