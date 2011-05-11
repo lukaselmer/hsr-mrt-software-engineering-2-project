@@ -74,7 +74,13 @@ class TimeEntryTypesController < ApplicationController
   end
 
   def synchronize
-    @updated_time_entry_types = TimeEntryType.updated_after(params[:last_update])
+    if params[:last_update].nil?
+      @updated_time_entry_types = TimeEntryType.all
+    else
+      last_update = Time.parse(params[:last_update])
+      @updated_time_entry_types = TimeEntryType.updated_after(last_update)
+    end
+    
     render :json => @updated_time_entry_types
   end
 end

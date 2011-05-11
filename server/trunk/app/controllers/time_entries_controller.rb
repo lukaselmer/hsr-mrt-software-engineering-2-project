@@ -68,9 +68,11 @@ class TimeEntriesController < ApplicationController
 
     # Case 1: Hashcode is blank and error is rendered
     render :json => "Hashcode blank", :status => :unprocessable_entity and return if params[:time_entry][:hashcode].blank?
+
     # Case 2: TimeEntry exists and is rendered
     @time_entry = TimeEntry.find_by_hashcode(params[:time_entry][:hashcode])
     render :json => @time_entry, :status => :created, :location => @time_entry and return if !@time_entry.nil?
+
     # Case 3: TimeEntry does not exists and is created
     @gps_position = GpsPosition.new(params[:time_entry][:gps_position_data])
     params[:time_entry].delete :gps_position_data
@@ -78,6 +80,9 @@ class TimeEntriesController < ApplicationController
     @time_entry = TimeEntry.new(params[:time_entry])
     @time_entry.gps_position = @gps_position;
     @time_entry.user = current_user
+
+    Rails.logger.debug params.inspect
+    
     render :json => @time_entry.errors, :status => :unprocessable_entity and return if !@time_entry.save
     render :json => @time_entry, :status => :created, :location => @time_entry
   end
