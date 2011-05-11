@@ -3,18 +3,13 @@ package ch.hsr.se2p.mrt.activities;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -23,7 +18,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,7 +25,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -150,39 +143,37 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
 					Collections.sort(getCustomers(), getComparator());
 					updateComboboxCustomers();
-					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 				locationManager.removeUpdates(locationListener);
 				setGPSImage(true);
 			}
-
-			private Comparator<Customer> getComparator() {
-				return new Comparator<Customer>() {
-					@Override
-					public int compare(Customer one, Customer another) {
-						if (one.getDistance() == null) {
-							if (another.getDistance() == null) 
-								return one.getLastName().compareTo(another.getLastName());
-							return 1;
-						}
-						if (another.getDistance() == null)
-							return -1;
-						if (one.getDistance() > another.getDistance())
-							return 1;
-						if (one.getDistance().equals(another.getDistance())) 
-							return one.getLastName().compareTo(another.getLastName());
-						return -1;
-					}
-				};
-			}
-
 			public void onProviderDisabled(String provider) {
 			}
 			public void onProviderEnabled(String provider) {
 			}
 			public void onStatusChanged(String provider, int status, Bundle extras) {
+			}
+		};
+	}
+	
+	private Comparator<Customer> getComparator() {
+		return new Comparator<Customer>() {
+			@Override
+			public int compare(Customer one, Customer another) {
+				if (one.getDistance() == null) {
+					if (another.getDistance() == null) 
+						return one.getLastName().compareTo(another.getLastName());
+					return 1;
+				}
+				if (another.getDistance() == null)
+					return -1;
+				if (one.getDistance() > another.getDistance())
+					return 1;
+				if (one.getDistance().equals(another.getDistance())) 
+					return one.getLastName().compareTo(another.getLastName());
+				return -1;
 			}
 		};
 	}
@@ -257,6 +248,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((AndroidComboBox) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
+			Collections.sort(getCustomers(), getComparator());
 		}
 		updateComboboxCustomers();
 	}
