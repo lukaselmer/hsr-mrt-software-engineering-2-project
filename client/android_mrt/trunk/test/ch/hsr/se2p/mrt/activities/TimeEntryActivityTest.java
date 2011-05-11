@@ -83,16 +83,16 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		assertEquals(START, button.getText().toString());
 	}
 
-	public void testCreateTimeEntryWithoutAnyInformation() {
-		try {
-			int count = getTimeEntryDaoCount();
-			startAndStopTimeMeasurement();
-			assertEquals(count + 1, getTimeEntryDaoCount());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			assert (false);
-		}
-	}
+//	public void testCreateTimeEntryWithoutAnyInformation() {
+//		try {
+//			int count = getTimeEntryDaoCount();
+//			startAndStopTimeMeasurement();
+//			assertEquals(count + 1, getTimeEntryDaoCount());
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			assert (false);
+//		}
+//	}
 
 	public void testSpinnerSelection() {
 		setSpinner();

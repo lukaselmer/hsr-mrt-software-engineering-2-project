@@ -48,9 +48,11 @@ public class GpsPosition {
 	}
 	
 	public void from(Location location) {
+		if (location != null) {
 	    time = location.getTime();
 	    latitude = location.getLatitude();
 	    longitude = location.getLongitude();
+		}
 	}
 	
 	public JSONObject toJSONObject() {

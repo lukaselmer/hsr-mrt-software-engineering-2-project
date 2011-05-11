@@ -1,7 +1,5 @@
 package ch.hsr.se2p.mrt.activities;
 
-import ch.hsr.se2p.mrt.models.User;
-import ch.hsr.se2p.mrt.network.HttpHelper;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
@@ -10,9 +8,6 @@ public class MRTApplicationTest extends AndroidTestCase {
 	
 	private MRTApplication mrtApp;
 	private final String EMAIL = "field_worker@mrt.ch", PASSWORD = "mrt";
-	private String email, password;
-	
-	
 
 	@Override
 	protected void setUp() throws Exception {

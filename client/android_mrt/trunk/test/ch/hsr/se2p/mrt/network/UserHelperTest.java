@@ -12,7 +12,7 @@ public class UserHelperTest extends HttpTestCase {
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
 		int id = 77;
 		Timestamp updatedAt = DateHelper.formatAndParseToTimestamp(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
-		expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
+		expectedResultFromTransmitter("{\"field_worker\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
 				+ "\",\"id\":" + id + ",\"updated_at\":\"" + DateHelper.format(updatedAt) + "\"}}");
 		UserHelper userHelper = new UserHelper(httpHelper);
 		assertTrue(userHelper.login("validlogin", "validpassword", u));
@@ -36,7 +36,7 @@ public class UserHelperTest extends HttpTestCase {
 		UserHelper userHelper = new UserHelper(httpHelper);
 		assertTrue(userHelper.login("field_worker@mrt.ch", "mrt", u));
 		assertTrue(u.getUpdatedAt().getTime() > 1);
-		String firstName = "Field", lastName = "Worker", email = "field_worker@mrt.ch";
+		String firstName = "Fredi", lastName = "Worker", email = "field_worker@mrt.ch";
 		Integer id = 2;
 		// Timestamp updatedAt = new Timestamp(Timestamp.parse(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60).toGMTString()));
 		// expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email

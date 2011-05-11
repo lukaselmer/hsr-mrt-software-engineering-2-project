@@ -30,8 +30,6 @@ public class UserTest extends AndroidTestCase {
 	}
 
 	public void testInitialUser() {
-		// assertNull(user.getId());
-		assertNull(user.getIdOnServer());
 		assertNull(user.getFirstName());
 		assertNull(user.getLastName());
 		assertNull(user.getEmail());
@@ -41,7 +39,6 @@ public class UserTest extends AndroidTestCase {
 	public void testFromJSON() {
 		try {
 			user.fromJSON(userObj);
-			// assertEquals(new Integer(0), user.getId());
 			assertEquals(1, user.getIdOnServer());
 			assertEquals(FIRST_NAME, user.getFirstName());
 			assertEquals(LAST_NAME, user.getLastName());

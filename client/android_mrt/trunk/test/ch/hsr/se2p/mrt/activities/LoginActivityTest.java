@@ -11,7 +11,7 @@ import ch.hsr.se2p.mrt.R;
 import com.jayway.android.robotium.solo.Solo;
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
-
+	
 	public LoginActivityTest() {
 		super("ch.hsr.se2p.mrt", LoginActivity.class);
 	}
