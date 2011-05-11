@@ -16,7 +16,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Saves needed information about the customer, which was received from the server.
  */
-public class Customer implements Receivable, Comparable<Customer> {
+public class Customer implements Receivable {
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -108,39 +108,19 @@ public class Customer implements Receivable, Comparable<Customer> {
 			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
 			position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
 		}
-		
 		return true;
 	}
 	
 	public void setGpsPositionId(Integer id) {
 		gpsPositionId = id;
 	}
-
-	@Override
-	public int compareTo(Customer another) {
-		if (this.distance == null) {
-			if (another.distance == null) 
-				return this.lastName.compareTo(another.lastName);
-			return 1;
-		}
-		if (another.distance == null) {
-			return -1;
-		}
-		if (this.distance > another.distance)
-			return 1;
-		if (this.distance.equals(another.distance)) 
-			return this.lastName.compareTo(another.lastName);
-		return -1;
-	}
 	
 	public String toString() {
 		String s = firstName + " " + lastName;
-		
 		if (distance != null) {
-			DecimalFormat f = new DecimalFormat(" (0m)");
+			DecimalFormat f = new DecimalFormat(" (0 m)");
 			s += f.format(distance); 
 		}
-		
 		return s;
 	}
 }

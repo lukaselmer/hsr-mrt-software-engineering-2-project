@@ -9,6 +9,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.j256.ormlite.dao.Dao;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
@@ -85,7 +87,7 @@ public class CustomerHelper {
 					// Circle 1000m
 					if (distance <= 1000) c.setDistance(distance);
 					else c.setDistance(null);
-					
+			
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
