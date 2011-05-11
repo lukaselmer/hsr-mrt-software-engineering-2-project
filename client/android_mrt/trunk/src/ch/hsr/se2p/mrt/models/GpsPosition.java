@@ -16,7 +16,7 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class GpsPosition {
 	private static final String TAG = TimeEntry.class.getSimpleName();
-	
+
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -31,7 +31,7 @@ public class GpsPosition {
 	public GpsPosition() {
 		// Needed for ormlite
 	}
-	
+
 	private GpsPosition(long time, double latitude, double longitude) {
 		createdAt = System.currentTimeMillis();
 		this.time = time;
@@ -42,23 +42,23 @@ public class GpsPosition {
 	public GpsPosition(Location location) {
 		this.from(location);
 	}
-	
+
 	public GpsPosition(double latitude, double longitude) {
 		this(0L, latitude, longitude);
 	}
-	
+
 	public void from(Location location) {
 		if (location != null) {
-	    time = location.getTime();
-	    latitude = location.getLatitude();
-	    longitude = location.getLongitude();
+			time = location.getTime();
+			latitude = location.getLatitude();
+			longitude = location.getLongitude();
 		}
 	}
-	
+
 	public JSONObject toJSONObject() {
 		JSONObject j = new JSONObject();
 		try {
-			//j.put("time", time);
+			// j.put("time", time);
 			j.put("latitude", latitude);
 			j.put("longitude", longitude);
 		} catch (JSONException e) {
@@ -86,24 +86,14 @@ public class GpsPosition {
 	public Timestamp getCreatedAt() {
 		return new Timestamp(createdAt);
 	}
-	
+
 	/**
 	 * Calculates the distance in meters from one to another GPS Position.
 	 */
-	private static double distance(double lat_a, double lng_a, double lat_b, double lng_b) {
-	    double pk = (180/3.14169);
-
-	    double a1 = lat_a / pk;
-	    double a2 = lng_a / pk;
-	    double b1 = lat_b / pk;
-	    double b2 = lng_b / pk;
-
-	    double t1 = Math.cos(a1)*Math.cos(a2)*Math.cos(b1)*Math.cos(b2);
-	    double t2 = Math.cos(a1)*Math.sin(a2)*Math.cos(b1)*Math.sin(b2);
-	    double t3 = Math.sin(a1)*Math.sin(b1);
-	    double tt = Math.acos(t1 + t2 + t3);
-	   
-	    return 6366000*tt;
+	private static float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
+		float[] results = { 999999 };
+		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
+		return results[0];
 	}
 
 	public double distanceTo(GpsPosition otherPos) {
