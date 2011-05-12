@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class TimeEntryTypeTest < ActiveSupport::TestCase
-
   setup do
     @time_entry_type_invalid = time_entry_types :one
     @time_entry_type_valid = time_entry_types :three

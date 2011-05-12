@@ -24,7 +24,6 @@ class TimeEntryTest < ActiveSupport::TestCase
   end
 
   test "correct duration of time_entry" do
-#    TODO Test überarbeiten
     assert_equal Time.at(@time_entry.time_stop - @time_entry.time_start).gmtime, @time_entry.duration
     assert_equal Time.at(@time_entry_2.time_stop - @time_entry_2.time_start).gmtime, @time_entry_2.duration
   end
