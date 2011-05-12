@@ -56,18 +56,10 @@ public class AndroidComboBox extends LinearLayout {
 		textView.setAdapter(customers);
 	}
 
-	/**
-	 * Gets the text in the combo box.
-	 * 
-	 * @return Text.
-	 */
 	public String getText() {
 		return textView.getText().toString();
 	}
 
-	/**
-	 * Sets the text in combo box.
-	 */
 	public void setText(String text) {
 		textView.setText(text);
 	}

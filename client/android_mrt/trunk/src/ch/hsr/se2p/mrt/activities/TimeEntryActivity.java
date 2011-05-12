@@ -216,10 +216,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-		if (customerAdapter == null) {
+//		if (customerAdapter == null) {
 			customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 			customerAdapter.setNotifyOnChange(true);
-		} 
+//		} 
 		
 		return customerAdapter;
 	}
