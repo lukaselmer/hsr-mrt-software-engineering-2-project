@@ -10,8 +10,9 @@ class Material < ActiveRecord::Base
 
   scope :active, where(:valid_until => nil)
 
+#  TODO active anstatt all auch in Test abgleichen
   def self.for_select
-    all.collect { |o| [o, o.id] }
+    active.collect { |o| [o, o.id] }
   end
   
   def to_s

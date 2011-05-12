@@ -15,4 +15,8 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal expected_string, @order_1.to_s
     assert_equal expected_string_2, @order_2.to_s
   end
+  
+  test "return appropriate array for Selection" do
+    assert_equal [[@order_1,@order_1.id],[@order_2,@order_2.id]], Order.for_select
+  end
 end

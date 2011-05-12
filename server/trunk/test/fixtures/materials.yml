@@ -13,3 +13,10 @@ two:
   dimensions: MyString
   price: 100
   valid_until: 2011-04-24 20:41:00
+
+three:
+  catalog_number:
+  description: Text
+  dimensions: ""
+  price: 60
+  valid_until: 
