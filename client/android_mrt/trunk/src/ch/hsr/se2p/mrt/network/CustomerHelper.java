@@ -73,6 +73,7 @@ public class CustomerHelper {
 			}
 		}
 		ret.put("last_update", DateHelper.format(maxUpdatedAt));
+		Log.d("last_update", "Newest customer dataset is from " + DateHelper.format(maxUpdatedAt));
 		
 		return ret;
 	}

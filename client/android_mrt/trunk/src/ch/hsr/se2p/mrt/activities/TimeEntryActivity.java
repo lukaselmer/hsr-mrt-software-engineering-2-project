@@ -71,6 +71,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private List<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
+	private ArrayAdapter<Customer> customerAdapter;
 
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
@@ -87,7 +88,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(false);
 				locationManager.removeUpdates(locationListener);
 				checkGpsPositionIsSet();
-				
+
 				saveTimeEntry();
 				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			} catch (SQLException e) {
@@ -128,7 +129,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
-		
+
 		initLocationListener();
 		initData();
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
@@ -149,21 +150,24 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				locationManager.removeUpdates(locationListener);
 				setGPSImage(true);
 			}
+
 			public void onProviderDisabled(String provider) {
 			}
+
 			public void onProviderEnabled(String provider) {
 			}
+
 			public void onStatusChanged(String provider, int status, Bundle extras) {
 			}
 		};
 	}
-	
+
 	private Comparator<Customer> getComparator() {
 		return new Comparator<Customer>() {
 			@Override
 			public int compare(Customer one, Customer another) {
 				if (one.getDistance() == null) {
-					if (another.getDistance() == null) 
+					if (another.getDistance() == null)
 						return one.getLastName().compareTo(another.getLastName());
 					return 1;
 				}
@@ -171,7 +175,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 					return -1;
 				if (one.getDistance() > another.getDistance())
 					return 1;
-				if (one.getDistance().equals(another.getDistance())) 
+				if (one.getDistance().equals(another.getDistance()))
 					return one.getLastName().compareTo(another.getLastName());
 				return -1;
 			}
@@ -196,7 +200,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initComboBox() {
 		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
 		comboBox.setArrayAdapter(getCustomerAdapter());
-		
 	}
 
 	private boolean isMeasurementStarted() {
@@ -213,7 +216,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-		return new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+		if (customerAdapter == null) {
+			customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+			customerAdapter.setNotifyOnChange(true);
+		} 
+		
+		return customerAdapter;
 	}
 
 	private void loadCustomers() {
@@ -251,6 +259,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 			Collections.sort(getCustomers(), getComparator());
 		}
+		initSpinnerTimeEntryType();
 		updateComboboxCustomers();
 	}
 
@@ -261,6 +270,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void updateComboboxCustomers() {
+		Log.d("Combo", getCustomerAdapter().toString());
 		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
@@ -277,7 +287,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		if (!(timeEntryTypeSpinner.getSelectedItem().equals(timeEntryTypeSpinner.getItemAtPosition(0))))
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryTypeSpinner.getSelectedItem()).getId());
-		
+
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 
 		if (currentPosition != null)
@@ -351,7 +361,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			logout();
 			return true;
 		case R.id.refreshMenu:
-			initData();			
+			customers.add(new Customer("Alta", "Vista " + customers.size(), "1", 1d));
+			customerAdapter.notifyDataSetChanged();
+			updateView();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
+
 /**
  * Creates a combobox with a autocomplete text and a button.
  */
@@ -47,26 +48,27 @@ public class AndroidComboBox extends LinearLayout {
 				textView.showDropDown();
 			}
 		});
-		this.addView(button, new LayoutParams(LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT));
+		this.addView(button, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	}
-	
-	   public void setArrayAdapter(ArrayAdapter<Customer> customers) {
-	       textView.setAdapter(customers);
-	   }
 
-	   /**
-	    * Gets the text in the combo box.
-	    * @return Text.
-	    */
-	   public String getText() {
-	       return textView.getText().toString();
-	   }
+	public void setArrayAdapter(ArrayAdapter<Customer> customers) {
+		customers.setNotifyOnChange(true);
+		textView.setAdapter(customers);
+	}
 
-	   /**
-	    * Sets the text in combo box.
-	    */
-	   public void setText(String text) {
-	       textView.setText(text);
-	   }
+	/**
+	 * Gets the text in the combo box.
+	 * 
+	 * @return Text.
+	 */
+	public String getText() {
+		return textView.getText().toString();
+	}
+
+	/**
+	 * Sets the text in combo box.
+	 */
+	public void setText(String text) {
+		textView.setText(text);
+	}
 }
