@@ -18,9 +18,6 @@
   </head>
   <body onload="<%= yield(:on_load) %>">
     <div class="outer-main">
-      <div class="fl logo">
-        <a href="<%= time_entries_path %>"><img src="/images/logo.png" alt="MRT Logo" /></a>
-      </div>
       <div class="navigation">
         <ul class="fl">
           <li><%= link_to "Stundeneinträge", time_entries_path %></li>
@@ -37,6 +34,10 @@
         <ul class="fl">
           <li><%= link_to "Benutzer", users_path %></li>
         </ul>
+
+        <div class="fr logo">
+          <a href="<%= time_entries_path %>"><img src="/images/logo.png" alt="MRT Logo" /></a>
+        </div>
         <div class="fr">
           <% if user_signed_in? %>
             Angemeldet als <%= link_to current_user.email, user_path(current_user) %> | <%= link_to "Abmelden", destroy_user_session_path %>
@@ -44,8 +45,8 @@
             <%= link_to "Anmelden", new_user_session_path %>
           <% end %>
         </div>
-        <div class="clearer"></div>
 
+        <div class="clearer"></div>
       </div>
       <% if flash[:alert] -%>
         <p id='alert'><%=h flash[:alert] %></p>
