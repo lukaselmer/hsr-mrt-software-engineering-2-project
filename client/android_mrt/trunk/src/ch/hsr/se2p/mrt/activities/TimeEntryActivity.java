@@ -216,11 +216,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-//		if (customerAdapter == null) {
 			customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 			customerAdapter.setNotifyOnChange(true);
-//		} 
-		
 		return customerAdapter;
 	}
 
@@ -361,9 +358,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			logout();
 			return true;
 		case R.id.refreshMenu:
-			customers.add(new Customer("Alta", "Vista " + customers.size(), "1", 1d));
-			customerAdapter.notifyDataSetChanged();
 			updateView();
+			Toast.makeText(getApplicationContext(), "Kunden und Stundeneintragstypen wurden aktualisiert.", Toast.LENGTH_LONG).show();
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

@@ -52,7 +52,6 @@ public class AndroidComboBox extends LinearLayout {
 	}
 
 	public void setArrayAdapter(ArrayAdapter<Customer> customers) {
-		customers.setNotifyOnChange(true);
 		textView.setAdapter(customers);
 	}
 
