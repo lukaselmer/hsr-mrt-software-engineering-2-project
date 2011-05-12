@@ -5,7 +5,10 @@ public class NetworkConfig {
 	}
 
 	// public static final String MRT_HOST = "local.mrt.elmermx.ch:3000";
-	//public static final String MRT_HOST = "152.96.235.215:3000";
+	
+	// 10.0.2.2 represents the host the emulator is running on
+	//public static final String MRT_HOST = "10.0.2.2:3000";
+	
 	public static final String MRT_HOST = "mrt.elmermx.ch";
 	public static final String MRT_SERVER = "http://" + MRT_HOST;
 	public static final String TIME_ENTRY_CREATE_URL = MRT_SERVER + "/time_entries.json";

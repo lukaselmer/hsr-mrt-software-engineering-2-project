@@ -10,7 +10,7 @@ import android.util.Log;
 
 public class DateHelper {
 	private static final String TAG = DateHelper.class.getSimpleName();
-	private static SimpleDateFormat iso8601formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+	private static SimpleDateFormat iso8601formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
 
 	public static Date parse(String date) {
 		setTimeZone();

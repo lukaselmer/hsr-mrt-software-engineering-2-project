@@ -16,6 +16,7 @@ import com.j256.ormlite.dao.Dao;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;
+import ch.hsr.se2p.mrt.models.DateHelper;
 
 public class CustomerHelper {
 	protected HttpHelper httpHelper;
@@ -71,7 +72,8 @@ public class CustomerHelper {
 				maxUpdatedAt = receivable.getUpdatedAt();
 			}
 		}
-		ret.put("last_update", maxUpdatedAt);
+		ret.put("last_update", DateHelper.format(maxUpdatedAt));
+		
 		return ret;
 	}
 	

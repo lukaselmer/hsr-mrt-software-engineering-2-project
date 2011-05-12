@@ -196,6 +196,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initComboBox() {
 		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
 		comboBox.setArrayAdapter(getCustomerAdapter());
+		
 	}
 
 	private boolean isMeasurementStarted() {
@@ -350,7 +351,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			logout();
 			return true;
 		case R.id.refreshMenu:
-			updateView();
+			initData();			
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);
