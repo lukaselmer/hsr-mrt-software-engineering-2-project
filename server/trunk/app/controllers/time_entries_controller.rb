@@ -112,6 +112,18 @@ class TimeEntriesController < ApplicationController
     end
   end
 
+  def destroy_all
+    @time_entries = TimeEntry.all
+    @time_entries.each do |t|
+      next unless write_access?(t)
+      t.destroy
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(time_entries_url) }
+    end
+  end
+
   # POST /time_entries/1/remove_hashcode
   def remove_hashcode
     @time_entry = TimeEntry.find(params[:id])

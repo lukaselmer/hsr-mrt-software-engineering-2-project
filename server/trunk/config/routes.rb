@@ -18,6 +18,7 @@ Mrt::Application.routes.draw do
   resources :users
 
   get 'time_entries/unassigned(.:format)' => 'time_entries#unassigned', :as => :time_entries_unassigned
+  get 'time_entries/destroy_all(.:format)' => 'time_entries#destroy_all', :as => :destroy_all_time_entries
   resources :time_entries do
     member do
       post 'remove_hashcode'

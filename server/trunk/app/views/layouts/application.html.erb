@@ -18,6 +18,9 @@
   </head>
   <body onload="<%= yield(:on_load) %>">
     <div class="outer-main">
+      <div class="fl logo">
+        <a href="<%= time_entries_path %>"><img src="/images/logo.png" alt="MRT Logo" /></a>
+      </div>
       <div class="navigation">
         <ul class="fl">
           <li><%= link_to "Stundeneinträge", time_entries_path %></li>
@@ -42,6 +45,7 @@
           <% end %>
         </div>
         <div class="clearer"></div>
+
       </div>
       <% if flash[:alert] -%>
         <p id='alert'><%=h flash[:alert] %></p>
