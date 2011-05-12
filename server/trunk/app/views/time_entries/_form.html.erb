@@ -44,11 +44,11 @@
   </div>
   <div class="field">
     <%= f.label :time_start %>
-    <%= f.datetime_select :time_start %>
+    <%= f.datetime_select(:time_start, :include_seconds => true) %>
   </div>
   <div class="field">
     <%= f.label :time_stop %>
-    <%= f.datetime_select :time_stop %>
+    <%= f.datetime_select(:time_stop, :include_seconds => true) %>
   </div>
   <div class="actions">
     <%= f.submit %>
