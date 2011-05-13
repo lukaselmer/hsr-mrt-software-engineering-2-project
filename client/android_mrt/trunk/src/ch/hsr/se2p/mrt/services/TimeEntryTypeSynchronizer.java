@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
-
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
-import ch.hsr.se2p.mrt.network.CustomerHelper;
 import ch.hsr.se2p.mrt.network.SynchronizationException;
 import ch.hsr.se2p.mrt.network.TimeEntryTypeHelper;
+
+import com.j256.ormlite.dao.Dao;
 
 class TimeEntryTypeSynchronizer implements Synchronizer {
 	private static final String TAG = TimeEntryTypeSynchronizer.class.getSimpleName();

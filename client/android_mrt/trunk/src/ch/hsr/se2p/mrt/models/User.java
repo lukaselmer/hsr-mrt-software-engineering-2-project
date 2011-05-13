@@ -1,19 +1,13 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.text.method.DateTimeKeyListener;
+import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
-
-import ch.hsr.se2p.mrt.interfaces.Receivable;
 /**
  * 
  */

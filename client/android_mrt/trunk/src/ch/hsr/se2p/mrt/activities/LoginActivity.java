@@ -2,7 +2,6 @@ package ch.hsr.se2p.mrt.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.GpsSatellite;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;

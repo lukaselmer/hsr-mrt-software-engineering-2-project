@@ -67,7 +67,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private boolean isStarted = false;
 	private TimeEntry currentTimeEntry;
 	private Spinner timeEntryTypeSpinner;
-	private AndroidComboBox comboBox;
+	private MRTAutocompleteSpinner comboBox;
 	private List<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
@@ -198,7 +198,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initComboBox() {
-		comboBox = (AndroidComboBox) findViewById(R.id.my_combo);
+		comboBox = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
 		comboBox.setArrayAdapter(getCustomerAdapter());
 	}
 
@@ -252,7 +252,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 
 			((TextView) findViewById(R.id.txtDescription)).setText("");
-			((AndroidComboBox) findViewById(R.id.my_combo)).setText("");
+			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 			Collections.sort(getCustomers(), getComparator());
 		}

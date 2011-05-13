@@ -21,7 +21,7 @@ import android.widget.TextView;
 public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
 
 	private TimeEntryActivity activity;
-	private AndroidComboBox editCustomer;
+	private MRTAutocompleteSpinner editCustomer;
 	private Spinner editTimeEntryType;
 	private TextView editDescription;
 	private Solo solo;
@@ -47,7 +47,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 
 	private void retrieveWidgetsById() {
-		editCustomer = (AndroidComboBox) activity.findViewById(R.id.my_combo);
+		editCustomer = (MRTAutocompleteSpinner) activity.findViewById(R.id.my_combo);
 		editTimeEntryType = (Spinner) activity.findViewById(R.id.spinnerTimeEntryType);
 		editDescription = (TextView) activity.findViewById(R.id.txtDescription);
 		button = (Button) activity.findViewById(R.id.btnStartStop);

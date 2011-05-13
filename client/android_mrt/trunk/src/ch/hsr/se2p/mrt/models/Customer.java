@@ -2,14 +2,10 @@ package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.util.Formatter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.R.integer;
-import android.location.Location;
-import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;

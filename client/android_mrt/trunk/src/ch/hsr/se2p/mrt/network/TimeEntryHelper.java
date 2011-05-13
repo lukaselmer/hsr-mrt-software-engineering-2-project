@@ -1,7 +1,6 @@
 package ch.hsr.se2p.mrt.network;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
