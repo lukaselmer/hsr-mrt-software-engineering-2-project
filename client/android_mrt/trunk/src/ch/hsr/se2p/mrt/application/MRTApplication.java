@@ -15,19 +15,30 @@ public class MRTApplication extends Application {
 	private String email, password;
 	private final User currentUser;
 	private SharedPreferences preferences;
-	private LocationManager locationManager;
 
 	public MRTApplication() {
 		httpHelper = new HttpHelper();
 		currentUser = new User();
 	}
 
-	public HttpHelper getHttpHelper() {
-		return httpHelper;
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 	public String getEmail() {
 		return email;
+	}
+
+	public HttpHelper getHttpHelper() {
+		return httpHelper;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public SharedPreferences getPreferences() {
+		return preferences;
 	}
 
 	public void login(String email, String password, boolean saveCredentials) {
@@ -52,38 +63,13 @@ public class MRTApplication extends Application {
 		}
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public User getCurrentUser() {
-		return currentUser;
+	public boolean mayLogin() {
+		return email != null && password != null;
 	}
 
 	public void setPreferences(SharedPreferences preferences) {
 		this.preferences = preferences;
 		email = preferences.getString("email", null);
 		password = preferences.getString("password", null);
-	}
-
-	public boolean mayLogin() {
-		return email != null && password != null;
-	}
-
-	public SharedPreferences getPreferences() {
-		return preferences;
-	}
-
-	@Override
-	public String toString() {
-		return "Email: " + email + ", Password: " + password + ", Current user: " + currentUser + ", Cookie: " + httpHelper.getCookie();
-	}
-
-	public void setLocationManager(LocationManager locationManager) {
-		this.locationManager = locationManager;
-	}
-
-	public LocationManager getLocationManager() {
-		return locationManager;
 	}
 }

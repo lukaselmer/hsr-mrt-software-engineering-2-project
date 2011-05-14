@@ -16,7 +16,7 @@ import ch.hsr.se2p.mrt.models.Customer;
 public class MRTAutocompleteSpinner extends LinearLayout {
 	private AutoCompleteTextView textView;
 
-	public MRTAutocompleteSpinner(Context context, AttributeSet attributeSet) {
+	protected MRTAutocompleteSpinner(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
 		initControls();
 	}
@@ -57,15 +57,15 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 				| InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT;
 	}
 
-	public void setAdapter(ArrayAdapter<Customer> customers) {
+	protected void setAdapter(ArrayAdapter<Customer> customers) {
 		textView.setAdapter(customers);
 	}
 
-	public String getText() {
+	protected String getText() {
 		return textView.getText().toString();
 	}
 
-	public void resetText() {
+	protected void resetText() {
 		setText("");
 	}
 

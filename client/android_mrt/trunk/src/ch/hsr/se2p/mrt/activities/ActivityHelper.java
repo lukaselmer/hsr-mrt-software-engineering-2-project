@@ -11,6 +11,10 @@ import ch.hsr.se2p.mrt.services.SynchronizationService;
  */
 class ActivityHelper {
 
+	protected static void startSyncService(Activity activity) {
+		activity.startService(new Intent(SynchronizationService.class.getName()));
+	}
+
 	protected static void displayAlertDialog(String title, String message, Activity activity) {
 		getAlertDialog(title, message, activity).show();
 	}
@@ -24,7 +28,4 @@ class ActivityHelper {
 		return d;
 	}
 
-	public static void startSyncService(Activity activity) {
-		activity.startService(new Intent(SynchronizationService.class.getName()));
-	}
 }
