@@ -2,7 +2,7 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <class id="8" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.application.MRTApplication" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/application/MRTApplication.java" binary="false">    
-    <position x="41" y="37" width="238" height="259"/>    
+    <position x="41" y="37" width="227" height="211"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="false" private="false"/>      
       <operations public="true" package="true" protected="false" private="false"/>    
