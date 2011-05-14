@@ -178,10 +178,6 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		}
 	}
 
-	private Dao<TimeEntry, ?> getTimeEntryDao() throws SQLException {
-		return activity.getHelper().getDao(TimeEntry.class);
-	}
-
 	private TimeEntryType getTimeEntryType(int index) throws SQLException {
 		return getTimeEntryTypeDao().queryForAll().get(index);
 	}
