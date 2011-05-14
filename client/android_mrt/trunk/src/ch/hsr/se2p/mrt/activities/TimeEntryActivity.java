@@ -35,7 +35,6 @@ import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
-import ch.hsr.se2p.mrt.network.CustomerHelper;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
@@ -58,6 +57,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
+	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 100000;// Circle 100km;
+
 	private static LocationManager locationManager;
 	private LocationListener locationListener;
 	private String locationProvider;
@@ -141,7 +142,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			public void onLocationChanged(Location location) {
 				currentPosition = new GpsPosition(location);
 				try {
-					CustomerHelper.calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
+					calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
 					// Collections.sort(getCustomers(), getComparator());
 					Collections.sort(getCustomers());
 					updateComboboxCustomers();
@@ -152,6 +153,24 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(true);
 			}
 		};
+	}
+
+	/**
+	 * Calculates the distance to the currentPosition and sets it on each customer
+	 */
+	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
+			throws SQLException {
+		for (Customer c : customers) {
+			if (c.hasGpsPosition()) {
+				GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
+				if (customerPosition == null) {
+					c.setDistance(null);
+					continue;
+				}
+				double distance = currentPosition.distanceTo(customerPosition);
+				c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
+			}
+		}
 	}
 
 	// private Comparator<Customer> getComparator() {

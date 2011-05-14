@@ -1,7 +1,6 @@
 package ch.hsr.se2p.mrt.network;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,13 +10,8 @@ import org.json.JSONObject;
 
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.models.GpsPosition;
-
-import com.j256.ormlite.dao.Dao;
 
 public class CustomerHelper {
-	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 100000;// Circle 100km;
 	protected HttpHelper httpHelper;
 
 	public CustomerHelper(HttpHelper httpHelper) {
@@ -77,21 +71,4 @@ public class CustomerHelper {
 		return ret;
 	}
 
-	/**
-	 * Calculates the distance to the currentPosition and sets it on each customer
-	 */
-	public static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
-			throws SQLException {
-		for (Customer c : customers) {
-			if (c.hasGpsPosition()) {
-				GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
-				if (customerPosition == null) {
-					c.setDistance(null);
-					continue;
-				}
-				double distance = currentPosition.distanceTo(customerPosition);
-				c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
-			}
-		}
-	}
 }

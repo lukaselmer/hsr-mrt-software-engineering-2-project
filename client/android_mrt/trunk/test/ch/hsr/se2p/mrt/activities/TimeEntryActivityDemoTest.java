@@ -2,14 +2,12 @@ package ch.hsr.se2p.mrt.activities;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.widget.TextView;
-import ch.hsr.se2p.mrt.R;
 
 import com.jayway.android.robotium.solo.Solo;
 
 public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
-	private TextView view;
-	private TimeEntryActivity activity;
+//	private TextView view;
+//	private TimeEntryActivity activity;
 	private Solo solo;
 
 	public TimeEntryActivityDemoTest() {
@@ -23,8 +21,8 @@ public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<
 		if (true)
 			return;
 		getActivity().getHelper().reset();
-		activity = getActivity();
-		view = (TextView) activity.findViewById(R.id.textview);
+		// activity = getActivity();
+		// view = (TextView) activity.findViewById(R.id.textview);
 		this.solo = new Solo(getInstrumentation(), getActivity());
 	}
 
