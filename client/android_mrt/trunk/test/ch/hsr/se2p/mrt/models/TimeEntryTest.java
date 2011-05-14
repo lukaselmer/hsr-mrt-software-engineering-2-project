@@ -86,6 +86,8 @@ public class TimeEntryTest extends AndroidTestCase {
 	public void testToJSON() {
 		try {
 			Timestamp timeStop = new Timestamp(System.currentTimeMillis()), timeStart = new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60);
+			timeStart = (Timestamp) ISO8601DateParser.formatAndParseToTimestamp(timeStart);
+			timeStop = (Timestamp) ISO8601DateParser.formatAndParseToTimestamp(timeStop);
 			TimeEntry t = new TimeEntry(timeStart);
 			t.setTimeStop(timeStop);
 			t.setDescription(DESCRIPTION);
@@ -93,8 +95,8 @@ public class TimeEntryTest extends AndroidTestCase {
 			t = dao.queryForId(id);
 			JSONObject j = t.toJSONObject();
 			assertEquals(DESCRIPTION, j.getString("description"));
-			assertEquals(timeStart, j.get("time_start"));
-			assertEquals(timeStop, j.get("time_stop"));
+			assertEquals(ISO8601DateParser.toString(timeStart), j.get("time_start"));
+			assertEquals(ISO8601DateParser.toString(timeStop), j.get("time_stop"));
 			assertEquals(t.getHashcode(), j.getString("hashcode"));
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -104,6 +106,4 @@ public class TimeEntryTest extends AndroidTestCase {
 			assertTrue(false);
 		}
 	}
-
-	// TODO: Test processTransmission & processConfirmation
 }

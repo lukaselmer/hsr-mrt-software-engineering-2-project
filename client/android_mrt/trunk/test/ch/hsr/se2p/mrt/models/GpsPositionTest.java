@@ -16,6 +16,7 @@ public class GpsPositionTest extends AndroidTestCase {
 	public void testDistanceTo() {
 		assertEquals(0.0, positionA.distanceTo(positionA));
 		assertEquals(1.0, positionA.distanceTo(positionB), 1);
-		assertEquals(95800.0, positionB.distanceTo(positionZ), 100);
+		System.err.println(positionB.distanceTo(positionZ));
+		assertEquals(96080.5859375, positionB.distanceTo(positionZ), 0.1);
 	}
 }

@@ -35,7 +35,7 @@ public class Customer implements Receivable {
 		// Needed for ormlite
 	}
 
-	public Customer(String firstname, String lastname, String phone, Double distance) {
+	protected Customer(String firstname, String lastname, String phone, Double distance) {
 		firstName = firstname;
 		lastName = lastname;
 		this.phone = phone;
