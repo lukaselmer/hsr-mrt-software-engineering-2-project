@@ -9,7 +9,6 @@ import com.jayway.android.robotium.solo.Solo;
 
 public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
 	private TextView view;
-	private String resourceString;
 	private TimeEntryActivity activity;
 	private Solo solo;
 
@@ -17,6 +16,7 @@ public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<
 		super("ch.hsr.se2p.mrt", TimeEntryActivity.class);
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -25,7 +25,6 @@ public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<
 		getActivity().getHelper().reset();
 		activity = getActivity();
 		view = (TextView) activity.findViewById(R.id.textview);
-		resourceString = activity.getString(R.string.txtWelcome);
 		this.solo = new Solo(getInstrumentation(), getActivity());
 	}
 
@@ -43,8 +42,6 @@ public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<
 
 	public void testPreconditions() {
 		assertTrue(true);
-		if (true)
-			return;
 		assertNotNull(view);
 	}
 
