@@ -84,18 +84,18 @@ class CustomerSynchronizer implements Synchronizer {
 			GpsPosition old_position = dao.queryForId(c.getGpsPositionId());
 			dao.delete(old_position);
 		}
-		if (c.gpsPosition != null) {
-			dao.create(c.gpsPosition);
-			c.setGpsPositionId(c.gpsPosition.getId());
+		if (c.getGpsPosition() != null) {
+			dao.create(c.getGpsPosition());
+			c.setGpsPositionId(c.getGpsPosition().getId());
 		}
 	}
 
 	private void handleCreation(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 
-		if (c.gpsPosition != null) {
-			positionDao.create(c.gpsPosition);
-			c.setGpsPositionId(c.gpsPosition.getId());
+		if (c.getGpsPosition() != null) {
+			positionDao.create(c.getGpsPosition());
+			c.setGpsPositionId(c.getGpsPosition().getId());
 		}
 
 		Log.d(TAG, "Creating " + c);

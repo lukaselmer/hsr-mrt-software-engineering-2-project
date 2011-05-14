@@ -26,11 +26,9 @@ public class Customer implements Receivable {
 	private long updatedAt = 0;
 	@DatabaseField
 	private boolean deleted = false;
-
 	private Double distance;
-
 	// Caches gps_position for creation or update as it has to be stored in a separate table
-	public GpsPosition gpsPosition;
+	private GpsPosition gpsPosition;
 	private boolean changed;
 
 	public Customer() {
@@ -113,7 +111,7 @@ public class Customer implements Receivable {
 	private void setAddressAndGpsPosition(JSONObject customerObj) throws JSONException {
 		if (customerObj.has("address")) {
 			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
-			gpsPosition = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
+			setGpsPosition(new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude")));
 		}
 	}
 
@@ -143,5 +141,13 @@ public class Customer implements Receivable {
 
 	public boolean hasChanged() {
 		return changed;
+	}
+
+	public void setGpsPosition(GpsPosition gpsPosition) {
+		this.gpsPosition = gpsPosition;
+	}
+
+	public GpsPosition getGpsPosition() {
+		return gpsPosition;
 	}
 }
