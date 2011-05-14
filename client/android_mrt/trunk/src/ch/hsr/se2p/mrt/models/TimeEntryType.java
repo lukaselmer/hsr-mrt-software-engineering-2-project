@@ -79,13 +79,11 @@ public class TimeEntryType implements Receivable {
 			return false;
 		this.railsId = railsId;
 		name = timeEntryTypeObj.getString("description");
-		createdAt = DateHelper.parse(timeEntryTypeObj.getString("created_at")).getTime();
-		updatedAt = DateHelper.parse(timeEntryTypeObj.getString("updated_at")).getTime();
+		createdAt = ISO8601DateParser.parse(timeEntryTypeObj.getString("created_at")).getTime();
+		updatedAt = ISO8601DateParser.parse(timeEntryTypeObj.getString("updated_at")).getTime();
 		deleted = !timeEntryTypeObj.isNull("valid_until");
-
-		if (deleted) {
-			validUntil = DateHelper.parse(timeEntryTypeObj.getString("valid_until")).getTime();
-		}
+		if (deleted)
+			validUntil = ISO8601DateParser.parse(timeEntryTypeObj.getString("valid_until")).getTime();
 		return true;
 	}
 }

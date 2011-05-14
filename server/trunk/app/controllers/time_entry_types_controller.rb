@@ -77,7 +77,7 @@ class TimeEntryTypesController < ApplicationController
     if params[:last_update].nil?
       @updated_time_entry_types = TimeEntryType.all
     else
-      last_update = Time.parse(params[:last_update])
+      last_update = Time.at(params[:last_update].to_i/1000)
       @updated_time_entry_types = TimeEntryType.updated_after(last_update)
     end
     

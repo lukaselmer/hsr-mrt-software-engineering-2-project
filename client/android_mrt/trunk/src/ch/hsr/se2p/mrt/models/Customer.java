@@ -104,7 +104,7 @@ public class Customer implements Receivable {
 		firstName = customerObj.getString("first_name");
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
-		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
+		updatedAt = ISO8601DateParser.parse(customerObj.getString("updated_at")).getTime();
 		deleted = !customerObj.isNull("deleted_at");
 	}
 

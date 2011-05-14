@@ -9,7 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ch.hsr.se2p.mrt.interfaces.Receivable;
-import ch.hsr.se2p.mrt.models.DateHelper;
 
 public class TimeEntryTypeHelper {
 	protected HttpHelper httpHelper;
@@ -64,7 +63,7 @@ public class TimeEntryTypeHelper {
 				maxUpdatedAt = receivable.getUpdatedAt();
 			}
 		}
-		ret.put("last_update", DateHelper.format(maxUpdatedAt));
+		ret.put("last_update", maxUpdatedAt.getTime());
 		return ret;
 	}
 }

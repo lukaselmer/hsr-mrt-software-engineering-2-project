@@ -63,11 +63,8 @@ class CustomersController < ApplicationController
     if params[:last_update].nil?
       @updated_customers = Customer.all
     else
-      begin
-        last_update = Time.parse(params[:last_update])
-        @updated_customers = Customer.updated_after(last_update)
-      rescue
-      end
+      last_update = Time.at(params[:last_update].to_i/1000)
+      @updated_customers = Customer.updated_after(last_update)
     end
     render :json => @updated_customers.to_json(:include => { :address => {:include => :gps_position } } )
   end

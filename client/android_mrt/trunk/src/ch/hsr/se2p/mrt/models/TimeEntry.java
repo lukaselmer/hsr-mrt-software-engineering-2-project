@@ -141,8 +141,8 @@ public class TimeEntry implements Transmittable, Confirmable {
 			j.put("time_entry_type_id", timeEntryTypeId);
 			j.put("hashcode", hashcode);
 			j.put("description", description);
-			j.put("time_start", DateHelper.format(getTimeStart()));
-			j.put("time_stop", DateHelper.format(getTimeStop()));
+			j.put("time_start", ISO8601DateParser.toString(getTimeStart()));
+			j.put("time_stop", ISO8601DateParser.toString(getTimeStop()));
 			if (customer != null)
 				j.put("customer_id", customer.getIdOnServer());
 			if (timeEntryType != null)

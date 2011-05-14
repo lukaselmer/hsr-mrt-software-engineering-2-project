@@ -25,9 +25,8 @@ public class CustomerTest extends AndroidTestCase {
 	}
 
 	private JSONObject getCustomerJSON() throws JSONException {
-
 		return new JSONObject().put("id", 1).put("first_name", FIRST_NAME).put("last_name", LAST_NAME).put("phone", PHONE)
-				.put("updated_at", DateHelper.format(timeStamp));
+				.put("updated_at", ISO8601DateParser.toString(timeStamp));
 	}
 
 	public void testInitialCustomer() {

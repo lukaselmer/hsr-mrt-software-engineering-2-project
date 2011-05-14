@@ -12,7 +12,6 @@ import org.json.JSONObject;
 import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.models.DateHelper;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 
 import com.j256.ormlite.dao.Dao;
@@ -71,8 +70,8 @@ public class CustomerHelper {
 				maxUpdatedAt = receivable.getUpdatedAt();
 			}
 		}
-		ret.put("last_update", DateHelper.format(maxUpdatedAt));
-		Log.d("last_update", "Newest customer dataset is from " + DateHelper.format(maxUpdatedAt));
+		ret.put("last_update", maxUpdatedAt.getTime());
+		Log.d("last_update", "Newest customer dataset is from " + maxUpdatedAt.getTime());
 
 		return ret;
 	}
