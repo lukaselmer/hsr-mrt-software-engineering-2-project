@@ -58,7 +58,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		});
 	}
-	public static final String TAG = TimeEntryActivity.class.getSimpleName();
+	private static final String TAG = TimeEntryActivity.class.getSimpleName();
 	private static LocationManager locationManager;
 	private LocationListener locationListener;
 	private String locationProvider;
@@ -320,12 +320,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		if (customers == null)
 			loadCustomers();
 		return customers;
-	}
-
-	private synchronized List<TimeEntryType> getTimeEntryTypes() {
-		if (timeEntryTypes == null)
-			loadTimeEntryTypes();
-		return timeEntryTypes;
 	}
 
 	@Override

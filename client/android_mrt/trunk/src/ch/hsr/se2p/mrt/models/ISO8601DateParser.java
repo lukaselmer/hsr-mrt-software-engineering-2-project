@@ -1,7 +1,6 @@
 package ch.hsr.se2p.mrt.models;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,9 +9,6 @@ import java.util.TimeZone;
 import android.util.Log;
 
 public class ISO8601DateParser {
-	private static final String TAG = ISO8601DateParser.class.getSimpleName();
-	private static DateFormat iso8601formatter = DateFormat.getDateInstance();
-
 	// 2004-06-14T19:GMT20:30Z
 	// 2004-06-20T06:GMT22:01Z
 
@@ -75,7 +71,7 @@ public class ISO8601DateParser {
 		try {
 			return df.parse(input);
 		} catch (ParseException e) {
-			Log.w(TAG, "Unparsable date", e);
+			Log.w(ISO8601DateParser.class.getSimpleName(), "Unparsable date", e);
 			return new Date(0);
 		}
 	}
