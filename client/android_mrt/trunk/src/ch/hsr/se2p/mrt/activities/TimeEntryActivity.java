@@ -207,7 +207,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		timeEntryTypeSpinner.setAdapter(timeEntryTypeAdapater);
 	}
 
-	protected ArrayAdapter<Customer> getCustomerAdapter() {
+	private ArrayAdapter<Customer> getCustomerAdapter() {
 		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
 		customerAdapter.setNotifyOnChange(true);
 		return customerAdapter;
@@ -221,13 +221,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	protected ArrayAdapter<TimeEntryType> getTimeEntryTypeAdapter() {
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
-				getTimeEntryTypes());
-		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		return timeEntryTypeAdapater;
-	}
-
 	private void loadTimeEntryTypes() {
 		try {
 			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
@@ -237,7 +230,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	protected void updateView() {
+	private void updateView() {
 		if (isMeasurementStarted()) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
 		} else {
@@ -271,7 +264,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			view.setImageResource(R.drawable.gps_off);
 	}
 
-	protected void saveTimeEntry() throws SQLException {
+	private void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 
 		if (!(timeEntryTypeSpinner.getSelectedItem().equals(timeEntryTypeSpinner.getItemAtPosition(0))))
@@ -288,7 +281,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
 	}
 
-	protected int saveGpsData() throws SQLException {
+	private int saveGpsData() throws SQLException {
 		if (currentPosition == null)
 			return -1;
 

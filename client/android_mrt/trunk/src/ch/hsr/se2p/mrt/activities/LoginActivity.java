@@ -39,7 +39,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	/** Called when the activity is first created. */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
 
@@ -76,7 +76,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	protected void checkLoginData() {
+	private void checkLoginData() {
 		if (editEmail.getText().length() > 0 && editPassword.getText().length() > 0) {
 			processLogin(editEmail.getText().toString(), editPassword.getText().toString());
 		} else {
