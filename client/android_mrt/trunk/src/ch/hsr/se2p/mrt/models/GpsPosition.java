@@ -17,6 +17,14 @@ import com.j256.ormlite.field.DatabaseField;
 public class GpsPosition {
 	private static final String TAG = TimeEntry.class.getSimpleName();
 
+	/**
+	 * Calculates the distance in meters from one to another GPS Position.
+	 */
+	private static float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
+		float[] results = { Float.MAX_VALUE };
+		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
+		return results[0];
+	}
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -25,11 +33,20 @@ public class GpsPosition {
 	private long createdAt = 0;
 	@DatabaseField
 	private double latitude = 0.0;
+
 	@DatabaseField
 	private double longitude = 0.0;
 
 	public GpsPosition() {
 		// Needed for ormlite
+	}
+
+	public GpsPosition(double latitude, double longitude) {
+		this(0L, latitude, longitude);
+	}
+
+	public GpsPosition(Location location) {
+		this.from(location);
 	}
 
 	private GpsPosition(long time, double latitude, double longitude) {
@@ -39,12 +56,8 @@ public class GpsPosition {
 		this.longitude = longitude;
 	}
 
-	public GpsPosition(Location location) {
-		this.from(location);
-	}
-
-	public GpsPosition(double latitude, double longitude) {
-		this(0L, latitude, longitude);
+	public double distanceTo(GpsPosition otherPos) {
+		return distance(latitude, longitude, otherPos.getLatitude(), otherPos.getLongitude());
 	}
 
 	public void from(Location location) {
@@ -55,16 +68,8 @@ public class GpsPosition {
 		}
 	}
 
-	public JSONObject toJSONObject() {
-		JSONObject j = new JSONObject();
-		try {
-			// j.put("time", time);
-			j.put("latitude", latitude);
-			j.put("longitude", longitude);
-		} catch (JSONException e) {
-			Log.e(TAG, "Error creating JSON Object", e);
-		}
-		return j;
+	public Timestamp getCreatedAt() {
+		return new Timestamp(createdAt);
 	}
 
 	public Integer getId() {
@@ -83,20 +88,15 @@ public class GpsPosition {
 		return time;
 	}
 
-	public Timestamp getCreatedAt() {
-		return new Timestamp(createdAt);
-	}
-
-	/**
-	 * Calculates the distance in meters from one to another GPS Position.
-	 */
-	private static float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
-		float[] results = { Float.MAX_VALUE };
-		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
-		return results[0];
-	}
-
-	public double distanceTo(GpsPosition otherPos) {
-		return distance(latitude, longitude, otherPos.getLatitude(), otherPos.getLongitude());
+	public JSONObject toJSONObject() {
+		JSONObject j = new JSONObject();
+		try {
+			// j.put("time", time);
+			j.put("latitude", latitude);
+			j.put("longitude", longitude);
+		} catch (JSONException e) {
+			Log.e(TAG, "Error creating JSON Object", e);
+		}
+		return j;
 	}
 }

@@ -42,50 +42,17 @@ public class Customer implements Receivable, Comparable<Customer> {
 		this.distance = distance;
 	}
 
-	public boolean hasGpsPosition() {
-		return gpsPositionId != null && gpsPositionId != 0;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
 	@Override
-	public int getIdOnServer() {
-		return railsId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public Integer getGpsPositionId() {
-		return gpsPositionId;
-	}
-
-	@Override
-	public Timestamp getUpdatedAt() {
-		return new Timestamp(updatedAt);
-	}
-
-	public boolean isDeleted() {
-		return deleted;
-	}
-
-	public Double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(Double distance) {
-		this.distance = distance;
+	public int compareTo(Customer another) {
+		if (this.getDistance() == null || another.getDistance() == null) {
+			if (this.getDistance() == null && another.getDistance() == null)
+				return this.getLastName().compareTo(another.getLastName());
+			else
+				return this.getDistance() == null ? 1 : -1;
+		} else {
+			int cmp = this.getDistance().compareTo(another.getDistance());
+			return cmp == 0 ? this.getLastName().compareTo(another.getLastName()) : cmp;
+		}
 	}
 
 	@Override
@@ -100,12 +67,54 @@ public class Customer implements Receivable, Comparable<Customer> {
 		return true;
 	}
 
-	private void setNormalAttributes(JSONObject customerObj) throws JSONException {
-		firstName = customerObj.getString("first_name");
-		lastName = customerObj.getString("last_name");
-		phone = customerObj.getString("phone");
-		updatedAt = ISO8601DateParser.parse(customerObj.getString("updated_at")).getTime();
-		deleted = !customerObj.isNull("deleted_at");
+	public Double getDistance() {
+		return distance;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public GpsPosition getGpsPosition() {
+		return gpsPosition;
+	}
+
+	public Integer getGpsPositionId() {
+		return gpsPositionId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	@Override
+	public int getIdOnServer() {
+		return railsId;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	@Override
+	public Timestamp getUpdatedAt() {
+		return new Timestamp(updatedAt);
+	}
+
+	public boolean hasChanged() {
+		return changed;
+	}
+
+	public boolean hasGpsPosition() {
+		return gpsPositionId != null && gpsPositionId != 0;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
 	}
 
 	private void setAddressAndGpsPosition(JSONObject customerObj) throws JSONException {
@@ -115,10 +124,34 @@ public class Customer implements Receivable, Comparable<Customer> {
 		}
 	}
 
+	public void setChanged() {
+		this.changed = true;
+	}
+
+	public void setChanged(boolean changed) {
+		this.changed = changed;
+	}
+
+	public void setDistance(Double distance) {
+		this.distance = distance;
+	}
+
+	public void setGpsPosition(GpsPosition gpsPosition) {
+		this.gpsPosition = gpsPosition;
+	}
+
 	public void setGpsPositionId(Integer id) {
 		gpsPositionId = id;
 		if (!hasGpsPosition())
 			setDistance(null);
+	}
+
+	private void setNormalAttributes(JSONObject customerObj) throws JSONException {
+		firstName = customerObj.getString("first_name");
+		lastName = customerObj.getString("last_name");
+		phone = customerObj.getString("phone");
+		updatedAt = ISO8601DateParser.parse(customerObj.getString("updated_at")).getTime();
+		deleted = !customerObj.isNull("deleted_at");
 	}
 
 	@Override
@@ -134,39 +167,6 @@ public class Customer implements Receivable, Comparable<Customer> {
 			}
 		}
 		return s;
-	}
-
-	public void setChanged() {
-		this.changed = true;
-	}
-
-	public void setChanged(boolean changed) {
-		this.changed = changed;
-	}
-
-	public boolean hasChanged() {
-		return changed;
-	}
-
-	public void setGpsPosition(GpsPosition gpsPosition) {
-		this.gpsPosition = gpsPosition;
-	}
-
-	public GpsPosition getGpsPosition() {
-		return gpsPosition;
-	}
-
-	@Override
-	public int compareTo(Customer another) {
-		if (this.getDistance() == null || another.getDistance() == null) {
-			if (this.getDistance() == null && another.getDistance() == null) 
-				return this.getLastName().compareTo(another.getLastName());
-			else
-				return this.getDistance() == null ? 1 : -1;
-		} else {
-			int cmp = this.getDistance().compareTo(another.getDistance());
-			return cmp == 0 ? this.getLastName().compareTo(another.getLastName()) : cmp;
-		}
 	}
 
 }

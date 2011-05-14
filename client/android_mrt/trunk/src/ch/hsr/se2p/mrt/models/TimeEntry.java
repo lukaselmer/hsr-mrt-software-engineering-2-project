@@ -50,24 +50,16 @@ public class TimeEntry implements Transmittable, Confirmable {
 		this.timeStart = timeStart.getTime();
 	}
 
-	public boolean hasCustomer() {
-		return customerId != null && customerId != 0;
-	}
-
-	public boolean hasTimeEntryType() {
-		return timeEntryTypeId != null && timeEntryTypeId != 0;
-	}
-
-	public boolean hasGpsPosition() {
-		return gpsPositionId != null && gpsPositionId != 0;
-	}
-
 	public Integer getCustomerId() {
 		return customerId;
 	}
 
 	public String getDescription() {
 		return description;
+	}
+
+	public Integer getGpsPositionId() {
+		return gpsPositionId;
 	}
 
 	public String getHashcode() {
@@ -95,13 +87,43 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return new Timestamp(timeStop);
 	}
 
+	public boolean hasCustomer() {
+		return customerId != null && customerId != 0;
+	}
+
+	public boolean hasGpsPosition() {
+		return gpsPositionId != null && gpsPositionId != 0;
+	}
+
+	public boolean hasTimeEntryType() {
+		return timeEntryTypeId != null && timeEntryTypeId != 0;
+	}
+
 	@Override
 	public boolean isTransmitted() {
 		return transmitted;
 	}
 
-	public Integer getGpsPositionId() {
-		return gpsPositionId;
+	@Override
+	public boolean processConfirmation(JSONObject jsonObject) throws JSONException {
+		return getIdOnServer() == jsonObject.optJSONObject("time_entry").getInt("id");
+	}
+
+	@Override
+	public boolean processTransmission(JSONObject jsonObject) throws JSONException {
+		int id = jsonObject.optJSONObject("time_entry").getInt("id");
+		String hashcode = jsonObject.optJSONObject("time_entry").getString("hashcode");
+
+		if (getHashcode().equals(hashcode) && id != 0) {
+			// Everything is fine, it worked! Now lets get rid of the hashcode!
+			setRailsId(id);
+			return true;
+		}
+		return false;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public void setCustomerId(Integer customerId) {
@@ -112,12 +134,20 @@ public class TimeEntry implements Transmittable, Confirmable {
 		this.description = description;
 	}
 
+	public void setGpsPosition(GpsPosition gpsPosition) {
+		this.gpsPosition = gpsPosition;
+	}
+
 	public void setGpsPositionId(Integer gpsPositionId) {
 		this.gpsPositionId = gpsPositionId;
 	}
 
 	public void setRailsId(Integer railsId) {
 		this.railsId = railsId;
+	}
+
+	public void setTimeEntryType(TimeEntryType timeEntryType) {
+		this.timeEntryType = timeEntryType;
 	}
 
 	public void setTimeEntryTypeId(Integer timeEntryTypeId) {
@@ -153,35 +183,5 @@ public class TimeEntry implements Transmittable, Confirmable {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
 		return j;
-	}
-
-	@Override
-	public boolean processTransmission(JSONObject jsonObject) throws JSONException {
-		int id = jsonObject.optJSONObject("time_entry").getInt("id");
-		String hashcode = jsonObject.optJSONObject("time_entry").getString("hashcode");
-
-		if (getHashcode().equals(hashcode) && id != 0) {
-			// Everything is fine, it worked! Now lets get rid of the hashcode!
-			setRailsId(id);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean processConfirmation(JSONObject jsonObject) throws JSONException {
-		return getIdOnServer() == jsonObject.optJSONObject("time_entry").getInt("id");
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public void setGpsPosition(GpsPosition gpsPosition) {
-		this.gpsPosition = gpsPosition;
-	}
-
-	public void setTimeEntryType(TimeEntryType timeEntryType) {
-		this.timeEntryType = timeEntryType;
 	}
 }

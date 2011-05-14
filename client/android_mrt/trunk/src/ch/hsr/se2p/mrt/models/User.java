@@ -41,10 +41,6 @@ public class User implements Receivable {
 		return true;
 	}
 
-	public int getId() {
-		return id;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -53,17 +49,21 @@ public class User implements Receivable {
 		return firstName;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public int getIdOnServer() {
+		return getRailsId();
+	}
+
 	public String getLastName() {
 		return lastName;
 	}
 
 	public int getRailsId() {
 		return railsId;
-	}
-
-	@Override
-	public int getIdOnServer() {
-		return getRailsId();
 	}
 
 	@Override

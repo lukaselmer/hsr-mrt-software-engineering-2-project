@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import ch.hsr.se2p.mrt.ISO8601DateParserHelperForTests;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.models.ISO8601DateParser;
 
 public class CustomerHelperTest extends HttpTestCase {
 
@@ -106,7 +105,7 @@ public class CustomerHelperTest extends HttpTestCase {
 
 	private JSONObject getCustomerJSON(Customer customer) throws JSONException {
 		return new JSONObject().put("first_name", customer.getFirstName()).put("last_name", customer.getLastName())
-				.put("id", customer.getIdOnServer()).put("phone", customer.getPhone()).put("updated_at", ISO8601DateParser.toString(customer.getUpdatedAt()));
+				.put("id", customer.getIdOnServer()).put("phone", customer.getPhone()).put("updated_at", ISO8601DateParserHelperForTests.toString(customer.getUpdatedAt()));
 	}
 
 	private Customer getCustomer(String fistName, String lastName, int railsId, String phone, Timestamp updatedAt) throws JSONException {
@@ -128,10 +127,10 @@ public class CustomerHelperTest extends HttpTestCase {
 		customerObj.put("first_name", fistName);
 		customerObj.put("last_name", lastName);
 		customerObj.put("phone", phone);
-		customerObj.put("updated_at", ISO8601DateParser.toString(updatedAt));
+		customerObj.put("updated_at", ISO8601DateParserHelperForTests.toString(updatedAt));
 		customerObj.put("gpsPosition", "");
 		if (deleted)
-			customerObj.put("deleted_at", ISO8601DateParser.toString(getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
+			customerObj.put("deleted_at", ISO8601DateParserHelperForTests.toString(getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		return customerObj;
 	}
 
