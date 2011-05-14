@@ -19,7 +19,7 @@ import com.j256.ormlite.table.TableUtils;
  * 
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-	public static final String TAG = DatabaseHelper.class.getSimpleName();
+	private static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	protected static final String DATABASE_NAME = "mrt.db";
 	protected static final int DATABASE_VERSION = 8;
@@ -57,7 +57,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		reset(w, getConnectionSource());
 	}
 
-	public void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
+	private void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Upgrading database -> drop + create");
 			for (Class<?> modelClass : MODEL_CLASSES) {
