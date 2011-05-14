@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import ch.hsr.se2p.mrt.R;
+import ch.hsr.se2p.mrt.application.MRTApplication;
 
 import com.jayway.android.robotium.solo.Solo;
 

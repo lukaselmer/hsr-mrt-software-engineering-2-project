@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import android.util.Log;
-import ch.hsr.se2p.mrt.activities.MRTApplication;
+import ch.hsr.se2p.mrt.application.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.network.TimeEntryHelper;

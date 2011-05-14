@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.activities;
+package ch.hsr.se2p.mrt.application;
 
 import android.app.Application;
 import android.content.SharedPreferences;

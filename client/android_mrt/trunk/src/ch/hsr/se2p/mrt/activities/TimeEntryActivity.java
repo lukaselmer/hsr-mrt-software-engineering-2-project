@@ -30,6 +30,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import ch.hsr.se2p.mrt.R;
+import ch.hsr.se2p.mrt.application.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;

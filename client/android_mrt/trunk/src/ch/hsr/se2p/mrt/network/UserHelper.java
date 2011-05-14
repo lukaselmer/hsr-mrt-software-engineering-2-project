@@ -5,7 +5,8 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ch.hsr.se2p.mrt.activities.MRTApplication;
+
+import ch.hsr.se2p.mrt.application.MRTApplication;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 public class UserHelper {

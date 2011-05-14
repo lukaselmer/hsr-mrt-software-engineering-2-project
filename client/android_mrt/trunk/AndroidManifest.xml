@@ -5,7 +5,7 @@
 
 	
         
-	<application android:name="ch.hsr.se2p.mrt.activities.MRTApplication"
+	<application android:name="application.MRTApplication"
 		android:icon="@drawable/icon" android:label="@string/app_name">
 
 		<activity android:name="ch.hsr.se2p.mrt.activities.LoginActivity"
@@ -16,7 +16,7 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="ch.hsr.se2p.mrt.activities.TimeEntryActivity"
+		<activity android:name="activities.TimeEntryActivity"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.RUN" />
@@ -24,7 +24,7 @@
 			</intent-filter>
 		</activity>
 
-		<service android:name="ch.hsr.se2p.mrt.services.SynchronizationService"
+		<service android:name="services.SynchronizationService"
 			android:process=":remote" android:enabled="true" android:exported="true">
 			<intent-filter>
 				<action android:name="ch.hsr.se2p.mrt.services.SynchronizationService" />
