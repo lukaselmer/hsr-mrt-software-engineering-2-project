@@ -13,9 +13,9 @@ import ch.hsr.se2p.mrt.network.UserHelper;
  */
 class SynchronizationServiceTask extends TimerTask {
 	private static final String TAG = SynchronizationService.class.getSimpleName();
-	private DatabaseHelper databaseHelper;
-	private MRTApplication mrtApplication;
-	private SynchronizationService service;
+	private final DatabaseHelper databaseHelper;
+	private final MRTApplication mrtApplication;
+	private final SynchronizationService service;
 
 	public SynchronizationServiceTask(SynchronizationService service) {
 		this.service = service;

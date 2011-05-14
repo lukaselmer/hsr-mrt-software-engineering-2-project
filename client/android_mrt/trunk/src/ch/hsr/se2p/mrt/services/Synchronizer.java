@@ -1,5 +1,5 @@
 package ch.hsr.se2p.mrt.services;
 
-public interface Synchronizer {
+interface Synchronizer {
 	public void synchronize();
 }

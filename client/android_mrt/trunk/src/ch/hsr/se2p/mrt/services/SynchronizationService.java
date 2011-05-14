@@ -27,7 +27,7 @@ public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 	private Timer timer;
 	private SynchronizationServiceTask serviceTask;
 
-	private static final int UPDATE_INTERVAL = 1000 * 30; // every 30 seconds TODO: Adjust value for production
+	private static final int UPDATE_INTERVAL = 1000 * 30; // every 30 seconds
 	private static final int START_DELAY = 1000; // 1 seconds
 
 	@Override
