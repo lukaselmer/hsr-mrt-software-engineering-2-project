@@ -66,6 +66,10 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 	}
 
 	public void resetText() {
-		textView.setText("");
+		setText("");
+	}
+
+	protected void setText(String text) {
+		textView.setText(text);
 	}
 }
