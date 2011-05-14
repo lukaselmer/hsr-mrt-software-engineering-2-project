@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 public class UserHelper {
-	protected HttpHelper httpHelper;
+	private HttpHelper httpHelper;
 
 	public UserHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;

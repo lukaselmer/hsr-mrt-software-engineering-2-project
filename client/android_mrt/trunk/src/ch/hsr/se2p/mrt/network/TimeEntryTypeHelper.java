@@ -11,7 +11,7 @@ import org.json.JSONObject;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 public class TimeEntryTypeHelper {
-	protected HttpHelper httpHelper;
+	private HttpHelper httpHelper;
 
 	public TimeEntryTypeHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;

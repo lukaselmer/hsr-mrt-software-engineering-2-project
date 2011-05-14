@@ -12,7 +12,7 @@ import android.util.Log;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 public class CustomerHelper {
-	protected HttpHelper httpHelper;
+	private HttpHelper httpHelper;
 
 	public CustomerHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;

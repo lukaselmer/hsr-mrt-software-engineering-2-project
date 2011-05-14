@@ -12,7 +12,7 @@ import ch.hsr.se2p.mrt.interfaces.Transmittable;
 public class TimeEntryHelper {
 	private static final String TAG = TimeEntryHelper.class.getSimpleName();
 
-	protected HttpHelper httpHelper;
+	private HttpHelper httpHelper;
 
 	public TimeEntryHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;

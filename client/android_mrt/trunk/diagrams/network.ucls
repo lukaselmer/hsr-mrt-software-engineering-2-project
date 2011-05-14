@@ -1,103 +1,101 @@
 <class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
-  <package id="1" language="java" name="ch.hsr.se2p.mrt.database" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/database" 
-    binary="false">    
-    <position x="342" y="205" width="168" height="44"/>  
-  </package>  
-  <package id="2" language="java" name="ch.hsr.se2p.mrt.application" project="mrt" 
-    file="/mrt/src/ch/hsr/se2p/mrt/application" binary="false">    
-    <position x="104" y="205" width="177" height="44"/>  
-  </package>  
-  <package id="3" language="java" name="ch.hsr.se2p.mrt.models" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/models" 
-    binary="false">    
-    <position x="302" y="289" width="157" height="44"/>  
-  </package>  
-  <package id="4" language="java" name="ch.hsr.se2p.mrt.interfaces" project="mrt" 
-    file="/mrt/src/ch/hsr/se2p/mrt/interfaces" binary="false">    
-    <position x="83" y="373" width="173" height="44"/>  
-  </package>  
-  <package id="5" language="java" name="ch.hsr.se2p.mrt.network" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/network" 
-    binary="false">    
-    <position x="83" y="289" width="162" height="44"/>  
-  </package>  
-  <package id="6" language="java" name="ch.hsr.se2p.mrt.services" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services" 
-    binary="false">    
-    <position x="104" y="121" width="164" height="44"/>  
-  </package>  
-  <package id="7" language="java" name="ch.hsr.se2p.mrt.activities" project="mrt" 
-    file="/mrt/src/ch/hsr/se2p/mrt/activities" binary="false">    
-    <position x="289" y="37" width="166" height="44"/>  
-  </package>  
-  <dependency>    
-    <bendpoint x="73" y="205"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="3"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="5"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="52" y="205"/>    
-    <bendpoint x="52" y="289"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.TimeEntryTypeHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/TimeEntryTypeHelper.java" binary="false">    
+    <position x="747" y="37" width="363" height="83"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.SynchronizationException" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/network/SynchronizationException.java" binary="false">    
+    <position x="546" y="240" width="203" height="67"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.TimeEntryHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/TimeEntryHelper.java" binary="false">    
+    <position x="1150" y="37" width="177" height="99"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.HttpHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/HttpHelper.java" binary="false">    
+    <position x="902" y="240" width="112" height="67"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.UserHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/UserHelper.java" binary="false">    
+    <position x="1367" y="37" width="212" height="83"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.CustomerHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/CustomerHelper.java" binary="false">    
+    <position x="344" y="37" width="363" height="83"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.NetworkConfig" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/NetworkConfig.java" binary="false">    
+    <position x="41" y="37" width="263" height="163"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
   <dependency>    
     <end type="SOURCE" nodeId="6"/>    
     <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="324" y="121"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="298" y="121"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="2"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="2"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="6"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="3"/>  
+    <end type="TARGET" nodeId="2"/>  
   </dependency>  
-  <dependency>    
-    <bendpoint x="311" y="205"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="31" y="121"/>    
-    <bendpoint x="31" y="205"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="540" y="121"/>    
-    <bendpoint x="540" y="205"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="httpHelper"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="5" navigable="false">      
+      <attribute name="httpHelper"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="6" navigable="false">      
+      <attribute name="httpHelper"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="httpHelper"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    
     <operations public="true" package="true" protected="false" private="false"/>  
