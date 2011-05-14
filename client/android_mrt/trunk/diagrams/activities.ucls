@@ -40,6 +40,14 @@
       <operations public="true" package="true" protected="false" private="false"/>    
     </display>  
   </class>  
+  <dependency>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
   <association>    
     <end type="SOURCE" nodeId="5" navigable="false">      
       <attribute name="comboBox"/>      
@@ -49,12 +57,8 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency>    
-    <end type="SOURCE" nodeId="4"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
     <end type="SOURCE" nodeId="5"/>    
-    <end type="TARGET" nodeId="3"/>  
+    <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    

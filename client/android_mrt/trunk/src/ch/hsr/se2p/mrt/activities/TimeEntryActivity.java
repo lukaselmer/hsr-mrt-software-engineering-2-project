@@ -211,7 +211,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void initComboBox() {
 		comboBox = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
-		comboBox.setArrayAdapter(getCustomerAdapter());
+		comboBox.setAdapter(getCustomerAdapter());
 	}
 
 	private boolean isMeasurementStarted() {
@@ -274,7 +274,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void updateComboboxCustomers() {
 		Log.d("Combo", getCustomerAdapter().toString());
-		comboBox.setArrayAdapter(getCustomerAdapter());
+		comboBox.setAdapter(getCustomerAdapter());
 	}
 
 	private void setGPSImage(boolean bool) {

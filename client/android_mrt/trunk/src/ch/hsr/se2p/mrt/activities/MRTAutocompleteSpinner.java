@@ -14,30 +14,22 @@ import ch.hsr.se2p.mrt.models.Customer;
  * Creates a combobox with a autocomplete text and a button.
  */
 public class MRTAutocompleteSpinner extends LinearLayout {
-
 	private AutoCompleteTextView textView;
-	private ImageButton button;
-
-	public MRTAutocompleteSpinner(Context context) {
-		super(context);
-		this.createChildControls(context);
-	}
 
 	public MRTAutocompleteSpinner(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
-		this.createChildControls(context);
+		initControls();
 	}
 
-	private void createChildControls(Context context) {
-		this.setOrientation(HORIZONTAL);
-		this.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-		textView = new AutoCompleteTextView(context);
-		textView.setSingleLine();
-		textView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-				| InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
-		textView.setRawInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-		this.addView(textView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
-		button = new ImageButton(context);
+	private void initControls() {
+		setOrientation(HORIZONTAL);
+		setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		initTextView(getContext());
+		initButton();
+	}
+
+	private void initButton() {
+		ImageButton button = new ImageButton(getContext());
 		button.setImageResource(android.R.drawable.arrow_down_float);
 		button.setOnClickListener(new OnClickListener() {
 			@Override
@@ -48,7 +40,16 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 		this.addView(button, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	}
 
-	public void setArrayAdapter(ArrayAdapter<Customer> customers) {
+	private void initTextView(Context context) {
+		textView = new AutoCompleteTextView(context);
+		textView.setSingleLine();
+		textView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+				| InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+		textView.setRawInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+		addView(textView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+	}
+
+	public void setAdapter(ArrayAdapter<Customer> customers) {
 		textView.setAdapter(customers);
 	}
 
