@@ -91,7 +91,7 @@ public class GpsPosition {
 	 * Calculates the distance in meters from one to another GPS Position.
 	 */
 	private static float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
-		float[] results = { 999999 };
+		float[] results = { Float.MAX_VALUE };
 		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
 		return results[0];
 	}

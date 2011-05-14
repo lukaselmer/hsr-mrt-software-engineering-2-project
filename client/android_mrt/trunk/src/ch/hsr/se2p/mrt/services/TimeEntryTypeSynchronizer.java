@@ -39,7 +39,8 @@ class TimeEntryTypeSynchronizer implements Synchronizer {
 		}
 	}
 
-	protected void synchronizeTimeEntryTypes(Dao<TimeEntryType, Integer> dao, TimeEntryTypeHelper ch, List<Receivable> receivables) throws SQLException {
+	protected void synchronizeTimeEntryTypes(Dao<TimeEntryType, Integer> dao, TimeEntryTypeHelper ch, List<Receivable> receivables)
+			throws SQLException {
 		try {
 			if (ch.synchronize(receivables, TimeEntryType.class)) {
 				for (Receivable receivable : receivables) {

@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
-
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
@@ -15,6 +12,8 @@ import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.network.CustomerHelper;
 import ch.hsr.se2p.mrt.network.SynchronizationException;
+
+import com.j256.ormlite.dao.Dao;
 
 class CustomerSynchronizer implements Synchronizer {
 	private static final String TAG = CustomerSynchronizer.class.getSimpleName();
@@ -73,41 +72,41 @@ class CustomerSynchronizer implements Synchronizer {
 	private void handleUpdate(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
-		
+
 		if (c.hasGpsPosition()) {
 			GpsPosition old_position = positionDao.queryForId(c.getGpsPositionId());
 			positionDao.delete(old_position);
 		}
-		
+
 		if (c.position != null) {
 			positionDao.create(c.position);
 			c.setGpsPositionId(c.position.getId());
 		}
-		
+
 		Log.d(TAG, "Updating " + c);
 		dao.update(c);
 	}
 
 	private void handleCreation(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
-		
+
 		if (c.position != null) {
 			positionDao.create(c.position);
 			c.setGpsPositionId(c.position.getId());
 		}
-		
+
 		Log.d(TAG, "Creating " + c);
 		dao.create(c);
 	}
 
 	private boolean handleDeletion(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
-		
+
 		if (c.hasGpsPosition()) {
 			GpsPosition old_position = positionDao.queryForId(c.getGpsPositionId());
 			positionDao.delete(old_position);
 		}
-		
+
 		if (c.isDeleted()) {
 			Log.d(TAG, "Deleting " + c);
 			if (needsUpdating(c)) {

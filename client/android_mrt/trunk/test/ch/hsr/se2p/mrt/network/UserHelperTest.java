@@ -12,8 +12,8 @@ public class UserHelperTest extends HttpTestCase {
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
 		int id = 77;
 		Timestamp updatedAt = DateHelper.formatAndParseToTimestamp(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
-		expectedResultFromTransmitter("{\"field_worker\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
-				+ "\",\"id\":" + id + ",\"updated_at\":\"" + DateHelper.format(updatedAt) + "\"}}");
+		expectedResultFromTransmitter("{\"field_worker\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\""
+				+ email + "\",\"id\":" + id + ",\"updated_at\":\"" + DateHelper.format(updatedAt) + "\"}}");
 		UserHelper userHelper = new UserHelper(httpHelper);
 		assertTrue(userHelper.login("validlogin", "validpassword", u));
 		assertEquals(firstName, u.getFirstName());

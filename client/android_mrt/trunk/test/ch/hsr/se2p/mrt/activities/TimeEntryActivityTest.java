@@ -1,22 +1,20 @@
 package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
-import java.util.List;
 
-import com.j256.ormlite.dao.Dao;
-import com.jayway.android.robotium.solo.Solo;
-
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.UiThreadTest;
+import android.view.KeyEvent;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.UiThreadTest;
-import android.view.KeyEvent;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
+
+import com.j256.ormlite.dao.Dao;
+import com.jayway.android.robotium.solo.Solo;
 
 public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {
 
@@ -83,25 +81,25 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		assertEquals(START, button.getText().toString());
 	}
 
-//	public void testCreateTimeEntryWithoutAnyInformation() {
-//		try {
-//			int count = getTimeEntryDaoCount();
-//			startAndStopTimeMeasurement();
-//			assertEquals(count + 1, getTimeEntryDaoCount());
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			assert (false);
-//		}
-//	}
+	// public void testCreateTimeEntryWithoutAnyInformation() {
+	// try {
+	// int count = getTimeEntryDaoCount();
+	// startAndStopTimeMeasurement();
+	// assertEquals(count + 1, getTimeEntryDaoCount());
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// assert (false);
+	// }
+	// }
 
 	public void testSpinnerSelection() {
 		setSpinner();
 		TimeEntryType timeEntryType = (TimeEntryType) editTimeEntryType.getSelectedItem();
 		try {
-			assertEquals(getTimeEntryType(TEST_POSITION-1).getName(), timeEntryType.getName());
+			assertEquals(getTimeEntryType(TEST_POSITION - 1).getName(), timeEntryType.getName());
 		} catch (SQLException e) {
 			e.printStackTrace();
-			assert(false);
+			assert (false);
 		}
 	}
 
@@ -120,8 +118,8 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		setSpinner();
 		try {
 			startAndStopTimeMeasurement();
-			timeEntry = getTimeEntry(getTimeEntryDaoCount()-1);
-			assertEquals(getTimeEntryType(TEST_POSITION-1).getId(), timeEntry.getTimeEntryTypeId());
+			timeEntry = getTimeEntry(getTimeEntryDaoCount() - 1);
+			assertEquals(getTimeEntryType(TEST_POSITION - 1).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			assert (false);
@@ -132,7 +130,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		setCustomerName();
 		try {
 			startAndStopTimeMeasurement();
-			timeEntry = getTimeEntry(getTimeEntryDaoCount()-1);
+			timeEntry = getTimeEntry(getTimeEntryDaoCount() - 1);
 			assertEquals(customer.getId(), timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -142,13 +140,14 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	public void testCreateTimeEntryWithInvalidCustomer() {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				editCustomer.setText("Ungültiger Benutzer");
 			}
 		});
 		try {
 			startAndStopTimeMeasurement();
-			timeEntry = getTimeEntry(getTimeEntryDaoCount()-1);
+			timeEntry = getTimeEntry(getTimeEntryDaoCount() - 1);
 			assertEquals(null, timeEntry.getCustomerId());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,7 +159,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		setDescription();
 		try {
 			startAndStopTimeMeasurement();
-			timeEntry = getTimeEntry(getTimeEntryDaoCount()-1);
+			timeEntry = getTimeEntry(getTimeEntryDaoCount() - 1);
 			assertEquals(DESCRIPTION, timeEntry.getDescription());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -178,24 +177,24 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 			assert (false);
 		}
 	}
-	
-	private Dao<TimeEntry, ?> getTimeEntryDao() throws SQLException{
+
+	private Dao<TimeEntry, ?> getTimeEntryDao() throws SQLException {
 		return activity.getHelper().getDao(TimeEntry.class);
 	}
-	
-	private TimeEntryType getTimeEntryType(int index) throws SQLException{
+
+	private TimeEntryType getTimeEntryType(int index) throws SQLException {
 		return getTimeEntryTypeDao().queryForAll().get(index);
 	}
-	
-	private Dao<TimeEntryType, Integer> getTimeEntryTypeDao() throws SQLException{
+
+	private Dao<TimeEntryType, Integer> getTimeEntryTypeDao() throws SQLException {
 		return activity.getHelper().getDao(TimeEntryType.class);
 	}
-	
-	private int getTimeEntryDaoCount() throws SQLException{
+
+	private int getTimeEntryDaoCount() throws SQLException {
 		return activity.getHelper().getTimeEntryDao().queryForAll().size();
 	}
-	
-	private TimeEntry getTimeEntry(int index) throws SQLException{
+
+	private TimeEntry getTimeEntry(int index) throws SQLException {
 		return activity.getHelper().getTimeEntryDao().queryForAll().get(index);
 	}
 
@@ -205,6 +204,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	private void setDescription() {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				editDescription.setText(DESCRIPTION);
 			}
@@ -213,6 +213,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	private void setSpinner() {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				editTimeEntryType.requestFocus();
 				editTimeEntryType.setSelection(INITIAL_POSITION);
@@ -227,6 +228,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 
 	private void setCustomerName() {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				editCustomer.setText(customer.toString());
 			}

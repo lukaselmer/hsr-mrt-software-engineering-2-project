@@ -5,11 +5,12 @@ import java.sql.Timestamp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ch.hsr.se2p.mrt.interfaces.Receivable;
+
 import com.j256.ormlite.field.DatabaseField;
 
-import ch.hsr.se2p.mrt.interfaces.Receivable;
 /**
- * Saves needed information about the timeentrytype, which was received from the server. 
+ * Saves needed information about the timeentrytype, which was received from the server.
  */
 public class TimeEntryType implements Receivable {
 	@DatabaseField(generatedId = true)
@@ -24,7 +25,7 @@ public class TimeEntryType implements Receivable {
 	private long validUntil = 0;
 	@DatabaseField
 	private long updatedAt = 0;
-	
+
 	private boolean deleted = false;
 
 	public TimeEntryType() {
@@ -44,6 +45,7 @@ public class TimeEntryType implements Receivable {
 		return name;
 	}
 
+	@Override
 	public String toString() {
 		return name;
 	}
@@ -57,15 +59,15 @@ public class TimeEntryType implements Receivable {
 	public Timestamp getUpdatedAt() {
 		return new Timestamp(updatedAt);
 	}
-	
-	public Timestamp getCreatedAt(){
+
+	public Timestamp getCreatedAt() {
 		return new Timestamp(createdAt);
 	}
-	
-	public Timestamp getValidUntil(){
+
+	public Timestamp getValidUntil() {
 		return new Timestamp(validUntil);
 	}
-	
+
 	public boolean isDeleted() {
 		return deleted;
 	}
@@ -80,7 +82,7 @@ public class TimeEntryType implements Receivable {
 		createdAt = DateHelper.parse(timeEntryTypeObj.getString("created_at")).getTime();
 		updatedAt = DateHelper.parse(timeEntryTypeObj.getString("updated_at")).getTime();
 		deleted = !timeEntryTypeObj.isNull("valid_until");
-		
+
 		if (deleted) {
 			validUntil = DateHelper.parse(timeEntryTypeObj.getString("valid_until")).getTime();
 		}

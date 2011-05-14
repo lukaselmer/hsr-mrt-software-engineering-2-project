@@ -1,6 +1,7 @@
 package ch.hsr.se2p.mrt.database;
 
 import java.sql.SQLException;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+
 /**
  * 
  */
@@ -79,12 +81,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			customerDao = getDao(Customer.class);
 		return customerDao;
 	}
-	
+
 	public synchronized Dao<GpsPosition, Integer> getGpsPositionDao() throws SQLException {
-        if (gpsPositionDao == null)
-            gpsPositionDao = getDao(GpsPosition.class);
-        return gpsPositionDao;
-    }
+		if (gpsPositionDao == null)
+			gpsPositionDao = getDao(GpsPosition.class);
+		return gpsPositionDao;
+	}
 
 	public synchronized Dao<TimeEntryType, Integer> getTimeEntryTypeDao() throws SQLException {
 		if (timeEntryTypeDao == null)

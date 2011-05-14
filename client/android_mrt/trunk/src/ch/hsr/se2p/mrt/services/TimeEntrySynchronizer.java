@@ -6,10 +6,7 @@ import java.util.List;
 import android.util.Log;
 import ch.hsr.se2p.mrt.activities.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
-import ch.hsr.se2p.mrt.models.TimeEntryType;
 import ch.hsr.se2p.mrt.network.TimeEntryHelper;
 
 import com.j256.ormlite.dao.Dao;
@@ -42,28 +39,37 @@ class TimeEntrySynchronizer implements Synchronizer {
 	}
 
 	private void transmitTimeEnties(List<TimeEntry> timeEntries) throws SQLException {
-		Dao<TimeEntry, Integer> timeEntryDao = databaseHelper.getTimeEntryDao();
-		Dao<GpsPosition, Integer> gpsPositionDao = databaseHelper.getGpsPositionDao();
-		Dao<Customer, Integer> customerDao = databaseHelper.getCustomerDao();
-		Dao<TimeEntryType, Integer> timeEntryTypeDao = databaseHelper.getTimeEntryTypeDao();
 		TimeEntryHelper timeEntryHelper = new TimeEntryHelper(mrtApplication.getHttpHelper());
-		
+
 		for (TimeEntry timeEntry : timeEntries) {
-			
-			GpsPosition pos = null;
-			Customer cus = null;
-			TimeEntryType tet = null;
-			
-			if (timeEntry.hasCustomer()) cus = customerDao.queryForId(timeEntry.getCustomerId());
-			if (timeEntry.hasGpsPosition()) pos = gpsPositionDao.queryForId(timeEntry.getGpsPositionId());
-			if (timeEntry.hasTimeEntryType()) tet = timeEntryTypeDao.queryForId(timeEntry.getTimeEntryTypeId());
-			
+			setRelationObjectsOnTimeEntry(timeEntry);
 			Log.d(TAG, "Transmitting " + timeEntry + "...");
-			if (timeEntryHelper.transmit(timeEntry, pos, cus, tet)) {
-				handleTransmittedTimeEntry(timeEntryDao, timeEntryHelper, timeEntry);
+			if (timeEntryHelper.transmit(timeEntry)) {
+				handleTransmittedTimeEntry(databaseHelper.getTimeEntryDao(), timeEntryHelper, timeEntry);
 			} else
 				break;
 		}
+	}
+
+	private void setRelationObjectsOnTimeEntry(TimeEntry timeEntry) throws SQLException {
+		setCustomerRelationOnTimeEntry(timeEntry);
+		setGpsPositionRelationOnTimeEntry(timeEntry);
+		setTimeEntryTypeRelationOnTimeEntry(timeEntry);
+	}
+
+	private void setTimeEntryTypeRelationOnTimeEntry(TimeEntry timeEntry) throws SQLException {
+		if (timeEntry.hasTimeEntryType())
+			timeEntry.setTimeEntryType(databaseHelper.getTimeEntryTypeDao().queryForId(timeEntry.getTimeEntryTypeId()));
+	}
+
+	private void setGpsPositionRelationOnTimeEntry(TimeEntry timeEntry) throws SQLException {
+		if (timeEntry.hasGpsPosition())
+			timeEntry.setGpsPosition(databaseHelper.getGpsPositionDao().queryForId(timeEntry.getGpsPositionId()));
+	}
+
+	private void setCustomerRelationOnTimeEntry(TimeEntry timeEntry) throws SQLException {
+		if (timeEntry.hasCustomer())
+			timeEntry.setCustomer(databaseHelper.getCustomerDao().queryForId(timeEntry.getCustomerId()));
 	}
 
 	private void handleTransmittedTimeEntry(Dao<TimeEntry, Integer> timeEntryDao, TimeEntryHelper timeEntryHelper, TimeEntry timeEntry)

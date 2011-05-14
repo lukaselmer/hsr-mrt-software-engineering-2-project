@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
+
 /**
  * Saves needed information about the customer, which was received from the server.
  */
@@ -25,16 +26,16 @@ public class Customer implements Receivable {
 	private long updatedAt = 0;
 	@DatabaseField
 	private boolean deleted = false;
-	
+
 	private Double distance;
-	
-	//Caches gps_position for creation or update as it has to be stored in a separate table
+
+	// Caches gps_position for creation or update as it has to be stored in a separate table
 	public GpsPosition position;
 
 	public Customer() {
 		// Needed for ormlite
 	}
-	
+
 	public Customer(String firstname, String lastname, String phone, Double distance) {
 		firstName = firstname;
 		lastName = lastname;
@@ -50,6 +51,7 @@ public class Customer implements Receivable {
 		return id;
 	}
 
+	@Override
 	public int getIdOnServer() {
 		return railsId;
 	}
@@ -70,6 +72,7 @@ public class Customer implements Receivable {
 		return gpsPositionId;
 	}
 
+	@Override
 	public Timestamp getUpdatedAt() {
 		return new Timestamp(updatedAt);
 	}
@@ -81,41 +84,49 @@ public class Customer implements Receivable {
 	public Double getDistance() {
 		return distance;
 	}
-	
+
 	public void setDistance(Double distance) {
 		this.distance = distance;
 	}
 
 	@Override
 	public boolean fromJSON(JSONObject customerObj) throws JSONException {
-		
 		int railsId = customerObj.getInt("id");
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
-		
+		setNormalAttributes(customerObj);
+		setAddressAndGpsPosition(customerObj);
+		return true;
+	}
+
+	private void setNormalAttributes(JSONObject customerObj) throws JSONException {
 		firstName = customerObj.getString("first_name");
 		lastName = customerObj.getString("last_name");
 		phone = customerObj.getString("phone");
 		updatedAt = DateHelper.parse(customerObj.getString("updated_at")).getTime();
 		deleted = !customerObj.isNull("deleted_at");
-		
+	}
+
+	private void setAddressAndGpsPosition(JSONObject customerObj) throws JSONException {
 		if (customerObj.has("address")) {
 			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
 			position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
 		}
-		return true;
 	}
-	
+
 	public void setGpsPositionId(Integer id) {
 		gpsPositionId = id;
+		if (!hasGpsPosition())
+			setDistance(null);
 	}
-	
+
+	@Override
 	public String toString() {
 		String s = firstName + " " + lastName;
 		if (distance != null) {
 			DecimalFormat f = new DecimalFormat(" (0 m)");
-			s += f.format(distance); 
+			s += f.format(distance);
 		}
 		return s;
 	}

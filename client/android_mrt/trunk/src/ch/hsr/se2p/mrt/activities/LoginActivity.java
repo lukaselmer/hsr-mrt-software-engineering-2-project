@@ -17,9 +17,9 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
-/** 
- * Performs the user login.
- * Requires email and password. Preferences saving is available. Shows warnings when data is incomplete or incorrect.
+
+/**
+ * Performs the user login. Requires email and password. Preferences saving is available. Shows warnings when data is incomplete or incorrect.
  */
 public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
@@ -42,11 +42,11 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login);
-		
+
 		initApplication();
 		initData();
 		checkPreferencesForAutoLogin();
-		
+
 		createClickListener((Button) findViewById(R.id.loginButton));
 	}
 
@@ -68,7 +68,7 @@ public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				checkLoginData();
 			}
 		});
-	} 
+	}
 
 	private void checkPreferencesForAutoLogin() {
 		if (mrtApplication.mayLogin()) {

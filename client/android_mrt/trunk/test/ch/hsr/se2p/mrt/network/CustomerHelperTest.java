@@ -2,7 +2,6 @@ package ch.hsr.se2p.mrt.network;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;

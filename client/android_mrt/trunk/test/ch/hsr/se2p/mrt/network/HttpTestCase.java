@@ -10,19 +10,22 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 
+import android.test.AndroidTestCase;
 import ch.hsr.se2p.mrt.network.mocks.MockHttpClient;
 import ch.hsr.se2p.mrt.network.mocks.MockHttpResponse;
-import android.test.AndroidTestCase;
 
 public class HttpTestCase extends AndroidTestCase {
 	HttpHelper httpHelper;
 
 	protected void expectedResultFromTransmitter(final String result) {
 		httpHelper = new HttpHelper() {
+			@Override
 			protected HttpClient getHttpClient() {
 				return new MockHttpClient() {
+					@Override
 					public HttpResponse execute(HttpUriRequest request) throws IOException, ClientProtocolException {
 						return new MockHttpResponse() {
+							@Override
 							public HttpEntity getEntity() {
 								// return new MockHttpEntity();
 								try {

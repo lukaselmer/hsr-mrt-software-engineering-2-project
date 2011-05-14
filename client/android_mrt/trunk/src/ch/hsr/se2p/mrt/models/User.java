@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 import com.j256.ormlite.field.DatabaseField;
+
 /**
  * 
  */

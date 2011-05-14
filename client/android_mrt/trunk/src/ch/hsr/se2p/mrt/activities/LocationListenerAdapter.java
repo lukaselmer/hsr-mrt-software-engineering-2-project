@@ -1,4 +1,4 @@
-package ch.hsr.se2p.mrt.services;
+package ch.hsr.se2p.mrt.activities;
 
 import android.location.Location;
 import android.location.LocationListener;

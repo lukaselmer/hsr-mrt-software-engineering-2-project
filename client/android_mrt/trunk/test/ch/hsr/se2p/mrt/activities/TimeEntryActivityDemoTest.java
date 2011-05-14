@@ -1,14 +1,10 @@
 package ch.hsr.se2p.mrt.activities;
 
-import java.sql.SQLException;
-
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.widget.TextView;
 import ch.hsr.se2p.mrt.R;
-import ch.hsr.se2p.mrt.models.TimeEntry;
 
-import com.j256.ormlite.dao.Dao;
 import com.jayway.android.robotium.solo.Solo;
 
 public class TimeEntryActivityDemoTest extends ActivityInstrumentationTestCase2<TimeEntryActivity> {

@@ -32,6 +32,10 @@ public class TimeEntry implements Transmittable, Confirmable {
 	@DatabaseField
 	private long timeStart, timeStop;
 
+	private Customer customer;
+	private GpsPosition gpsPosition;
+	private TimeEntryType timeEntryType;
+
 	private static SecureRandom random = new SecureRandom();
 
 	TimeEntry() {
@@ -74,6 +78,7 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return id;
 	}
 
+	@Override
 	public int getIdOnServer() {
 		return railsId;
 	}
@@ -90,6 +95,7 @@ public class TimeEntry implements Transmittable, Confirmable {
 		return new Timestamp(timeStop);
 	}
 
+	@Override
 	public boolean isTransmitted() {
 		return transmitted;
 	}
@@ -137,6 +143,12 @@ public class TimeEntry implements Transmittable, Confirmable {
 			j.put("description", description);
 			j.put("time_start", DateHelper.format(getTimeStart()));
 			j.put("time_stop", DateHelper.format(getTimeStop()));
+			if (customer != null)
+				j.put("customer_id", customer.getIdOnServer());
+			if (timeEntryType != null)
+				j.put("time_entry_type_id", timeEntryType.getIdOnServer());
+			if (gpsPosition != null)
+				j.put("gps_position_data", gpsPosition.toJSONObject());
 		} catch (JSONException e) {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
@@ -159,5 +171,17 @@ public class TimeEntry implements Transmittable, Confirmable {
 	@Override
 	public boolean processConfirmation(JSONObject jsonObject) throws JSONException {
 		return getIdOnServer() == jsonObject.optJSONObject("time_entry").getInt("id");
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public void setGpsPosition(GpsPosition gpsPosition) {
+		this.gpsPosition = gpsPosition;
+	}
+
+	public void setTimeEntryType(TimeEntryType timeEntryType) {
+		this.timeEntryType = timeEntryType;
 	}
 }

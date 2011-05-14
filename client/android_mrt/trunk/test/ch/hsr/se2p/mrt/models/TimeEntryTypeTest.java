@@ -2,6 +2,6 @@ package ch.hsr.se2p.mrt.models;
 
 import android.test.AndroidTestCase;
 
-public class TimeEntryTypeTest extends AndroidTestCase{
-	//TODO: Finish Tests
+public class TimeEntryTypeTest extends AndroidTestCase {
+	// TODO: Finish Tests
 }

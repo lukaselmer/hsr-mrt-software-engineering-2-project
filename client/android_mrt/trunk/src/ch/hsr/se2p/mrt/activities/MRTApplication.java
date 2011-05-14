@@ -1,11 +1,12 @@
 package ch.hsr.se2p.mrt.activities;
 
-import ch.hsr.se2p.mrt.models.User;
-import ch.hsr.se2p.mrt.network.HttpHelper;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.location.LocationManager;
+import ch.hsr.se2p.mrt.models.User;
+import ch.hsr.se2p.mrt.network.HttpHelper;
+
 /**
  * MRTApplication operates as the main application and also saves the login preferences if wanted.
  */
@@ -43,11 +44,11 @@ public class MRTApplication extends Application {
 	public void logout() {
 		email = null;
 		password = null;
-		if (preferences != null){
+		if (preferences != null) {
 			Editor edit = preferences.edit();
 			edit.remove("email");
 			edit.remove("password");
-			edit.commit();	
+			edit.commit();
 		}
 	}
 

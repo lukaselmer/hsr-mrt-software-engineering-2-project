@@ -10,13 +10,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
-
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
-import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.DateHelper;
+import ch.hsr.se2p.mrt.models.GpsPosition;
+
+import com.j256.ormlite.dao.Dao;
 
 public class CustomerHelper {
 	protected HttpHelper httpHelper;
@@ -45,7 +44,7 @@ public class CustomerHelper {
 			JSONObject o = arrayOfJSONReceivables.getJSONObject(i).getJSONObject("customer");
 			Receivable r = clazz.newInstance();
 			r.fromJSON(o);
-			
+
 			updateOrCreateReceivable(r, receivables, o);
 		}
 	}
@@ -74,28 +73,24 @@ public class CustomerHelper {
 		}
 		ret.put("last_update", DateHelper.format(maxUpdatedAt));
 		Log.d("last_update", "Newest customer dataset is from " + DateHelper.format(maxUpdatedAt));
-		
+
 		return ret;
 	}
-	
-	public static void calculateDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition) {
-		
+
+	/**
+	 * Calculates the distance to the currentPosition and sets it on each customer
+	 */
+	public static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
+			throws SQLException {
 		for (Customer c : customers) {
-			if (c.hasGpsPosition()){
-				GpsPosition customerPosition;
-				try {
-					customerPosition = dao.queryForId(c.getGpsPositionId());
-					double distance = currentPosition.distanceTo(customerPosition);
-					
-					// Circle 1000m
-					if (distance <= 1000) c.setDistance(distance);
-					else c.setDistance(null);
-			
-				} catch (SQLException e) {
-					e.printStackTrace();
+			if (c.hasGpsPosition()) {
+				GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
+				if(customerPosition == null){
+					c.setDistance(null);
+					continue;
 				}
-			} else {
-				c.setDistance(null);
+				double distance = currentPosition.distanceTo(customerPosition);
+				c.setDistance(distance <= 1000 ? distance : null); // Circle 1000m
 			}
 		}
 	}

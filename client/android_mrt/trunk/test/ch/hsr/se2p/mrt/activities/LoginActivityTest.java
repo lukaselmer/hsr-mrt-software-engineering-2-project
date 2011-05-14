@@ -11,7 +11,7 @@ import ch.hsr.se2p.mrt.R;
 import com.jayway.android.robotium.solo.Solo;
 
 public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginActivity> {
-	
+
 	public LoginActivityTest() {
 		super("ch.hsr.se2p.mrt", LoginActivity.class);
 	}
@@ -24,9 +24,8 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 	private CheckBox checkbox;
 	private Button loginBtn;
 
-	final static private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben", 
-	LOGIN_ERROR = "Anmeldung schlug fehl!", PASSWORD = "password", EMAIL = "email", OK = "Ok",
-	EMAIL_FIELD_WORKER = "field_worker@mrt.ch", PASSWORD_MRT = "mrt";
+	final static private String LOGINDATA_ERROR = "Bitte Emailadresse und Passwort angeben", LOGIN_ERROR = "Anmeldung schlug fehl!",
+			PASSWORD = "password", EMAIL = "email", OK = "Ok", EMAIL_FIELD_WORKER = "field_worker@mrt.ch", PASSWORD_MRT = "mrt";
 
 	@Override
 	protected void setUp() throws Exception {
@@ -48,7 +47,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		checkbox = (CheckBox) activity.findViewById(R.id.chbxSaveLogin);
 		loginBtn = (Button) activity.findViewById(R.id.loginButton);
 	}
-	
+
 	public void setPreferences() {
 		Editor editor = testedApplication.getPreferences().edit();
 		editor.putString("email", EMAIL_FIELD_WORKER);
@@ -199,6 +198,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
 	private void fillInLoginForm(final String email, final String password, final boolean bool) {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				editEmail.setText(email);
 				editPassword.setText(password);
@@ -209,6 +209,7 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 
 	private void performClickOnLoginButton() {
 		activity.runOnUiThread(new Runnable() {
+			@Override
 			public void run() {
 				loginBtn.performClick();
 			}

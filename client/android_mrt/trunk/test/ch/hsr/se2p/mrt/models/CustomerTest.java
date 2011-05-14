@@ -31,8 +31,8 @@ public class CustomerTest extends AndroidTestCase {
 	}
 
 	public void testInitialCustomer() {
-		 assertEquals(new Integer(0), customer.getId());
-		 assertEquals(0, customer.getIdOnServer());
+		assertEquals(new Integer(0), customer.getId());
+		assertEquals(0, customer.getIdOnServer());
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());
 		assertNull(customer.getPhone());
@@ -55,6 +55,7 @@ public class CustomerTest extends AndroidTestCase {
 			e.printStackTrace();
 		}
 	}
+
 	public void testCustomerSort() {
 		Set<Customer> set = new TreeSet<Customer>();
 		set.add(new Customer("Jasper", "Zazoo", "+41 444 44 11", null));

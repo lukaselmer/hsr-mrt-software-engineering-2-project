@@ -6,17 +6,16 @@ import java.sql.Timestamp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.j256.ormlite.dao.Dao;
-
-import ch.hsr.se2p.mrt.database.DatabaseHelper;
-import ch.hsr.se2p.mrt.models.TimeEntry;
 import android.test.AndroidTestCase;
+import ch.hsr.se2p.mrt.database.DatabaseHelper;
+
+import com.j256.ormlite.dao.Dao;
 
 public class TimeEntryTest extends AndroidTestCase {
 	private static final String DESCRIPTION = "text";
 	private Dao<TimeEntry, Integer> dao;
 	private DatabaseHelper dh;
-	
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -105,6 +104,6 @@ public class TimeEntryTest extends AndroidTestCase {
 			assertTrue(false);
 		}
 	}
-	
-	//TODO: Test processTransmission & processConfirmation
+
+	// TODO: Test processTransmission & processConfirmation
 }

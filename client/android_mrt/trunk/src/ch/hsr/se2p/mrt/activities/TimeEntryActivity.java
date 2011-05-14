@@ -116,7 +116,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			currentPosition = null;
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 			setMeausurementStarted(true);
-			locationManager.requestLocationUpdates(locationProvider, 2000, 0, locationListener);
+			locationManager.requestLocationUpdates(locationProvider, 2 * 1000, 0, locationListener); // update location maximal every 2 seconds
 		}
 	};
 
@@ -137,11 +137,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initLocationListener() {
-		locationListener = new LocationListener() {
+		locationListener = new LocationListenerAdapter() {
+			@Override
 			public void onLocationChanged(Location location) {
 				currentPosition = new GpsPosition(location);
 				try {
-					CustomerHelper.calculateDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
+					CustomerHelper.calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
 					Collections.sort(getCustomers(), getComparator());
 					updateComboboxCustomers();
 				} catch (SQLException e) {
@@ -149,15 +150,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				}
 				locationManager.removeUpdates(locationListener);
 				setGPSImage(true);
-			}
-
-			public void onProviderDisabled(String provider) {
-			}
-
-			public void onProviderEnabled(String provider) {
-			}
-
-			public void onStatusChanged(String provider, int status, Bundle extras) {
 			}
 		};
 	}
@@ -216,8 +208,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	protected ArrayAdapter<Customer> getCustomerAdapter() {
-			customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
-			customerAdapter.setNotifyOnChange(true);
+		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+		customerAdapter.setNotifyOnChange(true);
 		return customerAdapter;
 	}
 
