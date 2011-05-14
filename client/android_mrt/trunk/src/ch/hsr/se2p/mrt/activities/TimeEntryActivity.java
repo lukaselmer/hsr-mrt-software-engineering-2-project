@@ -143,7 +143,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				currentPosition = new GpsPosition(location);
 				try {
 					CustomerHelper.calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
-					Collections.sort(getCustomers(), getComparator());
+					// Collections.sort(getCustomers(), getComparator());
+					Collections.sort(getCustomers());
 					updateComboboxCustomers();
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -154,25 +155,25 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		};
 	}
 
-	private Comparator<Customer> getComparator() {
-		return new Comparator<Customer>() {
-			@Override
-			public int compare(Customer one, Customer another) {
-				if (one.getDistance() == null) {
-					if (another.getDistance() == null)
-						return one.getLastName().compareTo(another.getLastName());
-					return 1;
-				}
-				if (another.getDistance() == null)
-					return -1;
-				if (one.getDistance() > another.getDistance())
-					return 1;
-				if (one.getDistance().equals(another.getDistance()))
-					return one.getLastName().compareTo(another.getLastName());
-				return -1;
-			}
-		};
-	}
+	// private Comparator<Customer> getComparator() {
+	// return new Comparator<Customer>() {
+	// @Override
+	// public int compare(Customer one, Customer another) {
+	// if (one.getDistance() == null) {
+	// if (another.getDistance() == null)
+	// return one.getLastName().compareTo(another.getLastName());
+	// return 1;
+	// }
+	// if (another.getDistance() == null)
+	// return -1;
+	// if (one.getDistance() > another.getDistance())
+	// return 1;
+	// if (one.getDistance().equals(another.getDistance()))
+	// return one.getLastName().compareTo(another.getLastName());
+	// return -1;
+	// }
+	// };
+	// }
 
 	private Criteria getInitializedCriteria() {
 		Criteria criteria = new Criteria();
@@ -239,7 +240,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).setText("");
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
-			Collections.sort(getCustomers(), getComparator());
+			// Collections.sort(getCustomers(), getComparator());
+			Collections.sort(getCustomers());
 		}
 		initSpinnerTimeEntryType();
 		updateComboboxCustomers();

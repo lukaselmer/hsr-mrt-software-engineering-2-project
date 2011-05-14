@@ -13,7 +13,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Saves needed information about the customer, which was received from the server.
  */
-public class Customer implements Receivable {
+public class Customer implements Receivable, Comparable<Customer> {
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -130,7 +130,7 @@ public class Customer implements Receivable {
 				s += f.format(getDistance());
 			} else {
 				DecimalFormat f = new DecimalFormat(" (0.0 km)");
-				s += f.format(getDistance()/1000);
+				s += f.format(getDistance() / 1000);
 			}
 		}
 		return s;
@@ -155,4 +155,18 @@ public class Customer implements Receivable {
 	public GpsPosition getGpsPosition() {
 		return gpsPosition;
 	}
+
+	@Override
+	public int compareTo(Customer another) {
+		if (this.getDistance() == null || another.getDistance() == null) {
+			if (this.getDistance() == null && another.getDistance() == null) 
+				return this.getLastName().compareTo(another.getLastName());
+			else
+				return this.getDistance() == null ? 1 : -1;
+		} else {
+			int cmp = this.getDistance().compareTo(another.getDistance());
+			return cmp == 0 ? this.getLastName().compareTo(another.getLastName()) : cmp;
+		}
+	}
+
 }
