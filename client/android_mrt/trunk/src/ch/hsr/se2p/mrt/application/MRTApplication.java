@@ -3,7 +3,6 @@ package ch.hsr.se2p.mrt.application;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.location.LocationManager;
 import ch.hsr.se2p.mrt.models.User;
 import ch.hsr.se2p.mrt.network.HttpHelper;
 
