@@ -123,10 +123,15 @@ public class Customer implements Receivable {
 
 	@Override
 	public String toString() {
-		String s = firstName + " " + lastName;
-		if (distance != null) {
-			DecimalFormat f = new DecimalFormat(" (0 m)");
-			s += f.format(distance);
+		String s = getFirstName() + " " + getLastName();
+		if (getDistance() != null) {
+			if (getDistance() <= 500) {
+				DecimalFormat f = new DecimalFormat(" (0 m)");
+				s += f.format(getDistance());
+			} else {
+				DecimalFormat f = new DecimalFormat(" (0.0 km)");
+				s += f.format(getDistance()/1000);
+			}
 		}
 		return s;
 	}

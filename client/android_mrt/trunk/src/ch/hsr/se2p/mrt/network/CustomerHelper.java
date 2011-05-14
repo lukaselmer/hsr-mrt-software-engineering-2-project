@@ -17,6 +17,7 @@ import ch.hsr.se2p.mrt.models.GpsPosition;
 import com.j256.ormlite.dao.Dao;
 
 public class CustomerHelper {
+	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 100000;// Circle 100km;
 	protected HttpHelper httpHelper;
 
 	public CustomerHelper(HttpHelper httpHelper) {
@@ -84,12 +85,12 @@ public class CustomerHelper {
 		for (Customer c : customers) {
 			if (c.hasGpsPosition()) {
 				GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
-				if(customerPosition == null){
+				if (customerPosition == null) {
 					c.setDistance(null);
 					continue;
 				}
 				double distance = currentPosition.distanceTo(customerPosition);
-				c.setDistance(distance <= 1000 ? distance : null); // Circle 1000m
+				c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
 			}
 		}
 	}

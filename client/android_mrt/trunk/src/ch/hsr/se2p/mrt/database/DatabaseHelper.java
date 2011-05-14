@@ -22,7 +22,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	public static final String TAG = DatabaseHelper.class.getSimpleName();
 
 	protected static final String DATABASE_NAME = "mrt.db";
-	protected static final int DATABASE_VERSION = 6;
+	protected static final int DATABASE_VERSION = 8;
 	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, TimeEntryType.class, GpsPosition.class };
 
 	private Dao<TimeEntry, Integer> timeEntryDao;
