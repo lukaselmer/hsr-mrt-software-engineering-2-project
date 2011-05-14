@@ -3,9 +3,7 @@
 	package="ch.hsr.se2p.mrt" android:versionCode="1" android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7" />
 
-	
-        
-	<application android:name="application.MRTApplication"
+	<application android:name="ch.hsr.se2p.mrt.application.MRTApplication"
 		android:icon="@drawable/icon" android:label="@string/app_name">
 
 		<activity android:name="ch.hsr.se2p.mrt.activities.LoginActivity"
@@ -16,7 +14,7 @@
 			</intent-filter>
 		</activity>
 
-		<activity android:name="activities.TimeEntryActivity"
+		<activity android:name="ch.hsr.se2p.mrt.activities.TimeEntryActivity"
 			android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.RUN" />
@@ -24,7 +22,7 @@
 			</intent-filter>
 		</activity>
 
-		<service android:name="services.SynchronizationService"
+		<service android:name="ch.hsr.se2p.mrt.services.SynchronizationService"
 			android:process=":remote" android:enabled="true" android:exported="true">
 			<intent-filter>
 				<action android:name="ch.hsr.se2p.mrt.services.SynchronizationService" />
@@ -38,7 +36,7 @@
 
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 
 	<!-- For tests -->

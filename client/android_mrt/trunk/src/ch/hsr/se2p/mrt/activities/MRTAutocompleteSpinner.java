@@ -16,7 +16,7 @@ import ch.hsr.se2p.mrt.models.Customer;
 public class MRTAutocompleteSpinner extends LinearLayout {
 	private AutoCompleteTextView textView;
 
-	protected MRTAutocompleteSpinner(Context context, AttributeSet attributeSet) {
+	public MRTAutocompleteSpinner(Context context, AttributeSet attributeSet) {
 		super(context, attributeSet);
 		initControls();
 	}
