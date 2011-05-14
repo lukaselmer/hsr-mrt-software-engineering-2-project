@@ -14,7 +14,7 @@ import ch.hsr.se2p.mrt.interfaces.Transmittable;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * TimeEntry stores information about a given customer, timeentry type and the gps position. Furthermore it saves the time when the TimeEntry was
+ * TimeEntry stores information about a given customer, timeentry type and the gps gpsPosition. Furthermore it saves the time when the TimeEntry was
  * first created (started) and a stop time can be set too.
  * 
  */

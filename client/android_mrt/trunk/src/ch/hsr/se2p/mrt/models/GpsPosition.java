@@ -11,8 +11,8 @@ import android.util.Log;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * A GpsPosition contains the geographical coordinates (latitude and longitude). Additionally, time is the time when the position was fixed and the
- * createdAt is the time when the position was saved the first time.
+ * A GpsPosition contains the geographical coordinates (latitude and longitude). Additionally, time is the time when the gpsPosition was fixed and the
+ * createdAt is the time when the gpsPosition was saved the first time.
  */
 public class GpsPosition {
 	private static final String TAG = TimeEntry.class.getSimpleName();

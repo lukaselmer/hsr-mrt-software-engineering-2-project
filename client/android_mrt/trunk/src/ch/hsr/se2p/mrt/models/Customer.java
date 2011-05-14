@@ -30,7 +30,8 @@ public class Customer implements Receivable {
 	private Double distance;
 
 	// Caches gps_position for creation or update as it has to be stored in a separate table
-	public GpsPosition position;
+	public GpsPosition gpsPosition;
+	private boolean changed;
 
 	public Customer() {
 		// Needed for ormlite
@@ -97,6 +98,7 @@ public class Customer implements Receivable {
 		this.railsId = railsId;
 		setNormalAttributes(customerObj);
 		setAddressAndGpsPosition(customerObj);
+		setChanged(true);
 		return true;
 	}
 
@@ -111,7 +113,7 @@ public class Customer implements Receivable {
 	private void setAddressAndGpsPosition(JSONObject customerObj) throws JSONException {
 		if (customerObj.has("address")) {
 			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
-			position = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
+			gpsPosition = new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude"));
 		}
 	}
 
@@ -129,5 +131,17 @@ public class Customer implements Receivable {
 			s += f.format(distance);
 		}
 		return s;
+	}
+
+	public void setChanged() {
+		this.changed = true;
+	}
+
+	public void setChanged(boolean changed) {
+		this.changed = changed;
+	}
+
+	public boolean hasChanged() {
+		return changed;
 	}
 }

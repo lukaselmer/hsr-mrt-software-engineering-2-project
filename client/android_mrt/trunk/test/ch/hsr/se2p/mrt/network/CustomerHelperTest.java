@@ -128,7 +128,7 @@ public class CustomerHelperTest extends HttpTestCase {
 		customerObj.put("last_name", lastName);
 		customerObj.put("phone", phone);
 		customerObj.put("updated_at", DateHelper.format(updatedAt));
-		customerObj.put("position", "");
+		customerObj.put("gpsPosition", "");
 		if (deleted)
 			customerObj.put("deleted_at", DateHelper.format(getTimestamp(System.currentTimeMillis() - 1000 * 60 * 60)));
 		return customerObj;

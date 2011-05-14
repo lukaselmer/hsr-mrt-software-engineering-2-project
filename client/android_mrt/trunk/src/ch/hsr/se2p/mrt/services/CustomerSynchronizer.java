@@ -31,10 +31,8 @@ class CustomerSynchronizer implements Synchronizer {
 		Log.d(TAG, "Synchronizing customers");
 		try {
 			Dao<Customer, Integer> dao = databaseHelper.getCustomerDao();
-
 			List<Receivable> receivables = new ArrayList<Receivable>(dao.queryForAll());
 			synchronizeCustomers(dao, new CustomerHelper(mrtApplication.getHttpHelper()), receivables);
-
 		} catch (SQLException e) {
 			Log.e(TAG, "Database error", e);
 		} catch (Exception e) {
@@ -55,44 +53,49 @@ class CustomerSynchronizer implements Synchronizer {
 	}
 
 	protected void processCustomer(Dao<Customer, Integer> dao, Customer c) throws SQLException {
-		if (handleDeletion(dao, c))
-			return;
+		try {
+			if (handleDeletion(dao, c))
+				return;
 
-		if (needsUpdating(c)) {
-			handleUpdate(dao, c);
-		} else {
-			handleCreation(dao, c);
+			if (existingCustomer(c)) {
+				if (c.hasChanged())
+					handleUpdate(dao, c);
+			} else
+				handleCreation(dao, c);
+		} finally {
+			c.setChanged(false);
 		}
 	}
 
-	private boolean needsUpdating(Customer c) {
+	private boolean existingCustomer(Customer c) {
 		return c.getId() != null && c.getId() > 0;
 	}
 
 	private void handleUpdate(Dao<Customer, Integer> dao, Customer c) throws SQLException {
-
-		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
-
-		if (c.hasGpsPosition()) {
-			GpsPosition old_position = positionDao.queryForId(c.getGpsPositionId());
-			positionDao.delete(old_position);
-		}
-
-		if (c.position != null) {
-			positionDao.create(c.position);
-			c.setGpsPositionId(c.position.getId());
-		}
-
+		updatePosition(c);
 		Log.d(TAG, "Updating " + c);
 		dao.update(c);
+	}
+
+	private void updatePosition(Customer c) throws SQLException {
+		Dao<GpsPosition, Integer> dao = databaseHelper.getGpsPositionDao();
+
+		if (c.hasGpsPosition()) {
+			GpsPosition old_position = dao.queryForId(c.getGpsPositionId());
+			dao.delete(old_position);
+		}
+		if (c.gpsPosition != null) {
+			dao.create(c.gpsPosition);
+			c.setGpsPositionId(c.gpsPosition.getId());
+		}
 	}
 
 	private void handleCreation(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 
-		if (c.position != null) {
-			positionDao.create(c.position);
-			c.setGpsPositionId(c.position.getId());
+		if (c.gpsPosition != null) {
+			positionDao.create(c.gpsPosition);
+			c.setGpsPositionId(c.gpsPosition.getId());
 		}
 
 		Log.d(TAG, "Creating " + c);
@@ -109,7 +112,7 @@ class CustomerSynchronizer implements Synchronizer {
 
 		if (c.isDeleted()) {
 			Log.d(TAG, "Deleting " + c);
-			if (needsUpdating(c)) {
+			if (existingCustomer(c)) {
 				dao.delete(c);
 				return true;
 			}
