@@ -34,8 +34,44 @@
     <end type="TARGET" nodeId="5"/>  
   </dependency>  
   <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="52" y="205"/>    
+    <bendpoint x="52" y="289"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="324" y="121"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="298" y="121"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
     <end type="SOURCE" nodeId="2"/>    
     <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="7"/>    
@@ -46,39 +82,9 @@
     <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
-    <end type="SOURCE" nodeId="3"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="324" y="121"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="5"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
     <bendpoint x="311" y="205"/>    
     <end type="SOURCE" nodeId="6"/>    
     <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="2"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="298" y="121"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="2"/>  
   </dependency>  
   <dependency>    
     <bendpoint x="31" y="121"/>    
@@ -91,12 +97,6 @@
     <bendpoint x="540" y="205"/>    
     <end type="SOURCE" nodeId="7"/>    
     <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="52" y="205"/>    
-    <bendpoint x="52" y="289"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    

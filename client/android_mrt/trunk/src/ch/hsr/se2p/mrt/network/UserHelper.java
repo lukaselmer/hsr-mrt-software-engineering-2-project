@@ -5,8 +5,6 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-import ch.hsr.se2p.mrt.application.MRTApplication;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 
 public class UserHelper {
@@ -14,10 +12,6 @@ public class UserHelper {
 
 	public UserHelper(HttpHelper httpHelper) {
 		this.httpHelper = httpHelper;
-	}
-
-	public boolean login(MRTApplication mrtApplication) {
-		return login(mrtApplication.getEmail(), mrtApplication.getPassword(), mrtApplication.getCurrentUser());
 	}
 
 	public boolean login(String email, String password, Receivable receivable) {

@@ -57,7 +57,8 @@ class SynchronizationServiceTask extends TimerTask {
 	}
 
 	private boolean login() {
-		return new UserHelper(mrtApplication.getHttpHelper()).login(mrtApplication);
+		UserHelper u = new UserHelper(mrtApplication.getHttpHelper());
+		return u.login(mrtApplication.getEmail(), mrtApplication.getPassword(), mrtApplication.getCurrentUser());
 	}
 
 };
