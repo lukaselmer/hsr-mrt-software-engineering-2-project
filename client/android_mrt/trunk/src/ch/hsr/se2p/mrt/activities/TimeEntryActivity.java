@@ -257,7 +257,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 
 			((TextView) findViewById(R.id.txtDescription)).setText("");
-			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).setText("");
+			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 			// Collections.sort(getCustomers(), getComparator());
 			Collections.sort(getCustomers());

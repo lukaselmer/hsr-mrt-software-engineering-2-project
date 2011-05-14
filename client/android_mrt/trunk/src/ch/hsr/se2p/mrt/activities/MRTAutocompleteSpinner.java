@@ -31,22 +31,30 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 	private void initButton() {
 		ImageButton button = new ImageButton(getContext());
 		button.setImageResource(android.R.drawable.arrow_down_float);
-		button.setOnClickListener(new OnClickListener() {
+		button.setOnClickListener(getButtonListener());
+		this.addView(button, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+	}
+
+	private OnClickListener getButtonListener() {
+		return new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
 				textView.showDropDown();
 			}
-		});
-		this.addView(button, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+		};
 	}
 
 	private void initTextView(Context context) {
 		textView = new AutoCompleteTextView(context);
 		textView.setSingleLine();
-		textView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-				| InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT);
+		textView.setInputType(getInputTypeForTextView());
 		textView.setRawInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
 		addView(textView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+	}
+
+	private int getInputTypeForTextView() {
+		return InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+				| InputType.TYPE_TEXT_FLAG_AUTO_COMPLETE | InputType.TYPE_TEXT_FLAG_AUTO_CORRECT;
 	}
 
 	public void setAdapter(ArrayAdapter<Customer> customers) {
@@ -57,7 +65,7 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 		return textView.getText().toString();
 	}
 
-	public void setText(String text) {
-		textView.setText(text);
+	public void resetText() {
+		textView.setText("");
 	}
 }
