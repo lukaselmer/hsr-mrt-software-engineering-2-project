@@ -60,7 +60,7 @@ class CustomersController < ApplicationController
   end
 
   def synchronize
-    if params[:last_update].nil?
+    if params[:last_update].blank?
       @updated_customers = Customer.all
     else
       last_update = Time.at(params[:last_update].to_i/1000)

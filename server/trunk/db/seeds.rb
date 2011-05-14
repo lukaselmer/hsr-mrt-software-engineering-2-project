@@ -36,27 +36,38 @@ Material.create!([
 materials = Material.all
 t = TimeEntryType.create!(:description => "Heizung ansehen")
 t.time_entry_type_materials = [
-    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
-  ]
+  TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+]
 t.save
 t = TimeEntryType.create!(:description => "Lavabo wechseln")
 t.time_entry_type_materials = [
-    TimeEntryTypeMaterial.new(:material => materials[0], :time_entry_type => t),
-    TimeEntryTypeMaterial.new(:material => materials[1], :time_entry_type => t),
-    TimeEntryTypeMaterial.new(:material => materials[4], :time_entry_type => t, :amount => 5),
-    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
-  ]
+  TimeEntryTypeMaterial.new(:material => materials[0], :time_entry_type => t),
+  TimeEntryTypeMaterial.new(:material => materials[1], :time_entry_type => t),
+  TimeEntryTypeMaterial.new(:material => materials[4], :time_entry_type => t, :amount => 5),
+  TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+]
 t.save
 t = TimeEntryType.create!(:description => "Wasserzähler ersetzen")
 t.time_entry_type_materials = [
-    TimeEntryTypeMaterial.new(:material => materials[8], :time_entry_type => t),
-    TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
-  ]
+  TimeEntryTypeMaterial.new(:material => materials[8], :time_entry_type => t),
+  TimeEntryTypeMaterial.new(:material => materials[9], :time_entry_type => t),
+]
 t.save
 
 ### Addresses
 Address.create!([
-    { :line1 => "Hungerbergstr. 1", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Alte Jonastrasse/Route 17", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Neue Jonastrasse/Route 8", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Schönbodenstrasse 2", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Etzelstrasse 9", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Alte Jonastrasse 81", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Lindenhof", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Hanfländerstrasse 65", :zip => "8640", :place => "Rapperswil" },
+    { :line1 => "Lenggiserstrasse 3", :zip => "8645", :place => "Rapperswil-Jona" },
+    { :line1 => "Hombrechtikerstrasse 51", :zip => "8645", :place => "Rapperswil-Jona" },
+    { :line1 => "Herschärenstrasse 71", :zip => "8633", :place => "Bubikon" },
+    { :line1 => "Schlüsselstrasse 1", :zip => "8046", :place => "Zürich" },
+    { :line1 => "Helvetiastrasse 2", :zip => "8046", :place => "Zürich" },
     { :line1 => "Oberseestrasse 10", :zip => "8640", :place => "Rapperswil" },
     { :line1 => "Bundesgasse 3", :zip => "3005", :place => "Bern" },
     { :line1 => "Hungerbergstr. 4", :zip => "8046", :place => "Zürich" },

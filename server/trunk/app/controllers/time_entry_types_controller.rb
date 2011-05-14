@@ -74,7 +74,7 @@ class TimeEntryTypesController < ApplicationController
   end
 
   def synchronize
-    if params[:last_update].nil?
+    if params[:last_update].blank?
       @updated_time_entry_types = TimeEntryType.all
     else
       last_update = Time.at(params[:last_update].to_i/1000)
