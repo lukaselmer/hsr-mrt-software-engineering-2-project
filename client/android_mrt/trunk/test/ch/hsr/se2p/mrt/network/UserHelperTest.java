@@ -2,6 +2,7 @@ package ch.hsr.se2p.mrt.network;
 
 import java.sql.Timestamp;
 
+import ch.hsr.se2p.mrt.ISO8601DateParserHelperForTests;
 import ch.hsr.se2p.mrt.models.ISO8601DateParser;
 import ch.hsr.se2p.mrt.models.User;
 
@@ -11,7 +12,7 @@ public class UserHelperTest extends HttpTestCase {
 		User u = new User();
 		String firstName = "Peter", lastName = "Muster", email = "peter@muster.ch";
 		int id = 77;
-		Timestamp updatedAt = ISO8601DateParser.formatAndParseToTimestamp(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
+		Timestamp updatedAt = ISO8601DateParserHelperForTests.formatAndParseToTimestamp(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60));
 		expectedResultFromTransmitter("{\"field_worker\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\""
 				+ email + "\",\"id\":" + id + ",\"updated_at\":\"" + ISO8601DateParser.toString(updatedAt) + "\"}}");
 		UserHelper userHelper = new UserHelper(httpHelper);

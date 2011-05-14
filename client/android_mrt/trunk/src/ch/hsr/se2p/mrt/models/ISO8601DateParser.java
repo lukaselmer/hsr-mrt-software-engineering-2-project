@@ -1,6 +1,5 @@
 package ch.hsr.se2p.mrt.models;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -88,13 +87,5 @@ public class ISO8601DateParser {
 		String result = s0 + s1;
 		result = result.replaceAll("UTC", "+00:00");
 		return result;
-	}
-
-	public static Date formatAndParse(Date date) {
-		return parse(toString(date));
-	}
-
-	public static Timestamp formatAndParseToTimestamp(Date date) {
-		return new Timestamp(parse(toString(date)).getTime());
 	}
 }

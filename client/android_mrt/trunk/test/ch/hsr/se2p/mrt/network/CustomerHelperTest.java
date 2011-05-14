@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ch.hsr.se2p.mrt.ISO8601DateParserHelperForTests;
 import ch.hsr.se2p.mrt.interfaces.Receivable;
 import ch.hsr.se2p.mrt.models.Customer;
 import ch.hsr.se2p.mrt.models.ISO8601DateParser;
@@ -135,7 +136,7 @@ public class CustomerHelperTest extends HttpTestCase {
 	}
 
 	private Timestamp getTimestamp(long l) {
-		return ISO8601DateParser.formatAndParseToTimestamp(new Timestamp(l));
+		return ISO8601DateParserHelperForTests.formatAndParseToTimestamp(new Timestamp(l));
 	}
 
 }

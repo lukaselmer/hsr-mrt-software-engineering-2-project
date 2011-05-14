@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.test.AndroidTestCase;
+import ch.hsr.se2p.mrt.ISO8601DateParserHelperForTests;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 
 import com.j256.ormlite.dao.Dao;
@@ -86,8 +87,8 @@ public class TimeEntryTest extends AndroidTestCase {
 	public void testToJSON() {
 		try {
 			Timestamp timeStop = new Timestamp(System.currentTimeMillis()), timeStart = new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60);
-			timeStart = (Timestamp) ISO8601DateParser.formatAndParseToTimestamp(timeStart);
-			timeStop = (Timestamp) ISO8601DateParser.formatAndParseToTimestamp(timeStop);
+			timeStart = (Timestamp) ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStart);
+			timeStop = (Timestamp) ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStop);
 			TimeEntry t = new TimeEntry(timeStart);
 			t.setTimeStop(timeStop);
 			t.setDescription(DESCRIPTION);
