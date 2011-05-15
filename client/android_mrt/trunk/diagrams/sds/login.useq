@@ -1,0 +1,111 @@
+<sequence-diagram version="1.0.1" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="ch.hsr.se2p.mrt.activities.LoginActivity" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/activities/LoginActivity.java" binary="false" label="loginActivity" type="class" 
+    autoSize="true">    
+    <position x="306" y="0" width="-1" height="-1"/>    
+    <execution id="1">      
+      <position x="5" y="78" width="118" height="590"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="5" y="118" width="118" height="530"/>    
+    </execution>    
+    <execution id="3">      
+      <position x="0" y="578" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="2" language="java" name="ch.hsr.se2p.mrt.application.MRTApplication" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/application/MRTApplication.java" binary="false" label="mrtApplication" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="148" width="0" height="20"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="0" y="228" width="0" height="20"/>    
+    </execution>    
+    <execution id="3">      
+      <position x="0" y="478" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="3" language="java" name="ch.hsr.se2p.mrt.network.UserHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/UserHelper.java" binary="false" type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="188" width="0" height="20"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="0" y="268" width="0" height="150"/>    
+    </execution>    
+    <execution id="3">      
+      <position x="0" y="348" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="7" language="java" name="ch.hsr.se2p.mrt.network.HttpHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/HttpHelper.java" binary="false" label="httpHelper" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="288" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="8" language="java" name="ch.hsr.se2p.mrt.interfaces.Receivable" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/interfaces/Receivable.java" binary="false" label="receivable" type="interface" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="378" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="ch.hsr.se2p.mrt.activities.ActivityHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/activities/ActivityHelper.java" binary="false" label="&lt;static&gt;" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="608" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <message operation="processLogin(java.lang.String,java.lang.String): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="0"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="1"/>  
+  </message>  
+  <message operation="getHttpHelper(): HttpHelper">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="2" messageNodeId="0"/>  
+  </message>  
+  <message operation="UserHelper(ch.hsr.se2p.mrt.network.HttpHelper)">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="3" messageNodeId="0"/>  
+  </message>  
+  <message operation="getCurrentUser(): User">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="2" messageNodeId="1"/>  
+  </message>  
+  <message operation="login(java.lang.String,java.lang.String,ch.hsr.se2p.mrt.interfaces.Receivable): boolean">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="3" messageNodeId="1"/>  
+  </message>  
+  <message operation="login(java.lang.String,java.lang.String,boolean): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="2" messageNodeId="2"/>  
+  </message>  
+  <message operation="switchToTimeEntryActivity(): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="2"/>  
+  </message>  
+  <message operation="displayAlertDialog(java.lang.String,java.lang.String,android.app.Activity): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="5" messageNodeId="0"/>  
+  </message>  
+  <message operation="doHttpPost(java.lang.Object,java.lang.String): String">    
+    <end type="SOURCE" nodeId="3" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="7" messageNodeId="0"/>  
+  </message>  
+  <message operation="generateJSONObject(java.lang.String,java.lang.String): JSONObject">    
+    <end type="SOURCE" nodeId="3" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="3" messageNodeId="2"/>  
+  </message>  
+  <message operation="fromJSON(org.json.JSONObject): boolean">    
+    <end type="SOURCE" nodeId="3" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="8" messageNodeId="0"/>  
+  </message>
+</sequence-diagram>
