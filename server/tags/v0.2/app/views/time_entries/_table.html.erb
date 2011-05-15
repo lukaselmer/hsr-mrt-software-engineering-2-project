@@ -1,0 +1,35 @@
+<% unless time_entries.nil? %>
+  <% fields = [:id, :customer, :time_entry_type, :user, :order, :description, :duration ] if fields.nil? %>
+
+  <table>
+    <tr>
+      <% fields.each do |f| %>
+        <th><%= TimeEntry.human_attribute_name(f) %></th>
+      <% end %>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% time_entries.each do |time_entry| %>
+      <tr id="<%= dom_id(time_entry) %>">
+        <% if fields.include? :id %><td><%= time_entry.id %></td><% end %>
+        <% if fields.include? :customer %><td><%= link_to time_entry.customer, time_entry.customer unless time_entry.customer.nil? %></td><% end %>
+        <% if fields.include? :time_entry_type %><td><%= link_to time_entry.time_entry_type, time_entry.time_entry_type unless time_entry.time_entry_type.nil? %></td><% end %>
+        <% if fields.include? :user %><td><%= link_to time_entry.user, user_path(time_entry.user) unless time_entry.user.nil? %></td><% end %>
+        <% if fields.include? :order %><td><%= link_to time_entry.order, time_entry.order unless time_entry.order.nil? %></td><% end %>
+        <% if fields.include? :description %><td><%= time_entry.description %></td><% end %>
+        <% if fields.include? :duration %><td><%= l time_entry.duration, :format => :time %></td><% end %>
+        <td><%= link_to t(:show), time_entry %></td>
+
+        <% if write_access? time_entry %>
+          <td><%= link_to t(:edit), edit_time_entry_path(time_entry) %></td>
+          <td><%= link_to t(:destroy), time_entry, :confirm => t(:confirm_delete), :method => :delete %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
+      </tr>
+    <% end unless time_entries.nil? %>
+  </table>
+<% end %>

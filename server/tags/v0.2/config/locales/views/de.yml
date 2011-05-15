@@ -1,0 +1,15 @@
+
+de:
+  show: Anzeigen
+  edit: Bearbeiten
+  destroy: Löschen
+  confirm_delete: Wirklich löschen?
+  back: Zurück
+  overview: Übersicht
+  detail: Details
+  editing: bearbeiten
+  login: Anmelden
+  create_successful: wurde erfolgreich erstellt.
+  update_successful: wurde erfolgreich geändert.
+  persist_successful: wurde erfolgreich persistent gespeichert.
+  pieces: Stück

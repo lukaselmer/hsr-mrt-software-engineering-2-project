@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  #time_entry_type_id: 1
+  description: TimeEntryType1
+  updated_at: 2011-04-24 20:37:04
+  valid_until: 2011-04-24 20:37:04
+
+two:
+#  time_entry_type_id: 2
+  description: TimeEntryType2
+  updated_at: 2011-04-24 20:37:04
+  valid_until: 2011-04-24 20:37:04
+
+three:
+#  time_entry_type_id: 3
+  description: TimeEntryType3
+  updated_at: 2011-04-24 20:37:04
+  valid_until:

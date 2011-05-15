@@ -1,0 +1,12 @@
+<h1><%= t(:detail)%> Material</h1>
+
+<% fields = [:id, :catalog_number, :description, :dimensions, :price] %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= Material.human_attribute_name(f) %></b>
+    <%= @material.send(f) %>
+  </p>
+<% end %>
+
+<%= link_to t(:edit), edit_material_path(@material) %> |
+<%= link_to t(:back), materials_path %>

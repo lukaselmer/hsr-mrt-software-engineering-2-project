@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  latitude: 47.182246
+  longitude: 8.778076
+
+two:
+  latitude: 47.182246
+  longitude: 8.778076

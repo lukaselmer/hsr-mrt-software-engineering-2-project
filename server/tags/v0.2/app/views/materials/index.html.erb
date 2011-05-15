@@ -1,0 +1,35 @@
+<h1><%= t(:overview)%> <%= Material.model_name.human %></h1>
+<% fields = [:id, :catalog_number, :description, :dimensions, :price] %>
+
+<table>
+  <tr>
+    <% fields.each do |f| %>
+      <th><%= Material.human_attribute_name(f) %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @materials.each do |material| %>
+    <tr>
+      <% fields.each do |f| %>
+        <td><%= material.send(f) %></td>
+      <% end %>
+
+
+      <td><%= link_to t(:show), material %></td>
+
+      <% if write_access? material %>
+        <td><%= link_to t(:edit), edit_material_path(material) %></td>
+        <td><%= link_to t(:destroy), material, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<% if write_access? %>
+  <%= link_to 'Neues ' + Material.model_name.human, new_material_path %>
+<% end %>

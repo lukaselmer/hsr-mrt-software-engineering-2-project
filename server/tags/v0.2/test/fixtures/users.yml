@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# This model initially had no columns defined.  If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+field_worker:
+  id: 101
+  first_name: 'Field'
+  last_name: 'Worker'
+  email: 'field_worker@mrt.ch'
+  type: <%= User::TYPE_FIELD_WORKER %>
+  encrypted_password: $2a$10$quf5zVz5P7pkhZl64IMto.KRG4vaX575yW4kyjO9jnxVpKsR9Yd2O
+  
+secretary:
+  id: 100
+  first_name: 'Sec'
+  last_name: 'Retary'
+  email: 'secretary@mrt.ch'
+  type: <%= User::TYPE_SECRETARY %>
+  encrypted_password: $2a$10$quf5zVz5P7pkhZl64IMto.KRG4vaX575yW4kyjO9jnxVpKsR9Yd2O

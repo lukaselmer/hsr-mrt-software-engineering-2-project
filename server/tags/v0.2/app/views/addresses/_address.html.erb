@@ -1,0 +1,6 @@
+<% unless address.nil? %>
+  <% [address.line1, address.line2, address.line3].compact.delete_if { |v| v.strip.blank? }.each do |line| %>
+    <span><%= line %></span><br />
+  <% end %>
+  <span class="zip"><%= address.zip %></span> <span class="place"><%= address.place %></span>
+<% end %>

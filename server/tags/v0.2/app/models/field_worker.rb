@@ -1,0 +1,2 @@
+class FieldWorker < User
+end

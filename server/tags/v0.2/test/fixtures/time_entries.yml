@@ -1,0 +1,20 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  customer: 
+  time_entry_type: 
+  hashcode: fjaioefoiawjefioj
+  description: MyText
+  time_start: 2011-04-06 14:49:21
+  time_stop: 2011-04-06 22:35:45
+  user_id: 101
+  gps_position: one
+
+two:
+  customer: 
+  time_entry_type: 
+  hashcode: ffweaoiefjoiwevo
+  description: MyText
+  time_start: 2011-04-06 14:49:21
+  time_stop: 2011-04-06 14:49:21
+  user_id: 102
