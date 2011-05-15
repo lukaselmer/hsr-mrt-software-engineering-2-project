@@ -49,7 +49,7 @@ public class GpsPosition {
 		this.from(location);
 	}
 
-	private GpsPosition(long time, double latitude, double longitude) {
+	public GpsPosition(long time, double latitude, double longitude) {
 		createdAt = System.currentTimeMillis();
 		this.time = time;
 		this.latitude = latitude;
