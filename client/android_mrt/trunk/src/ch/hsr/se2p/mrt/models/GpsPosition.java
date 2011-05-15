@@ -1,7 +1,5 @@
 package ch.hsr.se2p.mrt.models;
 
-import java.sql.Timestamp;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -17,20 +15,8 @@ import com.j256.ormlite.field.DatabaseField;
 public class GpsPosition {
 	private static final String TAG = TimeEntry.class.getSimpleName();
 
-	/**
-	 * Calculates the distance in meters from one to another GPS Position.
-	 */
-	private static float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
-		float[] results = { Float.MAX_VALUE };
-		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
-		return results[0];
-	}
 	@DatabaseField(generatedId = true)
 	private int id;
-	@DatabaseField
-	private long time = 0;
-	@DatabaseField
-	private long createdAt = 0;
 	@DatabaseField
 	private double latitude = 0.0;
 
@@ -46,30 +32,26 @@ public class GpsPosition {
 	}
 
 	public GpsPosition(Location location) {
-		this.from(location);
+		latitude = location.getLatitude();
+		longitude = location.getLongitude();
 	}
 
-	public GpsPosition(long time, double latitude, double longitude) {
-		createdAt = System.currentTimeMillis();
-		this.time = time;
+	private GpsPosition(long time, double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
+	/**
+	 * Calculates the distance in meters from one to another GPS Position.
+	 */
 	public double distanceTo(GpsPosition otherPos) {
 		return distance(latitude, longitude, otherPos.getLatitude(), otherPos.getLongitude());
 	}
 
-	public void from(Location location) {
-		if (location != null) {
-			time = location.getTime();
-			latitude = location.getLatitude();
-			longitude = location.getLongitude();
-		}
-	}
-
-	public Timestamp getCreatedAt() {
-		return new Timestamp(createdAt);
+	private float distance(double lat_a, double lng_a, double lat_b, double lng_b) {
+		float[] results = { Float.MAX_VALUE };
+		Location.distanceBetween(lat_a, lng_a, lat_b, lng_b, results);
+		return results[0];
 	}
 
 	public Integer getId() {
@@ -82,10 +64,6 @@ public class GpsPosition {
 
 	public double getLongitude() {
 		return longitude;
-	}
-
-	public long getTime() {
-		return time;
 	}
 
 	public JSONObject toJSONObject() {

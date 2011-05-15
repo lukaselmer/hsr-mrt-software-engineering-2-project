@@ -20,7 +20,7 @@ public class HttpTestCase extends AndroidTestCase {
 	protected void expectedResultFromTransmitter(final String result) {
 		httpHelper = new HttpHelper() {
 			@Override
-			public HttpClient getHttpClient() {
+			protected HttpClient getHttpClient() {
 				return new MockHttpClient() {
 					@Override
 					public HttpResponse execute(HttpUriRequest request) throws IOException, ClientProtocolException {

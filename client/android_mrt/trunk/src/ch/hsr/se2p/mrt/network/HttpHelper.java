@@ -28,7 +28,7 @@ public class HttpHelper {
 		return doHttpRequest(url, jsonObject, getHttpPost(url));
 	}
 
-	public HttpEntityEnclosingRequestBase getHttpPost(String url) {
+	protected HttpEntityEnclosingRequestBase getHttpPost(String url) {
 		return new HttpPost(url);
 	}
 
@@ -39,11 +39,11 @@ public class HttpHelper {
 		return handleResponse(response);
 	}
 
-	public HttpClient getHttpClient() {
+	protected HttpClient getHttpClient() {
 		return new DefaultHttpClient(getHttpParams());
 	}
 
-	public HttpParams getHttpParams() {
+	protected HttpParams getHttpParams() {
 		HttpParams httpParams = new BasicHttpParams();
 		// Set the timeout in milliseconds until a connection is established.
 		HttpConnectionParams.setConnectionTimeout(httpParams, HTTP_TIMEOUT_IN_MILLISECONDS);
@@ -95,7 +95,7 @@ public class HttpHelper {
 		return responseString;
 	}
 
-	public String getCookie() {
+	protected String getCookie() {
 		return cookie;
 	}
 
