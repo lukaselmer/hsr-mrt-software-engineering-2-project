@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<RelativeLayout android:layout_height="wrap_content"
+		android:id="@+id/relativeLayout1" android:layout_width="fill_parent">
+
+		<TextView android:text="Status" android:id="@+id/txtStatus"
+			android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:textStyle="bold" android:textSize="30px"></TextView>
+
+		<ImageView android:layout_height="wrap_content"
+			android:layout_width="wrap_content" android:layout_alignParentRight="true"
+			android:id="@+id/image_gps"
+			android:src="@drawable/gps_off"></ImageView>
+
+	</RelativeLayout>
+	<TextView android:text="Zeit gestoppt" android:id="@+id/txtTime"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	<TextView android:text=" " android:layout_width="fill_parent"
+		android:layout_height="wrap_content"></TextView>
+	<ch.hsr.se2p.mrt.activities.MRTAutocompleteSpinner
+		android:id="@+id/my_combo" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" />
+	<!-- <AutoCompleteTextView android:layout_height="wrap_content" android:id="@+id/autocompleteCustomer" 
+		android:layout_width="fill_parent" android:hint="Kunde"></AutoCompleteTextView> 
+		<Spinner android:layout_width="fill_parent" android:id="@+id/spinnerGPSSelection" 
+		android:layout_height="wrap_content"></Spinner> -->
+	<Spinner android:layout_width="fill_parent" android:id="@+id/spinnerTimeEntryType"
+		android:layout_height="wrap_content"></Spinner>
+	<EditText android:id="@+id/txtDescription" android:hint="Beschreibung"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"
+		android:layout_weight="1" android:drawingCacheQuality="low"></EditText>
+	<Button android:id="@+id/btnStartStop" android:text="Start"
+		android:layout_height="wrap_content" android:layout_width="fill_parent"></Button>
+</LinearLayout>

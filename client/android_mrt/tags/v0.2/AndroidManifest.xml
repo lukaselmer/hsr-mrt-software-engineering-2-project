@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="ch.hsr.se2p.mrt" android:versionCode="1" android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="7" android:targetSdkVersion="7" />
+
+	<application android:name="ch.hsr.se2p.mrt.application.MRTApplication"
+		android:icon="@drawable/icon" android:label="@string/app_name">
+
+		<activity android:name="ch.hsr.se2p.mrt.activities.LoginActivity"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name="ch.hsr.se2p.mrt.activities.TimeEntryActivity"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.RUN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<service android:name="ch.hsr.se2p.mrt.services.SynchronizationService"
+			android:process=":remote" android:enabled="true" android:exported="true">
+			<intent-filter>
+				<action android:name="ch.hsr.se2p.mrt.services.SynchronizationService" />
+			</intent-filter>
+		</service>
+
+		<!-- For tests -->
+		<uses-library android:name="android.test.runner" />
+
+	</application>
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+	<!-- For tests -->
+	<instrumentation android:targetPackage="ch.hsr.se2p.mrt"
+		android:name="android.test.InstrumentationTestRunner" />
+</manifest>

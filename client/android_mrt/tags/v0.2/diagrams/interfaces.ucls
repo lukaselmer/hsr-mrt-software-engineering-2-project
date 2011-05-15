@@ -1,0 +1,32 @@
+<class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.interfaces.Transmittable" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/interfaces/Transmittable.java" binary="false">    
+    <position x="41" y="37" width="237" height="99"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="2" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.interfaces.Confirmable" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/interfaces/Confirmable.java" binary="false">    
+    <position x="318" y="37" width="233" height="99"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="3" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.interfaces.Receivable" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/interfaces/Receivable.java" binary="false">    
+    <position x="591" y="37" width="182" height="99"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="false" private="false"/>    
+    <operations public="true" package="true" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
