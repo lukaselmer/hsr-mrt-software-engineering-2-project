@@ -8,13 +8,13 @@ import org.json.JSONObject;
  */
 public interface Transmittable {
 	/**
-	 * Creates a new JSONObject, initializes it
+	 * Creates a new JSONObject, initializes it.
 	 * @return The newly created object
 	 */
 	public JSONObject toJSONObject();
 
 	/**
-	 * @return Successfully transmitted.
+	 * @return Successfully transmitted
 	 */
 	public boolean isTransmitted();
 

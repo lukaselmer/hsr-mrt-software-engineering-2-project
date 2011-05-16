@@ -7,10 +7,14 @@ import org.json.JSONObject;
  * Confirms a time entry on the server. Makes sure, that object is transmitted successfully and can be removed on client.
  */
 public interface Confirmable {
+	/**
+	 * Creates a new JSONObject, initializes it.
+	 * @return The newly created object
+	 */
 	public JSONObject toJSONObject();
 
 	/**
-	 * @return Id set on the server.
+	 * @return Id set on the server
 	 */
 	public int getIdOnServer();
 

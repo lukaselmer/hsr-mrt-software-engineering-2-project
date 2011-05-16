@@ -5,14 +5,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Confirms a time entry on the server. Makes sure, that object is transmitted successfully and can be removed on client.
+ * Provides a method to transfer objects from the server to the client.
  */
 public interface Receivable {
+	/**
+	 * @return Id set on the server
+	 */
 	public int getIdOnServer();
 
+	/**
+	 * @return Time of last modification as Timestamp
+	 */
 	public Timestamp getUpdatedAt();
 
 	/**
+	 * The obtained object contains all eligible attributes.
 	 * @param jsonObject
 	 *            the object obtained by the request
 	 * @return whether response was valid or not
@@ -20,14 +27,3 @@ public interface Receivable {
 	 */
 	public boolean fromJSON(JSONObject jsonObject) throws JSONException;
 }
-
-
-/**
-4.1.4.2	Receivable
-Das Interfaces Receivable stellt Methoden zur Verfügung um die Übertragung von Elementen vom Server an den Client zu ermöglichen.
-Methode	Beschreibung
-getIdOnServer()	Gibt die ID zurück, welche vom Server gesetzt wurde.
-getUpdatedAt()	Gibt den Zeitpunkt der letzten Änderung in Form eines Timestamps zurück.
-fromJSON(JSONObject jsonObject)	Dem erhaltenen JSONObject können die Attribute der implementierenden Klasse entnommen werden. Die Methode returniert ob dies erfolgreich verlaufen ist.
-
-*/
