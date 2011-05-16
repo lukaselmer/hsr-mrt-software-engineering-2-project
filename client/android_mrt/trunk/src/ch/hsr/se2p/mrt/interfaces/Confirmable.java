@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Needed to confirm a timeentry on the server. Makes sure, that object is transmitted successfully and can be removed on client.
+ * Confirms a time entry on the server. Makes sure, that object is transmitted successfully and can be removed on client.
  */
 public interface Confirmable {
 	public JSONObject toJSONObject();
