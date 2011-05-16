@@ -1,7 +1,7 @@
 package ch.hsr.se2p.mrt.services;
 
 /**
- * The interface services passes down the method synchronize() to all its itself implementing classes. 
+ * The interface services passes down the method synchronize() to all its implementing classes. 
  */
 
 interface Synchronizer {

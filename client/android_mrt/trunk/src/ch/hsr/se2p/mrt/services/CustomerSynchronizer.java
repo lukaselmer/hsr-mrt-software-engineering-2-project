@@ -15,6 +15,9 @@ import ch.hsr.se2p.mrt.network.SynchronizationException;
 
 import com.j256.ormlite.dao.Dao;
 
+/**
+ * Synchronizes the clients customer data with the customer data on the server.
+ */
 class CustomerSynchronizer implements Synchronizer {
 	private static final String TAG = CustomerSynchronizer.class.getSimpleName();
 
