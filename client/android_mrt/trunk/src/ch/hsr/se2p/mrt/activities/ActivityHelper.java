@@ -4,17 +4,18 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
-import ch.hsr.se2p.mrt.services.SynchronizationService;
 
 /**
  * Creates the standard alert dialog for other activities. Does not have its own testing class. Gets tested in the LoginActivityTest.
  */
 class ActivityHelper {
+	private static final String SYNCHRONIZATION_SERVICE_CLASS_NAME = "ch.hsr.se2p.mrt.services.SynchronizationService";
+
 	/**
 	 * Displays a android alert dialog
 	 */
 	protected static void startSyncService(Activity activity) {
-		activity.startService(new Intent(SynchronizationService.class.getName()));
+		activity.startService(new Intent(SYNCHRONIZATION_SERVICE_CLASS_NAME));
 	}
 
 	protected static void displayAlertDialog(String title, String message, Activity activity) {
