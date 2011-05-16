@@ -48,51 +48,63 @@
       <operations public="true" package="true" protected="false" private="false"/>    
     </display>  
   </class>  
+  <realization>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </realization>  
   <dependency>    
     <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="6"/>  
+    <end type="TARGET" nodeId="3"/>  
   </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
+  <realization>    
+    <bendpoint x="501" y="428"/>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </realization>  
   <association>    
+    <bendpoint x="494" y="156"/>    
     <end type="SOURCE" nodeId="2" navigable="false">      
-      <attribute name="serviceTask"/>      
-      <multiplicity minimum="0" maximum="1"/>    
+      <attribute name="serviceTask">        
+        <position x="428" y="151" width="62" height="14"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1">        
+        <position x="500" y="150" width="18" height="15"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" nodeId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </dependency>  
   <realization>    
     <end type="SOURCE" nodeId="6"/>    
     <end type="TARGET" nodeId="4"/>  
   </realization>  
   <dependency>    
-    <bendpoint x="1058" y="315"/>    
+    <bendpoint x="1043" y="288"/>    
+    <bendpoint x="1043" y="413"/>    
     <end type="SOURCE" nodeId="1"/>    
     <end type="TARGET" nodeId="4"/>  
   </dependency>  
-  <realization>    
-    <end type="SOURCE" nodeId="5"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </realization>  
-  <realization>    
-    <end type="SOURCE" nodeId="3"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </realization>  
   <association>    
+    <bendpoint x="582" y="158"/>    
     <end type="SOURCE" nodeId="1" navigable="false">      
-      <attribute name="service"/>      
-      <multiplicity minimum="0" maximum="1"/>    
+      <attribute name="service">        
+        <position x="536" y="151" width="40" height="14"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1">        
+        <position x="587" y="153" width="18" height="15"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" nodeId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency>    
-    <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    
     <operations public="true" package="true" protected="false" private="false"/>  

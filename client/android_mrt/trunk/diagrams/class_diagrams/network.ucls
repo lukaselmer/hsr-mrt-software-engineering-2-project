@@ -34,7 +34,7 @@
   </class>  
   <class id="5" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.UserHelper" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/network/UserHelper.java" binary="false">    
-    <position x="1212" y="37" width="212" height="83"/>    
+    <position x="1084" y="209" width="-1" height="-1"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="false" private="false"/>      
       <operations public="true" package="true" protected="false" private="false"/>    
@@ -50,20 +50,16 @@
   </class>  
   <class id="7" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.network.NetworkConfig" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/network/NetworkConfig.java" binary="false">    
-    <position x="41" y="37" width="108" height="51"/>    
+    <position x="253" y="201" width="-1" height="-1"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="false" private="false"/>      
       <operations public="true" package="true" protected="false" private="false"/>    
     </display>  
   </class>  
-  <association>    
-    <end type="SOURCE" nodeId="5" navigable="false">      
-      <attribute name="httpHelper"/>      
-      <multiplicity minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" nodeId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
   <association>    
     <end type="SOURCE" nodeId="1" navigable="false">      
       <attribute name="httpHelper"/>      
@@ -73,29 +69,39 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association>    
-    <end type="SOURCE" nodeId="6" navigable="false">      
-      <attribute name="httpHelper"/>      
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="httpHelper">        
+        <position x="839" y="161" width="53" height="14"/>      
+      </attribute>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <association>    
+    <end type="SOURCE" nodeId="5" navigable="false">      
+      <attribute name="httpHelper">        
+        <position x="894" y="213" width="53" height="14"/>      
+      </attribute>      
       <multiplicity minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" nodeId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association>    
-    <end type="SOURCE" nodeId="3" navigable="false">      
-      <attribute name="httpHelper"/>      
+    <end type="SOURCE" nodeId="6" navigable="false">      
+      <attribute name="httpHelper">        
+        <position x="663" y="184" width="53" height="14"/>      
+      </attribute>      
       <multiplicity minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" nodeId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency>    
-    <end type="SOURCE" nodeId="1"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    
     <operations public="true" package="true" protected="false" private="false"/>  

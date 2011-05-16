@@ -10,7 +10,7 @@
   </class>  
   <class id="2" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.activities.LocationListenerAdapter" 
     project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/activities/LocationListenerAdapter.java" binary="false">    
-    <position x="251" y="176" width="221" height="115"/>    
+    <position x="382" y="243" width="-1" height="-1"/>    
     <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
       <attributes public="true" package="true" protected="false" private="false"/>      
       <operations public="true" package="true" protected="false" private="false"/>    
@@ -42,7 +42,7 @@
   </class>  
   <dependency>    
     <end type="SOURCE" nodeId="4"/>    
-    <end type="TARGET" nodeId="2"/>  
+    <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <association>    
     <end type="SOURCE" nodeId="4" navigable="false">      
@@ -53,12 +53,12 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency>    
-    <end type="SOURCE" nodeId="4"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
     <end type="SOURCE" nodeId="3"/>    
     <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="4"/>    
+    <end type="TARGET" nodeId="2"/>  
   </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    
