@@ -12,12 +12,15 @@ class ActivityHelper {
 	private static final String SYNCHRONIZATION_SERVICE_CLASS_NAME = "ch.hsr.se2p.mrt.services.SynchronizationService";
 
 	/**
-	 * Displays a android alert dialog
+	 * Starts the synchronization service
 	 */
 	protected static void startSyncService(Activity activity) {
 		activity.startService(new Intent(SYNCHRONIZATION_SERVICE_CLASS_NAME));
 	}
 
+	/**
+	 * Displays a android alert dialog
+	 */
 	protected static void displayAlertDialog(String title, String message, Activity activity) {
 		getAlertDialog(title, message, activity).show();
 	}

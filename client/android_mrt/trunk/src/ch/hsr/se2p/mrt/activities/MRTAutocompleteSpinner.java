@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import ch.hsr.se2p.mrt.models.Customer;
 
 /**
- * Creates a combobox with a autocomplete text and a button.
+ * Creates a combobox with a autocomplete text and a button
  */
 public class MRTAutocompleteSpinner extends LinearLayout {
 	private AutoCompleteTextView textView;

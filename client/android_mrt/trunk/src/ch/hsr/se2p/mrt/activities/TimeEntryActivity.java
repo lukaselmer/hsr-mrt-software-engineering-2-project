@@ -89,15 +89,22 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(false);
 				locationManager.removeUpdates(locationListener);
 				checkGpsPositionIsSet();
-
 				saveTimeEntry();
-				Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
+				displayStopTimeMeasurementSuccess();
 			} catch (SQLException e) {
 				Log.e(TAG, "Database Exception", e);
-				ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
-						TimeEntryActivity.this);
+				displayStopTimeMeasurementFail(e);
 			}
 			setMeasurementStarted(false);
+		}
+
+		private void displayStopTimeMeasurementFail(SQLException e) {
+			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
+					TimeEntryActivity.this);
+		}
+
+		private void displayStopTimeMeasurementSuccess() {
+			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 		}
 
 		private void checkGpsPositionIsSet() {
@@ -115,9 +122,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		private void startTimeMeasurement() {
 			currentPosition = null;
-			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+			currentTimeEntry = new TimeEntry(getCurrentTimestamp());
 			setMeasurementStarted(true);
+			requestLocationUpdates();
+		}
+
+		private void requestLocationUpdates() {
 			locationManager.requestLocationUpdates(locationProvider, 2 * 1000, 0, locationListener); // update location maximal every 2 seconds
+		}
+
+		private Timestamp getCurrentTimestamp() {
+			return new Timestamp(System.currentTimeMillis());
 		}
 	};
 
@@ -141,15 +156,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		locationListener = new LocationListenerAdapter() {
 			@Override
 			public void onLocationChanged(Location location) {
-				currentPosition = new GpsPosition(location);
-				try {
-					calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
-					// Collections.sort(getCustomers(), getComparator());
-					Collections.sort(getCustomers());
-					updateComboboxCustomers();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				sortCustomersByLocation(location);
 				locationManager.removeUpdates(locationListener);
 				setGPSImage(true);
 			}
@@ -260,12 +267,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		comboBox.setAdapter(getCustomerAdapter());
 	}
 
-	private void setGPSImage(boolean bool) {
+	private void setGPSImage(boolean gpsOn) {
 		ImageView view = (ImageView) findViewById(R.id.image_gps);
-		if (bool)
-			view.setImageResource(R.drawable.gps_on);
-		else
-			view.setImageResource(R.drawable.gps_off);
+		view.setImageResource(gpsOn ? R.drawable.gps_on : R.drawable.gps_off);
 	}
 
 	private void saveTimeEntry() throws SQLException {
@@ -357,5 +361,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void switchToLoginActivity() {
 		this.startActivity(new Intent(this, LoginActivity.class));
 		finish();
+	}
+
+	private void sortCustomersByLocation(Location location) {
+		currentPosition = new GpsPosition(location);
+		try {
+			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
+			Collections.sort(getCustomers());
+			updateComboboxCustomers();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
