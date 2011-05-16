@@ -11,6 +11,9 @@ import ch.hsr.se2p.mrt.network.TimeEntryHelper;
 
 import com.j256.ormlite.dao.Dao;
 
+/**
+ * Transfers the time entries from the client to the server.
+ */
 class TimeEntrySynchronizer implements Synchronizer {
 	private static final String TAG = TimeEntrySynchronizer.class.getSimpleName();
 

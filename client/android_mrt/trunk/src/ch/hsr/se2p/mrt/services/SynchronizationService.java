@@ -13,6 +13,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFacto
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
+
 public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
 	static {
 		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {

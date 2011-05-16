@@ -14,6 +14,9 @@ import ch.hsr.se2p.mrt.network.TimeEntryTypeHelper;
 
 import com.j256.ormlite.dao.Dao;
 
+/**
+ * Synchronizes the time entry types of the client with the ones available on the server.
+ */
 class TimeEntryTypeSynchronizer implements Synchronizer {
 	private static final String TAG = TimeEntryTypeSynchronizer.class.getSimpleName();
 
