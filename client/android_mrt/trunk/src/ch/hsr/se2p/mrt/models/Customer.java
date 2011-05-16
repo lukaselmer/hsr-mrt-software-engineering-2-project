@@ -44,15 +44,20 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public int compareTo(Customer another) {
-		if (this.getDistance() == null || another.getDistance() == null) {
-			if (this.getDistance() == null && another.getDistance() == null)
-				return this.getLastName().compareTo(another.getLastName());
-			else
-				return this.getDistance() == null ? 1 : -1;
-		} else {
-			int cmp = this.getDistance().compareTo(another.getDistance());
-			return cmp == 0 ? this.getLastName().compareTo(another.getLastName()) : cmp;
-		}
+		if (getDistance() == null && another.getDistance() == null)
+			return compareLastName(another);
+		if (getDistance() == null || another.getDistance() == null)
+			return getDistance() == null ? 1 : -1;
+		return compareToNonNullDistance(another);
+	}
+
+	private int compareToNonNullDistance(Customer another) {
+		int cmp = getRoundedDistance().compareTo(another.getRoundedDistance());
+		return cmp == 0 ? compareLastName(another) : cmp;
+	}
+
+	private int compareLastName(Customer another) {
+		return getLastName().compareTo(another.getLastName());
 	}
 
 	@Override
@@ -69,6 +74,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	public Double getDistance() {
 		return distance;
+	}
+
+	private Long getRoundedDistance() {
+		return Math.round(getDistance());
 	}
 
 	public String getFirstName() {

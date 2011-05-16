@@ -60,7 +60,7 @@ public class CustomerTest extends AndroidTestCase {
 		set.add(new Customer("Jasper", "Zazoo", "+41 444 44 11", null));
 		set.add(new Customer("Duelue", "Anton", "+41 444 44 22", null));
 		set.add(new Customer("The", "Zombie", "+41 444 44 33", 100.0));
-		set.add(new Customer("Klara", "Wayne", "+41 444 44 44", 500.0));
+		set.add(new Customer("Klara", "Wayne", "+41 444 44 44", 499.9));
 		set.add(new Customer("Fritz", "Arnold", "+41 444 44 55", 800.0));
 		set.add(new Customer("Hans", "Peter", "+41 444 44 66", 500.0));
 		Object[] custArray = set.toArray();
