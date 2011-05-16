@@ -29,7 +29,7 @@ public class Customer implements Receivable, Comparable<Customer> {
 	private Double distance;
 	// Caches gps_position for creation or update as it has to be stored in a separate table
 	private GpsPosition gpsPosition;
-	private boolean changed;
+	private boolean changed = true;
 
 	public Customer() {
 		// Needed for ormlite
