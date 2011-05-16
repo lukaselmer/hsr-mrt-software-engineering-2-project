@@ -1,0 +1,29 @@
+POST /time_entries/21/remove_hashcode.json HTTP/1.1
+Content-Type: application/json
+cookie: remember_user_token=BAhbB1sGaQciIiQyYSQxMCQ1bno3c2ZuN3hxL2pCWWlJRlNWTG4u--2b97c50bc95da8d888d99e12e9ed364d291b0cb9; path=/; expires=Sat, 28-May-2011 16:19:03 GMT; HttpOnly
+Content-Length: 139
+Host: mrt.elmermx.ch
+Connection: Keep-Alive
+
+{"time_start":"2011-05-16T14:54:49+00:00","description":"","time_stop":"2011-05-16T14:54:50+00:00","hashcode":"4ooutmps9t4llqa9u3fnh561me"}HTTP/1.1 200 OK
+Date: Mon, 16 May 2011 14:55:47 GMT
+Server: Apache
+X-Powered-By: Phusion Passenger (mod_rails/mod_rack) 2.2.15
+ETag: "0ed62284b88268d3aa00207b06d53a5d"
+X-UA-Compatible: IE=Edge,chrome=1
+X-Runtime: 0.213613
+Cache-Control: max-age=0, private, must-revalidate
+Set-Cookie: remember_user_token=BAhbB1sGaQciIiQyYSQxMCQ1bno3c2ZuN3hxL2pCWWlJRlNWTG4u--2b97c50bc95da8d888d99e12e9ed364d291b0cb9; path=/; expires=Sat, 28-May-2011 16:19:03 GMT; HttpOnly
+Set-Cookie: _mrt_session=BAh7ByIPc2Vzc2lvbl9pZCIlMmNmOTJmMTRiNmM4NzcwMjhkZjhkNTJmYjJkZGUwYmEiGXdhcmRlbi51c2VyLnVzZXIua2V5WwgiEEZpZWxkV29ya2VyWwZpByIiJDJhJDEwJDVuejdzZm43eHEvakJZaUlGU1ZMbi4%3D--cbd4b333e2079f9dffbc8520da8205c2ef44b1d3; path=/; HttpOnly
+Location: http://mrt.elmermx.ch/time_entries/21
+Status: 200
+Keep-Alive: timeout=15, max=150
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: application/json; charset=utf-8
+
+13c
+{"time_entry":{"created_at":"2011-05-16T16:55:46+02:00","time_stop":"2011-05-16T16:54:50+02:00","order_id":null,"time_entry_type_id":null,"updated_at":"2011-05-16T16:55:47+02:00","hashcode":null,"id":21,"user_id":2,"customer_id":null,"description":"","gps_position_id":null,"time_start":"2011-05-16T16:54:49+02:00"}}
+0
+
+
