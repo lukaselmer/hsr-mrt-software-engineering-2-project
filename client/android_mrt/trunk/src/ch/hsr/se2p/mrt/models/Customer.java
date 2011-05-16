@@ -165,17 +165,17 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public String toString() {
-		String s = getFirstName() + " " + getLastName();
-		if (getDistance() != null) {
-			if (getDistance() <= 500) {
-				DecimalFormat f = new DecimalFormat(" (0 m)");
-				s += f.format(getDistance());
-			} else {
-				DecimalFormat f = new DecimalFormat(" (0.0 km)");
-				s += f.format(getDistance() / 1000);
-			}
+		return getFirstName() + " " + getLastName() + (getDistance() == null ? "" : getDistanceString());
+	}
+
+	private String getDistanceString() {
+		if (getDistance() <= 500) {
+			DecimalFormat f = new DecimalFormat(" (0 m)");
+			return f.format(getDistance());
+		} else {
+			DecimalFormat f = new DecimalFormat(" (0.0 km)");
+			return f.format(getDistance() / 1000);
 		}
-		return s;
 	}
 
 }
