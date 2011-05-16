@@ -44,11 +44,19 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public int compareTo(Customer another) {
-		if (getDistance() == null && another.getDistance() == null)
+		if (bothDistancesNull(another))
 			return compareLastName(another);
 		if (getDistance() == null || another.getDistance() == null)
-			return getDistance() == null ? 1 : -1;
+			return compareToNullDistance();
 		return compareToNonNullDistance(another);
+	}
+
+	private boolean bothDistancesNull(Customer another) {
+		return getDistance() == null && another.getDistance() == null;
+	}
+
+	private int compareToNullDistance() {
+		return getDistance() == null ? 1 : -1;
 	}
 
 	private int compareToNonNullDistance(Customer another) {
