@@ -16,14 +16,11 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 /**
- * 
+ * This class is responsible for managing the database. This means that it will create, upgrade or reset the database. Additionally, it is responsible
+ * to provide database access objects (or dao's, in short) to read from and write to the database.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private static final String TAG = DatabaseHelper.class.getSimpleName();
-
-	protected static final String DATABASE_NAME = "mrt.db";
-	protected static final int DATABASE_VERSION = 8;
-	private static final Class<?> MODEL_CLASSES[] = { TimeEntry.class, Customer.class, TimeEntryType.class, GpsPosition.class };
 
 	private Dao<TimeEntry, Integer> timeEntryDao;
 	private Dao<Customer, Integer> customerDao;
@@ -31,14 +28,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<GpsPosition, Integer> gpsPositionDao;
 
 	public DatabaseHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+		super(context, DatabaseSpec.DATABASE_NAME, null, DatabaseSpec.DATABASE_VERSION);
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Creating database");
-			for (Class<?> modelClass : MODEL_CLASSES) {
+			for (Class<?> modelClass : DatabaseSpec.MODEL_CLASSES) {
 				TableUtils.createTable(connectionSource, modelClass);
 			}
 		} catch (SQLException e) {
@@ -60,7 +57,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private void reset(SQLiteDatabase db, ConnectionSource connectionSource) {
 		try {
 			Log.i(TAG, "Upgrading database -> drop + create");
-			for (Class<?> modelClass : MODEL_CLASSES) {
+			for (Class<?> modelClass : DatabaseSpec.MODEL_CLASSES) {
 				TableUtils.dropTable(connectionSource, modelClass, true);
 			}
 			onCreate(db, connectionSource);
@@ -99,6 +96,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		timeEntryDao = null;
 		customerDao = null;
 		timeEntryTypeDao = null;
+		gpsPositionDao = null;
 		super.close();
 	}
 

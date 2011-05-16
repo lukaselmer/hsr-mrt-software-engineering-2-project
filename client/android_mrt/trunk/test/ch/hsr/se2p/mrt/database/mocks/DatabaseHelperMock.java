@@ -2,6 +2,7 @@ package ch.hsr.se2p.mrt.database.mocks;
 
 import android.content.Context;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
+import ch.hsr.se2p.mrt.database.DatabaseSpec;
 
 public class DatabaseHelperMock extends DatabaseHelper {
 	private final Context mContext;
@@ -12,6 +13,6 @@ public class DatabaseHelperMock extends DatabaseHelper {
 	}
 
 	public void deleteDatabase() {
-		mContext.deleteDatabase(DATABASE_NAME);
+		mContext.deleteDatabase(DatabaseSpec.DATABASE_NAME);
 	}
 }
