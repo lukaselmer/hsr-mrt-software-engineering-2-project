@@ -1,0 +1,84 @@
+<sequence-diagram version="1.0.1" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="ch.hsr.se2p.mrt.services.SynchronizationService" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/services/SynchronizationService.java" binary="false" label="synchronizationService" 
+    type="class" autoSize="true">    
+    <position x="255" y="0" width="-1" height="-1"/>    
+    <execution id="1">      
+      <position x="5" y="78" width="161" height="330"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="5" y="118" width="161" height="270"/>    
+    </execution>  
+  </object>  
+  <object id="2" language="java" name="android.util.Log" project="mrt" 
+    file="D:/Programme/Android/android-sdk/platforms/android-7/android.jar" binary="true" label="&lt;static&gt;" 
+    type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="148" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="3" language="java" name="ch.hsr.se2p.mrt.services.SynchronizationServiceTask" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/services/SynchronizationServiceTask.java" binary="false" label="serviceTask" 
+    type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="188" width="0" height="100"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="ch.hsr.se2p.mrt.application.MRTApplication" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/application/MRTApplication.java" binary="false" label="mrtApplication" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="248" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="7" language="java" name="android.preference.PreferenceManager" project="mrt" 
+    file="D:/Programme/Android/android-sdk/platforms/android-7/android.jar" binary="true" label="&lt;static&gt;" 
+    type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="208" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="4" language="java" name="java.util.Timer" project="mrt" 
+    file="D:/Programme/Android/android-sdk/platforms/android-7/android.jar" binary="true" label="timer" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="308" width="0" height="20"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="0" y="348" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <message operation="onCreate(): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="0"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="1"/>  
+  </message>  
+  <message operation="i(java.lang.String,java.lang.String): int">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="2" messageNodeId="0"/>  
+  </message>  
+  <message operation="SynchronizationServiceTask(ch.hsr.se2p.mrt.services.SynchronizationService)">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="3" messageNodeId="0"/>  
+  </message>  
+  <message operation="Timer(java.lang.String)">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="4" messageNodeId="0"/>  
+  </message>  
+  <message operation="schedule(java.util.TimerTask,long,long): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="4" messageNodeId="1"/>  
+  </message>  
+  <message operation="getDefaultSharedPreferences(android.content.Context): SharedPreferences">    
+    <end type="SOURCE" nodeId="3" messageNodeId="0"/>    
+    <end type="TARGET" nodeId="7" messageNodeId="0"/>  
+  </message>  
+  <message operation="setPreferences(android.content.SharedPreferences): void">    
+    <end type="SOURCE" nodeId="3" messageNodeId="0"/>    
+    <end type="TARGET" nodeId="6" messageNodeId="0"/>  
+  </message>
+</sequence-diagram>

@@ -10,7 +10,7 @@
       <position x="5" y="118" width="118" height="530"/>    
     </execution>    
     <execution id="3">      
-      <position x="0" y="578" width="0" height="20"/>    
+      <position x="0" y="566" width="0" height="20"/>    
     </execution>  
   </object>  
   <object id="2" language="java" name="ch.hsr.se2p.mrt.application.MRTApplication" project="mrt" 
@@ -24,7 +24,15 @@
       <position x="0" y="228" width="0" height="20"/>    
     </execution>    
     <execution id="3">      
-      <position x="0" y="478" width="0" height="20"/>    
+      <position x="0" y="438" width="0" height="60"/>    
+    </execution>  
+  </object>  
+  <object id="9" language="java" name="android.content.SharedPreferences" project="mrt" 
+    file="D:/Programme/Android/android-sdk/platforms/android-7/android.jar" binary="true" label="preferences" 
+    type="interface" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="458" width="0" height="20"/>    
     </execution>  
   </object>  
   <object id="3" language="java" name="ch.hsr.se2p.mrt.network.UserHelper" project="mrt" 
@@ -95,6 +103,10 @@
   <message operation="displayAlertDialog(java.lang.String,java.lang.String,android.app.Activity): void">    
     <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
     <end type="TARGET" nodeId="5" messageNodeId="0"/>  
+  </message>  
+  <message operation="edit(): Editor">    
+    <end type="SOURCE" nodeId="2" messageNodeId="2"/>    
+    <end type="TARGET" nodeId="9" messageNodeId="0"/>  
   </message>  
   <message operation="doHttpPost(java.lang.Object,java.lang.String): String">    
     <end type="SOURCE" nodeId="3" messageNodeId="1"/>    
