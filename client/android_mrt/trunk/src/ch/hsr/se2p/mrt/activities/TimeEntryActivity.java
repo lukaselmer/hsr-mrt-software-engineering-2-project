@@ -97,7 +97,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
 						TimeEntryActivity.this);
 			}
-			setMeausurementStarted(false);
+			setMeasurementStarted(false);
 		}
 
 		private void checkGpsPositionIsSet() {
@@ -109,14 +109,14 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 		}
 
-		private void setMeausurementStarted(boolean bool) {
+		private void setMeasurementStarted(boolean bool) {
 			isStarted = bool;
 		}
 
 		private void startTimeMeasurement() {
 			currentPosition = null;
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-			setMeausurementStarted(true);
+			setMeasurementStarted(true);
 			locationManager.requestLocationUpdates(locationProvider, 2 * 1000, 0, locationListener); // update location maximal every 2 seconds
 		}
 	};
