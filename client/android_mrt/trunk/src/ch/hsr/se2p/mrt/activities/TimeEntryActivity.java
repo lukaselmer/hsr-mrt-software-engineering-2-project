@@ -162,37 +162,21 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
 			throws SQLException {
 		for (Customer c : customers) {
-			if (c.hasGpsPosition()) {
-				GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
-				if (customerPosition == null) {
-					c.setDistance(null);
-					continue;
-				}
-				double distance = currentPosition.distanceTo(customerPosition);
-				c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
-			}
+			calculateAndSetDistances(dao, currentPosition, c);
 		}
 	}
 
-	// private Comparator<Customer> getComparator() {
-	// return new Comparator<Customer>() {
-	// @Override
-	// public int compare(Customer one, Customer another) {
-	// if (one.getDistance() == null) {
-	// if (another.getDistance() == null)
-	// return one.getLastName().compareTo(another.getLastName());
-	// return 1;
-	// }
-	// if (another.getDistance() == null)
-	// return -1;
-	// if (one.getDistance() > another.getDistance())
-	// return 1;
-	// if (one.getDistance().equals(another.getDistance()))
-	// return one.getLastName().compareTo(another.getLastName());
-	// return -1;
-	// }
-	// };
-	// }
+	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, GpsPosition currentPosition, Customer c) throws SQLException {
+		if (c.hasGpsPosition()) {
+			GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
+			if (customerPosition == null) {
+				c.setDistance(null);
+				return;
+			}
+			double distance = currentPosition.distanceTo(customerPosition);
+			c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
+		}
+	}
 
 	private Criteria getInitializedCriteria() {
 		Criteria criteria = new Criteria();
@@ -259,7 +243,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
-			// Collections.sort(getCustomers(), getComparator());
 			Collections.sort(getCustomers());
 		}
 		initSpinnerTimeEntryType();
