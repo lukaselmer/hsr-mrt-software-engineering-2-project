@@ -1,4 +1,4 @@
-# The AddressesController is responsible to manage all addresses of the system. It supports all basic CRUD operations
+# The AddressesController is responsible to manage all addresses of the system. It supports all basic CRUD operations for an Address
 class AddressesController < ApplicationController
   before_filter :authorize_secretary!, :only => [:new, :create, :edit, :update, :destroy]
   # GET /addresses

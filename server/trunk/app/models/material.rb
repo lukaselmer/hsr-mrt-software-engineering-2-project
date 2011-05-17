@@ -1,4 +1,4 @@
-# Holds information about a material which can be used in an order or for a time_entry_type
+# Holds information about a Material which can be used in an Order or for a TimeEntryType
 class Material < ActiveRecord::Base
   has_many :applied_materials
   has_many :orders, :through => :applied_materials

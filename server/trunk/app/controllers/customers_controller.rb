@@ -1,4 +1,4 @@
-# The CustomersController is responsible for managing all the customers of the system. It supports all the CRUD operations for a customer as well as a syncronization method that return all changed customers to a client in JSON (see API Documentation)
+# The CustomersController is responsible for managing all the customers of the system. It supports all the CRUD operations for a Customer as well as a syncronization method that return all changed customers to a client in JSON (see API Documentation)
 class CustomersController < ApplicationController
   before_filter :authorize_secretary!, :only => [:new, :create, :edit, :update, :destroy]
 

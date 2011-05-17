@@ -1,4 +1,4 @@
-# Holds a customer
+# Holds all information about a Customer
 class Customer < ActiveRecord::Base
   has_many :time_entries
   has_many :orders

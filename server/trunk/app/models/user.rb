@@ -1,3 +1,4 @@
+# Holds information about a User (see Devise)
 class User < ActiveRecord::Base
   has_many :time_entries
   

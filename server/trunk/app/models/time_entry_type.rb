@@ -1,4 +1,4 @@
-# Holds all information about a time_entry_type
+# Holds all information about a TimeEntryType
 class TimeEntryType < ActiveRecord::Base
   has_many :time_entries
   has_many :time_entry_type_materials

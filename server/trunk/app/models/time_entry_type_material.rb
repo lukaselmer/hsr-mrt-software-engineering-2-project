@@ -1,4 +1,4 @@
-# Holds information about material which is supposedly used on a time_entry_type
+# Holds information about material which is supposedly used on a TimeEntryType
 class TimeEntryTypeMaterial < ActiveRecord::Base
   belongs_to :time_entry_type
   belongs_to :material

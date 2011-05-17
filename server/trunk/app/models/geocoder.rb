@@ -1,4 +1,4 @@
-# Converts an address to coordinates
+# Converts an Address to coordinates
 class Geocoder
   def self.translate address_str
     return :error => "You must provide an address" if address_str.nil? || address_str.empty?
