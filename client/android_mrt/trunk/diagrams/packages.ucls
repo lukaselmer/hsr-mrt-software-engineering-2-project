@@ -22,21 +22,28 @@
   </package>  
   <package id="6" language="java" name="ch.hsr.se2p.mrt.services" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services" 
     binary="false">    
-    <position x="64" y="37" width="164" height="44"/>  
+    <position x="147" y="33" width="-1" height="-1"/>  
   </package>  
   <package id="7" language="java" name="ch.hsr.se2p.mrt.activities" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/activities" binary="false">    
-    <position x="342" y="37" width="166" height="44"/>  
+    <position x="426" y="33" width="-1" height="-1"/>  
   </package>  
   <dependency>    
-    <bendpoint x="540" y="121"/>    
     <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
     <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
-    <bendpoint x="73" y="121"/>    
+    <bendpoint x="271" y="182"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
     <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="3"/>  
+    <end type="TARGET" nodeId="1"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="2"/>    
@@ -47,44 +54,40 @@
     <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <dependency>    
-    <end type="SOURCE" nodeId="1"/>    
+    <bendpoint x="526" y="114"/>    
+    <bendpoint x="526" y="233"/>    
+    <end type="SOURCE" nodeId="7"/>    
     <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
     <bendpoint x="31" y="121"/>    
-    <bendpoint x="31" y="205"/>    
+    <bendpoint x="34" y="256"/>    
     <end type="SOURCE" nodeId="6"/>    
     <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <dependency>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="311" y="121"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
     <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
     <end type="TARGET" nodeId="1"/>  
   </dependency>  
   <dependency>    
     <bendpoint x="52" y="121"/>    
+    <bendpoint x="51" y="186"/>    
     <end type="SOURCE" nodeId="6"/>    
     <end type="TARGET" nodeId="5"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="2"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="2"/>    
     <end type="TARGET" nodeId="5"/>  
   </dependency>  
   <dependency>    
+    <bendpoint x="73" y="121"/>    
+    <bendpoint x="73" y="172"/>    
     <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="2"/>  
+    <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="3"/>    
