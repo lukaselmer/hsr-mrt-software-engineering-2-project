@@ -74,6 +74,7 @@ class TimeEntryTypesController < ApplicationController
   end
 
   def synchronize
+    @updated_time_entry_types = nil
     if params[:last_update].blank?
       @updated_time_entry_types = TimeEntryType.all
     else

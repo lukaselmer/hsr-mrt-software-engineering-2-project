@@ -28,7 +28,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
 
   test "should get destroy_all" do
     get :destroy_all
-    assert_response :success
+    assert_redirected_to time_entries_path
   end
 
   test "should create time_entry" do
