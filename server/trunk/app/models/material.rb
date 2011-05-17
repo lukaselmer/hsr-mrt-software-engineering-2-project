@@ -1,3 +1,4 @@
+# Holds information about a material which can be used in an order or for a time_entry_type
 class Material < ActiveRecord::Base
   has_many :applied_materials
   has_many :orders, :through => :applied_materials
@@ -10,7 +11,6 @@ class Material < ActiveRecord::Base
 
   scope :active, where(:valid_until => nil)
 
-#  TODO active anstatt all auch in Test abgleichen
   def self.for_select
     active.collect { |o| [o, o.id] }
   end
