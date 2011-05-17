@@ -96,8 +96,8 @@ public class TimeEntryTest extends AndroidTestCase {
 			t = dao.queryForId(id);
 			JSONObject j = t.toJSONObject();
 			assertEquals(DESCRIPTION, j.getString("description"));
-			assertEquals(ISO8601DateParser.toString(timeStart), j.get("time_start"));
-			assertEquals(ISO8601DateParser.toString(timeStop), j.get("time_stop"));
+			assertEquals(ISO8601DateParser.format(timeStart), j.get("time_start"));
+			assertEquals(ISO8601DateParser.format(timeStop), j.get("time_stop"));
 			assertEquals(t.getHashcode(), j.getString("hashcode"));
 		} catch (SQLException e) {
 			e.printStackTrace();

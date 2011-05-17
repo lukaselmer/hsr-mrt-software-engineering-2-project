@@ -7,6 +7,9 @@ import java.util.TimeZone;
 
 import android.util.Log;
 
+/**
+ * Parses and formats ISO 8601 Strings / Dates
+ */
 class ISO8601DateParser {
 	// 2004-06-14T19:GMT20:30Z
 	// 2004-06-20T06:GMT22:01Z
@@ -53,11 +56,13 @@ class ISO8601DateParser {
 	// ss = two digits of second (00 through 59)
 	// s = one or more digits representing a decimal fraction of a second
 	// TZD = time zone designator (Z or +hh:mm or -hh:mm)
-	protected static Date parse(String input) {
-		// NOTE: SimpleDateFormat uses GMT[-+]hh:mm for the TZ which breaks
-		// things a bit. Before we go on we have to repair this.
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
 
+	/**
+	 * Parses a ISO 8601 String to a Date
+	 */
+	protected static Date parse(String input) {
+		// NOTE: SimpleDateFormat uses GMT[-+]hh:mm for the TZ which breaks things a bit. Before we go on we have to repair this.
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
 		// this is zero time so we need to add that TZ indicator for
 		if (input.endsWith("Z")) {
 			input = input.substring(0, input.length() - 1) + "GMT-00:00";
@@ -67,6 +72,10 @@ class ISO8601DateParser {
 			String s1 = input.substring(input.length() - inset, input.length());
 			input = s0 + "GMT" + s1;
 		}
+		return parse(input, df);
+	}
+
+	private static Date parse(String input, SimpleDateFormat df) {
 		try {
 			return df.parse(input);
 		} catch (ParseException e) {
@@ -75,10 +84,10 @@ class ISO8601DateParser {
 		}
 	}
 
-	protected static String toString(Date date) {
+	/* Formats a Date to a ISO 8601 String */
+	protected static String format(Date date) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssz");
-		TimeZone tz = TimeZone.getTimeZone("UTC");
-		df.setTimeZone(tz);
+		df.setTimeZone(TimeZone.getTimeZone("UTC"));
 		String output = df.format(date);
 		int inset0 = 9;
 		int inset1 = 6;

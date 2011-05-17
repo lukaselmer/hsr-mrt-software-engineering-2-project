@@ -26,7 +26,7 @@ public class UserTest extends AndroidTestCase {
 
 	private JSONObject getUserJSON() throws JSONException {
 		return new JSONObject().put("id", 1).put("first_name", FIRST_NAME).put("last_name", LAST_NAME).put("email", EMAIL)
-				.put("updated_at", ISO8601DateParser.toString(timeStamp));
+				.put("updated_at", ISO8601DateParser.format(timeStamp));
 	}
 
 	public void testInitialUser() {
@@ -43,7 +43,7 @@ public class UserTest extends AndroidTestCase {
 			assertEquals(FIRST_NAME, user.getFirstName());
 			assertEquals(LAST_NAME, user.getLastName());
 			assertEquals(EMAIL, user.getEmail());
-			assertEquals(ISO8601DateParser.toString(timeStamp), ISO8601DateParser.toString((user.getUpdatedAt())));
+			assertEquals(ISO8601DateParser.format(timeStamp), ISO8601DateParser.format((user.getUpdatedAt())));
 		} catch (JSONException e) {
 			e.printStackTrace();
 			assert (false);
