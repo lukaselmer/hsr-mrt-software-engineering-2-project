@@ -107,12 +107,10 @@ class CustomerSynchronizer implements Synchronizer {
 
 	private boolean handleDeletion(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
-
 		if (c.hasGpsPosition()) {
-			GpsPosition old_position = positionDao.queryForId(c.getGpsPositionId());
-			positionDao.delete(old_position);
+			GpsPosition oldPosition = positionDao.queryForId(c.getGpsPositionId());
+			positionDao.delete(oldPosition);
 		}
-
 		if (c.isDeleted()) {
 			Log.d(TAG, "Deleting " + c);
 			if (existingCustomer(c)) {
