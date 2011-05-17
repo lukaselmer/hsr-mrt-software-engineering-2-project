@@ -1,3 +1,4 @@
+# The UsersController is responsible for managing all the Users of the system and completes Devise for authentication. It supports the CRUD operations for a User.
 class UsersController < ApplicationController
   before_filter :authorize_secretary!, :only => [:new, :create, :edit, :update, :destroy]
   
