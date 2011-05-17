@@ -74,10 +74,12 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
   test "should synchronize time_entry_types without last_update" do
     get :synchronize
     assert_not_nil assigns(:updated_time_entry_types)
+    assert_response :success
   end
   
   test "should synchronize time_entry_types with last_update" do
     get :synchronize, :last_update => (Time.now.to_i * 1000)
     assert_not_nil assigns(:updated_time_entry_types)
+    assert_response :success
   end
 end
