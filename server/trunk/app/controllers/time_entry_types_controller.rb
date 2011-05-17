@@ -75,10 +75,7 @@ class TimeEntryTypesController < ApplicationController
     @time_entry_type_material = TimeEntryTypeMaterial.new(:time_entry_type => @time_entry_type)
   end
 
-  # GET /time_entry_types/synchronize
-  # @param: last_update
-  # Receive all updated time_entry_types as JSON 
-  # see API Documentation
+  # GET /time_entry_types/synchronize. Receive all updated time_entry_types as JSON (see API Documentation)
   def synchronize
     @updated_time_entry_types = nil
     if params[:last_update].blank?

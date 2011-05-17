@@ -115,7 +115,7 @@ class TimeEntriesController < ApplicationController
     end
   end
 
-  # GET /time_entries/destroy_all
+  # GET /time_entries/destroy_all.
   # Destroys all time_entries the user has write access to
   def destroy_all
     @time_entries = TimeEntry.all
@@ -126,7 +126,7 @@ class TimeEntriesController < ApplicationController
     redirect_to(time_entries_url)
   end
 
-  # POST /time_entries/1/remove_hashcode
+  # POST /time_entries/1/remove_hashcode.
   # Verifies a time_entry transmitted through JSON
   def remove_hashcode
     @time_entry = TimeEntry.find(params[:id])
