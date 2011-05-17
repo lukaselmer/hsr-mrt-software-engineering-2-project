@@ -118,10 +118,7 @@ class TimeEntriesController < ApplicationController
       next unless write_access?(t)
       t.destroy
     end
-
-    respond_to do |format|
-      format.html { redirect_to(time_entries_url) }
-    end
+    redirect_to(time_entries_url)
   end
 
   # POST /time_entries/1/remove_hashcode

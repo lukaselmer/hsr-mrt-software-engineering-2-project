@@ -26,6 +26,11 @@ class TimeEntriesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get destroy_all" do
+    get :destroy_all
+    assert_response :success
+  end
+
   test "should create time_entry" do
     valid_entry = TimeEntry.new(:hashcode => 'h45hc0de', :description => "Valid Entry", :time_start => 3.hours.ago, :time_stop => 1.hour.ago)
     assert_difference('TimeEntry.count') do
