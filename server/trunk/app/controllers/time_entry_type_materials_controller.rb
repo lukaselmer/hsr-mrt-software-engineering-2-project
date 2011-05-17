@@ -1,3 +1,4 @@
+# The TimeEntryTypeMaterialsController is responsible for the materials usually used for a TimeEntryType. It supports all the CRUD operations for a TimeEntryTypeMaterial
 class TimeEntryTypeMaterialsController < ApplicationController
   # GET /time_entry_type_materials
   # GET /time_entry_type_materials.xml

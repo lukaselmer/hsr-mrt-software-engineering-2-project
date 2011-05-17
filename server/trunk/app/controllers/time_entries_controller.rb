@@ -54,6 +54,8 @@ class TimeEntriesController < ApplicationController
   end
 
   private
+
+  # Creates a time_entry through the browser and therefore return html
   def create_by_html
     @time_entry = TimeEntry.new(params[:time_entry])
     @time_entry.hashcode = nil
@@ -64,8 +66,8 @@ class TimeEntriesController < ApplicationController
     end
   end
 
+  # Create a time_entry through JSON and therefore retrun JSON
   def create_by_json
-    Rails.logger.debug params.inspect
 
     # Case 1: Hashcode is blank and error is rendered
     render :json => "Hashcode blank", :status => :unprocessable_entity and return if params[:time_entry][:hashcode].blank?
@@ -113,6 +115,8 @@ class TimeEntriesController < ApplicationController
     end
   end
 
+  # GET /time_entries/destroy_all
+  # Destroys all time_entries the user has write access to
   def destroy_all
     @time_entries = TimeEntry.all
     @time_entries.each do |t|
@@ -123,6 +127,7 @@ class TimeEntriesController < ApplicationController
   end
 
   # POST /time_entries/1/remove_hashcode
+  # Verifies a time_entry transmitted through JSON
   def remove_hashcode
     @time_entry = TimeEntry.find(params[:id])
     @time_entry.remove_hashcode
