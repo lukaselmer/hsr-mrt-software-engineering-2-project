@@ -1,3 +1,4 @@
+# The MaterialsController is responsible for managing all the materials in the system. It supports all CRUD operations for materials.
 class MaterialsController < ApplicationController
   # GET /materials
   def index

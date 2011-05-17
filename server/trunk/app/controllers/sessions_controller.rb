@@ -1,3 +1,4 @@
+# The SessionsController override Devise's defaut SessionsController and is responsible for the session management (speak: login/logout). It now supports login through JSON (see API Documentation)
 class SessionsController < Devise::SessionsController
   def create
     respond_to do |format|
