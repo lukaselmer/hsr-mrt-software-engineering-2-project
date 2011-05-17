@@ -110,9 +110,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		private void checkGpsPositionIsSet() {
 			if (currentPosition == null) {
 				Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				if (location == null) {
+				// TODO: What's this??? This will cause a null pointer exception!!! :(
+				if (location == null)
 					currentPosition = new GpsPosition(location);
-				}
 			}
 		}
 
