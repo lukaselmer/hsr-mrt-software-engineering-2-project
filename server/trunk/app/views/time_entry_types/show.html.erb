@@ -3,23 +3,18 @@
 <% fields = [:id, :description] %>
 <% fields.each do |f| %>
   <p>
-    <b><%= TimeEntryType.human_attribute_name(f) %></b>
+    <b><%= TimeEntryType.human_attribute_name(f) %>:</b>
     <%= @time_entry_type.send(f) %>
   </p>
 <% end %>
 
 <p>
-  <b><%= TimeEntryType.human_attribute_name(:time_entry_type_id) %></b>
-  <%= [@time_entry_type.time_entry_type.description, @time_entry_type.time_entry_type.valid_until].join(', ')unless @time_entry_type.time_entry_type.nil? %>
-</p>
-
-<p>
   <b>Benötigtes Material:</b>
 <table>
   <tr>
-    <th><%= Material.human_attribute_name(:id) %>:</th>
-    <th><%= Material.human_attribute_name(:description) %>:</th>
-    <th><%= Material.human_attribute_name(:price) %>:</th>
+    <th><%= Material.human_attribute_name(:id) %></th>
+    <th><%= Material.human_attribute_name(:description) %></th>
+    <th><%= Material.human_attribute_name(:price) %></th>
     <th></th>
     <th></th>
     <th></th>

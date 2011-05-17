@@ -8,8 +8,8 @@
   <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path %> |
 <% end %>
   <% if write_access? TimeEntry.new %>
-  <%= link_to 'Alle ' + TimeEntry.model_name.human + ' löschen', destroy_all_time_entries_path %> |
+  <%= link_to 'Alle Stundeneinträge löschen', destroy_all_time_entries_path %> |
 <% end %>
 
-<%= link_to 'Nur unzugewiesene Stundeneinträge', time_entries_unassigned_path %> |
-<%= link_to 'Alle Stundeneinträge', time_entries_path %>
+<%= link_to 'Nur unzugewiesene Stundeneinträge anzeigen', time_entries_unassigned_path %> |
+<%= link_to 'Alle Stundeneinträge anzeigen', time_entries_path %>

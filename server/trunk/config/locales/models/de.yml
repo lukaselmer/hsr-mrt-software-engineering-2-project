@@ -91,3 +91,4 @@ de:
         updated_at: Aktualisiert am
         human_model_name: Benutzertyp
         password: Passwort
+        remember_me: 'Angemeldet bleiben'

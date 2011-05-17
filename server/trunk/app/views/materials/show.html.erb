@@ -3,7 +3,7 @@
 <% fields = [:id, :catalog_number, :description, :dimensions, :price] %>
 <% fields.each do |f| %>
   <p>
-    <b><%= Material.human_attribute_name(f) %></b>
+    <b><%= Material.human_attribute_name(f) %>:</b>
     <%= @material.send(f) %>
   </p>
 <% end %>

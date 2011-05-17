@@ -20,7 +20,7 @@
 </p>
 
 <p>
-  <b>Address:</b><br />
+  <b><%= Customer.human_attribute_name(:address) %>:</b><br />
     <% unless @customer.address.nil? %>
     <%= render :partial => "addresses/address", :locals => { :address => @customer.address } %>
     <%= render :partial => "addresses/map", :locals => { :gps_position => @customer.address.gps_position } %>
