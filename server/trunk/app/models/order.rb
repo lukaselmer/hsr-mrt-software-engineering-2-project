@@ -13,6 +13,6 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    "#" << id.to_s << ": " << [customer.to_s, created_at.to_s(:short)].join('; ')
+    "##{id}: #{customer}; #{created_at}"
   end
 end
