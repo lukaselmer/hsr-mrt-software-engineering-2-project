@@ -60,6 +60,10 @@ class CustomersController < ApplicationController
     redirect_to(customers_url)
   end
 
+  # GET /customers/syncronize
+  # @param: last_update
+  # Receive all updated customers as JSON
+  # see API Documentation
   def synchronize
     if params[:last_update].blank?
       @updated_customers = Customer.all

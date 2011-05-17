@@ -1,3 +1,4 @@
+# The TimeEntryTypesController is responsible for managing all the TimeEntryTypes in the system. It supports all the CRUD operations for a TimeEntryType. It also supports synchronization of the client through JSON (see API Documentation)
 class TimeEntryTypesController < ApplicationController
   # GET /time_entry_types
   def index
@@ -68,11 +69,16 @@ class TimeEntryTypesController < ApplicationController
     end
   end
 
+  
   def add_material
     @time_entry_type = TimeEntryType.find(params[:id])
     @time_entry_type_material = TimeEntryTypeMaterial.new(:time_entry_type => @time_entry_type)
   end
 
+  # GET /time_entry_types/synchronize
+  # @param: last_update
+  # Receive all updated time_entry_types as JSON 
+  # see API Documentation
   def synchronize
     @updated_time_entry_types = nil
     if params[:last_update].blank?
