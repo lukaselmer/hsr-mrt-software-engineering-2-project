@@ -1,3 +1,4 @@
+# The OrdersController is repsonsible to manage all orders of the system. It supports all CRUD operations as well as adding/removing of Materials to an order
 class OrdersController < ApplicationController
   # GET /orders
   def index

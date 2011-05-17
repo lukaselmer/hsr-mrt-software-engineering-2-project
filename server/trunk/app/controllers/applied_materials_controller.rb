@@ -1,3 +1,4 @@
+# The AppliedMaterialsController is responsible to manager the materials that were used in an order. It supports the CRUD operations for the applied material although its basic functionallity has been implemented inline in the orders controller
 class AppliedMaterialsController < ApplicationController
   # GET /applied_materials
   # GET /applied_materials.xml
