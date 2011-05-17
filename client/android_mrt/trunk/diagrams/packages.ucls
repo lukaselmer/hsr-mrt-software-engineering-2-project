@@ -2,99 +2,93 @@
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
   <package id="1" language="java" name="ch.hsr.se2p.mrt.database" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/database" 
     binary="false">    
-    <position x="415" y="230" width="-1" height="-1"/>  
+    <position x="342" y="121" width="168" height="44"/>  
   </package>  
   <package id="2" language="java" name="ch.hsr.se2p.mrt.application" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/application" binary="false">    
-    <position x="160" y="229" width="-1" height="-1"/>  
+    <position x="104" y="121" width="177" height="44"/>  
   </package>  
   <package id="3" language="java" name="ch.hsr.se2p.mrt.models" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/models" 
     binary="false">    
-    <position x="413" y="324" width="-1" height="-1"/>  
+    <position x="264" y="205" width="157" height="44"/>  
   </package>  
   <package id="4" language="java" name="ch.hsr.se2p.mrt.interfaces" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/interfaces" binary="false">    
-    <position x="83" y="373" width="173" height="44"/>  
+    <position x="62" y="289" width="173" height="44"/>  
   </package>  
   <package id="5" language="java" name="ch.hsr.se2p.mrt.network" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/network" 
     binary="false">    
-    <position x="162" y="311" width="-1" height="-1"/>  
+    <position x="62" y="205" width="162" height="44"/>  
   </package>  
   <package id="6" language="java" name="ch.hsr.se2p.mrt.services" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services" 
     binary="false">    
-    <position x="83" y="121" width="164" height="44"/>  
+    <position x="64" y="37" width="164" height="44"/>  
   </package>  
   <package id="7" language="java" name="ch.hsr.se2p.mrt.activities" project="mrt" 
     file="/mrt/src/ch/hsr/se2p/mrt/activities" binary="false">    
-    <position x="286" y="60" width="-1" height="-1"/>  
+    <position x="342" y="37" width="166" height="44"/>  
   </package>  
   <dependency>    
-    <bendpoint x="278" y="262"/>    
+    <bendpoint x="540" y="121"/>    
     <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="5"/>  
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="73" y="121"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
     <end type="SOURCE" nodeId="5"/>    
     <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="2"/>    
-    <end type="TARGET" nodeId="3"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="1"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="6"/>  
-  </dependency>  
-  <dependency>    
-    <end type="SOURCE" nodeId="3"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="31" y="205"/>    
-    <bendpoint x="31" y="289"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="4"/>  
-  </dependency>  
-  <dependency>    
-    <bendpoint x="262" y="161"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="2"/>  
-  </dependency>  
-  <dependency>    
     <end type="SOURCE" nodeId="1"/>    
     <end type="TARGET" nodeId="3"/>  
   </dependency>  
   <dependency>    
+    <bendpoint x="31" y="121"/>    
+    <bendpoint x="31" y="205"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="311" y="121"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="52" y="121"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
     <end type="SOURCE" nodeId="2"/>    
     <end type="TARGET" nodeId="5"/>  
   </dependency>  
   <dependency>    
-    <bendpoint x="518" y="133"/>    
-    <bendpoint x="516" y="282"/>    
-    <end type="SOURCE" nodeId="7"/>    
-    <end type="TARGET" nodeId="3"/>  
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="2"/>  
   </dependency>  
   <dependency>    
-    <bendpoint x="57" y="206"/>    
-    <bendpoint x="56" y="284"/>    
-    <end type="SOURCE" nodeId="6"/>    
-    <end type="TARGET" nodeId="5"/>  
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
   </dependency>  
   <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
     <attributes public="true" package="true" protected="false" private="false"/>    

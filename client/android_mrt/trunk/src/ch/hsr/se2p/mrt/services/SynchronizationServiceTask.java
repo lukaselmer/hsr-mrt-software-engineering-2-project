@@ -34,8 +34,12 @@ class SynchronizationServiceTask extends TimerTask {
 		runSynchronizers();
 	}
 
+	protected SynchronizationServiceSpec getSynchronizationServiceSpec() {
+		return new SynchronizationServiceSpec();
+	}
+
 	private void runSynchronizers() {
-		for (Class<?> cls : SynchronizationServiceSpec.SYNCHRONIZERS) {
+		for (Class<?> cls : getSynchronizationServiceSpec().getSynchronizers()) {
 			try {
 				@SuppressWarnings("unchecked")
 				Class<Synchronizer> syncCls = (Class<Synchronizer>) cls;
