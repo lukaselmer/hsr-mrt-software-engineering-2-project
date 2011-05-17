@@ -165,23 +165,30 @@ public class TimeEntry implements Transmittable, Confirmable {
 	@Override
 	public JSONObject toJSONObject() {
 		JSONObject j = new JSONObject();
-
 		try {
-			j.put("customer_id", customerId);
-			j.put("time_entry_type_id", timeEntryTypeId);
-			j.put("hashcode", hashcode);
-			j.put("description", description);
-			j.put("time_start", ISO8601DateParser.format(getTimeStart()));
-			j.put("time_stop", ISO8601DateParser.format(getTimeStop()));
-			if (customer != null)
-				j.put("customer_id", customer.getIdOnServer());
-			if (timeEntryType != null)
-				j.put("time_entry_type_id", timeEntryType.getIdOnServer());
-			if (gpsPosition != null)
-				j.put("gps_position_data", gpsPosition.toJSONObject());
+			putMembersToJson(j);
+			putRelationsToJson(j);
 		} catch (JSONException e) {
 			Log.e(TAG, "Error creating JSON Object", e);
 		}
 		return j;
+	}
+
+	private void putRelationsToJson(JSONObject j) throws JSONException {
+		if (customer != null)
+			j.put("customer_id", customer.getIdOnServer());
+		if (timeEntryType != null)
+			j.put("time_entry_type_id", timeEntryType.getIdOnServer());
+		if (gpsPosition != null)
+			j.put("gps_position_data", gpsPosition.toJSONObject());
+	}
+
+	private void putMembersToJson(JSONObject j) throws JSONException {
+		j.put("customer_id", customerId);
+		j.put("time_entry_type_id", timeEntryTypeId);
+		j.put("hashcode", hashcode);
+		j.put("description", description);
+		j.put("time_start", ISO8601DateParser.format(getTimeStart()));
+		j.put("time_stop", ISO8601DateParser.format(getTimeStop()));
 	}
 }

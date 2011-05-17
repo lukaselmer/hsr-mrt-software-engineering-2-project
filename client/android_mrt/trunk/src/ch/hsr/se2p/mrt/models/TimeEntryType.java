@@ -43,13 +43,17 @@ public class TimeEntryType implements Receivable {
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
+		parseMembersFromJson(timeEntryTypeObj);
+		if (deleted)
+			validUntil = ISO8601DateParser.parse(timeEntryTypeObj.getString("valid_until")).getTime();
+		return true;
+	}
+
+	private void parseMembersFromJson(JSONObject timeEntryTypeObj) throws JSONException {
 		name = timeEntryTypeObj.getString("description");
 		createdAt = ISO8601DateParser.parse(timeEntryTypeObj.getString("created_at")).getTime();
 		updatedAt = ISO8601DateParser.parse(timeEntryTypeObj.getString("updated_at")).getTime();
 		deleted = !timeEntryTypeObj.isNull("valid_until");
-		if (deleted)
-			validUntil = ISO8601DateParser.parse(timeEntryTypeObj.getString("valid_until")).getTime();
-		return true;
 	}
 
 	public Timestamp getCreatedAt() {
