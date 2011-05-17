@@ -1,3 +1,4 @@
+# The TimeEntriesController is responsible for managing all the time_entries in the system. It supports all the CRUD operations for the time entries as wel as a syncronization method which allows a client to transmit and verify a time entry through JSON (see API Documentation)
 class TimeEntriesController < ApplicationController
 
   # GET /time_entries
