@@ -60,7 +60,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
 	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 100000;// Circle 100km;
 
-	private static LocationManager locationManager;
+	private LocationManager locationManager;
 	private LocationListener locationListener;
 	private String locationProvider;
 	private GpsPosition currentPosition;
