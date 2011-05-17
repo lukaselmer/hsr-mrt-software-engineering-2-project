@@ -19,7 +19,6 @@ public class GpsPosition {
 	private int id;
 	@DatabaseField
 	private double latitude = 0.0;
-
 	@DatabaseField
 	private double longitude = 0.0;
 
