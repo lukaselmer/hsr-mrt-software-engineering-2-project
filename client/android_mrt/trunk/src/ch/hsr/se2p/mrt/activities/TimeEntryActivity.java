@@ -95,7 +95,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setGPSImage(false);
 			saveTimeEntry();
 			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
-			resetDistances(customers);
 		} catch (SQLException e) {
 			logAndDisplaySQLException(e);
 		}
@@ -124,8 +123,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		locationListener = new LocationListenerAdapter() {
 			@Override
 			public void onLocationChanged(Location location) {
-				sortCustomersByLocation(location);
-				locationManager.removeUpdates(locationListener);
+				currentPosition = new GpsPosition(location);
+				sortCustomersByCurrentLocation();
 				setGPSImage(true);
 			}
 		};
@@ -137,6 +136,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	 */
 	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
 			throws SQLException {
+
+		if (currentPosition == null)
+			return;
+
 		for (Customer c : customers) {
 			calculateAndSetDistances(dao, currentPosition, c);
 		}
@@ -170,12 +173,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return criteria;
 	}
 
-	private void populateCustomers() {
+	private void populateComboboxCustomers() {
 		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
 		comboboxCustomers.setAdapter(getCustomerAdapter());
 	}
 
-	private void populateTimeEntryTypes() {
+	private void populateSpinnerTimeEntryTypes() {
 		loadTimeEntryTypes();
 		spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
@@ -208,9 +211,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void updateView() {
-		populateCustomers();
-		populateTimeEntryTypes();
-		Collections.sort(getCustomers());
+		sortCustomersByCurrentLocation();
+		populateComboboxCustomers();
+		populateSpinnerTimeEntryTypes();
 
 		if (isMeasurementStarted) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
@@ -302,17 +305,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void logout() {
+		locationManager.removeUpdates(locationListener);
 		mrtApplication.logout();
 		this.startActivity(new Intent(this, LoginActivity.class));
 		finish();
 	}
 
-	private void sortCustomersByLocation(Location location) {
-		currentPosition = new GpsPosition(location);
+	private void sortCustomersByCurrentLocation() {
 		try {
 			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
 			Collections.sort(getCustomers());
-			populateCustomers();
+			populateComboboxCustomers();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
