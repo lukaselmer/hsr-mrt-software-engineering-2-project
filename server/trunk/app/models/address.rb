@@ -25,7 +25,7 @@ class Address < ActiveRecord::Base
 
   # Returns an array compliant for form-selects
   def self.for_select
-    all.collect { |a| [a, a.id] }
+    find(:all, :order => :line1).collect { |a| [a, a.id] }
   end
 
   def to_s
