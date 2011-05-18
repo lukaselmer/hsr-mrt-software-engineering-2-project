@@ -6,7 +6,7 @@ class TimeEntryType < ActiveRecord::Base
   belongs_to :time_entry_type
   has_one :time_entry_type
 
-  validates :description, :presence => true
+  validates :description, :presence => true, :length => { :within => 1..50 }
   
   scope :active, where(:valid_until => nil)
   scope :updated_after, lambda {|last_update| where("updated_at > :last_update OR created_at > :last_update OR valid_until > :last_update",
