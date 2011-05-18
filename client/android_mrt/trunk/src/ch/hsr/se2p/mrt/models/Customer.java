@@ -44,6 +44,8 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public int compareTo(Customer another) {
+		if (equals(another))
+			return 0;
 		if (bothDistancesNull(another))
 			return compareLastName(another);
 		if (getDistance() == null || another.getDistance() == null)
