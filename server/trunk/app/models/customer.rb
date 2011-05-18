@@ -12,7 +12,7 @@ class Customer < ActiveRecord::Base
   accepts_nested_attributes_for :address, :allow_destroy => true
 
   def self.for_select
-    all.collect { |c| [c, c.id] }
+    find(:all, :order => :last_name).collect { |c| [c, c.id] }
   end
 
   def to_s
