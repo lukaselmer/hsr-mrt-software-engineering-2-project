@@ -13,7 +13,7 @@ class TimeEntryType < ActiveRecord::Base
     :last_update => last_update) }
   
   def self.for_select
-    active.collect {|t| [ t, t.id ] }
+    active.order("description asc").collect {|t| [ t, t.id ] }
   end
   
   def to_s
