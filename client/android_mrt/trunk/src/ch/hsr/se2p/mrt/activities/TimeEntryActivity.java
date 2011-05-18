@@ -3,8 +3,9 @@ package ch.hsr.se2p.mrt.activities;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import android.content.Context;
@@ -58,7 +59,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		});
 	}
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
-	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 100000;// Circle 100km;
+	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 300000;// Circle 30km;
 
 	private LocationManager locationManager;
 	private LocationListener locationListener;
@@ -69,7 +70,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private TimeEntry currentTimeEntry;
 	private Spinner spinnerTimeEntryTypes;
 	private MRTAutocompleteSpinner comboboxCustomers;
-	private List<Customer> customers;
+	private final List<Customer> customers = new ArrayList<Customer>();
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
 	private ArrayAdapter<Customer> customerAdapter;
@@ -77,18 +78,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			if (!isMeasurementStarted)
-				startTimeMeasurement();
-			else
-				stopTimeMeasurement();
+			startOrStopTimeMeasurement();
 			updateView();
 		}
 	};
-
-	private void startTimeMeasurement() {
-		currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
-		isMeasurementStarted = true;
-	}
 
 	private void stopTimeMeasurement() {
 		try {
@@ -98,7 +91,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		} catch (SQLException e) {
 			logAndDisplaySQLException(e);
 		}
-		isMeasurementStarted = false;
 	}
 
 	private void logAndDisplaySQLException(SQLException e) {
@@ -110,6 +102,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
+		loadCustomers();
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
 		initLocationService();
@@ -195,7 +188,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void loadCustomers() {
 		try {
-			customers = getHelper().getCustomerDao().queryForAll();
+			customers.clear();
+			customers.addAll(getHelper().getCustomerDao().queryForAll());
 		} catch (SQLException e) {
 			Log.e(TAG, "Init customers", e);
 		}
@@ -267,7 +261,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		String textCustomer = comboboxCustomers.getText();
 		if (textCustomer.length() == 0)
 			return null;
-		for (Customer customer : customers) {
+		for (Customer customer : getCustomers()) {
 			if (customer.toString().equals(textCustomer)) {
 				return customer;
 			}
@@ -276,9 +270,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private synchronized List<Customer> getCustomers() {
-		if (customers == null)
-			loadCustomers();
-		
 		return customers;
 	}
 
@@ -320,5 +311,13 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void startOrStopTimeMeasurement() {
+		if (isMeasurementStarted)
+			stopTimeMeasurement();
+		else
+			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
+		isMeasurementStarted = !isMeasurementStarted;
 	}
 }
