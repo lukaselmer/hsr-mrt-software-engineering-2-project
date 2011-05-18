@@ -1,0 +1,101 @@
+<class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.SynchronizationServiceTask" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services/SynchronizationServiceTask.java" binary="false">    
+    <position x="514" y="96" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.SynchronizationService" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services/SynchronizationService.java" binary="false">    
+    <position x="171" y="92" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.TimeEntryTypeSynchronizer" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services/TimeEntryTypeSynchronizer.java" binary="false">    
+    <position x="313" y="315" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.Synchronizer" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/services/Synchronizer.java" binary="false">    
+    <position x="513" y="208" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.TimeEntrySynchronizer" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services/TimeEntrySynchronizer.java" binary="false">    
+    <position x="510" y="418" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.SynchronizationServiceSpec" 
+    project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services/SynchronizationServiceSpec.java" binary="false">    
+    <position x="814" y="97" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class id="7" corner="BOTTOM_RIGHT" language="java" name="ch.hsr.se2p.mrt.services.CustomerSynchronizer" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/services/CustomerSynchronizer.java" binary="false">    
+    <position x="699" y="314" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="false" private="false"/>      
+      <operations public="true" package="true" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="6"/>  
+  </dependency>  
+  <association>    
+    <bendpoint x="299" y="129"/>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="serviceTask"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </realization>  
+  <realization>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </realization>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="service"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </realization>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="false" private="false"/>    
+    <operations public="true" package="true" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

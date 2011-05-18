@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+ <TextView android:text="Login" 
+  	android:id="@+id/viewLogin" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:textSize="30px"></TextView>
+ <TextView android:text="Emailadresse" 
+  	android:id="@+id/viewEmail" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"></TextView>
+  <EditText android:id="@+id/editEmail"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"></EditText>
+   <TextView android:text="Passwort" 
+  	android:id="@+id/viewPassword" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"></TextView>
+  <EditText android:id="@+id/editPassword"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:password="true"></EditText>
+  <CheckBox android:text=" Angemeldet bleiben" 
+  	android:id="@+id/chbxSaveLogin" 
+  	android:layout_width="wrap_content" 
+  	android:layout_height="wrap_content"
+  	android:checked="true"
+  	android:layout_gravity="center"></CheckBox>
+  <TextView android:text=" "
+ 	android:layout_width="fill_parent" 
+  	android:layout_height="wrap_content"></TextView>
+  <Button android:text="Anmelden" 
+	android:id="@+id/loginButton" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:paddingLeft="40px"
+    android:paddingRight="40px"></Button>
+</LinearLayout>
