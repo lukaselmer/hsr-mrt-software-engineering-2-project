@@ -96,11 +96,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			saveTimeEntry();
 			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 		} catch (SQLException e) {
-			Log.e(TAG, "Database Exception", e);
-			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
-					TimeEntryActivity.this);
+			logAndDisplaySQLException(e);
 		}
 		isMeasurementStarted = false;
+	}
+
+	private void logAndDisplaySQLException(SQLException e) {
+		Log.e(TAG, "Database Exception", e);
+		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
+				TimeEntryActivity.this);
 	}
 
 	@Override
@@ -147,6 +151,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			}
 			double distance = currentPosition.distanceTo(customerPosition);
 			c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
+		}
+	}
+
+	private static void resetDistances(List<Customer> customers) {
+		for (Customer c : customers) {
+			c.setDistance(null);
 		}
 	}
 
