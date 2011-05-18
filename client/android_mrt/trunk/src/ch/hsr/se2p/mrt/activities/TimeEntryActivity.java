@@ -67,8 +67,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private boolean isMeasurementStarted = false;
 	private TimeEntry currentTimeEntry;
-	private Spinner timeEntryTypeSpinner;
-	private MRTAutocompleteSpinner comboBox;
+	private Spinner spinnerTimeEntryTypes;
+	private MRTAutocompleteSpinner comboboxCustomers;
 	private List<Customer> customers;
 	private List<TimeEntryType> timeEntryTypes;
 	private MRTApplication mrtApplication;
@@ -95,6 +95,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			setGPSImage(false);
 			saveTimeEntry();
 			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
+			resetDistances(customers);
 		} catch (SQLException e) {
 			logAndDisplaySQLException(e);
 		}
@@ -103,8 +104,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void logAndDisplaySQLException(SQLException e) {
 		Log.e(TAG, "Database Exception", e);
-		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
-				TimeEntryActivity.this);
+		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
 	}
 
 	@Override
@@ -129,7 +129,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(true);
 			}
 		};
-		locationManager.requestLocationUpdates(locationProvider, 60 * 1000, 0, locationListener); // update location maximal every 60 seconds
+		locationManager.requestLocationUpdates(locationProvider, 10 * 1000, 0, locationListener); // update location maximal every 60 seconds
 	}
 
 	/**
@@ -171,17 +171,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void populateCustomers() {
-		comboBox = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
-		comboBox.setAdapter(getCustomerAdapter());
+		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
+		comboboxCustomers.setAdapter(getCustomerAdapter());
 	}
 
 	private void populateTimeEntryTypes() {
 		loadTimeEntryTypes();
-		timeEntryTypeSpinner = (Spinner) findViewById(R.id.spinnerTimeEntryType);
+		spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				timeEntryTypes);
 		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		timeEntryTypeSpinner.setAdapter(timeEntryTypeAdapater);
+		spinnerTimeEntryTypes.setAdapter(timeEntryTypeAdapater);
 	}
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
@@ -210,6 +210,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void updateView() {
 		populateCustomers();
 		populateTimeEntryTypes();
+		Collections.sort(getCustomers());
 
 		if (isMeasurementStarted) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
@@ -218,7 +219,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
-			Collections.sort(getCustomers());
 		}
 	}
 
@@ -236,15 +236,17 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 
-		if (!(timeEntryTypeSpinner.getSelectedItem().equals(timeEntryTypeSpinner.getItemAtPosition(0))))
-			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) timeEntryTypeSpinner.getSelectedItem()).getId());
+		if (!(spinnerTimeEntryTypes.getSelectedItem().equals(spinnerTimeEntryTypes.getItemAtPosition(0))))
+			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinnerTimeEntryTypes.getSelectedItem()).getId());
 
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 
 		if (currentPosition != null)
 			currentTimeEntry.setGpsPositionId(saveGpsPosition());
 
-		setCustomer();
+		if (comboboxCustomers.getText().length() != 0 && getCustomer() != null)
+			currentTimeEntry.setCustomerId(getCustomer().getId());
+
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
 		timeEntryDao.create(currentTimeEntry);
 		Log.i(TAG, "Inserted ID: " + currentTimeEntry.getId());
@@ -258,22 +260,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return currentPosition.getId();
 	}
 
-	private void setCustomer() throws SQLException {
-		if (comboBox.getText().length() != 0 && getCustomer() != null) {
-			currentTimeEntry.setCustomerId(getCustomer().getId());
-		}
-	}
-
 	private Customer getCustomer() throws SQLException {
-		String text = comboBox.getText();
-		if (text.length() == 0)
+		String textCustomer = comboboxCustomers.getText();
+		if (textCustomer.length() == 0)
 			return null;
-		return findCustomer(text);
-	}
-
-	private Customer findCustomer(String customerStr) {
 		for (Customer customer : customers) {
-			if (customer.toString().equals(customerStr.toString())) {
+			if (customer.toString().equals(textCustomer)) {
 				return customer;
 			}
 		}
