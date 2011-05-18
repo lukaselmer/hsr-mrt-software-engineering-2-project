@@ -1,0 +1,39 @@
+<% unless orders.nil? %>
+  <% fields =  [:id, :customer, :address] if fields.nil? %>
+
+  <table>
+    <tr>
+      <% fields.each do |f| %>
+        <th><%= Order.human_attribute_name(f) %></th>
+      <% end %>
+      <th><%= Order.human_attribute_name(:material) %></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    <% orders.each do |order| %>
+      <tr id="<%= dom_id(order) %>">
+        <% fields.each do |f| %>
+          <td><%= order.send(f) %></td>
+        <% end %>
+        <td><%= render 'orders/applied_materials', :applied_materials => order.applied_materials %></td>
+
+        <td><%= link_to Material.model_name.human + " hinzufügen", add_material_order_path(order), :remote => true %></td>
+
+        <td><%= link_to t(:show), order %></td>
+        <% if write_access? order %>
+          <td><%= link_to t(:edit), edit_order_path(order) %></td>
+          <td><%= link_to t(:destroy), order, :confirm => t(:confirm_delete), :method => :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <br />
+
+  <% if write_access? %>
+    <%= link_to 'Neuer ' + Order.model_name.human, new_order_path %>
+  <% end %>
+<% end %>

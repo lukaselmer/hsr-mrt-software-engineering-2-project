@@ -1,0 +1,33 @@
+<h1><%= t(:overview)%> Adressen</h1>
+<% fields = [:id, :line1, :line2, :line3, :zip, :place] %>
+<table>
+  <tr>
+    <% fields.each do |f| %>
+      <th><%= Address.human_attribute_name(f) %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @addresses.each do |address| %>
+    <tr>
+      <% fields.each do |f| %>
+        <td><%= address.send(f) %></td>
+      <% end %>
+
+      <td><%= link_to t(:show), address %></td>
+
+      <% if write_access? address %>
+        <td><%= link_to t(:edit), edit_address_path(address) %></td>
+        <td><%= link_to t(:destroy), address, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<% if write_access? %>
+  <%= link_to 'Neue ' + Address.model_name.human, new_address_path %>
+<% end %>

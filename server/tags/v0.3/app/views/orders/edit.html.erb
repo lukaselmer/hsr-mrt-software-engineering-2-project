@@ -1,0 +1,17 @@
+<h1><%= Order.model_name.human %> <%= t(:editing) %></h1>
+
+<%= render 'form' %>
+
+<div id="<%= dom_id(@order) %>">
+  <b><%=  Order.human_attribute_name(:materials)  %>:</b>
+
+  <%= render 'orders/applied_materials', :applied_materials => @order.applied_materials %>
+  <%= link_to Material.model_name.human + " hinzufügen", add_material_order_path(@order), :remote => true %> |
+  <%= link_to 'Neues ' +  Material.model_name.human +   ' erfassen', new_material_path %>
+</div>
+
+<br>
+<%= link_to t(:show), @order %> |
+<%= link_to t(:back), orders_path %>
+</br>
+

@@ -1,0 +1,31 @@
+<%= form_for(@user, :as => :user, :url => (@user.new_record? ? users_path : user_path(@user))) do |f| %>
+  <%= form_error_messages f %>
+
+  <div class="field">
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone %>
+  </div>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :type %>
+    <%= f.select :type, User.type_for_select %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

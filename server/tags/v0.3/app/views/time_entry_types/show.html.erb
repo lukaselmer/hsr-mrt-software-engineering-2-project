@@ -1,0 +1,57 @@
+<h1><%= t(:detail)%> Stundeneintragstyp</h1>
+
+<% fields = [:id, :description] %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= TimeEntryType.human_attribute_name(f) %>:</b>
+    <%= @time_entry_type.send(f) %>
+  </p>
+<% end %>
+
+<p>
+  <b>Benötigtes Material:</b>
+<table>
+  <tr>
+    <th><%= Material.human_attribute_name(:id) %></th>
+    <th><%= Material.human_attribute_name(:description) %></th>
+    <th><%= Material.human_attribute_name(:price) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @time_entry_type.time_entry_type_materials.each do |type_material| %>
+    <tr>
+
+      <% material = type_material.material %>
+
+      <td><%= material.id %></td>
+      <td><%= material.description %></td>
+      <td><%= material.price %></td>
+
+      <td><%= link_to t(:show), material %></td>
+
+      <% if write_access? type_material %>
+        <td><%= link_to t(:edit), edit_material_path(type_material) %></td>
+        <td><%= link_to t(:destroy), material, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+
+    </tr>
+  <% end %>
+</table>
+
+<div id="<%= dom_id(@time_entry_type) %>">
+  <b><%= TimeEntryType.human_attribute_name(:materials) %>:</b>
+
+  <%= render 'time_entry_type_materials', :time_entry_type_materials => @time_entry_type.time_entry_type_materials %>
+  <%= link_to Material.model_name.human  + " hinzufügen", add_material_time_entry_type_path(@time_entry_path), :remote => true %> |
+  <%= link_to 'Neues ' +  Material.model_name.human +   ' erfassen', new_material_path %>
+</div>
+
+</p>
+
+<br>
+<%= link_to t(:edit), edit_time_entry_type_path(@time_entry_type) %> |
+<%= link_to t(:back), time_entry_types_path %>
+</br>
+

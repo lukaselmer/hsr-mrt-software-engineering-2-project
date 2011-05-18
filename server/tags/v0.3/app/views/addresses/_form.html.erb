@@ -1,0 +1,27 @@
+<%= form_for(@address) do |f| %>
+  <%= form_error_messages f %>
+
+  <div class="field">
+    <%= f.label :line1 %>
+    <%= f.text_field :line1 %>
+  </div>
+  <div class="field">
+    <%= f.label :line2 %>
+    <%= f.text_field :line2 %>
+  </div>
+  <div class="field">
+    <%= f.label :line3 %>
+    <%= f.text_field :line3 %>
+  </div>
+  <div class="field">
+    <%= f.label :place %>
+    <%= f.text_field :place %>
+  </div>
+  <div class="field">
+    <%= f.label :zip %>
+    <%= f.text_field :zip %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

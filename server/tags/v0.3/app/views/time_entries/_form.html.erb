@@ -1,0 +1,56 @@
+<%= form_for(@time_entry) do |f| %>
+  <%= form_error_messages f %>
+
+  <div class="field">
+    <%= f.label :order %>
+    <%= f.select(:order_id, Order.for_select, {:include_blank => true}) %>
+    <% if write_access? Order.new %>
+      <%= link_to 'Neuen ' + Order.model_name.human + ' erfassen', new_order_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :customer %>
+    <%= f.select(:customer_id, Customer.for_select, {:include_blank => true}) %>
+    <% if write_access? Customer.new %>
+      <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_customer_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_entry_type %>
+    <%= f.select(:time_entry_type_id, TimeEntryType.for_select, {:include_blank => true}) %>
+    <% if write_access? TimeEntry.new %>
+      <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user %>
+    <%=  f.select(:user_id, FieldWorker.for_select, {:include_blank => true}) %>
+    <% if write_access? User.new %>
+      <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gps_position_id %>
+    <%= @time_entry.gps_position.nil? ? "-" : @time_entry.gps_position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :time_start %>
+    <%= f.datetime_select(:time_start, :include_seconds => true) %>
+  </div>
+  <div class="field">
+    <%= f.label :time_stop %>
+    <%= f.datetime_select(:time_stop, :include_seconds => true) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,5 @@
+if @saved
+  page.redirect_to(orders_path)
+else
+  page.replace_html 'applied_material_form', :partial => 'form'
+end

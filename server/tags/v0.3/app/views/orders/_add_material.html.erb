@@ -1,0 +1,58 @@
+<tr>
+  <td colspan="11">
+    <%= form_for(@applied_material, :remote => true) do |f| %>
+      <%= form_error_messages f %>
+
+      <div class="field">
+        <%= f.label :order_id %>
+        <%= f.hidden_field :order_id %>
+      </div>
+
+      <div class="field">
+        <%= f.label :customer_id %>
+        <%= f.select(:customer_id, Customer.for_select, {:include_blank => true}) %>
+        <% if write_access? %>
+          <%= link_to 'Neuen ' + Customer.model_name.human + ' erfassen', new_order_path %>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :time_entry_type_id %>
+        <%= f.select(:time_entry_type_id, TimeEntryType.for_select, {:include_blank => true}) %>
+        <% if write_access? %>
+          <%= link_to 'Neuen ' + TimeEntryType.model_name.human + ' erfassen', new_time_entry_type_path %>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :user_id %>
+        <%=  f.select(:user_id, FieldWorker.for_select, {:include_blank => true}) %>
+        <% if write_access? %>
+          <%= link_to 'Neuen ' + User.model_name.human + ' erfassen', new_user_path %>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :gps_position_id %>
+        <%= @time_entry.gps_position.nil? ? "-" : @time_entry.gps_position %>
+      </div>
+
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description %>
+      </div>
+      <div class="field">
+        <%= f.label :time_start %>
+        <%= f.datetime_select :time_start %>
+      </div>
+      <div class="field">
+        <%= f.label :time_stop %>
+        <%= f.datetime_select :time_stop %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+
+  </td>
+</tr>

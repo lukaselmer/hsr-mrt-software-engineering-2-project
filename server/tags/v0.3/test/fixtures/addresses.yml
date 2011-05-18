@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  line1: MyString
+  line2: MyString
+  line3: MyString
+  place: MyString
+  zip: 1
+
+two:
+  line1: MyString
+  line2: MyString
+  line3: MyString
+  place: MyString
+  zip: 1
+
+valid_geocoding_address:
+  line1: Hungerbergstasse 16
+  line2: 
+  line3:
+  place: Zürich
+  zip: 8046
+
+invalid_geocoding_address:
+  line1: bluuuuuuu
+  line2:
+  line3:
+  place: Blaaaaaaaaaaaaa
+  zip: 1111111111111

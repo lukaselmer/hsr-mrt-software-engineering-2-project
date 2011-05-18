@@ -1,0 +1,4 @@
+page << "if ($('time_entry_type_material_form')) {"
+page.remove 'time_entry_type_material_form'
+page << "}"
+page.insert_html :after, dom_id(@time_entry_type), :partial => 'time_entry_type_materials/form'

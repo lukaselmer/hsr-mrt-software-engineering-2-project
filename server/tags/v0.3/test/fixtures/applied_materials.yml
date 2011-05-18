@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  amount: 1
+  material_id: 101
+  order_id: 101
+
+two:
+  amount: 2
+  material_id: 102
+  order_id: 102

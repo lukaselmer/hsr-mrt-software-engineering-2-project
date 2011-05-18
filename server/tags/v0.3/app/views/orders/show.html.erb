@@ -1,0 +1,42 @@
+<h1><%= t(:detail)%> Auftrag</h1>
+
+<div id="<%= dom_id(@order) %>">
+  <p>
+    <b><%= Order.human_attribute_name(:customer_id) %>:</b>
+    <%= @order.customer %>
+  </p>
+
+  <p>
+    <b><%= Order.human_attribute_name(:description) %>:</b>
+    <%= @order.description %>
+  </p>
+
+  <p>
+    <b><%= Order.human_attribute_name(:address) %>:</b>
+    <% unless @order.address.nil? %>
+      <%= render :partial => "addresses/address", :locals => { :address => @order.address } %>
+      <%= render :partial => "addresses/map", :locals => { :gps_position => @order.address.gps_position } %>
+    <% end %>
+  </p>
+
+  <p>
+    <b><%= Order.human_attribute_name(:time_entries) %>:</b>
+    <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :fields => [ :id, :time_entry_type, :user, :duration ] } %>
+
+    <br />
+
+    <% if write_access? TimeEntry.new %>
+      <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path(:order_id => @order.id) %>
+    <% end %>
+
+  </p>
+
+  <p>
+    <b><%= TimeEntryType.human_attribute_name(:materials) %>:</b>
+    <%= render 'applied_materials', :applied_materials => @order.applied_materials %>
+    <%= link_to "Material hinzufügen", add_material_order_path(@order), :remote => true %>
+  </p>
+</div>
+
+<%= link_to t(:edit), edit_order_path(@order) %> |
+<%= link_to t(:back), orders_path %>

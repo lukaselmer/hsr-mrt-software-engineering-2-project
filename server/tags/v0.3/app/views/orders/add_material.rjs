@@ -1,0 +1,4 @@
+page << "if ($('applied_material_form')) {"
+page.remove 'applied_material_form'
+page << "}"
+page.insert_html :after, dom_id(@order), :partial => 'applied_materials/form'

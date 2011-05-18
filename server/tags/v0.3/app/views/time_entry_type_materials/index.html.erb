@@ -1,0 +1,23 @@
+<h1><%= t(:overview) %> Stundeneintragstypmaterialien</h1>
+
+<table>
+  <tr>
+    <th><%= TimeEntryTypeMaterial.human_attribute_name(:amount) %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @time_entry_type_materials.each do |time_entry_type_material| %>
+  <tr>
+    <td><%= time_entry_type_material.amount %></td>
+    <td><%= link_to t(:show), time_entry_type_material %></td>
+    <td><%= link_to t(:edit), edit_time_entry_type_material_path(time_entry_type_material) %></td>
+    <td><%= link_to t(:destroy), time_entry_type_material, :confirm => t(:confirm_delete), :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Neues ' + TimeEntryTypeMaterial.model_name.human, new_time_entry_type_material_path %>

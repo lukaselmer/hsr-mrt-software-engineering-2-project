@@ -1,0 +1,12 @@
+<%= form_for(@time_entry_type) do |f| %>
+  <%= form_error_messages f %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

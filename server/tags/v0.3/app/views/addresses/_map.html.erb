@@ -1,0 +1,27 @@
+<% unless gps_position.nil? %>
+
+  <% content_for :head do %>
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+  <% end %>
+
+  <% content_for :on_load do "initialize()" end %>
+  <script type="text/javascript">
+    function initialize() {
+      var myLatlng = new google.maps.LatLng(<%= gps_position %> );
+      var myOptions = {
+        zoom: 14,
+        center: myLatlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title:"Hello World!"
+      });
+    }
+  </script>
+  <div id="map_canvas" style="width: 600px; height: 480px;"></div>
+  
+<% end %>

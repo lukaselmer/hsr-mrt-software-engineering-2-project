@@ -1,0 +1,36 @@
+<h1><%= t(:detail)%> Kunde</h1>
+<p>
+  <b><%= Customer.human_attribute_name(:id) %>:</b>
+  <%= @customer.id %>
+</p>
+
+<p>
+  <b><%= Customer.human_attribute_name(:first_name) %>:</b>
+  <%= @customer.first_name %>
+</p>
+
+<p>
+  <b><%= Customer.human_attribute_name(:last_name) %>:</b>
+  <%= @customer.last_name %>
+</p>
+
+<p>
+  <b><%= Customer.human_attribute_name(:phone) %>:</b>
+  <%= @customer.phone %>
+</p>
+
+<p>
+  <b><%= Customer.human_attribute_name(:address) %>:</b><br />
+    <% unless @customer.address.nil? %>
+    <%= render :partial => "addresses/address", :locals => { :address => @customer.address } %>
+    <%= render :partial => "addresses/map", :locals => { :gps_position => @customer.address.gps_position } %>
+  <% end %>
+</p>
+
+<p>
+  <b>Aufträge:</b>
+  <%= render :partial => "orders/table", :locals => { :orders => @customer.orders } %>
+</p>
+
+<%= link_to t(:edit), edit_customer_path(@customer) %> |
+<%= link_to t(:back), customers_path %>
