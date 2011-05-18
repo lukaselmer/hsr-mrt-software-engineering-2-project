@@ -86,7 +86,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	};
 
 	private void startTimeMeasurement() {
-
 		currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 		isMeasurementStarted = true;
 	}
@@ -97,12 +96,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			saveTimeEntry();
 			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 		} catch (SQLException e) {
-
 			Log.e(TAG, "Database Exception", e);
 			ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.",
 					TimeEntryActivity.this);
 		}
-
 		isMeasurementStarted = false;
 	}
 
@@ -110,21 +107,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
-
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
-
 		initLocationService();
-
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		updateView();
 	}
 
 	private void initLocationService() {
-
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
-
 		locationListener = new LocationListenerAdapter() {
 			@Override
 			public void onLocationChanged(Location location) {
@@ -133,7 +125,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(true);
 			}
 		};
-
 		locationManager.requestLocationUpdates(locationProvider, 60 * 1000, 0, locationListener); // update location maximal every 60 seconds
 	}
 
@@ -142,23 +133,18 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	 */
 	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, List<Customer> customers, GpsPosition currentPosition)
 			throws SQLException {
-
 		for (Customer c : customers) {
 			calculateAndSetDistances(dao, currentPosition, c);
 		}
 	}
 
 	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, GpsPosition currentPosition, Customer c) throws SQLException {
-
 		if (c.hasGpsPosition()) {
-
 			GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
 			if (customerPosition == null) {
-
 				c.setDistance(null);
 				return;
 			}
-
 			double distance = currentPosition.distanceTo(customerPosition);
 			c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
 		}
@@ -216,12 +202,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		populateTimeEntryTypes();
 
 		if (isMeasurementStarted) {
-
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
 		} else {
-
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
-
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
@@ -260,10 +243,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private int saveGpsPosition() throws SQLException {
 		if (currentPosition == null)
 			return -1;
-
 		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
 		gpsPositionDao.create(currentPosition);
-
 		return currentPosition.getId();
 	}
 
@@ -281,12 +262,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private Customer findCustomer(String customerStr) {
-		Iterator<Customer> i = customers.iterator();
-
-		while (i.hasNext()) {
-			Customer c = i.next();
-			if (c.toString().equals(customerStr.toString())) {
-				return c;
+		for (Customer customer : customers) {
+			if (customer.toString().equals(customerStr.toString())) {
+				return customer;
 			}
 		}
 		return null;
