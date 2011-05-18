@@ -27,7 +27,7 @@ class TimeEntriesControllerTest < ActionController::TestCase
   end
 
   test "should get destroy_all" do
-    get :destroy_all
+    delete :destroy_all
     assert_redirected_to time_entries_path
   end
 

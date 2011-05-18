@@ -8,7 +8,7 @@
   <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path %> |
 <% end %>
   <% if write_access? TimeEntry.new %>
-  <%= link_to 'Alle Stundeneinträge löschen', destroy_all_time_entries_path %> |
+  <%= link_to 'Alle Stundeneinträge löschen', destroy_all_time_entries_path, :method => :delete, :confirm => t(:confirm_delete) %> |
 <% end %>
 
 <%= link_to 'Nur unzugewiesene Stundeneinträge anzeigen', time_entries_unassigned_path %> |
