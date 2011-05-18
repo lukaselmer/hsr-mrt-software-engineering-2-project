@@ -278,6 +278,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private synchronized List<Customer> getCustomers() {
 		if (customers == null)
 			loadCustomers();
+		
 		return customers;
 	}
 
