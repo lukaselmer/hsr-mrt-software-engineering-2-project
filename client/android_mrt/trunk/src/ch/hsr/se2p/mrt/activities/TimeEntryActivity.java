@@ -107,6 +107,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		mrtApplication = (MRTApplication) getApplication();
 		initLocationService();
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
+		populateSpinnerTimeEntryTypes();
 		updateView();
 	}
 
@@ -207,7 +208,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void updateView() {
 		sortCustomersByCurrentLocation();
 		populateComboboxCustomers();
-		populateSpinnerTimeEntryTypes();
+		
 
 		if (isMeasurementStarted) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
@@ -216,6 +217,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			((TextView) findViewById(R.id.txtDescription)).setText("");
 			((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
 			((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
+			populateSpinnerTimeEntryTypes();
 		}
 	}
 
@@ -232,8 +234,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-
-		if (!(spinnerTimeEntryTypes.getSelectedItem().equals(spinnerTimeEntryTypes.getItemAtPosition(0))))
+		
+		if (spinnerTimeEntryTypes.getSelectedItemPosition() != 0)
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinnerTimeEntryTypes.getSelectedItem()).getId());
 
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());

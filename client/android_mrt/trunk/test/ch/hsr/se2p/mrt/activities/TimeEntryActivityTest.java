@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -119,6 +120,7 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 		try {
 			startAndStopTimeMeasurement();
 			timeEntry = getTimeEntry(getTimeEntryDaoCount() - 1);
+			
 			assertEquals(getTimeEntryType(TEST_POSITION - 1).getId(), timeEntry.getTimeEntryTypeId());
 		} catch (SQLException e) {
 			e.printStackTrace();
