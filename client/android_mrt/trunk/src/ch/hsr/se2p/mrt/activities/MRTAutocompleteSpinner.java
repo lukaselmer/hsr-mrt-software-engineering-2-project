@@ -49,7 +49,7 @@ public class MRTAutocompleteSpinner extends LinearLayout {
 		textView.setSingleLine();
 		textView.setInputType(getInputTypeForTextView());
 		textView.setRawInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-		textView.setCompletionHint("Kunde");
+		textView.setHint("Kunde");
 		addView(textView, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
 	}
 
