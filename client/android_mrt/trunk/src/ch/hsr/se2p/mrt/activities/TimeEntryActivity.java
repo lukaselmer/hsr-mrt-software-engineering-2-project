@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,10 +60,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
 	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 300000;// Circle 30km;
 
-	private LocationManager locationManager;
-	private LocationListener locationListener;
-	private String locationProvider;
-	private GpsPosition currentPosition;
+	private LocationService locationService;
 
 	private boolean isMeasurementStarted = false;
 	private TimeEntry currentTimeEntry;
@@ -112,17 +108,18 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initLocationService() {
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationProvider = locationManager.getBestProvider(getInitializedCriteria(), true);
-		locationListener = new LocationListenerAdapter() {
+		LocationListenerAdapter locationListener = new LocationListenerAdapter() {
 			@Override
 			public void onLocationChanged(Location location) {
-				currentPosition = new GpsPosition(location);
 				sortCustomersByCurrentLocation();
 				setGPSImage(true);
 			}
 		};
-		locationManager.requestLocationUpdates(locationProvider, 10 * 1000, 0, locationListener); // update location maximal every 60 seconds
+		locationService = new LocationService(getLocationManager(), locationListener);
+	}
+
+	private LocationManager getLocationManager() {
+		return (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 	}
 
 	/**
@@ -155,16 +152,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		for (Customer c : customers) {
 			c.setDistance(null);
 		}
-	}
-
-	private Criteria getInitializedCriteria() {
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_FINE);
-		criteria.setAltitudeRequired(false);
-		criteria.setBearingRequired(false);
-		criteria.setCostAllowed(true);
-		criteria.setPowerRequirement(Criteria.POWER_LOW);
-		return criteria;
 	}
 
 	private void populateComboboxCustomers() {
@@ -240,7 +227,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 		currentTimeEntry.setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
 
-		if (currentPosition != null)
+		if (locationService.getCurrentGPSPosition() != null)
 			currentTimeEntry.setGpsPositionId(saveGpsPosition());
 
 		if (comboboxCustomers.getText().length() != 0 && getCustomer() != null)
@@ -252,11 +239,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private int saveGpsPosition() throws SQLException {
-		if (currentPosition == null)
+		if (locationService.getCurrentGPSPosition() == null)
 			return -1;
 		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
-		gpsPositionDao.create(currentPosition);
-		return currentPosition.getId();
+		gpsPositionDao.create(locationService.getCurrentGPSPosition());
+		return locationService.getCurrentGPSPosition().getId();
 	}
 
 	private Customer getCustomer() throws SQLException {
@@ -299,7 +286,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void logout() {
-		locationManager.removeUpdates(locationListener);
+		locationService.stop();
 		mrtApplication.logout();
 		this.startActivity(new Intent(this, LoginActivity.class));
 		finish();
@@ -307,7 +294,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void sortCustomersByCurrentLocation() {
 		try {
-			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), currentPosition);
+			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), locationService.getCurrentGPSPosition());
 			Collections.sort(getCustomers());
 			populateComboboxCustomers();
 		} catch (SQLException e) {
