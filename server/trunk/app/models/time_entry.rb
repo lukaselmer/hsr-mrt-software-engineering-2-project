@@ -18,4 +18,8 @@ class TimeEntry < ActiveRecord::Base
   def duration
     Time.at(time_stop - time_start).gmtime
   end
+  
+  def to_s
+    "##{id}: #{user}; #{created_at}"
+  end
 end

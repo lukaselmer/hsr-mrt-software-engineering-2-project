@@ -1,0 +1,8 @@
+<ul>
+  <% time_entries.each do |time_entry| %>
+    <% next if time_entry.nil? %>
+    <li>
+      <%= link_to time_entry do %><%= time_entry %><% end %>
+    </li>
+  <% end %>
+</ul>

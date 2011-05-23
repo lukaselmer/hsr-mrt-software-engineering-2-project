@@ -21,13 +21,7 @@
 
   <p>
     <b><%= Order.human_attribute_name(:time_entries) %>:</b>
-    <%= render :partial => "time_entries/table", :locals => { :time_entries => @order.time_entries, :fields => [ :id, :time_entry_type, :user, :duration ] } %>
-
-    <br />
-
-    <% if write_access? TimeEntry.new %>
-      <%= link_to 'Neuer ' + TimeEntry.model_name.human, new_time_entry_path(:order_id => @order.id) %>
-    <% end %>
+    <%= render :partial => "accomplished_time_entries", :locals => { :time_entries => @order.time_entries } %>
 
   </p>
 
