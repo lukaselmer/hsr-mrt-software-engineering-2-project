@@ -7,6 +7,14 @@ class TimeEntryTest < ActiveSupport::TestCase
     @time_entry_2 = time_entries :two
   end
 
+  test "correct String representation" do
+    expected_string = "##{@time_entry.id}: #{@time_entry.user}; #{@time_entry.created_at}"
+    expected_string_2 = "##{@time_entry_2.id}: #{@time_entry_2.user}; #{@time_entry_2.created_at}"
+
+    assert_equal expected_string, @time_entry.to_s
+    assert_equal expected_string_2, @time_entry_2.to_s
+  end
+
   test "remove_hashcode removes hashcode" do
     assert_not_nil @time_entry.hashcode
     @time_entry.remove_hashcode
