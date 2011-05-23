@@ -8,8 +8,7 @@ import android.location.LocationManager;
 
 class LocationService {
 	private final LocationManager locationManager;
-	private final LocationListener locationListener;
-	private final LocationListener activityLocationListener;
+	private final LocationListener locationListener, activityLocationListener;
 	protected Location currentLocation;
 	private GpsPosition currentGPSPosition;
 
@@ -17,8 +16,9 @@ class LocationService {
 		this.locationManager = locationManager;
 		this.activityLocationListener = activityLocationListener;
 		locationListener = getLocationListener();
+		currentLocation = locationManager.getLastKnownLocation(getLocationProvider());
 		// Update location maximal every 10 seconds
-		locationManager.requestLocationUpdates(getLocationProvider(), 10 * 1000, 0, this.activityLocationListener);
+		locationManager.requestLocationUpdates(getLocationProvider(), 10 * 1000, 0, locationListener);
 	}
 
 	protected Location getCurrentLocation() {
@@ -27,6 +27,7 @@ class LocationService {
 
 	protected GpsPosition getCurrentGPSPosition() {
 		return currentGPSPosition;
+		// currentGPSPosition = currentLocation == null ? null : new GpsPosition(currentLocation);
 	}
 
 	private LocationListener getLocationListener() {
@@ -34,7 +35,7 @@ class LocationService {
 			@Override
 			public void onLocationChanged(Location location) {
 				currentLocation = location;
-				currentGPSPosition = new GpsPosition(currentLocation);
+				currentGPSPosition = location == null ? null : new GpsPosition(location);
 				activityLocationListener.onLocationChanged(location);
 			}
 		};

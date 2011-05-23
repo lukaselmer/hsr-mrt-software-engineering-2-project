@@ -12,9 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -98,10 +96,10 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.time_entry);
+		initLocationService();
 		loadCustomers();
 		ActivityHelper.startSyncService(this);
 		mrtApplication = (MRTApplication) getApplication();
-		initLocationService();
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		populateSpinnerTimeEntryTypes();
 		updateView();
@@ -111,7 +109,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		LocationListenerAdapter locationListener = new LocationListenerAdapter() {
 			@Override
 			public void onLocationChanged(Location location) {
-				sortCustomersByCurrentLocation();
+				sortCustomersByCurrentLocation(location);
 				setGPSImage(true);
 			}
 		};
@@ -193,9 +191,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void updateView() {
-		sortCustomersByCurrentLocation();
+		// sortCustomersByCurrentLocation();
 		populateComboboxCustomers();
-		
 
 		if (isMeasurementStarted) {
 			setLayout("Zeit gestartet um " + new Time(currentTimeEntry.getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
@@ -221,7 +218,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
-		
+
 		if (spinnerTimeEntryTypes.getSelectedItemPosition() != 0)
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinnerTimeEntryTypes.getSelectedItem()).getId());
 
@@ -292,7 +289,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		finish();
 	}
 
-	private void sortCustomersByCurrentLocation() {
+	private void sortCustomersByCurrentLocation(Location location) {
 		try {
 			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), locationService.getCurrentGPSPosition());
 			Collections.sort(getCustomers());
