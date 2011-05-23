@@ -14,3 +14,5 @@ de:
   persist_successful: wurde erfolgreich persistent gespeichert.
   pieces: Stück
   remember_me: 
+  remove: Entfernen
+  confirm_remove: Wirklich entfernen?
