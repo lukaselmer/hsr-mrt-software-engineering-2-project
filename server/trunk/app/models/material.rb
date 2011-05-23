@@ -12,7 +12,7 @@ class Material < ActiveRecord::Base
   scope :active, where(:valid_until => nil)
 
   def self.for_select
-    find(:active, :order => :description).collect { |o| [o, o.id] }
+    active.order("description asc").collect { |o| [o, o.id] }
   end
   
   def to_s
