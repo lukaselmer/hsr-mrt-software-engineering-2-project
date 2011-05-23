@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   end
 
   def self.for_select
-    active.order("first_name asc").collect { |u| [u, u.id] }
+    find(:all, :order => :first_name).collect { |u| [u, u.id] }
   end
 
   def to_s
