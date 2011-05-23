@@ -19,7 +19,7 @@
 
       <% if write_access? user %>
         <td><%= link_to t(:edit), edit_user_path(user) %></td>
-        <td><%= link_to t(:destroy), user_path(user), :confirm => :confirm_delete, :method => :delete %></td>
+        <td><%= link_to t(:destroy), user_path(user), :confirm => t(:confirm_delete), :method => :delete %></td>
       <% end %>
     </tr>
   <% end %>
