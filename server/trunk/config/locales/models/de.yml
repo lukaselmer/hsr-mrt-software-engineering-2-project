@@ -19,7 +19,7 @@ de:
       order:
         id: ID
         customer_id: Kunde
-        time_entries: Zeiteinträge
+        time_entries: Stundeneinträge
         address: Adresse
         created_at: Erstellt am
         description: Beschreibung
