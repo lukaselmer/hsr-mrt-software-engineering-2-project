@@ -22,7 +22,7 @@ valid_geocoding_address:
   zip: 8046
 
 invalid_geocoding_address:
-  line1: bluuuuuuu
+  line1: Bluuuuuuu
   line2:
   line3:
   place: Blaaaaaaaaaaaaa

@@ -9,8 +9,8 @@ class AddressTest < ActiveSupport::TestCase
   end
   
   test "return appropriate array for Selection" do
-    expected_array = [[@address_2,@address_2.id],
-      [@address_3,@address_3.id], [@address_4,@address_4.id],[@address_1,@address_1.id]]
+    expected_array = [[@address_4,@address_4.id],
+      [@address_3,@address_3.id], [@address_2,@address_2.id],[@address_1,@address_1.id]]
     assert_equal expected_array, Address.for_select
   end
 
