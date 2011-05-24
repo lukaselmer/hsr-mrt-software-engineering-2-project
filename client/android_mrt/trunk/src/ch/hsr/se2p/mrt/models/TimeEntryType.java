@@ -12,7 +12,7 @@ import com.j256.ormlite.field.DatabaseField;
 /**
  * Saves needed information about the timeentrytype, which was received from the server.
  */
-public class TimeEntryType implements Receivable {
+public class TimeEntryType implements Receivable, Comparable<TimeEntryType> {
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField
@@ -89,5 +89,10 @@ public class TimeEntryType implements Receivable {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int compareTo(TimeEntryType anotherTimeEntryType) {
+		return getName().compareTo(anotherTimeEntryType.getName());	
 	}
 }

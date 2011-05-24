@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -160,10 +161,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void populateSpinnerTimeEntryTypes() {
 		loadTimeEntryTypes();
 		spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapater = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
+		Collections.sort(timeEntryTypes);
+		timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
 				timeEntryTypes);
-		timeEntryTypeAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerTimeEntryTypes.setAdapter(timeEntryTypeAdapater);
+		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerTimeEntryTypes.setAdapter(timeEntryTypeAdapter);
 	}
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
@@ -184,7 +187,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void loadTimeEntryTypes() {
 		try {
 			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
-			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
 		} catch (SQLException e) {
 			Log.e(TAG, "Init timeentry types", e);
 		}
