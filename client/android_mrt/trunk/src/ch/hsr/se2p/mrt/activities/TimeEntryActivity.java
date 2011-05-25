@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,14 +105,14 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initLocationService() {
-		LocationListenerAdapter locationListener = new LocationListenerAdapter() {
+		Runnable locationChangedAction = new Runnable() {
 			@Override
-			public void onLocationChanged(Location location) {
-				sortCustomersByCurrentLocation(location);
+			public void run() {
+				sortCustomersByCurrentLocation();
 				setGPSImage(true);
 			}
 		};
-		locationService = new LocationService(getLocationManager(), locationListener);
+		locationService = new LocationService(getLocationManager(), locationChangedAction);
 	}
 
 	private LocationManager getLocationManager() {
@@ -291,13 +289,15 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		finish();
 	}
 
-	private void sortCustomersByCurrentLocation(Location location) {
+	private void sortCustomersByCurrentLocation() {
 		try {
 			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), locationService.getCurrentGPSPosition());
 			Collections.sort(getCustomers());
 			populateComboboxCustomers();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Log.e(TAG, "SQLException", e);
+		} catch (NullPointerException e) {
+			Log.e(TAG, "ORM Lite Exception", e);
 		}
 	}
 
