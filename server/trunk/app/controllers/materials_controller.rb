@@ -75,7 +75,7 @@ class MaterialsController < ApplicationController
 
     if @material.update_attribute(:valid_until, Time.now)
       redirect_to(materials_url)
-  else
+    else
       redirect_to(materials_url, :error => Material.model_name.human + ' ' + t(:deletion_unsuccessful))
     end
   end

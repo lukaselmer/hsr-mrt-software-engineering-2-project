@@ -52,12 +52,23 @@ class CustomersController < ApplicationController
     end
   end
 
-  # DELETE /customers/1
-  def destroy
+  # DELETE /customers/1 really delete customer
+  def delete
     @customer = Customer.find(params[:id])
     @customer.destroy
 
     redirect_to(customers_url)
+  end
+  
+  # DELETE /materials/1 to historize customer
+  def destroy
+    @customer = Customer.find(params[:id])
+
+    if @customer.update_attribute(:deleted_at, Time.now)
+      redirect_to(customers_url)
+    else
+      redirect_to(customers_url, :error => Customer.model_name.human + ' ' + t(:deletion_unsuccessful))
+    end
   end
 
   # GET /customers/syncronize.  Receive all updated customers as JSON (see API Documentation)

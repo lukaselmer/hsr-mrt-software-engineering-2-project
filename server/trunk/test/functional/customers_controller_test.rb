@@ -57,12 +57,20 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should destroy customer" do
-    assert_difference('Customer.count', -1) do
+    assert_no_difference('Customer.count') do
       delete :destroy, :id => @customer.to_param
     end
 
     assert_redirected_to customers_path
   end
+  
+  test "should delete customer" do
+      assert_difference('Customer.count', -1) do
+        delete :delete, :id => @customer.to_param
+      end
+  
+      assert_redirected_to customers_path
+    end
 
   test "should get all customers when synchronizing without last_update" do
     post :synchronize, :format => :json
