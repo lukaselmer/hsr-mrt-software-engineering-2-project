@@ -31,7 +31,7 @@ class Measurement {
 		return timeEntry;
 	}
 
-	public void stop(Spinner spinnerTimeEntryTypes, TextView textView, Integer gpsPositionId, MRTAutocompleteSpinner comboboxCustomers,
+	public TimeEntry stop(Spinner spinnerTimeEntryTypes, TextView textView, Integer gpsPositionId, MRTAutocompleteSpinner comboboxCustomers,
 			List<Customer> customers) {
 		started = false;
 		timeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
@@ -39,6 +39,7 @@ class Measurement {
 		timeEntry.setDescription(textView.getText().toString());
 		timeEntry.setGpsPositionId(gpsPositionId);
 		setCustomer(comboboxCustomers, customers);
+		return timeEntry;
 	}
 
 	private void setCustomer(MRTAutocompleteSpinner comboboxCustomers, List<Customer> customers) {

@@ -2,6 +2,7 @@ package ch.hsr.se2p.mrt.models;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import org.json.JSONException;
