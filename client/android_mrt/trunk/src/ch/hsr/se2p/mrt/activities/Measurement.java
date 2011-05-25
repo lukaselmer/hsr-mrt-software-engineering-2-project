@@ -38,8 +38,6 @@ class Measurement {
 		setTimeEntryType(spinnerTimeEntryTypes);
 		timeEntry.setDescription(textView.getText().toString());
 		timeEntry.setGpsPositionId(gpsPositionId);
-		System.out.println(gpsPositionId);
-		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 		setCustomer(comboboxCustomers, customers);
 		return timeEntry;
 	}
