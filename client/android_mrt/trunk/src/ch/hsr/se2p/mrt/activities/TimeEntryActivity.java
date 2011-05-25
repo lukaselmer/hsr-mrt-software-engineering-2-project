@@ -50,7 +50,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private boolean isMeasurementStarted = false;
 	private TimeEntry currentTimeEntry;
-	private Spinner spinnerTimeEntryTypes;
 	private MRTAutocompleteSpinner comboboxCustomers;
 	private final List<Customer> customers = new ArrayList<Customer>();
 	private final List<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
@@ -83,14 +82,18 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ActivityHelper.startSyncService(this);
 		setContentView(R.layout.time_entry);
+		mrtApplication = (MRTApplication) getApplication();
 		initLocationService();
 		loadCustomers();
-		ActivityHelper.startSyncService(this);
-		mrtApplication = (MRTApplication) getApplication();
-		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
+		setStartStopButtonListener();
 		populateSpinnerTimeEntryTypes();
 		updateView();
+	}
+
+	private void setStartStopButtonListener() {
+		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 	}
 
 	private void initLocationService() {
@@ -144,12 +147,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void populateSpinnerTimeEntryTypes() {
 		loadTimeEntryTypes();
-		spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		Collections.sort(timeEntryTypes);
-		timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
 		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinnerTimeEntryTypes.setAdapter(timeEntryTypeAdapter);
+		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setAdapter(timeEntryTypeAdapter);
 	}
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
@@ -171,6 +171,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		try {
 			timeEntryTypes.clear();
 			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
+			Collections.sort(timeEntryTypes);
+			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
 		} catch (SQLException e) {
 			Log.e(TAG, "Init timeentry types", e);
 		}
@@ -205,6 +207,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void saveTimeEntry() throws SQLException {
 		currentTimeEntry.setTimeStop(new Timestamp(System.currentTimeMillis()));
 
+		Spinner spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		if (spinnerTimeEntryTypes.getSelectedItemPosition() != 0)
 			currentTimeEntry.setTimeEntryTypeId(((TimeEntryType) spinnerTimeEntryTypes.getSelectedItem()).getId());
 
