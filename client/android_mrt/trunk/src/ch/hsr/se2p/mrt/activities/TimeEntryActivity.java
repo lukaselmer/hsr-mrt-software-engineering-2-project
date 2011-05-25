@@ -53,7 +53,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private Spinner spinnerTimeEntryTypes;
 	private MRTAutocompleteSpinner comboboxCustomers;
 	private final List<Customer> customers = new ArrayList<Customer>();
-	private List<TimeEntryType> timeEntryTypes;
+	private final List<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
 	private MRTApplication mrtApplication;
 	private ArrayAdapter<Customer> customerAdapter;
 
@@ -172,7 +172,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void loadTimeEntryTypes() {
 		try {
-			timeEntryTypes = getHelper().getTimeEntryTypeDao().queryForAll();
+			timeEntryTypes.clear();
+			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
 		} catch (SQLException e) {
 			Log.e(TAG, "Init timeentry types", e);
 		}
