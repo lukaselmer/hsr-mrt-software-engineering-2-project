@@ -204,7 +204,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void saveTimeEntry() throws SQLException {
-		getCurrentTimeEntry().setTimeStop(new Timestamp(System.currentTimeMillis()));
+		measurement.stop();
+		measurement.getTimeEntry().setTimeStop(new Timestamp(System.currentTimeMillis()));
 
 		Spinner spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		if (spinnerTimeEntryTypes.getSelectedItemPosition() != 0)
@@ -292,7 +293,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void startOrStopTimeMeasurement() {
 		if (measurement.isStarted()) {
 			stopTimeMeasurement();
-			measurement.stop();
 		} else
 			measurement = new Measurement();
 	}
