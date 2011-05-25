@@ -35,7 +35,6 @@ import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.android.apptools.OpenHelperManager.SqliteOpenHelperFactory;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -47,12 +46,7 @@ import com.j256.ormlite.dao.Dao;
  */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	static {
-		OpenHelperManager.setOpenHelperFactory(new SqliteOpenHelperFactory() {
-			@Override
-			public OrmLiteSqliteOpenHelper getHelper(Context context) {
-				return new DatabaseHelper(context);
-			}
-		});
+		OpenHelperManager.setOpenHelperClass(OrmLiteSqliteOpenHelper.class);
 	}
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
 	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 30000;// Circle 30km;
@@ -161,8 +155,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
 		Collections.sort(timeEntryTypes);
 		timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item,
-				timeEntryTypes);
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
 		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerTimeEntryTypes.setAdapter(timeEntryTypeAdapter);
 	}
@@ -191,7 +184,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void updateView() {
-		// sortCustomersByCurrentLocation();
+		sortCustomersByCurrentLocation();
 		populateComboboxCustomers();
 
 		if (isMeasurementStarted) {
