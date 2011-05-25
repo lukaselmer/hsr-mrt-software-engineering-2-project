@@ -13,18 +13,12 @@ import ch.hsr.se2p.mrt.application.MRTApplication;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 import ch.hsr.se2p.mrt.network.UserHelper;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
 /**
  * Performs the user login. Requires email and password. Preferences saving is available. Shows warnings when data is incomplete or incorrect.
  */
 public class LoginActivity extends OrmLiteBaseActivity<DatabaseHelper> {
-	static {
-		OpenHelperManager.setOpenHelperClass(OrmLiteSqliteOpenHelper.class);
-	}
-
 	private EditText editEmail;
 	private EditText editPassword;
 	private CheckBox chbxSaveLogin;

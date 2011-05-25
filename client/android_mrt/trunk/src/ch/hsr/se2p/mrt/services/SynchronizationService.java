@@ -7,14 +7,9 @@ import android.os.IBinder;
 import android.util.Log;
 import ch.hsr.se2p.mrt.database.DatabaseHelper;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseService;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
 public class SynchronizationService extends OrmLiteBaseService<DatabaseHelper> {
-	static {
-		OpenHelperManager.setOpenHelperClass(OrmLiteSqliteOpenHelper.class);
-	}
 	private static final String TAG = SynchronizationService.class.getSimpleName();
 
 	private Timer timer;

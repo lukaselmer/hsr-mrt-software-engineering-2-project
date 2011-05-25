@@ -34,9 +34,7 @@ import ch.hsr.se2p.mrt.models.GpsPosition;
 import ch.hsr.se2p.mrt.models.TimeEntry;
 import ch.hsr.se2p.mrt.models.TimeEntryType;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
-import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 
 /**
@@ -45,11 +43,8 @@ import com.j256.ormlite.dao.Dao;
  * TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
  */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
-	static {
-		OpenHelperManager.setOpenHelperClass(OrmLiteSqliteOpenHelper.class);
-	}
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
-	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 30000;// Circle 30km;
+	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 30000; // Circle 30km;
 
 	private LocationService locationService;
 
@@ -300,5 +295,12 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		else
 			currentTimeEntry = new TimeEntry(new Timestamp(System.currentTimeMillis()));
 		isMeasurementStarted = !isMeasurementStarted;
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (locationService != null)
+			locationService.stop();
+		super.onDestroy();
 	}
 }
