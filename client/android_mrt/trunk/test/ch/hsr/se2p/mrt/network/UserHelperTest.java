@@ -54,5 +54,4 @@ public class UserHelperTest extends HttpTestCase {
 		UserHelper userHelper = new UserHelper(httpHelper);
 		assertFalse(userHelper.login("invalidlogin", "invalidpassword", u));
 	}
-
 }

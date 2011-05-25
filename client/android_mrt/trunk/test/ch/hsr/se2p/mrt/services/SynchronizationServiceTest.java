@@ -1,17 +1,8 @@
 package ch.hsr.se2p.mrt.services;
 
-import android.test.ServiceTestCase;
+/**
+ * Tests would have been possible but would have consumed too much time for this short project
+ */
+public class SynchronizationServiceTest {
 
-public class SynchronizationServiceTest extends ServiceTestCase<SynchronizationService> {
-
-	// TODO: Write more tests
-
-	public SynchronizationServiceTest() {
-		super(SynchronizationService.class);
-	}
-
-	public void testCustomerSync() {
-		if (true)
-			assertTrue(true);
-	}
 }

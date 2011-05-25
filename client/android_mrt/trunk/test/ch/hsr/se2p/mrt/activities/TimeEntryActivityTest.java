@@ -1,6 +1,8 @@
 package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
@@ -181,7 +183,13 @@ public class TimeEntryActivityTest extends ActivityInstrumentationTestCase2<Time
 	}
 
 	private TimeEntryType getTimeEntryType(int index) throws SQLException {
-		return getTimeEntryTypeDao().queryForAll().get(index);
+		return sortTimeEntryTypes().get(index);
+	}
+
+	private List<TimeEntryType> sortTimeEntryTypes() throws SQLException {
+		final List<TimeEntryType> timeEntryTypes = getTimeEntryTypeDao().queryForAll();
+		Collections.sort(timeEntryTypes);
+		return timeEntryTypes;
 	}
 
 	private Dao<TimeEntryType, Integer> getTimeEntryTypeDao() throws SQLException {
