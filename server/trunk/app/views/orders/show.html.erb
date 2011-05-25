@@ -10,6 +10,11 @@
     <b><%= Order.human_attribute_name(:description) %>:</b>
     <%= @order.description %>
   </p>
+  
+  <p>
+    <b><%= Order.human_attribute_name(:created_at) %>:</b>
+    <%= l @order.created_at %>
+  </p>
 
   <p>
     <b><%= Order.human_attribute_name(:address) %>:</b>
