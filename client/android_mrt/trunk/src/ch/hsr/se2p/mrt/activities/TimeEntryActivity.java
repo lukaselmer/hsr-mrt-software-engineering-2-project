@@ -101,11 +101,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 				setGPSImage(true);
 			}
 		};
-		locationService = new LocationService(getLocationManager(), locationChangedAction);
-	}
-
-	private LocationManager getLocationManager() {
-		return (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationService = new LocationService(lm, locationChangedAction);
 	}
 
 	/**
