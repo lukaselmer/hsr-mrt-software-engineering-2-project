@@ -33,7 +33,7 @@ class LocationService {
 	}
 
 	protected GpsPosition getCurrentGPSPosition() {
-		return currentLocation == null ? null : new GpsPosition(currentLocation);
+		return currentGPSPosition;
 	}
 
 	private String getLocationProvider() {

@@ -101,7 +101,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
 		populateSpinnerTimeEntryTypes();
 		updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
-		populateSpinnerTimeEntryTypes();
 		updateView();
 	}
 
