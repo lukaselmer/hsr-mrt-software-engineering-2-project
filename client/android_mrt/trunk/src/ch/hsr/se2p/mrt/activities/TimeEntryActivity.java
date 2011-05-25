@@ -182,7 +182,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		populateComboboxCustomers();
 
 		if (measurement.isStarted()) {
-			setLayout("Zeit gestartet um " + new Time(getCurrentTimeEntry().getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
+			setLayout("Zeit gestartet um " + new Time(getTimeEntry().getTimeStart().getTime()) + " Uhr", "Stop", Color.RED);
 		} else {
 			setLayout("Zeit gestoppt", "Start", Color.GREEN);
 			((TextView) findViewById(R.id.txtDescription)).setText("");
@@ -204,44 +204,19 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void saveTimeEntry() throws SQLException {
-		measurement.stop();
-		measurement.getTimeEntry().setTimeStop(new Timestamp(System.currentTimeMillis()));
-
-		Spinner spinnerTimeEntryTypes = (Spinner) findViewById(R.id.spinnerTimeEntryType);
-		if (spinnerTimeEntryTypes.getSelectedItemPosition() != 0)
-			getCurrentTimeEntry().setTimeEntryTypeId(((TimeEntryType) spinnerTimeEntryTypes.getSelectedItem()).getId());
-
-		getCurrentTimeEntry().setDescription(((TextView) findViewById(R.id.txtDescription)).getText().toString());
-
-		if (locationService.getCurrentGPSPosition() != null)
-			getCurrentTimeEntry().setGpsPositionId(saveGpsPosition());
-
-		if (comboboxCustomers.getText().length() != 0 && getCustomer() != null)
-			getCurrentTimeEntry().setCustomerId(getCustomer().getId());
-
+		measurement.stop((Spinner) findViewById(R.id.spinnerTimeEntryType), (TextView) findViewById(R.id.txtDescription), saveGpsPosition(),
+				comboboxCustomers, customers);
 		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-		timeEntryDao.create(getCurrentTimeEntry());
-		Log.i(TAG, "Inserted ID: " + getCurrentTimeEntry().getId());
+		timeEntryDao.create(getTimeEntry());
+		Log.i(TAG, "Inserted ID: " + getTimeEntry().getId());
 	}
 
-	private int saveGpsPosition() throws SQLException {
+	private Integer saveGpsPosition() throws SQLException {
 		if (locationService.getCurrentGPSPosition() == null)
-			return -1;
+			return null;
 		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
 		gpsPositionDao.create(locationService.getCurrentGPSPosition());
 		return locationService.getCurrentGPSPosition().getId();
-	}
-
-	private Customer getCustomer() throws SQLException {
-		String textCustomer = comboboxCustomers.getText();
-		if (textCustomer.length() == 0)
-			return null;
-		for (Customer customer : getCustomers()) {
-			if (customer.toString().equals(textCustomer)) {
-				return customer;
-			}
-		}
-		return null;
 	}
 
 	private synchronized List<Customer> getCustomers() {
@@ -307,7 +282,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	/**
 	 * @return the currentTimeEntry
 	 */
-	private TimeEntry getCurrentTimeEntry() {
+	private TimeEntry getTimeEntry() {
 		return measurement.getTimeEntry();
 	}
 }
