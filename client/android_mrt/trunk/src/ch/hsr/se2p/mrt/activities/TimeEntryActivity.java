@@ -206,9 +206,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void saveTimeEntry() throws SQLException {
 		measurement.stop((Spinner) findViewById(R.id.spinnerTimeEntryType), (TextView) findViewById(R.id.txtDescription), saveGpsPosition(),
 				comboboxCustomers, customers);
-		Dao<TimeEntry, Integer> timeEntryDao = getHelper().getTimeEntryDao();
-		timeEntryDao.create(getTimeEntry());
-		Log.i(TAG, "Inserted ID: " + getTimeEntry().getId());
+		getHelper().getTimeEntryDao().create(getTimeEntry());
+		Log.v(TAG, "TimeEntry with ID " + getTimeEntry().getId() + " created");
 	}
 
 	private Integer saveGpsPosition() throws SQLException {
