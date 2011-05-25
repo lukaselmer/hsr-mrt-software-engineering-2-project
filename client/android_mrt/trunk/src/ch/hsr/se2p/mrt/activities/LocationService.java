@@ -15,7 +15,7 @@ class LocationService {
 			currentGPSPosition = location == null ? null : new GpsPosition(location);
 			locationChangedAction.run();
 		}
-	};;
+	};
 	private final Runnable locationChangedAction;
 	protected Location currentLocation;
 	private GpsPosition currentGPSPosition;
@@ -33,8 +33,7 @@ class LocationService {
 	}
 
 	protected GpsPosition getCurrentGPSPosition() {
-		return currentGPSPosition;
-		// currentGPSPosition = currentLocation == null ? null : new GpsPosition(currentLocation);
+		return currentLocation == null ? null : new GpsPosition(currentLocation);
 	}
 
 	private String getLocationProvider() {
