@@ -2,7 +2,11 @@ Mrt::Application.routes.draw do
   
   resources :time_entry_type_materials
   resources :applied_materials
-  resources :materials
+  resources :materials do
+    member do
+      delete 'delete'
+    end
+  end
   
   resources :addresses
 

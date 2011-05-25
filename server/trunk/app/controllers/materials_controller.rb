@@ -59,13 +59,24 @@ class MaterialsController < ApplicationController
     end
   end
 
-  # DELETE /materials/1
-  def destroy
+  # Really delete material
+  def delete
     @material = Material.find(params[:id])
     @material.destroy
 
     respond_to do |format|
       format.html { redirect_to(materials_url) }
+    end
+  end
+
+  # DELETE /materials/1 to historize material
+  def destroy
+    @material = Material.find(params[:id])
+
+    if @material.update_attribute(:valid_until, Time.now)
+      redirect_to(materials_url)
+  else
+      redirect_to(materials_url, :error => Material.model_name.human + ' ' + t(:deletion_unsuccessful))
     end
   end
 end

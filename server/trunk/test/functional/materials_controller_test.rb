@@ -57,8 +57,16 @@ class MaterialsControllerTest < ActionController::TestCase
   end
 
   test "should destroy material" do
-    assert_difference('Material.count', -1) do
+    assert_no_difference('Material.count') do
       delete :destroy, :id => @material.to_param
+    end
+
+    assert_redirected_to materials_path
+  end
+  
+  test "should delete material" do
+    assert_difference('Material.count', -1) do
+      delete :delete, :id => @material.to_param
     end
 
     assert_redirected_to materials_path
