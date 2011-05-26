@@ -5,5 +5,5 @@
     <string name="btnCreateTimeEntryWithoutDescription">Create TimeEntry without description</string>
     <string name="btnSendTimeEntries">Send TimeEntries</string>
     <string name="logout">Abmelden</string>
-    <string name="refreshMenu">Refresh Menu</string>
+    <string name="refreshMenu">Aktualisieren</string>
 </resources>
