@@ -2,7 +2,6 @@ package ch.hsr.se2p.mrt.activities;
 
 import java.sql.SQLException;
 import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -69,7 +68,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
 			updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
 			resetInputFields();
-			populateSpinnerTimeEntryTypes();
+			initSpinnerTimeEntryTypes();
 		} catch (SQLException e) {
 			logAndDisplaySQLException(e);
 		}
@@ -99,7 +98,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initGui() {
 		loadCustomers();
 		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
-		populateSpinnerTimeEntryTypes();
+		initSpinnerTimeEntryTypes();
 		updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
 		updateView();
 	}
@@ -151,7 +150,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		comboboxCustomers.setAdapter(getCustomerAdapter());
 	}
 
-	private void populateSpinnerTimeEntryTypes() {
+	private void initSpinnerTimeEntryTypes() {
 		loadTimeEntryTypes();
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
 		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -209,29 +208,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return customers;
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.main_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle item selection
-		switch (item.getItemId()) {
-		case R.id.logout:
-			logout();
-			return true;
-		case R.id.refreshMenu:
-			updateView();
-			Toast.makeText(getApplicationContext(), "Kunden und Stundeneintragstypen wurden aktualisiert.", Toast.LENGTH_LONG).show();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
-
 	private void logout() {
 		locationService.stop();
 		mrtApplication.logout();
@@ -279,10 +255,26 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		super.onDestroy();
 	}
 
-	/**
-	 * @return the currentTimeEntry
-	 */
-	private TimeEntry getTimeEntry() {
-		return measurement.getTimeEntry();
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_menu, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.logout:
+			logout();
+			return true;
+		case R.id.refreshMenu:
+			updateView();
+			Toast.makeText(getApplicationContext(), "Kunden und Stundeneintragstypen wurden aktualisiert.", Toast.LENGTH_LONG).show();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
