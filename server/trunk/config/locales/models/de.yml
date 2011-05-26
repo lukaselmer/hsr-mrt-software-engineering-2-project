@@ -23,6 +23,7 @@ de:
         address: Adresse
         created_at: Erstellt am
         description: Beschreibung
+        materials: Materialien
       address:
         id: ID
         line1: Adresszeile1
