@@ -81,14 +81,9 @@ class CustomerSynchronizer implements Synchronizer {
 	}
 
 	private void updatePosition(Customer c) throws SQLException {
-		Dao<GpsPosition, Integer> dao = databaseHelper.getGpsPositionDao();
-
-		if (c.hasGpsPosition()) {
-			GpsPosition oldPosition = dao.queryForId(c.getGpsPositionId());
-			dao.delete(oldPosition);
-		}
+		handleGpsPosition(c);
 		if (c.getGpsPosition() != null) {
-			dao.create(c.getGpsPosition());
+			databaseHelper.getGpsPositionDao().create(c.getGpsPosition());
 			c.setGpsPositionId(c.getGpsPosition().getId());
 		}
 	}
@@ -97,13 +92,11 @@ class CustomerSynchronizer implements Synchronizer {
 		if (existingCustomer(c)) {
 			return false;
 		}
-
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 		if (c.getGpsPosition() != null) {
 			positionDao.create(c.getGpsPosition());
 			c.setGpsPositionId(c.getGpsPosition().getId());
 		}
-
 		Log.d(TAG, "Creating " + c);
 		dao.create(c);
 		return true;
@@ -112,18 +105,20 @@ class CustomerSynchronizer implements Synchronizer {
 	private boolean handleDeletion(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		if (!c.hasChanged())
 			return false;
+		handleGpsPosition(c);
+		if (!c.isDeleted() && existingCustomer(c)) {
+			Log.d(TAG, "Deleting " + c);
+			dao.delete(c);
+			return true;
+		}
+		return false;
+	}
+
+	private void handleGpsPosition(Customer c) throws SQLException {
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 		if (c.hasGpsPosition()) {
 			GpsPosition oldPosition = positionDao.queryForId(c.getGpsPositionId());
 			positionDao.delete(oldPosition);
 		}
-		if (c.isDeleted()) {
-			Log.d(TAG, "Deleting " + c);
-			if (existingCustomer(c)) {
-				dao.delete(c);
-				return true;
-			}
-		}
-		return false;
 	}
 }
