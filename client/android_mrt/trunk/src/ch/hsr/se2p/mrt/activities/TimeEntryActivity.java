@@ -116,15 +116,16 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private static void calculateAndSetDistances(Dao<GpsPosition, Integer> dao, GpsPosition currentPosition, Customer c) throws SQLException {
-		if (c.hasGpsPosition()) {
-			GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
-			if (customerPosition == null) {
-				c.setDistance(null);
-				return;
-			}
+		if (!c.hasGpsPosition())
+			return;
+		GpsPosition customerPosition = dao.queryForId(c.getGpsPositionId());
+		if (customerPosition == null) {
+			c.setDistance(null);
+		} else {
 			double distance = currentPosition.distanceTo(customerPosition);
 			c.setDistance(distance <= CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN ? distance : null);
 		}
+
 	}
 
 	private void stopTimeMeasurement() {
