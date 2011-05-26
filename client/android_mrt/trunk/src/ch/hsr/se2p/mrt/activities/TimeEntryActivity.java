@@ -19,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AbsSpinner;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,12 +48,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private LocationService locationService;
 
-	private MRTAutocompleteSpinner comboboxCustomers;
+	private Measurement measurement = new Measurement(false);
 	private final List<Customer> customers = new ArrayList<Customer>();
+	private ArrayAdapter<Customer> customerAdapter;
 	private final List<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
 	private MRTApplication mrtApplication;
-	private ArrayAdapter<Customer> customerAdapter;
-	private Measurement measurement = new Measurement(false);
 
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
@@ -99,8 +99,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initComboboxCustomers() {
-		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
-		comboboxCustomers.setAdapter(getCustomerAdapter());
+		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, customers);
+		((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).setAdapter(customerAdapter);
 	}
 
 	/**
@@ -151,12 +151,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
 	}
 
-	private ArrayAdapter<Customer> getCustomerAdapter() {
-		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, customers);
-		//customerAdapter.setNotifyOnChange(true);
-		return customerAdapter;
-	}
-
 	private void setGPSImage(boolean gpsOn) {
 		ImageView view = (ImageView) findViewById(R.id.image_gps);
 		view.setImageResource(gpsOn ? R.drawable.gps_on : R.drawable.gps_off);
@@ -164,7 +158,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private TimeEntry saveTimeEntry() throws SQLException {
 		TimeEntry timeEntry = measurement.stop((Spinner) findViewById(R.id.spinnerTimeEntryType), (TextView) findViewById(R.id.txtDescription),
-				saveGpsPosition(), comboboxCustomers, customers);
+				saveGpsPosition(), ((MRTAutocompleteSpinner) findViewById(R.id.my_combo)), customers);
 		getHelper().getTimeEntryDao().create(timeEntry);
 		Log.v(TAG, "TimeEntry with ID " + timeEntry.getId() + " created");
 		return timeEntry;
@@ -174,7 +168,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		try {
 			calculateAndSetDistances(getHelper().getGpsPositionDao(), customers, locationService.getCurrentGPSPosition());
 			Collections.sort(customers);
-			initComboboxCustomers();
+			customerAdapter.notifyDataSetChanged();
 		} catch (SQLException e) {
 			Log.e(TAG, "SQLException", e);
 		} catch (NullPointerException e) {
