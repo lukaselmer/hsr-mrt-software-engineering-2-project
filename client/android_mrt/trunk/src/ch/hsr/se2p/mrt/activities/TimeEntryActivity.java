@@ -153,7 +153,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
 		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, customers);
-		customerAdapter.setNotifyOnChange(true);
+		//customerAdapter.setNotifyOnChange(true);
 		return customerAdapter;
 	}
 
