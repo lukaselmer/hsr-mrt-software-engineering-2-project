@@ -61,30 +61,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	};
 
-	private void stopTimeMeasurement() {
-		try {
-			setGPSImage(false);
-			saveTimeEntry();
-			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
-			updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
-			resetInputFields();
-			initSpinnerTimeEntryTypes();
-		} catch (SQLException e) {
-			logAndDisplaySQLException(e);
-		}
-	}
-
-	private void resetInputFields() {
-		((TextView) findViewById(R.id.txtDescription)).setText("");
-		((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
-		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
-	}
-
-	private void logAndDisplaySQLException(SQLException e) {
-		Log.e(TAG, "Database Exception", e);
-		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -96,11 +72,18 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initGui() {
-		loadCustomers();
-		((Button) findViewById(R.id.btnStartStop)).setOnClickListener(lstnStartStopTime);
+		loadLists();
 		initSpinnerTimeEntryTypes();
+		initComboboxCustomers();
+		findViewById(R.id.btnStartStop).setOnClickListener(lstnStartStopTime);
 		updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
-		updateView();
+	}
+
+	private void initSpinnerTimeEntryTypes() {
+		loadTimeEntryTypes();
+		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
+		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setAdapter(timeEntryTypeAdapter);
 	}
 
 	private void initLocationService() {
@@ -113,6 +96,31 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		};
 		LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		locationService = new LocationService(lm, locationChangedAction);
+	}
+
+	private void initComboboxCustomers() {
+		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
+		comboboxCustomers.setAdapter(getCustomerAdapter());
+	}
+
+	private void loadCustomers() {
+		try {
+			customers.clear();
+			customers.addAll(getHelper().getCustomerDao().queryForAll());
+		} catch (SQLException e) {
+			Log.e(TAG, "Init customers", e);
+		}
+	}
+
+	private void loadTimeEntryTypes() {
+		try {
+			timeEntryTypes.clear();
+			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
+			Collections.sort(timeEntryTypes);
+			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
+		} catch (SQLException e) {
+			Log.e(TAG, "Init timeentry types", e);
+		}
 	}
 
 	/**
@@ -139,48 +147,34 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	private static void resetDistances(List<Customer> customers) {
-		for (Customer c : customers) {
-			c.setDistance(null);
+	private void stopTimeMeasurement() {
+		try {
+			setGPSImage(false);
+			saveTimeEntry();
+			Toast.makeText(getApplicationContext(), "Neuer Stundeneintrag wurde erstellt.", Toast.LENGTH_LONG).show();
+			updateGuiAfterMeasurement("Zeit gestoppt", "Start", Color.GREEN);
+			resetInputFields();
+			initSpinnerTimeEntryTypes();
+		} catch (SQLException e) {
+			logAndDisplaySQLException(e);
 		}
 	}
 
-	private void initComboboxCustomers() {
-		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
-		comboboxCustomers.setAdapter(getCustomerAdapter());
+	private void resetInputFields() {
+		((TextView) findViewById(R.id.txtDescription)).setText("");
+		((MRTAutocompleteSpinner) findViewById(R.id.my_combo)).resetText();
+		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setSelection(0);
 	}
 
-	private void initSpinnerTimeEntryTypes() {
-		loadTimeEntryTypes();
-		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
-		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setAdapter(timeEntryTypeAdapter);
+	private void logAndDisplaySQLException(SQLException e) {
+		Log.e(TAG, "Database Exception", e);
+		ActivityHelper.displayAlertDialog("SQL Exception", e.getMessage() + "\n" + "Für weitere Informationen Log anzeigen.", TimeEntryActivity.this);
 	}
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
 		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, customers);
 		customerAdapter.setNotifyOnChange(true);
 		return customerAdapter;
-	}
-
-	private void loadCustomers() {
-		try {
-			customers.clear();
-			customers.addAll(getHelper().getCustomerDao().queryForAll());
-		} catch (SQLException e) {
-			Log.e(TAG, "Init customers", e);
-		}
-	}
-
-	private void loadTimeEntryTypes() {
-		try {
-			timeEntryTypes.clear();
-			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
-			Collections.sort(timeEntryTypes);
-			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
-		} catch (SQLException e) {
-			Log.e(TAG, "Init timeentry types", e);
-		}
 	}
 
 	private void setGPSImage(boolean gpsOn) {
@@ -194,21 +188,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		getHelper().getTimeEntryDao().create(timeEntry);
 		Log.v(TAG, "TimeEntry with ID " + timeEntry.getId() + " created");
 		return timeEntry;
-	}
-
-	private Integer saveGpsPosition() throws SQLException {
-		if (locationService.getCurrentGPSPosition() == null)
-			return null;
-		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
-		gpsPositionDao.create(locationService.getCurrentGPSPosition());
-		return locationService.getCurrentGPSPosition().getId();
-	}
-
-	private void logout() {
-		locationService.stop();
-		mrtApplication.logout();
-		this.startActivity(new Intent(this, LoginActivity.class));
-		finish();
 	}
 
 	private void sortCustomersByCurrentLocation() {
@@ -230,7 +209,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			measurement = new Measurement();
 			updateGuiAfterMeasurement("Zeit gestartet um " + new Time(System.currentTimeMillis()) + " Uhr", "Stop", Color.RED);
 		}
-		updateView();
+		loadLists();
 	}
 
 	private void updateGuiAfterMeasurement(String textViewText, String buttonText, int color) {
@@ -239,9 +218,25 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		findViewById(R.id.btnStartStop).getBackground().setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_ATOP));
 	}
 
-	private void updateView() {
+	private void loadLists() {
 		sortCustomersByCurrentLocation();
-		initComboboxCustomers();
+		loadCustomers();
+		loadTimeEntryTypes();
+	}
+
+	private Integer saveGpsPosition() throws SQLException {
+		if (locationService.getCurrentGPSPosition() == null)
+			return null;
+		Dao<GpsPosition, Integer> gpsPositionDao = getHelper().getGpsPositionDao();
+		gpsPositionDao.create(locationService.getCurrentGPSPosition());
+		return locationService.getCurrentGPSPosition().getId();
+	}
+
+	private void logout() {
+		locationService.stop();
+		mrtApplication.logout();
+		this.startActivity(new Intent(this, LoginActivity.class));
+		finish();
 	}
 
 	@Override
@@ -266,7 +261,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			logout();
 			return true;
 		case R.id.refreshMenu:
-			updateView();
+			loadLists();
 			Toast.makeText(getApplicationContext(), "Kunden und Stundeneintragstypen wurden aktualisiert.", Toast.LENGTH_LONG).show();
 			return true;
 		default:
