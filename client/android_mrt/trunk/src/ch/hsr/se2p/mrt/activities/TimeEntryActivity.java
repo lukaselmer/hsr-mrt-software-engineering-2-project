@@ -145,7 +145,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		}
 	}
 
-	private void populateComboboxCustomers() {
+	private void initComboboxCustomers() {
 		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
 		comboboxCustomers.setAdapter(getCustomerAdapter());
 	}
@@ -158,7 +158,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private ArrayAdapter<Customer> getCustomerAdapter() {
-		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, getCustomers());
+		customerAdapter = new ArrayAdapter<Customer>(this, R.layout.list_item, customers);
 		customerAdapter.setNotifyOnChange(true);
 		return customerAdapter;
 	}
@@ -204,10 +204,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		return locationService.getCurrentGPSPosition().getId();
 	}
 
-	private synchronized List<Customer> getCustomers() {
-		return customers;
-	}
-
 	private void logout() {
 		locationService.stop();
 		mrtApplication.logout();
@@ -217,9 +213,9 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void sortCustomersByCurrentLocation() {
 		try {
-			calculateAndSetDistances(getHelper().getGpsPositionDao(), getCustomers(), locationService.getCurrentGPSPosition());
-			Collections.sort(getCustomers());
-			populateComboboxCustomers();
+			calculateAndSetDistances(getHelper().getGpsPositionDao(), customers, locationService.getCurrentGPSPosition());
+			Collections.sort(customers);
+			initComboboxCustomers();
 		} catch (SQLException e) {
 			Log.e(TAG, "SQLException", e);
 		} catch (NullPointerException e) {
@@ -245,7 +241,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 
 	private void updateView() {
 		sortCustomersByCurrentLocation();
-		populateComboboxCustomers();
+		initComboboxCustomers();
 	}
 
 	@Override
