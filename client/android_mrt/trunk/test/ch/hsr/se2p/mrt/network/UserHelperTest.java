@@ -38,14 +38,10 @@ public class UserHelperTest extends HttpTestCase {
 		assertTrue(u.getUpdatedAt().getTime() > 1);
 		String firstName = "Fredi", lastName = "Worker", email = "field_worker@mrt.ch";
 		Integer id = 2;
-		// Timestamp updatedAt = new Timestamp(Timestamp.parse(new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60).toGMTString()));
-		// expectedResultFromTransmitter("{\"user\":{\"first_name\":\"" + firstName + "\",\"last_name\":\"" + lastName + "\",\"email\":\"" + email
-		// + "\",\"id\":" + id + ",\"updated_at\":\"" + updatedAt.toGMTString() + "\"}}");
 		assertEquals(firstName, u.getFirstName());
 		assertEquals(lastName, u.getLastName());
 		assertEquals(email, u.getEmail());
 		assertSame(id, u.getRailsId());
-		// assertEquals(updatedAt, u.getUpdatedAt());
 	}
 
 	public void testLoginFailsWithServer() {

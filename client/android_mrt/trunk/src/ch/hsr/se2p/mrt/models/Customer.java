@@ -29,7 +29,7 @@ public class Customer implements Receivable, Comparable<Customer> {
 	private Double distance;
 	// Caches gps_position for creation or update as it has to be stored in a separate table
 	private GpsPosition gpsPosition;
-	private boolean changed = true;
+	private boolean changed = false;
 
 	public Customer() {
 		// Needed for ormlite
@@ -72,13 +72,13 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	@Override
 	public boolean fromJSON(JSONObject customerObj) throws JSONException {
+		setChanged();
 		int railsId = customerObj.getInt("id");
 		if (railsId <= 0)
 			return false;
 		this.railsId = railsId;
 		setNormalAttributes(customerObj);
 		setAddressAndGpsPosition(customerObj);
-		setChanged(true);
 		return true;
 	}
 
@@ -144,7 +144,7 @@ public class Customer implements Receivable, Comparable<Customer> {
 	}
 
 	public void setChanged() {
-		this.changed = true;
+		setChanged(true);
 	}
 
 	public void setChanged(boolean changed) {

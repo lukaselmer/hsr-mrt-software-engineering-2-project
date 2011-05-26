@@ -57,14 +57,12 @@ class CustomerSynchronizer implements Synchronizer {
 
 	protected void processCustomer(Dao<Customer, Integer> dao, Customer c) throws SQLException {
 		try {
+			if (handleCreation(dao, c))
+				return;
 			if (handleDeletion(dao, c))
 				return;
-
-			if (existingCustomer(c)) {
-				if (c.hasChanged())
-					handleUpdate(dao, c);
-			} else
-				handleCreation(dao, c);
+			else
+				handleUpdate(dao, c);
 		} finally {
 			c.setChanged(false);
 		}
@@ -75,6 +73,8 @@ class CustomerSynchronizer implements Synchronizer {
 	}
 
 	private void handleUpdate(Dao<Customer, Integer> dao, Customer c) throws SQLException {
+		if (!c.hasChanged())
+			return;
 		updatePosition(c);
 		Log.d(TAG, "Updating " + c);
 		dao.update(c);
@@ -84,8 +84,8 @@ class CustomerSynchronizer implements Synchronizer {
 		Dao<GpsPosition, Integer> dao = databaseHelper.getGpsPositionDao();
 
 		if (c.hasGpsPosition()) {
-			GpsPosition old_position = dao.queryForId(c.getGpsPositionId());
-			dao.delete(old_position);
+			GpsPosition oldPosition = dao.queryForId(c.getGpsPositionId());
+			dao.delete(oldPosition);
 		}
 		if (c.getGpsPosition() != null) {
 			dao.create(c.getGpsPosition());
@@ -93,9 +93,12 @@ class CustomerSynchronizer implements Synchronizer {
 		}
 	}
 
-	private void handleCreation(Dao<Customer, Integer> dao, Customer c) throws SQLException {
-		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
+	private boolean handleCreation(Dao<Customer, Integer> dao, Customer c) throws SQLException {
+		if (existingCustomer(c)) {
+			return false;
+		}
 
+		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 		if (c.getGpsPosition() != null) {
 			positionDao.create(c.getGpsPosition());
 			c.setGpsPositionId(c.getGpsPosition().getId());
@@ -103,9 +106,12 @@ class CustomerSynchronizer implements Synchronizer {
 
 		Log.d(TAG, "Creating " + c);
 		dao.create(c);
+		return true;
 	}
 
 	private boolean handleDeletion(Dao<Customer, Integer> dao, Customer c) throws SQLException {
+		if (!c.hasChanged())
+			return false;
 		Dao<GpsPosition, Integer> positionDao = databaseHelper.getGpsPositionDao();
 		if (c.hasGpsPosition()) {
 			GpsPosition oldPosition = positionDao.queryForId(c.getGpsPositionId());
