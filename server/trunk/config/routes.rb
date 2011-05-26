@@ -47,6 +47,7 @@ Mrt::Application.routes.draw do
   resources :time_entry_types do
     member do
       get 'add_material'
+      delete 'delete'
     end
   end
 

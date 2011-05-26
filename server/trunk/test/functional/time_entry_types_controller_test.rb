@@ -27,7 +27,6 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-
   test "should create time_entry_type" do
     assert_difference('TimeEntryType.count') do
       post :create, :time_entry_type => @time_entry_type.attributes
@@ -57,8 +56,16 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
     assert_redirected_to time_entry_type_path(assigns(:time_entry_type))
   end
 
-  test "should destroy time_entry_type" do
+  test "should delete time_entry_type" do
     assert_difference('TimeEntryType.count', -1) do
+      delete :delete, :id => @time_entry_type.to_param
+    end
+
+    assert_redirected_to time_entry_types_path
+  end
+
+  test "should destroy time_entry_type" do
+    assert_no_difference('TimeEntryType.count') do
       delete :destroy, :id => @time_entry_type.to_param
     end
 
@@ -76,7 +83,7 @@ class TimeEntryTypesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:updated_time_entry_types)
     assert_response :success
   end
-  
+
   test "should synchronize time_entry_types with last_update" do
     get :synchronize, :last_update => (Time.now.to_i * 1000)
     assert_not_nil assigns(:updated_time_entry_types)

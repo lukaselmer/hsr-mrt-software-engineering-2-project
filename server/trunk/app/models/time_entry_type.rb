@@ -18,7 +18,7 @@ class TimeEntryType < ActiveRecord::Base
   
   def to_s
     s = [description].join(", ")
-    s << " (" << I18n.t(:until, :default => "bis") << " "  << I18n.localize(valid_until, :format => :short) << ") " unless valid_until.nil?
+    s += " (" + I18n.t(:until, :default => "bis") + " "  + I18n.localize(valid_until, :format => :short) + ")" unless valid_until.nil?
     return s
   end
 end
