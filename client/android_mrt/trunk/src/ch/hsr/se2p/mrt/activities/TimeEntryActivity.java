@@ -58,6 +58,7 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		@Override
 		public void onClick(View v) {
 			startOrStopTimeMeasurement();
+			loadLists();
 		}
 	};
 
@@ -80,7 +81,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void initSpinnerTimeEntryTypes() {
-		loadTimeEntryTypes();
 		ArrayAdapter<TimeEntryType> timeEntryTypeAdapter = new ArrayAdapter<TimeEntryType>(this, android.R.layout.simple_spinner_item, timeEntryTypes);
 		timeEntryTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		((Spinner) findViewById(R.id.spinnerTimeEntryType)).setAdapter(timeEntryTypeAdapter);
@@ -101,26 +101,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private void initComboboxCustomers() {
 		comboboxCustomers = (MRTAutocompleteSpinner) findViewById(R.id.my_combo);
 		comboboxCustomers.setAdapter(getCustomerAdapter());
-	}
-
-	private void loadCustomers() {
-		try {
-			customers.clear();
-			customers.addAll(getHelper().getCustomerDao().queryForAll());
-		} catch (SQLException e) {
-			Log.e(TAG, "Init customers", e);
-		}
-	}
-
-	private void loadTimeEntryTypes() {
-		try {
-			timeEntryTypes.clear();
-			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
-			Collections.sort(timeEntryTypes);
-			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
-		} catch (SQLException e) {
-			Log.e(TAG, "Init timeentry types", e);
-		}
 	}
 
 	/**
@@ -209,7 +189,6 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 			measurement = new Measurement();
 			updateGuiAfterMeasurement("Zeit gestartet um " + new Time(System.currentTimeMillis()) + " Uhr", "Stop", Color.RED);
 		}
-		loadLists();
 	}
 
 	private void updateGuiAfterMeasurement(String textViewText, String buttonText, int color) {
@@ -219,9 +198,29 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	}
 
 	private void loadLists() {
-		sortCustomersByCurrentLocation();
 		loadCustomers();
 		loadTimeEntryTypes();
+	}
+
+	private void loadCustomers() {
+		try {
+			customers.clear();
+			customers.addAll(getHelper().getCustomerDao().queryForAll());
+		} catch (SQLException e) {
+			Log.e(TAG, "Init customers", e);
+		}
+		sortCustomersByCurrentLocation();
+	}
+
+	private void loadTimeEntryTypes() {
+		try {
+			timeEntryTypes.clear();
+			timeEntryTypes.addAll(getHelper().getTimeEntryTypeDao().queryForAll());
+			Collections.sort(timeEntryTypes);
+			timeEntryTypes.add(0, new TimeEntryType(0, "Kein Stundeneintragstyp"));
+		} catch (SQLException e) {
+			Log.e(TAG, "Init timeentry types", e);
+		}
 	}
 
 	private Integer saveGpsPosition() throws SQLException {
