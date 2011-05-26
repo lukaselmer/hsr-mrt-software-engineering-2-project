@@ -13,6 +13,6 @@ class Order < ActiveRecord::Base
   end
 
   def to_s
-    "##{id}: #{customer}; #{created_at}"
+    "##{id}: #{customer}; " << I18n.localize(created_at, :format => :short)
   end
 end

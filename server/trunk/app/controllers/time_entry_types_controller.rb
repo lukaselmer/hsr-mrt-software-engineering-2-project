@@ -59,8 +59,8 @@ class TimeEntryTypesController < ApplicationController
     end
   end
 
-  # DELETE /time_entry_types/1
-  def destroy
+  # DELETE /time_entry_types/1 really delete time_entry_type
+  def delete
     @time_entry_type = TimeEntryType.find(params[:id])
     @time_entry_type.destroy
 
@@ -69,6 +69,14 @@ class TimeEntryTypesController < ApplicationController
     end
   end
 
+  # DELETE /time_entry_types/1 historize time_entry_type
+  def destroy
+    @time_entry_type = TimeEntryType.find(params[:id])
+    @time_entry_type.update_attribute(:valid_until, Time.now)
+
+    redirect_to(time_entry_types_url)
+  end
+  
   
   def add_material
     @time_entry_type = TimeEntryType.find(params[:id])

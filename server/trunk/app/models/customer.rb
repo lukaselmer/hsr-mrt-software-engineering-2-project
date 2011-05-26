@@ -22,7 +22,7 @@ class Customer < ActiveRecord::Base
 
   def to_s
     s = [ last_name, first_name ].join(', ')
-    s << " (bis #{deleted_at})" unless deleted_at.nil? 
+    s << " (" << I18n.translate(:until, :default => "bis") << " " << I18n.localize(deleted_at, :format => :short) << ")" unless deleted_at.nil? 
     return s
   end
 end
