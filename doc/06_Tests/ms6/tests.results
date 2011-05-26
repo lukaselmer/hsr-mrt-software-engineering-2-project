@@ -1,0 +1,194 @@
+
+
+>>> addresses_controller_test.rb
+Loaded suite test/functional/addresses_controller_test
+Started
+test_should_create_address(AddressesControllerTest): .
+test_should_destroy_address(AddressesControllerTest): .
+test_should_get_edit(AddressesControllerTest): .
+test_should_get_index(AddressesControllerTest): .
+test_should_get_new(AddressesControllerTest): .
+test_should_not_create_address_without_line1(AddressesControllerTest): .
+test_should_not_update_address_without_line1(AddressesControllerTest): .
+test_should_not_update_coordinates(AddressesControllerTest): .
+test_should_show_address(AddressesControllerTest): .
+test_should_update_address(AddressesControllerTest): .
+test_should_update_coordinates(AddressesControllerTest): .
+
+Finished in 1.241412 seconds.
+
+11 tests, 21 assertions, 0 failures, 0 errors
+
+
+>>> applied_materials_controller_test.rb
+Loaded suite test/functional/applied_materials_controller_test
+Started
+test_should_create_applied_material(AppliedMaterialsControllerTest): .
+test_should_destroy_applied_material(AppliedMaterialsControllerTest): .
+test_should_get_edit(AppliedMaterialsControllerTest): .
+test_should_get_index(AppliedMaterialsControllerTest): .
+test_should_get_new(AppliedMaterialsControllerTest): .
+test_should_not_create_applied_material(AppliedMaterialsControllerTest): .
+test_should_not_update_applied_material(AppliedMaterialsControllerTest): .
+test_should_update_applied_material(AppliedMaterialsControllerTest): .
+
+Finished in 0.468409 seconds.
+
+8 tests, 11 assertions, 0 failures, 0 errors
+
+
+>>> customers_controller_test.rb
+Loaded suite test/functional/customers_controller_test
+Started
+test_should_create_customer(CustomersControllerTest): .
+test_should_delete_customer(CustomersControllerTest): .
+test_should_destroy_customer(CustomersControllerTest): .
+test_should_get_all_customers_when_synchronizing_with_last_update(CustomersControllerTest): .
+test_should_get_all_customers_when_synchronizing_without_last_update(CustomersControllerTest): .
+test_should_get_edit(CustomersControllerTest): .
+test_should_get_index(CustomersControllerTest): .
+test_should_get_new(CustomersControllerTest): .
+test_should_not_create_customer_without_last_name(CustomersControllerTest): .
+test_should_not_update_customer_without_last_name(CustomersControllerTest): .
+test_should_show_customer(CustomersControllerTest): .
+test_should_update_customer(CustomersControllerTest): .
+
+Finished in 0.571441 seconds.
+
+12 tests, 19 assertions, 0 failures, 0 errors
+
+
+>>> materials_controller_test.rb
+Loaded suite test/functional/materials_controller_test
+Started
+test_should_create_material(MaterialsControllerTest): .
+test_should_delete_material(MaterialsControllerTest): .
+test_should_destroy_material(MaterialsControllerTest): .
+test_should_get_edit(MaterialsControllerTest): .
+test_should_get_index(MaterialsControllerTest): .
+test_should_get_new(MaterialsControllerTest): .
+test_should_not_create_material_without_description(MaterialsControllerTest): .
+test_should_not_update_material_without_description(MaterialsControllerTest): .
+test_should_show_material(MaterialsControllerTest): .
+test_should_update_material(MaterialsControllerTest): .
+
+Finished in 0.739342 seconds.
+
+10 tests, 15 assertions, 0 failures, 0 errors
+
+
+>>> orders_controller_test.rb
+Loaded suite test/functional/orders_controller_test
+Started
+test_should_add_material_to_order(OrdersControllerTest): .
+test_should_create_order(OrdersControllerTest): .
+test_should_destroy_order(OrdersControllerTest): .
+test_should_get_edit(OrdersControllerTest): .
+test_should_get_index(OrdersControllerTest): .
+test_should_get_new(OrdersControllerTest): .
+test_should_not_create_order_without_customer_id(OrdersControllerTest): .
+test_should_not_update_order_without_customer_id(OrdersControllerTest): .
+test_should_show_order(OrdersControllerTest): .
+test_should_update_order(OrdersControllerTest): .
+
+Finished in 0.586307 seconds.
+
+10 tests, 15 assertions, 0 failures, 0 errors
+
+
+>>> session_controller_test.rb
+Loaded suite test/functional/session_controller_test
+Started
+test_should_get_new(SessionsControllerTest): .
+test_sould_login_by_html(SessionsControllerTest): .
+test_sould_login_by_json(SessionsControllerTest): .
+test_sould_not_login_by_json(SessionsControllerTest): .
+
+Finished in 0.352735 seconds.
+
+4 tests, 2 assertions, 0 failures, 0 errors
+
+
+>>> time_entries_controller_test.rb
+Loaded suite test/functional/time_entries_controller_test
+Started
+test_should_create_time_entry(TimeEntriesControllerTest): .
+test_should_create_time_entry_by_json(TimeEntriesControllerTest): .
+test_should_destroy_time_entry(TimeEntriesControllerTest): .
+test_should_destroy_time_entry_from_other_worker(TimeEntriesControllerTest): .
+test_should_get_destroy_all(TimeEntriesControllerTest): .
+test_should_get_edit(TimeEntriesControllerTest): .
+test_should_get_index(TimeEntriesControllerTest): .
+test_should_get_new(TimeEntriesControllerTest): .
+test_should_get_unassigned(TimeEntriesControllerTest): .
+test_should_leave_time_entry_unchanged_if_hashcode_is_already_nil(TimeEntriesControllerTest): .
+test_should_not_create_time_entry_by_json_with_existing_hashcode(TimeEntriesControllerTest): .
+test_should_not_create_time_entry_by_json_without_hashcode(TimeEntriesControllerTest): .
+test_should_not_create_time_entry_without_start_time(TimeEntriesControllerTest): .
+test_should_not_get_edit_from_other_worker(TimeEntriesControllerTest): .
+test_should_not_update_time_entry_from_other_worker(TimeEntriesControllerTest): .
+test_should_not_update_time_entry_without_start_time(TimeEntriesControllerTest): .
+test_should_remove_hashcode(TimeEntriesControllerTest): .
+test_should_show_time_entry(TimeEntriesControllerTest): .
+test_should_update_time_entry(TimeEntriesControllerTest): .
+
+Finished in 1.059362 seconds.
+
+19 tests, 29 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_type_materials_controller_test.rb
+Loaded suite test/functional/time_entry_type_materials_controller_test
+Started
+test_should_create_time_entry_type_material(TimeEntryTypeMaterialsControllerTest): .
+test_should_destroy_time_entry_type_material(TimeEntryTypeMaterialsControllerTest): .
+test_should_get_edit(TimeEntryTypeMaterialsControllerTest): .
+test_should_get_index(TimeEntryTypeMaterialsControllerTest): .
+test_should_get_new(TimeEntryTypeMaterialsControllerTest): .
+test_should_not_update_time_entry_type_material(TimeEntryTypeMaterialsControllerTest): .
+test_should_show_time_entry_type_material(TimeEntryTypeMaterialsControllerTest): .
+test_should_update_time_entry_type_material(TimeEntryTypeMaterialsControllerTest): .
+
+Finished in 0.504579 seconds.
+
+8 tests, 11 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_types_controller_test.rb
+Loaded suite test/functional/time_entry_types_controller_test
+Started
+test_should_add_material_time_entry_types(TimeEntryTypesControllerTest): .
+test_should_create_time_entry_type(TimeEntryTypesControllerTest): .
+test_should_delete_time_entry_type(TimeEntryTypesControllerTest): .
+test_should_destroy_time_entry_type(TimeEntryTypesControllerTest): .
+test_should_get_edit(TimeEntryTypesControllerTest): .
+test_should_get_index(TimeEntryTypesControllerTest): .
+test_should_get_new(TimeEntryTypesControllerTest): .
+test_should_not_create_time_entry_type_without_material_id(TimeEntryTypesControllerTest): .
+test_should_not_update_time_entry_type_without_description(TimeEntryTypesControllerTest): .
+test_should_show_time_entry_type(TimeEntryTypesControllerTest): .
+test_should_synchronize_time_entry_types_with_last_update(TimeEntryTypesControllerTest): .
+test_should_synchronize_time_entry_types_without_last_update(TimeEntryTypesControllerTest): .
+test_should_update_time_entry_type(TimeEntryTypesControllerTest): .
+
+Finished in 0.800472 seconds.
+
+13 tests, 21 assertions, 0 failures, 0 errors
+
+
+>>> users_controller_test.rb
+Loaded suite test/functional/users_controller_test
+Started
+test_should_create_user(UsersControllerTest): .
+test_should_destroy_user(UsersControllerTest): .
+test_should_get_edit(UsersControllerTest): .
+test_should_get_index(UsersControllerTest): .
+test_should_get_new(UsersControllerTest): .
+test_should_not_create_user_without_email(UsersControllerTest): .
+test_should_not_update_user_without_email(UsersControllerTest): .
+test_should_show_user(UsersControllerTest): .
+test_should_update_user(UsersControllerTest): .
+
+Finished in 0.614425 seconds.
+
+9 tests, 13 assertions, 0 failures, 0 errors

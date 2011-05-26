@@ -1,0 +1,100 @@
+
+
+>>> addresses_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/addresses_controller_test
+Started
+...........
+Finished in 1.232217 seconds.
+
+11 tests, 21 assertions, 0 failures, 0 errors
+
+
+>>> applied_materials_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/applied_materials_controller_test
+Started
+........
+Finished in 0.549903 seconds.
+
+8 tests, 11 assertions, 0 failures, 0 errors
+
+
+>>> customers_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/customers_controller_test
+Started
+............
+Finished in 0.615795 seconds.
+
+12 tests, 19 assertions, 0 failures, 0 errors
+
+
+>>> materials_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/materials_controller_test
+Started
+..........
+Finished in 0.829864 seconds.
+
+10 tests, 15 assertions, 0 failures, 0 errors
+
+
+>>> orders_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/orders_controller_test
+Started
+..........
+Finished in 0.685677 seconds.
+
+10 tests, 15 assertions, 0 failures, 0 errors
+
+
+>>> session_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/session_controller_test
+Started
+....
+Finished in 0.435055 seconds.
+
+4 tests, 2 assertions, 0 failures, 0 errors
+
+
+>>> time_entries_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/time_entries_controller_test
+Started
+...................
+Finished in 1.101337 seconds.
+
+19 tests, 29 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_type_materials_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/time_entry_type_materials_controller_test
+Started
+........
+Finished in 0.566739 seconds.
+
+8 tests, 11 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_types_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/time_entry_types_controller_test
+Started
+.............
+Finished in 0.764024 seconds.
+
+13 tests, 21 assertions, 0 failures, 0 errors
+
+
+>>> users_controller_test.rb
+ruby 1.8.7 (2010-08-16 patchlevel 302) [x86_64-linux]
+Loaded suite test/functional/users_controller_test
+Started
+.........
+Finished in 0.698215 seconds.
+
+9 tests, 13 assertions, 0 failures, 0 errors
