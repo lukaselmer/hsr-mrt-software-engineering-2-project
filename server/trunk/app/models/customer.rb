@@ -12,11 +12,17 @@ class Customer < ActiveRecord::Base
 
   accepts_nested_attributes_for :address, :allow_destroy => true
 
-  def self.for_select
-    active.order("last_name asc").collect { |c| [c, c.id] }
+  def self.for_select(customer = nil)
+    
+    customers = active.order("last_name asc").collect { |c| [c, c.id] }
+    customers += [[customer, customer.id]] unless customer.nil? || customer.deleted_at.nil?
+      
+    return customers
   end
 
   def to_s
-    [ last_name, first_name ].join(', ')
+    s = [ last_name, first_name ].join(', ')
+    s << " (bis #{deleted_at})" unless deleted_at.nil? 
+    return s
   end
 end
