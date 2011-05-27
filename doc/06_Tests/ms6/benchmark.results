@@ -1,0 +1,33 @@
+$ rake test:benchmark
+(in /home/digi/workspaces/www/mrt-server)
+Loaded suite /var/lib/gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader
+Started
+BrowsingTest#test_homepage (17 ms warmup)
+           wall_time: 3 ms
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.BrowsingTest#test_post_1000_time_entries (9.89 sec warmup)
+           wall_time: 9.88 sec
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.BrowsingTest#test_post_100_time_entries (1.12 sec warmup)
+           wall_time: 1.02 sec
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.BrowsingTest#test_post_10_time_entries (179 ms warmup)
+           wall_time: 134 ms
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.
+Finished in 240.847408 seconds.
+
+20 tests, 23373 assertions, 0 failures, 0 errors
+
