@@ -1,0 +1,127 @@
+
+
+>>> address_test.rb
+Loaded suite test/unit/address_test
+Started
+test_correct_String_representation(AddressTest): .
+test_return_appropriate_array_for_Selection(AddressTest): .
+
+Finished in 0.257959 seconds.
+
+2 tests, 2 assertions, 0 failures, 0 errors
+
+
+>>> applied_material_test.rb
+Loaded suite test/unit/applied_material_test
+Started
+test_correct_String_representation(AppliedMaterialTest): .
+
+Finished in 0.136691 seconds.
+
+1 tests, 2 assertions, 0 failures, 0 errors
+
+
+>>> customer_test.rb
+Loaded suite test/unit/customer_test
+Started
+test_correct_String_representation(CustomerTest): .
+test_return_appropriate_array_for_Selection(CustomerTest): .
+
+Finished in 0.109843 seconds.
+
+2 tests, 3 assertions, 0 failures, 0 errors
+
+
+>>> geocoder_test.rb
+Loaded suite test/unit/geocoder_test
+Started
+test_address_to_gps_position(GeocoderTest): .
+test_invalid_address_translation(GeocoderTest): .
+test_valid_address_translation(GeocoderTest): .
+test_valid_address_translation_with_umlauts(GeocoderTest): .
+
+Finished in 1.12138 seconds.
+
+4 tests, 11 assertions, 0 failures, 0 errors
+
+
+>>> gps_position_test.rb
+Loaded suite test/unit/gps_position_test
+Started
+test_correct_String_representation(LocationTest): .
+
+Finished in 0.106973 seconds.
+
+1 tests, 2 assertions, 0 failures, 0 errors
+
+
+>>> helpers
+
+
+>>> material_test.rb
+Loaded suite test/unit/material_test
+Started
+test_correct_String_representation(MaterialTest): .
+test_return_appropriate_array_for_Selection(MaterialTest): .
+
+Finished in 0.118641 seconds.
+
+2 tests, 4 assertions, 0 failures, 0 errors
+
+
+>>> order_test.rb
+Loaded suite test/unit/order_test
+Started
+test_correct_String_representation(OrderTest): .
+test_return_appropriate_array_for_Selection(OrderTest): .
+
+Finished in 0.304229 seconds.
+
+2 tests, 3 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_test.rb
+Loaded suite test/unit/time_entry_test
+Started
+test_cannot_create_time_entry_without_time_start(TimeEntryTest): .
+test_cannot_create_time_entry_without_time_stop(TimeEntryTest): .
+test_correct_String_representation(TimeEntryTest): .
+test_correct_duration_of_time_entry(TimeEntryTest): .
+test_remove_hashcode_removes_hashcode(TimeEntryTest): .
+
+Finished in 0.167384 seconds.
+
+5 tests, 8 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_type_material_test.rb
+Loaded suite test/unit/time_entry_type_material_test
+Started
+test_correct_String_representation(TimeEntryTypeMaterialTest): .
+
+Finished in 0.100838 seconds.
+
+1 tests, 1 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_type_test.rb
+Loaded suite test/unit/time_entry_type_test
+Started
+test_correct_String_representation(TimeEntryTypeTest): .
+test_return_appropriate_array_for_Selection(TimeEntryTypeTest): .
+
+Finished in 0.132914 seconds.
+
+2 tests, 3 assertions, 0 failures, 0 errors
+
+
+>>> user_test.rb
+Loaded suite test/unit/user_test
+Started
+test_correct_String_representation(UserTest): .
+test_return_appropriate_array_for_given_Type(UserTest): .
+test_return_correct_array_for_Selection(UserTest): .
+
+Finished in 0.147466 seconds.
+
+3 tests, 4 assertions, 0 failures, 0 errors

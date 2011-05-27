@@ -1,0 +1,99 @@
+
+
+>>> addresses_helper_test.rb
+Loaded suite test/unit/helpers/addresses_helper_test
+Started
+
+Finished in 0.000201 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> applied_materials_helper_test.rb
+Loaded suite test/unit/helpers/applied_materials_helper_test
+Started
+
+Finished in 0.000206 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> customers_helper_test.rb
+Loaded suite test/unit/helpers/customers_helper_test
+Started
+
+Finished in 0.0002 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> locations_helper_test.rb
+Loaded suite test/unit/helpers/locations_helper_test
+Started
+
+Finished in 0.000199 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> materials_helper_test.rb
+Loaded suite test/unit/helpers/materials_helper_test
+Started
+
+Finished in 0.0002 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> orders_helper_test.rb
+Loaded suite test/unit/helpers/orders_helper_test
+Started
+
+Finished in 0.000202 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> session_helper_test.rb
+Loaded suite test/unit/helpers/session_helper_test
+Started
+
+Finished in 0.000201 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> time_entries_helper_test.rb
+Loaded suite test/unit/helpers/time_entries_helper_test
+Started
+
+Finished in 0.00025 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_type_materials_helper_test.rb
+Loaded suite test/unit/helpers/time_entry_type_materials_helper_test
+Started
+
+Finished in 0.000201 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> time_entry_types_helper_test.rb
+Loaded suite test/unit/helpers/time_entry_types_helper_test
+Started
+
+Finished in 0.000224 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
+
+
+>>> welcome_helper_test.rb
+Loaded suite test/unit/helpers/welcome_helper_test
+Started
+
+Finished in 0.00021 seconds.
+
+0 tests, 0 assertions, 0 failures, 0 errors
