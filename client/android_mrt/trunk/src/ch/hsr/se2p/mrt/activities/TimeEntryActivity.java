@@ -46,13 +46,11 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static final double CIRCLE_RADIUS_FOR_CUSTOMER_DROPDOWN = 30000; // Circle 30km;
 
 	private LocationService locationService;
-
 	private Measurement measurement = new Measurement(false);
 	private final List<Customer> customers = new ArrayList<Customer>();
 	private ArrayAdapter<Customer> customerAdapter;
 	private final List<TimeEntryType> timeEntryTypes = new ArrayList<TimeEntryType>();
 	private MRTApplication mrtApplication;
-
 	private OnClickListener lstnStartStopTime = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
