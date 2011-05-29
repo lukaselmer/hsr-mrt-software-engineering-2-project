@@ -1,9 +1,9 @@
 package ch.hsr.se2p.mrt.activities;
 
-import ch.hsr.se2p.mrt.application.MRTApplication;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.test.AndroidTestCase;
+import ch.hsr.se2p.mrt.application.MRTApplication;
 
 public class MRTApplicationTest extends AndroidTestCase {
 

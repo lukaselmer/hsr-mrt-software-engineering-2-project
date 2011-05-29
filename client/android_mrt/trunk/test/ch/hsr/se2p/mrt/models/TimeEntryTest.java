@@ -87,8 +87,8 @@ public class TimeEntryTest extends AndroidTestCase {
 	public void testToJSON() {
 		try {
 			Timestamp timeStop = new Timestamp(System.currentTimeMillis()), timeStart = new Timestamp(System.currentTimeMillis() - 1000 * 60 * 60);
-			timeStart = (Timestamp) ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStart);
-			timeStop = (Timestamp) ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStop);
+			timeStart = ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStart);
+			timeStop = ISO8601DateParserHelperForTests.formatAndParseToTimestamp(timeStop);
 			TimeEntry t = new TimeEntry(timeStart);
 			t.setTimeStop(timeStop);
 			t.setDescription(DESCRIPTION);

@@ -1,10 +1,10 @@
 package ch.hsr.se2p.mrt.activities;
 
-import ch.hsr.se2p.mrt.models.GpsPosition;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import ch.hsr.se2p.mrt.models.GpsPosition;
 
 class LocationService {
 	private final LocationManager locationManager;
