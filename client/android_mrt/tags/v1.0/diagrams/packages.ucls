@@ -1,0 +1,101 @@
+<class-diagram version="1.0.1" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <package id="1" language="java" name="ch.hsr.se2p.mrt.database" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/database" 
+    binary="false">    
+    <position x="342" y="121" width="168" height="44"/>  
+  </package>  
+  <package id="2" language="java" name="ch.hsr.se2p.mrt.application" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/application" binary="false">    
+    <position x="104" y="121" width="177" height="44"/>  
+  </package>  
+  <package id="3" language="java" name="ch.hsr.se2p.mrt.models" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/models" 
+    binary="false">    
+    <position x="264" y="205" width="157" height="44"/>  
+  </package>  
+  <package id="4" language="java" name="ch.hsr.se2p.mrt.interfaces" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/interfaces" binary="false">    
+    <position x="62" y="289" width="173" height="44"/>  
+  </package>  
+  <package id="5" language="java" name="ch.hsr.se2p.mrt.network" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/network" 
+    binary="false">    
+    <position x="62" y="205" width="162" height="44"/>  
+  </package>  
+  <package id="6" language="java" name="ch.hsr.se2p.mrt.services" project="mrt" file="/mrt/src/ch/hsr/se2p/mrt/services" 
+    binary="false">    
+    <position x="147" y="33" width="-1" height="-1"/>  
+  </package>  
+  <package id="7" language="java" name="ch.hsr.se2p.mrt.activities" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/activities" binary="false">    
+    <position x="426" y="33" width="-1" height="-1"/>  
+  </package>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="1"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="271" y="182"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="5"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="526" y="114"/>    
+    <bendpoint x="526" y="233"/>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="31" y="121"/>    
+    <bendpoint x="34" y="256"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="2"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="7"/>    
+    <end type="TARGET" nodeId="1"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="52" y="121"/>    
+    <bendpoint x="51" y="186"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="2"/>    
+    <end type="TARGET" nodeId="5"/>  
+  </dependency>  
+  <dependency>    
+    <bendpoint x="73" y="121"/>    
+    <bendpoint x="73" y="172"/>    
+    <end type="SOURCE" nodeId="6"/>    
+    <end type="TARGET" nodeId="3"/>  
+  </dependency>  
+  <dependency>    
+    <end type="SOURCE" nodeId="3"/>    
+    <end type="TARGET" nodeId="4"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="false" private="false"/>    
+    <operations public="true" package="true" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

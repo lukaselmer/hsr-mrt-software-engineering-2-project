@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MRT</string>
+    <string name="btnCreateTimeEntryWithDescription">Create TimeEntry with description</string>
+    <string name="btnCreateTimeEntryWithoutDescription">Create TimeEntry without description</string>
+    <string name="btnSendTimeEntries">Send TimeEntries</string>
+    <string name="logout">Abmelden</string>
+    <string name="refreshMenu">Aktualisieren</string>
+</resources>

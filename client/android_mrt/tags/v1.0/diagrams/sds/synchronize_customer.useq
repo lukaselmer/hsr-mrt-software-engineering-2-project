@@ -1,0 +1,103 @@
+<sequence-diagram version="1.0.1" icons="true" automaticImage="PNG">  
+  <object id="1" language="java" name="ch.hsr.se2p.mrt.services.CustomerSynchronizer" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/services/CustomerSynchronizer.java" binary="false" label="customerSynchronizer" 
+    type="class" autoSize="true">    
+    <position x="162" y="0" width="-1" height="-1"/>    
+    <execution id="1">      
+      <position x="5" y="78" width="158" height="458"/>    
+    </execution>    
+    <execution id="2">      
+      <position x="5" y="118" width="158" height="398"/>    
+    </execution>    
+    <execution id="3">      
+      <position x="0" y="301" width="0" height="134"/>    
+    </execution>    
+    <execution id="4">      
+      <position x="0" y="395" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="8" language="java" name="ch.hsr.se2p.mrt.network.CustomerHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/CustomerHelper.java" binary="false" label="ch" type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="331" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="3" language="java" name="ch.hsr.se2p.mrt.database.DatabaseHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/database/DatabaseHelper.java" binary="false" label="databaseHelper" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="147" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="4" language="java" name="java.util.ArrayList" project="mrt" 
+    file="D:/Programme/Android/android-sdk/platforms/android-7/android.jar" binary="true" label="receivables" 
+    type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="187" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="5" language="java" name="com.j256.ormlite.dao.Dao" project="mrt" file="/mrt/lib/ormlite-core-4.18.jar" 
+    binary="true" label="dao" type="interface" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="233" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="ch.hsr.se2p.mrt.application.MRTApplication" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/application/MRTApplication.java" binary="false" label="mrtApplication" type="class" 
+    autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="449" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <object id="7" language="java" name="ch.hsr.se2p.mrt.network.CustomerHelper" project="mrt" 
+    file="/mrt/src/ch/hsr/se2p/mrt/network/CustomerHelper.java" binary="false" type="class" autoSize="true">    
+    <position x="0" y="0" width="0" height="0"/>    
+    <execution id="1">      
+      <position x="0" y="476" width="0" height="20"/>    
+    </execution>  
+  </object>  
+  <message operation="synchronize(): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="0"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="1"/>  
+  </message>  
+  <message operation="getCustomerDao(): Dao&lt;Customer,Integer&gt;">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="3" messageNodeId="0"/>  
+  </message>  
+  <message operation="ArrayList(java.util.Collection&lt;? extends E&gt;)">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="4" messageNodeId="0"/>  
+  </message>  
+  <message operation="queryForAll(): List&lt;T&gt;">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="5" messageNodeId="0"/>  
+  </message>  
+  <message 
+    operation="synchronizeCustomers(com.j256.ormlite.dao.Dao&lt;Customer,Integer&gt;,ch.hsr.se2p.mrt.network.CustomerHelper,java.util.List&lt;Receivable&gt;): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="2"/>  
+  </message>  
+  <message operation="getHttpHelper(): HttpHelper">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="6" messageNodeId="0"/>  
+  </message>  
+  <message operation="CustomerHelper(ch.hsr.se2p.mrt.network.HttpHelper)">    
+    <end type="SOURCE" nodeId="1" messageNodeId="1"/>    
+    <end type="TARGET" nodeId="7" messageNodeId="0"/>  
+  </message>  
+  <message 
+    operation="synchronize(java.util.List&lt;Receivable&gt;,java.lang.Class&lt;? extends Receivable&gt;): boolean">    
+    <end type="SOURCE" nodeId="1" messageNodeId="2"/>    
+    <end type="TARGET" nodeId="8" messageNodeId="0"/>  
+  </message>  
+  <message 
+    operation="processCustomer(com.j256.ormlite.dao.Dao&lt;Customer,Integer&gt;,ch.hsr.se2p.mrt.models.Customer): void">    
+    <end type="SOURCE" nodeId="1" messageNodeId="2"/>    
+    <end type="TARGET" nodeId="1" messageNodeId="3"/>  
+  </message>
+</sequence-diagram>
