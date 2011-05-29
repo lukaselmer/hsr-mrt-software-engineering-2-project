@@ -1,0 +1,2 @@
+module AppliedMaterialsHelper
+end

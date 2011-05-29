@@ -1,0 +1,10 @@
+<ul>
+  <% applied_materials.each do |applied_material| %>
+    <% material = applied_material.material %>
+    <% next if material.nil? %>
+    <li>
+      <%= link_to material do %><%= material %>, <%= (number_to_currency material.price) unless material.price.nil? %> (<%= applied_material.amount %> <%= t(:pieces) %>)<% end -%>
+      &nbsp;<%= link_to t(:remove), applied_material, :confirm => t(:confirm_remove), :remote => true, :method => :delete %>
+    </li>
+  <% end %>
+</ul>

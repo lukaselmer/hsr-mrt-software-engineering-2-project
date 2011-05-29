@@ -1,0 +1,10 @@
+<h1><%= TimeEntry.model_name.human %> bearbeiten</h1>
+
+<%= render 'form' %>
+
+<% unless @time_entry.gps_position.nil? %>
+  <%= render :partial => "addresses/map", :locals => { :gps_position => @time_entry.gps_position } %>
+<% end %>
+
+<%= link_to t(:show), @time_entry %> |
+<%= link_to t(:back), time_entries_path %>

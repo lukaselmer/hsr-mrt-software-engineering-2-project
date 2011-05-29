@@ -1,0 +1,25 @@
+<h1><%= t(:detail)%> Stundeneintrag</h1>
+
+<% fields= [:id, :customer, :time_entry_type, :user, :order, :description] %>
+<% fields.each do |f| %>
+  <p>
+    <b><%= TimeEntry.human_attribute_name(f) %>:</b>
+    <%= @time_entry.send(f) %>
+  </p>
+<% end %>
+
+  <p>
+    <b><%= TimeEntry.human_attribute_name(:time_start) %>:</b>
+    <%= l @time_entry.time_start %>
+  </p>
+  <p>
+    <b><%= TimeEntry.human_attribute_name(:time_stop) %>:</b>
+    <%= l @time_entry.time_stop %>
+  </p>
+
+<% unless @time_entry.gps_position.nil? %>
+  <%= render :partial => "addresses/map", :locals => { :gps_position => @time_entry.gps_position } %>
+<% end %>
+
+<%= link_to t(:edit), edit_time_entry_path(@time_entry) %> |
+<%= link_to t(:back), time_entries_path %>

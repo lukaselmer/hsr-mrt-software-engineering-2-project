@@ -1,0 +1,8 @@
+<p>
+  <b><%= Applied_material.human_attribute_name(:amount) %>:</b>
+  <%= @applied_material.amount %>
+</p>
+
+
+<%= link_to t(:edit), edit_applied_material_path(@applied_material) %> |
+<%= link_to t(:back), applied_materials_path %>

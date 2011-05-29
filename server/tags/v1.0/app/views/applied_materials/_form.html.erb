@@ -1,0 +1,21 @@
+<tr id ="applied_material_form">
+  <td colspan="7">
+    <%= form_for(@applied_material, :remote => true) do |f| %>
+      <%= f.hidden_field :order_id %>
+      <%= form_error_messages f %>
+
+      <div class="field">
+        <%= f.label :material_id %>
+        <%= f.select(:material_id, Material.for_select, {:include_blank => true}) %>
+      </div>
+
+      <div class="field">
+        <%= f.label :amount %>
+        <%= f.text_field :amount %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </td>
+</tr>

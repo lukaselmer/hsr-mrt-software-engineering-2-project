@@ -1,0 +1,32 @@
+<h1><%= t(:overview)%> Kunden</h1>
+<% fields = [:id, :first_name, :last_name, :phone, :address] %>
+
+<table>
+  <tr>
+    <% fields.each do |f| %>
+      <th><%= Customer.human_attribute_name(f) %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @customers.each do |customer| %>
+    <tr>
+      <% fields.each do |f| %>
+        <td><%= customer.send(f) %></td>
+      <% end %>
+      <td><%= link_to t(:show), customer %></td>
+
+      <% if write_access? customer %>
+        <td><%= link_to t(:edit), edit_customer_path(customer) %></td>
+        <td><%= link_to t(:destroy), customer, :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<% if write_access? %>
+  <%= link_to 'Neuer '+ Customer.model_name.human, new_customer_path %>
+<% end %>

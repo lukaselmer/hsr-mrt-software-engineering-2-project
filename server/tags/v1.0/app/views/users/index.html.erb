@@ -1,0 +1,31 @@
+<h1><%= t(:overview)%> <%= User.model_name.human %></h1>
+<% fields = [:id, :first_name, :last_name, :phone, :email, :human_model_name] %>
+<table>
+  <tr>
+    <% fields.each do |f| %>
+      <th><%= User.human_attribute_name(f) %></th>
+    <% end %>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <% fields.each do |f| %>
+        <td><%= user.send(f) %></td>
+      <% end %>
+      <td><%= link_to t(:show), user_path(user) %></td>
+
+      <% if write_access? user %>
+        <td><%= link_to t(:edit), edit_user_path(user) %></td>
+        <td><%= link_to t(:destroy), user_path(user), :confirm => t(:confirm_delete), :method => :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<% if write_access? %>
+  <%= link_to 'Neuer ' + User.model_name.human, new_user_path %>
+<% end %>

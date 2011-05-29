@@ -1,0 +1,96 @@
+de:
+  activerecord:
+    models:
+      order: Auftrag
+      address: Adresse
+      addresses: Adressen
+      customer: Kunde
+      time_entry: Stundeneintrag
+      time_entries: Stundeneinträge
+      material: Material
+      user: Benutzer
+      gps_position: GPS Position
+      applied_material: verwendetes Material
+      time_entry_type: Stundeneintragstyp
+      secretary: Sekretärin
+      field_worker: Aussendienstmitarbeiter
+      time_entry_type_material: Passendes Material
+    attributes:
+      order:
+        id: ID
+        customer: Kunde
+        customer_id: Kunde
+        time_entries: Stundeneinträge
+        address: Adresse
+        created_at: Erstellt am
+        description: Beschreibung
+        materials: Materialien
+      address:
+        id: ID
+        line1: Adresszeile1
+        line2: Adresszeile2
+        line3: Adresszeile3
+        place: Ort
+        zip: PLZ
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+      customer:
+        id: ID
+        first_name: Vorname
+        last_name: Nachname
+        phone: Telefonnummer
+        address: Adresse
+      time_entry_type_material:
+        id: ID
+        amount: Anzahl
+      gps_position:
+        id: ID
+        latitude: Breitengrad
+        longitude: Längengrad
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+      time_entry_type:
+        id: ID
+        description: Typ
+        valid_until: Gültig bis
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+        time_entry_type: Vorgänger
+        materials: Materialien
+      time_entry:
+        id: ID
+        customer: Kunde
+        gps_position_id: GPS Position
+        order: Auftrag
+        time_entry_type: Stundeneintragstyp
+        user: Aussendienstmitarbeiter
+        duration: Dauer
+        description: Beschreibung
+        time_start: Startzeitpunkt
+        time_stop: Endzeitpunkt
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+      applied_material:
+        id: ID
+        amount: Anzahl
+      material:
+        id: ID
+        catalog_number: Katalognummer
+        description: Beschreibung
+        dimensions: Dimension
+        price: Preis
+        valid_until: Gültig bis
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+      user:
+        id: ID
+        email: Email
+        first_name: Vorname
+        last_name: Nachname
+        phone: Telefonnummer
+        type: Typ
+        created_at: Erstellt am
+        updated_at: Aktualisiert am
+        human_model_name: Benutzertyp
+        password: Passwort
+        remember_me: 'Angemeldet bleiben'

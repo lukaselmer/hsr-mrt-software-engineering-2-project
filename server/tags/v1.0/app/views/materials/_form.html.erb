@@ -1,0 +1,23 @@
+<%= form_for(@material) do |f| %>
+  <%= form_error_messages f %>
+
+  <div class="field">
+    <%= f.label :catalog_number %>
+    <%= f.text_field :catalog_number %>
+  </div>
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :dimensions %>
+    <%= f.text_field :dimensions %>
+  </div>
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
