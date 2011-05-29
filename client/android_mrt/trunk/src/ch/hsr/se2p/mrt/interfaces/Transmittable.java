@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public interface Transmittable {
 	/**
 	 * Creates a new JSONObject, initializes it.
+	 * 
 	 * @return The newly created object
 	 */
 	public JSONObject toJSONObject();
@@ -19,7 +20,9 @@ public interface Transmittable {
 	public boolean isTransmitted();
 
 	/**
-	 * Compares the hashcodes on the client to the server side. If they match, the hashcode on the server is removed. Additionally the Id on the server is set.
+	 * Compares the hashcodes on the client to the server side. If they match, the hashcode on the server is removed. Additionally the Id on the
+	 * server is set.
+	 * 
 	 * @param jsonObject
 	 *            the object obtained by the request
 	 * @return whether response was valid or not

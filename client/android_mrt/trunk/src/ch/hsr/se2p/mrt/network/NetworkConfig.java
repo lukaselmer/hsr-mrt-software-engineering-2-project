@@ -4,6 +4,7 @@ class NetworkConfig {
 	private NetworkConfig() {
 	}
 
+	// local.mrt.elmermx.ch may be set for development as the rails host
 	// public static final String MRT_HOST = "local.mrt.elmermx.ch:3000";
 
 	// 10.0.2.2 represents the host the emulator is running on

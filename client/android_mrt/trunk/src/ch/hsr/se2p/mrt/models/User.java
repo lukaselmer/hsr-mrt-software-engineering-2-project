@@ -10,10 +10,9 @@ import ch.hsr.se2p.mrt.interfaces.Receivable;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * 
+ * The user or fieldWorker
  */
 public class User implements Receivable {
-
 	@DatabaseField(generatedId = true)
 	private int id;
 	@DatabaseField

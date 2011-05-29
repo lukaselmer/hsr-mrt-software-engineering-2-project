@@ -9,6 +9,7 @@ import org.json.JSONObject;
 public interface Confirmable {
 	/**
 	 * Creates a new JSONObject, initializes it.
+	 * 
 	 * @return The newly created object
 	 */
 	public JSONObject toJSONObject();

@@ -20,6 +20,7 @@ public interface Receivable {
 
 	/**
 	 * The obtained object contains all eligible attributes.
+	 * 
 	 * @param jsonObject
 	 *            the object obtained by the request
 	 * @return whether response was valid or not

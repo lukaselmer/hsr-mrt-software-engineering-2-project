@@ -10,7 +10,7 @@ import ch.hsr.se2p.mrt.interfaces.Receivable;
 import com.j256.ormlite.field.DatabaseField;
 
 /**
- * Saves needed information about the timeentrytype, which was received from the server.
+ * Saves needed information about the timeEntryType, which was received from the server.
  */
 public class TimeEntryType implements Receivable, Comparable<TimeEntryType> {
 	@DatabaseField(generatedId = true)
@@ -93,6 +93,6 @@ public class TimeEntryType implements Receivable, Comparable<TimeEntryType> {
 
 	@Override
 	public int compareTo(TimeEntryType anotherTimeEntryType) {
-		return getName().compareTo(anotherTimeEntryType.getName());	
+		return getName().compareTo(anotherTimeEntryType.getName());
 	}
 }

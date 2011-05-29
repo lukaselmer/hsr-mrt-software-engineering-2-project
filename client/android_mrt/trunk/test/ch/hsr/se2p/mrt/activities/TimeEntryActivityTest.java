@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.Spinner;
