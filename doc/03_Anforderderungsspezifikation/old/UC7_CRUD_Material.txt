@@ -1,7 +1,0 @@
-h1. Use Case CRUD Material
-Primary Actor: Sekretärin
-Die Sekretärin verwaltet die Materialien (CRUD). Die Daten eines Materials umfassen:
-* Katalognummer
-* Beschreibung
-* Dimension
-* Preis

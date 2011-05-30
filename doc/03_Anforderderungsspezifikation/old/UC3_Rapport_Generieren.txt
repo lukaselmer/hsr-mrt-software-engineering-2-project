@@ -1,3 +1,0 @@
-h1. Rapport generieren, Brief
-Primary Actor: Sekretärin
-Die Sekretärin veranlasst das System, einen Rapport zu einem bestimmten Auftrag zu generieren. Das System liefert den Rapport.
