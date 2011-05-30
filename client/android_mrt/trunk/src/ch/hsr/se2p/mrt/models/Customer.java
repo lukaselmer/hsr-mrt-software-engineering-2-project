@@ -50,6 +50,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 	public int compareTo(Customer another) {
 		if (equals(another))
 			return 0;
+		return compareToNotEquals(another);
+	}
+
+	private int compareToNotEquals(Customer another) {
 		if (bothDistancesNull(another))
 			return compareLastName(another);
 		if (getDistance() == null || another.getDistance() == null)
