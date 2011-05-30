@@ -1,25 +1,26 @@
 require 'test_helper'
 require 'rails/performance_test_help'
 
-class BrowsingTest < ActionDispatch::PerformanceTest
-  def test_post_10_time_entries
+class SynchronizeTimeEntriesTest < ActionDispatch::PerformanceTest
+  def setup
     sign_in
+  end
+  
+  def sign_in
+    post_via_redirect "/users/sign_in", "user[email]" => "field_worker@mrt.ch", "user[password]" => "mrt"
+    assert_equal "/", path
+  end
+
+  def test_post_10_time_entries
     post_time_entries 10
   end
   
   def test_post_100_time_entries
-    sign_in
     post_time_entries 100
   end
   
   def test_post_1000_time_entries
-    sign_in
     post_time_entries 1000
-  end
-
-  def sign_in
-    post_via_redirect "/users/sign_in", "user[email]" => "field_worker@mrt.ch", "user[password]" => "mrt"
-    assert_equal "/", path
   end
 
   def post_time_entries(times = 1)
@@ -29,6 +30,5 @@ class BrowsingTest < ActionDispatch::PerformanceTest
       post '/time_entries.json', :time_entry => valid_entry.attributes, :format => :json
       assert_response :success
     end
-
   end
 end
