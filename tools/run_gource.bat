@@ -8,22 +8,30 @@ ECHO * MRT Gource - SVN repository visualization *
 ECHO *********************************************
 ECHO.
 ECHO s - Slow run
+ECHO m - Medium run
 ECHO f - Fast run
 ECHO a - Export slow
 ECHO b - Export fast
 ECHO e - Exit
 ECHO.
-CHOICE /C "sfabe" /M "What would you like to do?"
+CHOICE /C "smfabe" /M "What would you like to do?"
 IF %ERRORLEVEL%==1 GOTO SLOW
-IF %ERRORLEVEL%==2 GOTO FAST
-IF %ERRORLEVEL%==3 GOTO EXPORT_SLOW
-IF %ERRORLEVEL%==4 GOTO EXPORT_FAST
-IF %ERRORLEVEL%==5 GOTO END
+IF %ERRORLEVEL%==2 GOTO MEDIUM
+IF %ERRORLEVEL%==3 GOTO FAST
+IF %ERRORLEVEL%==4 GOTO EXPORT_SLOW
+IF %ERRORLEVEL%==5 GOTO EXPORT_FAST
+IF %ERRORLEVEL%==6 GOTO END
 GOTO MENU
 
 :SLOW
 cd gource-0.32.win32/
 gource.exe --user-scale 2 --highlight-users --title "MRT - Mobile Reporting Tool" --logo userdata/logo.png --user-image-dir userdata/avatars/ --file-idle-time 0 --max-files 0 --key ../../
+cd ../
+GOTO MENU
+
+:MEDIUM
+cd gource-0.32.win32/
+gource.exe --user-scale 2 --highlight-users --title "MRT - Mobile Reporting Tool" --logo userdata/logo.png --user-image-dir userdata/avatars/ --file-idle-time 0 --max-file-lag 1 --max-files 0 --key -s 0.3 -a 0.1  ../../
 cd ../
 GOTO MENU
 
