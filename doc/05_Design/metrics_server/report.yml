@@ -1,0 +1,6511 @@
+--- 
+:rails_best_practices: 
+  :problems: 
+  - :file: app/controllers/addresses_controller.rb
+    :problem: simplify render in controllers
+    :line: "53"
+  - :file: app/controllers/addresses_controller.rb
+    :problem: simplify render in controllers
+    :line: "70"
+  - :file: app/controllers/application_controller.rb
+    :problem: simplify render in controllers
+    :line: "19"
+  - :file: app/controllers/applied_materials_controller.rb
+    :problem: simplify render in controllers
+    :line: "47"
+  - :file: app/controllers/customers_controller.rb
+    :problem: simplify render in controllers
+    :line: "41"
+  - :file: app/controllers/customers_controller.rb
+    :problem: simplify render in controllers
+    :line: "52"
+  - :file: app/controllers/materials_controller.rb
+    :problem: simplify render in controllers
+    :line: "43"
+  - :file: app/controllers/materials_controller.rb
+    :problem: simplify render in controllers
+    :line: "57"
+  - :file: app/controllers/orders_controller.rb
+    :problem: simplify render in controllers
+    :line: "44"
+  - :file: app/controllers/orders_controller.rb
+    :problem: simplify render in controllers
+    :line: "58"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: simplify render in controllers
+    :line: "17"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: simplify render in controllers
+    :line: "66"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: simplify render in controllers
+    :line: "102"
+  - :file: app/controllers/time_entry_type_materials_controller.rb
+    :problem: simplify render in controllers
+    :line: "58"
+  - :file: app/controllers/time_entry_types_controller.rb
+    :problem: simplify render in controllers
+    :line: "43"
+  - :file: app/controllers/time_entry_types_controller.rb
+    :problem: simplify render in controllers
+    :line: "57"
+  - :file: app/controllers/users_controller.rb
+    :problem: simplify render in controllers
+    :line: "38"
+  - :file: app/controllers/users_controller.rb
+    :problem: simplify render in controllers
+    :line: "50"
+  - :file: app/controllers/addresses_controller.rb
+    :problem: use before_filter for show,edit,update,destroy
+    :line: "17,38,61,78"
+  - :file: app/controllers/applied_materials_controller.rb
+    :problem: use before_filter for edit,update,destroy
+    :line: "26,39,55"
+  - :file: app/controllers/customers_controller.rb
+    :problem: use before_filter for show,edit,update,delete,destroy
+    :line: "11,29,45,56,64"
+  - :file: app/controllers/materials_controller.rb
+    :problem: use before_filter for show,edit,delete,destroy
+    :line: "13,31,63,73"
+  - :file: app/controllers/orders_controller.rb
+    :problem: use before_filter for show,edit,update,destroy,add_material
+    :line: "13,31,50,64,73"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: use before_filter for show,edit
+    :line: "23,41"
+  - :file: app/controllers/time_entry_type_materials_controller.rb
+    :problem: use before_filter for show,edit,update,destroy
+    :line: "16,37,50,66"
+  - :file: app/controllers/time_entry_types_controller.rb
+    :problem: use before_filter for show,edit,delete,destroy,add_material
+    :line: "13,31,63,73,81"
+  - :file: app/controllers/users_controller.rb
+    :problem: use before_filter for show,edit,update,destroy
+    :line: "15,25,42,54"
+  - :file: app/helpers/addresses_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/applied_materials_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/customers_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/materials_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/orders_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/session_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/time_entries_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/time_entry_type_materials_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/time_entry_types_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/users_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/helpers/welcome_helper.rb
+    :problem: remove empty helpers
+    :line: "1"
+  - :file: app/controllers/application_controller.rb
+    :problem: move model logic into model (object use_count > 4)
+    :line: "8"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: move model logic into model (@time_entry use_count > 4)
+    :line: "71"
+  - :file: app/models/customer.rb
+    :problem: use query attribute (customer.deleted_at?)
+    :line: "18"
+  - :file: db/schema.rb
+    :problem: always add db index (applied_materials => [material_id])
+    :line: "26"
+  - :file: db/schema.rb
+    :problem: always add db index (applied_materials => [order_id])
+    :line: "26"
+  - :file: db/schema.rb
+    :problem: always add db index (addresses => [gps_position_id])
+    :line: "15"
+  - :file: db/schema.rb
+    :problem: always add db index (customers => [address_id])
+    :line: "34"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entry_types => [time_entry_type_id])
+    :line: "92"
+  - :file: db/schema.rb
+    :problem: always add db index (orders => [customer_id])
+    :line: "62"
+  - :file: db/schema.rb
+    :problem: always add db index (orders => [address_id])
+    :line: "62"
+  - :file: db/schema.rb
+    :problem: always add db index (materials => [material_id])
+    :line: "51"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entry_type_materials => [time_entry_type_id])
+    :line: "84"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entry_type_materials => [material_id])
+    :line: "84"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entries => [customer_id])
+    :line: "70"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entries => [time_entry_type_id])
+    :line: "70"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entries => [user_id])
+    :line: "70"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entries => [gps_position_id])
+    :line: "70"
+  - :file: db/schema.rb
+    :problem: always add db index (time_entries => [order_id])
+    :line: "70"
+  - :file: app/views/addresses/show.html.erb
+    :problem: simplify render in views
+    :line: "10"
+  - :file: app/views/customers/show.html.erb
+    :problem: simplify render in views
+    :line: "25"
+  - :file: app/views/customers/show.html.erb
+    :problem: simplify render in views
+    :line: "25"
+  - :file: app/views/customers/show.html.erb
+    :problem: simplify render in views
+    :line: "28"
+  - :file: app/views/orders/index.html.erb
+    :problem: simplify render in views
+    :line: "1"
+  - :file: app/views/orders/show.html.erb
+    :problem: simplify render in views
+    :line: "22"
+  - :file: app/views/orders/show.html.erb
+    :problem: simplify render in views
+    :line: "22"
+  - :file: app/views/orders/show.html.erb
+    :problem: simplify render in views
+    :line: "25"
+  - :file: app/views/time_entries/edit.html.erb
+    :problem: simplify render in views
+    :line: "6"
+  - :file: app/views/time_entries/index.html.erb
+    :problem: simplify render in views
+    :line: "1"
+  - :file: app/views/time_entries/show.html.erb
+    :problem: simplify render in views
+    :line: "21"
+  - :file: app/models/address.rb
+    :problem: remove trailing whitespace
+    :line: "10"
+  - :file: app/models/material.rb
+    :problem: remove trailing whitespace
+    :line: "17"
+  - :file: app/models/customer.rb
+    :problem: remove trailing whitespace
+    :line: "16"
+  - :file: app/models/user.rb
+    :problem: remove trailing whitespace
+    :line: "4"
+  - :file: app/models/geocoder.rb
+    :problem: remove trailing whitespace
+    :line: "12"
+  - :file: app/models/time_entry_type.rb
+    :problem: remove trailing whitespace
+    :line: "10"
+  - :file: app/models/time_entry.rb
+    :problem: remove trailing whitespace
+    :line: "21"
+  - :file: app/controllers/addresses_controller.rb
+    :problem: remove trailing whitespace
+    :line: "64"
+  - :file: app/controllers/customers_controller.rb
+    :problem: remove trailing whitespace
+    :line: "62"
+  - :file: app/controllers/materials_controller.rb
+    :problem: remove trailing whitespace
+    :line: "76"
+  - :file: app/controllers/time_entries_controller.rb
+    :problem: remove trailing whitespace
+    :line: "43"
+  - :file: app/controllers/time_entry_types_controller.rb
+    :problem: remove trailing whitespace
+    :line: "79"
+  - :file: app/controllers/users_controller.rb
+    :problem: remove trailing whitespace
+    :line: "4"
+  - :file: app/helpers/application_helper.rb
+    :problem: remove trailing whitespace
+    :line: "5"
+  - :file: app/views/addresses/_map.html.erb
+    :problem: remove trailing whitespace
+    :line: "26"
+  - :file: app/views/materials/index.html.erb
+    :problem: remove trailing whitespace
+    :line: "20"
+  - :file: app/views/orders/show.html.erb
+    :problem: remove trailing whitespace
+    :line: "13"
+  - :file: config/routes.rb
+    :problem: remove trailing whitespace
+    :line: "2"
+  - :file: db/migrate/20110406124921_create_time_entries.rb
+    :problem: remove trailing whitespace
+    :line: "13"
+  - :file: db/migrate/20110419190509_create_customers.rb
+    :problem: remove trailing whitespace
+    :line: "8"
+  - :file: db/migrate/20110424183332_create_orders.rb
+    :problem: remove trailing whitespace
+    :line: "7"
+  - :file: db/migrate/20110424183704_create_time_entry_types.rb
+    :problem: remove trailing whitespace
+    :line: "7"
+  - :file: db/migrate/20110424184100_create_materials.rb
+    :problem: remove trailing whitespace
+    :line: "10"
+  - :file: db/migrate/20110424184355_create_applied_materials.rb
+    :problem: remove trailing whitespace
+    :line: "7"
+  - :file: db/migrate/20110425203731_create_time_entry_type_materials.rb
+    :problem: remove trailing whitespace
+    :line: "7"
+  :total: 
+  - Found 92 errors.
+:rcov: 
+  :global_percent_run: 0.0
+:hotspots: 
+  :classes: 
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 19.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: SessionsController
+      file_path: app/controllers/sessions_controller.rb
+      hash: 339220318
+      method_name: 
+  - :details: 
+      :flog: average complexity is 17.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Geocoder
+      file_path: app/models/geocoder.rb:3
+      hash: -975719499
+      method_name: 
+  - :details: 
+      :reek: found 2 code smells
+      :flog: average complexity is 15.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer
+      file_path: app/models/customer.rb
+      hash: 1050354698
+      method_name: 
+  - :details: 
+      :reek: found 11 code smells
+      :flog: average complexity is 14.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: 690421930
+      method_name: 
+  - :details: 
+      :reek: found 14 code smells
+      :flog: average complexity is 13.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: -743329560
+      method_name: 
+  - :details: 
+      :reek: found 2 code smells
+      :flog: average complexity is 13.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType
+      file_path: app/models/time_entry_type.rb
+      hash: -131075082
+      method_name: 
+  - :details: 
+      :reek: found 8 code smells
+      :flog: average complexity is 12.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: -793172314
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+      :flog: average complexity is 12.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb
+      hash: -863450267
+      method_name: 
+  - :details: 
+      :reek: found 4 code smells
+      :flog: average complexity is 11.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: app/models/address.rb
+      hash: 591069297
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+      :flog: average complexity is 11.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb
+      hash: 127259346
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+      :flog: average complexity is 11.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb
+      hash: -945200438
+      method_name: 
+  - :details: 
+      :reek: found 7 code smells
+      :flog: average complexity is 9.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: 558910069
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+      :flog: average complexity is 10.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material
+      file_path: app/models/material.rb
+      hash: -581110633
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+      :flog: average complexity is 9.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb
+      hash: 138320742
+      method_name: 
+  - :details: 
+      :reek: found 4 code smells
+      :flog: average complexity is 9.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb
+      hash: -365716232
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+      :flog: average complexity is 6.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationController
+      file_path: app/controllers/application_controller.rb
+      hash: -849426860
+      method_name: 
+  - :details: 
+      :reek: found 5 code smells
+      :flog: average complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationHelper
+      file_path: app/helpers/application_helper.rb
+      hash: -521972605
+      method_name: 
+  - :details: 
+      :flog: average complexity is 5.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order
+      file_path: 
+      hash: 1026863857
+      method_name: 
+  - :details: 
+      :flog: average complexity is 5.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntry
+      file_path: 
+      hash: 858808122
+      method_name: 
+  - :details: 
+      :flog: average complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:22
+      hash: -76049736
+      method_name: 
+  - :details: 
+      :flog: average complexity is 2.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterial
+      file_path: 
+      hash: -678076202
+      method_name: 
+  - :details: 
+      :flog: average complexity is 2.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: GpsPosition
+      file_path: 
+      hash: 353533591
+      method_name: 
+  - :details: 
+      :flog: average complexity is 2.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterial
+      file_path: app/models/applied_material.rb:8
+      hash: -168211281
+      method_name: 
+  - :details: 
+      :reek: found 4 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Geocoder#self
+      file_path: app/models/geocoder.rb
+      hash: 257262305
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer#self
+      file_path: app/models/customer.rb
+      hash: 1042909382
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User#self
+      file_path: app/models/user.rb
+      hash: 987233918
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order#self
+      file_path: app/models/order.rb
+      hash: 840511166
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material#self
+      file_path: app/models/material.rb
+      hash: -630741360
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address#self
+      file_path: app/models/address.rb
+      hash: 1072637477
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType#self
+      file_path: app/models/time_entry_type.rb
+      hash: -779783241
+      method_name: 
+  :methods: 
+  - :details: 
+      :reek: found 5 code smells
+      :flog: complexity is 38.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: -227127325
+      method_name: TimeEntriesController#create_by_json
+      simple_method_name: "#create_by_json"
+  - :details: 
+      :reek: found 4 code smells
+      :flog: complexity is 35.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: -165505798
+      method_name: AddressesController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 4 code smells
+      :flog: complexity is 35.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb
+      hash: -1003062182
+      method_name: AppliedMaterialsController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 32.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: -693677372
+      method_name: AddressesController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 30.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: 631242399
+      method_name: TimeEntryTypesController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 30.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb
+      hash: 901034646
+      method_name: MaterialsController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 29.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 305560883
+      method_name: TimeEntriesController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 27.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb
+      hash: 1036564808
+      method_name: OrdersController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 4 code smells
+      :flog: complexity is 25.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: 445142620
+      method_name: TimeEntryTypeMaterialsController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 25.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb
+      hash: 518157896
+      method_name: UsersController#update
+      simple_method_name: "#update"
+  - :details: 
+      :flog: complexity is 26.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Geocoder
+      file_path: app/models/geocoder.rb:3
+      hash: 427258911
+      method_name: Geocoder#translate
+      simple_method_name: "#translate"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 24.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb
+      hash: -447874203
+      method_name: OrdersController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 23.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb
+      hash: -314576019
+      method_name: MaterialsController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 23.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: -854019855
+      method_name: TimeEntryTypesController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 22.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb
+      hash: -142658507
+      method_name: UsersController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 22.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 408419914
+      method_name: TimeEntriesController#remove_hashcode
+      simple_method_name: "#remove_hashcode"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 20.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer
+      file_path: app/models/customer.rb
+      hash: -544615157
+      method_name: Customer#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 20.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType
+      file_path: app/models/time_entry_type.rb
+      hash: 133926523
+      method_name: TimeEntryType#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 20.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb
+      hash: -690117703
+      method_name: CustomersController#update
+      simple_method_name: "#update"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 19.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: SessionsController
+      file_path: app/controllers/sessions_controller.rb
+      hash: -685798966
+      method_name: SessionsController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 19.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb
+      hash: 572250002
+      method_name: CustomersController#synchronize
+      simple_method_name: "#synchronize"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 18.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: 890121658
+      method_name: TimeEntryTypesController#synchronize
+      simple_method_name: "#synchronize"
+  - :details: 
+      :flog: complexity is 17.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb:59
+      hash: 1035582013
+      method_name: TimeEntriesController#create_by_html
+      simple_method_name: "#create_by_html"
+  - :details: 
+      :flog: complexity is 17.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:34
+      hash: -944085816
+      method_name: CustomersController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 16.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: app/models/address.rb
+      hash: -522137448
+      method_name: Address#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 16.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: app/models/address.rb
+      hash: -568663466
+      method_name: Address#to_google_maps_address
+      simple_method_name: "#to_google_maps_address"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 15.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: app/models/address.rb
+      hash: -82947447
+      method_name: Address#update_gps_position
+      simple_method_name: "#update_gps_position"
+  - :details: 
+      :reek: found 2 code smells
+      :flog: complexity is 15.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationController
+      file_path: app/controllers/application_controller.rb
+      hash: -38265814
+      method_name: ApplicationController#write_access?
+      simple_method_name: "#write_access?"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 14.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material
+      file_path: app/models/material.rb
+      hash: 923046227
+      method_name: Material#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 14.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: -926738545
+      method_name: AddressesController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 14.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 181045432
+      method_name: TimeEntriesController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 13.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer
+      file_path: app/models/customer.rb:15
+      hash: -755273097
+      method_name: Customer#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :flog: complexity is 12.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType
+      file_path: 
+      hash: -737243487
+      method_name: TimeEntryType#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 11.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer
+      file_path: 
+      hash: 298862553
+      method_name: Customer#none
+      simple_method_name: "#none"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb
+      hash: -732026745
+      method_name: OrdersController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb
+      hash: -949379354
+      method_name: MaterialsController#delete
+      simple_method_name: "#delete"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: -680356497
+      method_name: TimeEntryTypesController#delete
+      simple_method_name: "#delete"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 10.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: -712074630
+      method_name: TimeEntryTypeMaterialsController#show
+      simple_method_name: "#show"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 10.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: 216591601
+      method_name: AddressesController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 10.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material
+      file_path: 
+      hash: 1058239581
+      method_name: Material#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb:73
+      hash: 392405700
+      method_name: MaterialsController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:73
+      hash: -464823799
+      method_name: TimeEntryTypesController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:64
+      hash: 891666753
+      method_name: CustomersController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 9.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Geocoder
+      file_path: app/models/geocoder.rb:15
+      hash: 1033288520
+      method_name: Geocoder#address_to_gps_position
+      simple_method_name: "#address_to_gps_position"
+  - :details: 
+      :flog: complexity is 9.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: 
+      hash: -444904155
+      method_name: User#none
+      simple_method_name: "#none"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 8.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: -789601768
+      method_name: TimeEntriesController#destroy_all
+      simple_method_name: "#destroy_all"
+  - :details: 
+      :flog: complexity is 9.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntry
+      file_path: 
+      hash: -137310672
+      method_name: TimeEntry#none
+      simple_method_name: "#none"
+  - :details: 
+      :reek: found 3 code smells
+      :flog: complexity is 8.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationHelper
+      file_path: app/helpers/application_helper.rb
+      hash: -381901748
+      method_name: ApplicationHelper#form_error_messages
+      simple_method_name: "#form_error_messages"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 8.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 968047385
+      method_name: TimeEntriesController#create
+      simple_method_name: "#create"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb
+      hash: -1071296157
+      method_name: AppliedMaterialsController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 8.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb:54
+      hash: -387713535
+      method_name: UsersController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 8.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:56
+      hash: 828852258
+      method_name: CustomersController#delete
+      simple_method_name: "#delete"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: 560545789
+      method_name: AddressesController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 7.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntry
+      file_path: app/models/time_entry.rb:18
+      hash: 1036821473
+      method_name: TimeEntry#duration
+      simple_method_name: "#duration"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb
+      hash: -1009710298
+      method_name: AppliedMaterialsController#new
+      simple_method_name: "#new"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb
+      hash: -715717513
+      method_name: AddressesController#new
+      simple_method_name: "#new"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: 569681057
+      method_name: TimeEntryTypeMaterialsController#index
+      simple_method_name: "#index"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: -37590542
+      method_name: TimeEntryTypeMaterialsController#new
+      simple_method_name: "#new"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationController
+      file_path: app/controllers/application_controller.rb
+      hash: 504594452
+      method_name: ApplicationController#authorize_secretary!
+      simple_method_name: "#authorize_secretary!"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb:41
+      hash: -462583796
+      method_name: TimeEntriesController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb:32
+      hash: 335963579
+      method_name: TimeEntriesController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:11
+      hash: 805132303
+      method_name: CustomersController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb:23
+      hash: -357633719
+      method_name: TimeEntriesController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb:13
+      hash: 753052303
+      method_name: MaterialsController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:13
+      hash: -850536523
+      method_name: TimeEntryTypesController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb:13
+      hash: -883804186
+      method_name: OrdersController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 7.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order
+      file_path: app/models/order.rb:15
+      hash: -47225218
+      method_name: Order#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 6.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 1073327338
+      method_name: TimeEntriesController#unassigned
+      simple_method_name: "#unassigned"
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb:73
+      hash: -283164300
+      method_name: OrdersController#add_material
+      simple_method_name: "#add_material"
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:81
+      hash: -199524064
+      method_name: TimeEntryTypesController#add_material
+      simple_method_name: "#add_material"
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb:43
+      hash: -807904357
+      method_name: TimeEntryTypeMaterialsController#create
+      simple_method_name: "#create"
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb:32
+      hash: -781150441
+      method_name: AppliedMaterialsController#create
+      simple_method_name: "#create"
+  - :details: 
+      :flog: complexity is 5.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material
+      file_path: app/models/material.rb:14
+      hash: -939318684
+      method_name: Material#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :flog: complexity is 5.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType
+      file_path: app/models/time_entry_type.rb:15
+      hash: 752049872
+      method_name: TimeEntryType#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb:66
+      hash: -1036063098
+      method_name: TimeEntryTypeMaterialsController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb:55
+      hash: -660751014
+      method_name: AppliedMaterialsController#destroy
+      simple_method_name: "#destroy"
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order
+      file_path: 
+      hash: -256054096
+      method_name: Order#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: 
+      hash: 761883974
+      method_name: Address#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 5.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:26
+      hash: -1014168441
+      method_name: User#type_for_select
+      simple_method_name: "#type_for_select"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:4
+      hash: 400562728
+      method_name: TimeEntryTypesController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb:6
+      hash: 900072083
+      method_name: UsersController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb:22
+      hash: 799677669
+      method_name: MaterialsController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb:4
+      hash: -173172722
+      method_name: MaterialsController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:22
+      hash: 395818345
+      method_name: TimeEntryTypesController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: app/controllers/time_entries_controller.rb:5
+      hash: -737381711
+      method_name: TimeEntriesController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb:22
+      hash: -979843621
+      method_name: OrdersController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:20
+      hash: -344585519
+      method_name: CustomersController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb:4
+      hash: 586163970
+      method_name: OrdersController#index
+      simple_method_name: "#index"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationHelper
+      file_path: app/helpers/application_helper.rb
+      hash: -690211330
+      method_name: ApplicationHelper#fr
+      simple_method_name: "#fr"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:29
+      hash: 635060638
+      method_name: CustomersController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: OrdersController
+      file_path: app/controllers/orders_controller.rb:31
+      hash: 828576032
+      method_name: OrdersController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: MaterialsController
+      file_path: app/controllers/materials_controller.rb:31
+      hash: 440238529
+      method_name: MaterialsController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb:15
+      hash: 572607238
+      method_name: UsersController#show
+      simple_method_name: "#show"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb:25
+      hash: 954618328
+      method_name: UsersController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: app/controllers/addresses_controller.rb:38
+      hash: -611904982
+      method_name: AddressesController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypesController
+      file_path: app/controllers/time_entry_types_controller.rb:31
+      hash: 990761224
+      method_name: TimeEntryTypesController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterialsController
+      file_path: app/controllers/applied_materials_controller.rb:26
+      hash: -700248286
+      method_name: AppliedMaterialsController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterialsController
+      file_path: app/controllers/time_entry_type_materials_controller.rb:37
+      hash: -929602044
+      method_name: TimeEntryTypeMaterialsController#edit
+      simple_method_name: "#edit"
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:30
+      hash: -795202289
+      method_name: User#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address
+      file_path: app/models/address.rb:27
+      hash: 1005131560
+      method_name: Address#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order
+      file_path: app/models/order.rb:11
+      hash: -880227218
+      method_name: Order#for_select
+      simple_method_name: "#for_select"
+  - :details: 
+      :reek: found 1 code smells
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationHelper
+      file_path: app/helpers/application_helper.rb
+      hash: -690211340
+      method_name: ApplicationHelper#fl
+      simple_method_name: "#fl"
+  - :details: 
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:24
+      hash: -524510623
+      method_name: User#human_model_name
+      simple_method_name: "#human_model_name"
+  - :details: 
+      :flog: complexity is 4.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:34
+      hash: 880112659
+      method_name: User#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :flog: complexity is 3.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntry
+      file_path: app/models/time_entry.rb:22
+      hash: 400937849
+      method_name: TimeEntry#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :flog: complexity is 3.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationController
+      file_path: 
+      hash: 500196191
+      method_name: ApplicationController#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 3.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterial
+      file_path: 
+      hash: -975467069
+      method_name: AppliedMaterial#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 3.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: GpsPosition
+      file_path: 
+      hash: -228379397
+      method_name: GpsPosition#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 3.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterial
+      file_path: 
+      hash: 896686356
+      method_name: TimeEntryTypeMaterial#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: GpsPosition
+      file_path: app/models/gps_position.rb:8
+      hash: -728673178
+      method_name: GpsPosition#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryTypeMaterial
+      file_path: app/models/time_entry_type_material.rb:8
+      hash: 685460101
+      method_name: TimeEntryTypeMaterial#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AppliedMaterial
+      file_path: app/models/applied_material.rb:8
+      hash: -143360230
+      method_name: AppliedMaterial#to_s
+      simple_method_name: "#to_s"
+  - :details: 
+      :flog: complexity is 2.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntriesController
+      file_path: 
+      hash: -1007228740
+      method_name: TimeEntriesController#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 1.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: app/controllers/users_controller.rb:20
+      hash: 823405390
+      method_name: UsersController#new
+      simple_method_name: "#new"
+  - :details: 
+      :flog: complexity is 1.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: app/controllers/customers_controller.rb:6
+      hash: -288525197
+      method_name: CustomersController#index
+      simple_method_name: "#index"
+  - :details: 
+      :flog: complexity is 1.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: ApplicationController
+      file_path: app/controllers/application_controller.rb:17
+      hash: -483848994
+      method_name: ApplicationController#deny_access!
+      simple_method_name: "#deny_access!"
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:23
+      hash: -81125684
+      method_name: User#field_worker?
+      simple_method_name: "#field_worker?"
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntry
+      file_path: app/models/time_entry.rb:14
+      hash: -31734231
+      method_name: TimeEntry#remove_hashcode
+      simple_method_name: "#remove_hashcode"
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User
+      file_path: app/models/user.rb:22
+      hash: -187816627
+      method_name: User#secretary?
+      simple_method_name: "#secretary?"
+  - :details: 
+      :flog: complexity is 1.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: UsersController
+      file_path: 
+      hash: 552219161
+      method_name: UsersController#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 1.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: CustomersController
+      file_path: 
+      hash: -136724672
+      method_name: CustomersController#none
+      simple_method_name: "#none"
+  - :details: 
+      :flog: complexity is 1.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: AddressesController
+      file_path: 
+      hash: 820649119
+      method_name: AddressesController#none
+      simple_method_name: "#none"
+  - :details: 
+      :reek: found 4 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Geocoder#self
+      file_path: app/models/geocoder.rb
+      hash: -577726180
+      method_name: Geocoder#self.translate
+      simple_method_name: .translate
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Customer#self
+      file_path: app/models/customer.rb
+      hash: 457078391
+      method_name: Customer#self.for_select
+      simple_method_name: .for_select
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: User#self
+      file_path: app/models/user.rb
+      hash: 390364731
+      method_name: User#self.for_select
+      simple_method_name: .for_select
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Material#self
+      file_path: app/models/material.rb
+      hash: 98720864
+      method_name: Material#self.for_select
+      simple_method_name: .for_select
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: TimeEntryType#self
+      file_path: app/models/time_entry_type.rb
+      hash: -425512152
+      method_name: TimeEntryType#self.for_select
+      simple_method_name: .for_select
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Address#self
+      file_path: app/models/address.rb
+      hash: -975774584
+      method_name: Address#self.for_select
+      simple_method_name: .for_select
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: Order#self
+      file_path: app/models/order.rb
+      hash: 184820749
+      method_name: Order#self.for_select
+      simple_method_name: .for_select
+  :files: 
+  - :details: 
+      :flog: complexity is 38.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:71
+      hash: 217510439
+      method_name: 
+  - :details: 
+      :flog: complexity is 35.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:39
+      hash: -1012301713
+      method_name: 
+  - :details: 
+      :flog: complexity is 35.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:61
+      hash: 1043089156
+      method_name: 
+  - :details: 
+      :flog: complexity is 32.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:44
+      hash: 1042547968
+      method_name: 
+  - :details: 
+      :flog: complexity is 30.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:49
+      hash: 654285728
+      method_name: 
+  - :details: 
+      :flog: complexity is 30.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:49
+      hash: 133546708
+      method_name: 
+  - :details: 
+      :flog: complexity is 29.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:93
+      hash: 218051671
+      method_name: 
+  - :details: 
+      :flog: complexity is 27.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:50
+      hash: -877250009
+      method_name: 
+  - :details: 
+      :flog: complexity is 26.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/geocoder.rb:3
+      hash: 895544868
+      method_name: 
+  - :details: 
+      :flog: complexity is 25.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:42
+      hash: -425521320
+      method_name: 
+  - :details: 
+      :flog: complexity is 25.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:50
+      hash: 278938067
+      method_name: 
+  - :details: 
+      :flog: complexity is 24.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:36
+      hash: -877791145
+      method_name: 
+  - :details: 
+      :flog: complexity is 23.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:36
+      hash: 133276068
+      method_name: 
+  - :details: 
+      :flog: complexity is 23.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:36
+      hash: 654015152
+      method_name: 
+  - :details: 
+      :flog: complexity is 22.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:131
+      hash: 919567704
+      method_name: 
+  - :details: 
+      :flog: complexity is 22.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:30
+      hash: -425791916
+      method_name: 
+  - :details: 
+      :flog: complexity is 20.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/customer.rb:23
+      hash: 450568396
+      method_name: 
+  - :details: 
+      :flog: complexity is 20.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry_type.rb:19
+      hash: -419256389
+      method_name: 
+  - :details: 
+      :flog: complexity is 20.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:45
+      hash: 1033541420
+      method_name: 
+  - :details: 
+      :flog: complexity is 19.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:72
+      hash: 1034353196
+      method_name: 
+  - :details: 
+      :flog: complexity is 19.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/sessions_controller.rb:3
+      hash: -140530220
+      method_name: 
+  - :details: 
+      :flog: complexity is 18.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:87
+      hash: 134629084
+      method_name: 
+  - :details: 
+      :flog: complexity is 17.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:59
+      hash: 216969311
+      method_name: 
+  - :details: 
+      :flog: complexity is 17.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:34
+      hash: 1033270820
+      method_name: 
+  - :details: 
+      :flog: complexity is 16.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/address.rb:31
+      hash: 228082640
+      method_name: 
+  - :details: 
+      :flog: complexity is 16.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/address.rb:22
+      hash: 227812048
+      method_name: 
+  - :details: 
+      :flog: complexity is 15.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/address.rb:12
+      hash: 227541460
+      method_name: 
+  - :details: 
+      :flog: complexity is 15.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/application_controller.rb:8
+      hash: -904206837
+      method_name: 
+  - :details: 
+      :flog: complexity is 14.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:78
+      hash: 1043359780
+      method_name: 
+  - :details: 
+      :flog: complexity is 14.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/material.rb:18
+      hash: 237029295
+      method_name: 
+  - :details: 
+      :flog: complexity is 14.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:108
+      hash: 918755956
+      method_name: 
+  - :details: 
+      :flog: complexity is 13.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/customer.rb:15
+      hash: 450297800
+      method_name: 
+  - :details: 
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:63
+      hash: 134087844
+      method_name: 
+  - :details: 
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:63
+      hash: 654826928
+      method_name: 
+  - :details: 
+      :flog: complexity is 11.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:64
+      hash: -876979373
+      method_name: 
+  - :details: 
+      :flog: complexity is 10.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:16
+      hash: 277855707
+      method_name: 
+  - :details: 
+      :flog: complexity is 10.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:17
+      hash: 1041736204
+      method_name: 
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:73
+      hash: 134358432
+      method_name: 
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:73
+      hash: 655097532
+      method_name: 
+  - :details: 
+      :flog: complexity is 9.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:64
+      hash: 1034082600
+      method_name: 
+  - :details: 
+      :flog: complexity is 9.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/geocoder.rb:15
+      hash: -788275948
+      method_name: 
+  - :details: 
+      :flog: complexity is 8.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:120
+      hash: 919297104
+      method_name: 
+  - :details: 
+      :flog: complexity is 8.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:48
+      hash: 216698711
+      method_name: 
+  - :details: 
+      :flog: complexity is 8.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:54
+      hash: -425250740
+      method_name: 
+  - :details: 
+      :flog: complexity is 8.1
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:56
+      hash: 1033812052
+      method_name: 
+  - :details: 
+      :flog: complexity is 8.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/helpers/application_helper.rb:2
+      hash: -724505345
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry.rb:18
+      hash: -127751205
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:28
+      hash: 1042006836
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:27
+      hash: 278126275
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:16
+      hash: -1012842893
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:6
+      hash: 537034139
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:5
+      hash: 568212216
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:5
+      hash: -1003643793
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:41
+      hash: 216698675
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/application_controller.rb:22
+      hash: 581123044
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:13
+      hash: -878332357
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:23
+      hash: 216157491
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:13
+      hash: 653473924
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:32
+      hash: 216428083
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:11
+      hash: 1032729608
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:13
+      hash: 132734856
+      method_name: 
+  - :details: 
+      :flog: complexity is 7.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/order.rb:15
+      hash: 625007276
+      method_name: 
+  - :details: 
+      :flog: complexity is 6.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:13
+      hash: 215886903
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:81
+      hash: 134629028
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:73
+      hash: -876708781
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:43
+      hash: 278667483
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.9
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:32
+      hash: -1012301749
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/material.rb:14
+      hash: 237029299
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.8
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry_type.rb:15
+      hash: -419256437
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:66
+      hash: 279208695
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.5
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:55
+      hash: -1011760537
+      method_name: 
+  - :details: 
+      :flog: complexity is 5.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:26
+      hash: 691587100
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:4
+      hash: 29253068
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:20
+      hash: 1033000200
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:22
+      hash: 653744516
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb:5
+      hash: 737197223
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:22
+      hash: 133005448
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:22
+      hash: -878061765
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:6
+      hash: -385831020
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:4
+      hash: 302176344
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:4
+      hash: -961388008
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb:26
+      hash: -1012572289
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb:31
+      hash: -877791173
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb:31
+      hash: 654015108
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb:37
+      hash: 278396879
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb:38
+      hash: 1042277424
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb:31
+      hash: 133276040
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:29
+      hash: 1033000276
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:15
+      hash: -426333096
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:25
+      hash: -426062524
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:30
+      hash: 691857636
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/address.rb:27
+      hash: 227812044
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.3
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/order.rb:11
+      hash: 625007292
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/helpers/application_helper.rb:6
+      hash: -724505361
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/helpers/application_helper.rb:7
+      hash: -724505365
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:24
+      hash: 691587092
+      method_name: 
+  - :details: 
+      :flog: complexity is 4.0
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:34
+      hash: 691857684
+      method_name: 
+  - :details: 
+      :flog: complexity is 3.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry.rb:22
+      hash: -127480657
+      method_name: 
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry_type_material.rb:8
+      hash: 100123639
+      method_name: 
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/applied_material.rb:8
+      hash: -627555649
+      method_name: 
+  - :details: 
+      :flog: complexity is 2.4
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/gps_position.rb:8
+      hash: 1052823732
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb:6
+      hash: 1019308572
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.7
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb:20
+      hash: -426062552
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.6
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/application_controller.rb:17
+      hash: 580852500
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:23
+      hash: 691587052
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb:22
+      hash: 691587040
+      method_name: 
+  - :details: 
+      :flog: complexity is 1.2
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry.rb:14
+      hash: -127751253
+      method_name: 
+  - :details: 
+      :reek: found 14 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entries_controller.rb
+      hash: 683107696
+      method_name: 
+  - :details: 
+      :reek: found 11 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/addresses_controller.rb
+      hash: -658988120
+      method_name: 
+  - :details: 
+      :reek: found 8 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_types_controller.rb
+      hash: 453862559
+      method_name: 
+  - :details: 
+      :reek: found 7 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/time_entry_type_materials_controller.rb
+      hash: 440855411
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/applied_materials_controller.rb
+      hash: -110515909
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/orders_controller.rb
+      hash: 73778967
+      method_name: 
+  - :details: 
+      :flay: found 1 code duplications
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/views/customers/index.html.erb
+      hash: 153968336
+      method_name: 
+  - :details: 
+      :reek: found 6 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/materials_controller.rb
+      hash: -269886157
+      method_name: 
+  - :details: 
+      :reek: found 5 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/helpers/application_helper.rb
+      hash: -618069025
+      method_name: 
+  - :details: 
+      :reek: found 5 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/address.rb
+      hash: 576408615
+      method_name: 
+  - :details: 
+      :reek: found 4 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/geocoder.rb
+      hash: -319478856
+      method_name: 
+  - :details: 
+      :reek: found 4 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/users_controller.rb
+      hash: -637898236
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/application_controller.rb
+      hash: 828760883
+      method_name: 
+  - :details: 
+      :flay: found 1 code duplications
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/views/users/index.html.erb
+      hash: 155869900
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/customer.rb
+      hash: -435477772
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/customers_controller.rb
+      hash: -179339393
+      method_name: 
+  - :details: 
+      :reek: found 3 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/time_entry_type.rb
+      hash: -1004490500
+      method_name: 
+  - :details: 
+      :reek: found 2 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/material.rb
+      hash: 818558248
+      method_name: 
+  - :details: 
+      :reek: found 2 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/controllers/sessions_controller.rb
+      hash: 440000100
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/user.rb
+      hash: 249407120
+      method_name: 
+  - :details: 
+      :reek: found 1 code smells
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/models/order.rb
+      hash: -760493376
+      method_name: 
+  - :details: 
+      :flay: found 1 code duplications
+    :location: !ruby/object:MetricFu::Location 
+      class_name: 
+      file_path: app/views/addresses/index.html.erb
+      hash: -463278132
+      method_name: 
+:saikuro: 
+  :classes: 
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntriesController#index
+    - :lines: 6
+      :complexity: 3
+      :name: TimeEntriesController#unassigned
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntriesController#show
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntriesController#new
+    - :lines: 4
+      :complexity: 2
+      :name: TimeEntriesController#edit
+    - :lines: 6
+      :complexity: 4
+      :name: TimeEntriesController#create
+    - :lines: 8
+      :complexity: 2
+      :name: TimeEntriesController#create_by_html
+    - :lines: 19
+      :complexity: 4
+      :name: TimeEntriesController#create_by_json
+    - :lines: 12
+      :complexity: 6
+      :name: TimeEntriesController#update
+    - :lines: 8
+      :complexity: 4
+      :name: TimeEntriesController#destroy
+    - :lines: 7
+      :complexity: 3
+      :name: TimeEntriesController#destroy_all
+    - :lines: 8
+      :complexity: 4
+      :name: TimeEntriesController#remove_hashcode
+    :lines: 138
+    :complexity: 38
+    :name: TimeEntriesController
+  - :defs: 
+    - :lines: 7
+      :complexity: 3
+      :name: AddressesController#index
+    - :lines: 7
+      :complexity: 3
+      :name: AddressesController#show
+    - :lines: 7
+      :complexity: 3
+      :name: AddressesController#new
+    - :lines: 2
+      :complexity: 1
+      :name: AddressesController#edit
+    - :lines: 13
+      :complexity: 7
+      :name: AddressesController#create
+    - :lines: 13
+      :complexity: 7
+      :name: AddressesController#update
+    - :lines: 8
+      :complexity: 4
+      :name: AddressesController#destroy
+    :lines: 85
+    :complexity: 28
+    :name: AddressesController
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntryTypesController#index
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntryTypesController#show
+    - :lines: 6
+      :complexity: 2
+      :name: TimeEntryTypesController#new
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntryTypesController#edit
+    - :lines: 10
+      :complexity: 5
+      :name: TimeEntryTypesController#create
+    - :lines: 11
+      :complexity: 5
+      :name: TimeEntryTypesController#update
+    - :lines: 7
+      :complexity: 3
+      :name: TimeEntryTypesController#delete
+    - :lines: 5
+      :complexity: 1
+      :name: TimeEntryTypesController#destroy
+    - :lines: 3
+      :complexity: 1
+      :name: TimeEntryTypesController#add_material
+    - :lines: 10
+      :complexity: 2
+      :name: TimeEntryTypesController#synchronize
+    :lines: 96
+    :complexity: 24
+    :name: TimeEntryTypesController
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: MaterialsController#index
+    - :lines: 6
+      :complexity: 2
+      :name: MaterialsController#show
+    - :lines: 6
+      :complexity: 2
+      :name: MaterialsController#new
+    - :lines: 2
+      :complexity: 1
+      :name: MaterialsController#edit
+    - :lines: 10
+      :complexity: 5
+      :name: MaterialsController#create
+    - :lines: 11
+      :complexity: 5
+      :name: MaterialsController#update
+    - :lines: 7
+      :complexity: 3
+      :name: MaterialsController#delete
+    - :lines: 5
+      :complexity: 1
+      :name: MaterialsController#destroy
+    :lines: 77
+    :complexity: 21
+    :name: MaterialsController
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: OrdersController#index
+    - :lines: 6
+      :complexity: 2
+      :name: OrdersController#show
+    - :lines: 6
+      :complexity: 2
+      :name: OrdersController#new
+    - :lines: 2
+      :complexity: 1
+      :name: OrdersController#edit
+    - :lines: 11
+      :complexity: 5
+      :name: OrdersController#create
+    - :lines: 11
+      :complexity: 5
+      :name: OrdersController#update
+    - :lines: 7
+      :complexity: 3
+      :name: OrdersController#destroy
+    - :lines: 3
+      :complexity: 1
+      :name: OrdersController#add_material
+    :lines: 75
+    :complexity: 21
+    :name: OrdersController
+  - :defs: 
+    - :lines: 7
+      :complexity: 3
+      :name: TimeEntryTypeMaterialsController#index
+    - :lines: 7
+      :complexity: 3
+      :name: TimeEntryTypeMaterialsController#show
+    - :lines: 7
+      :complexity: 3
+      :name: TimeEntryTypeMaterialsController#new
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntryTypeMaterialsController#edit
+    - :lines: 3
+      :complexity: 1
+      :name: TimeEntryTypeMaterialsController#create
+    - :lines: 12
+      :complexity: 7
+      :name: TimeEntryTypeMaterialsController#update
+    - :lines: 3
+      :complexity: 1
+      :name: TimeEntryTypeMaterialsController#destroy
+    :lines: 68
+    :complexity: 19
+    :name: TimeEntryTypeMaterialsController
+  - :defs: 
+    - :lines: 7
+      :complexity: 3
+      :name: AppliedMaterialsController#index
+    - :lines: 7
+      :complexity: 3
+      :name: AppliedMaterialsController#new
+    - :lines: 2
+      :complexity: 1
+      :name: AppliedMaterialsController#edit
+    - :lines: 3
+      :complexity: 1
+      :name: AppliedMaterialsController#create
+    - :lines: 12
+      :complexity: 7
+      :name: AppliedMaterialsController#update
+    - :lines: 3
+      :complexity: 1
+      :name: AppliedMaterialsController#destroy
+    :lines: 57
+    :complexity: 16
+    :name: AppliedMaterialsController
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: CustomersController#index
+    - :lines: 6
+      :complexity: 2
+      :name: CustomersController#show
+    - :lines: 6
+      :complexity: 2
+      :name: CustomersController#new
+    - :lines: 2
+      :complexity: 1
+      :name: CustomersController#edit
+    - :lines: 8
+      :complexity: 2
+      :name: CustomersController#create
+    - :lines: 8
+      :complexity: 2
+      :name: CustomersController#update
+    - :lines: 5
+      :complexity: 1
+      :name: CustomersController#delete
+    - :lines: 5
+      :complexity: 1
+      :name: CustomersController#destroy
+    - :lines: 8
+      :complexity: 2
+      :name: CustomersController#synchronize
+    :lines: 79
+    :complexity: 14
+    :name: CustomersController
+  - :defs: 
+    - :lines: 6
+      :complexity: 2
+      :name: UsersController#index
+    - :lines: 2
+      :complexity: 1
+      :name: UsersController#show
+    - :lines: 2
+      :complexity: 1
+      :name: UsersController#new
+    - :lines: 2
+      :complexity: 1
+      :name: UsersController#edit
+    - :lines: 9
+      :complexity: 2
+      :name: UsersController#create
+    - :lines: 9
+      :complexity: 2
+      :name: UsersController#update
+    - :lines: 5
+      :complexity: 1
+      :name: UsersController#destroy
+    :lines: 58
+    :complexity: 10
+    :name: UsersController
+  - :defs: 
+    - :lines: 7
+      :complexity: 3
+      :name: Address#update_gps_position
+    - :lines: 2
+      :complexity: 2
+      :name: Address#to_google_maps_address
+    - :lines: 2
+      :complexity: 2
+      :name: Address#self.for_select
+    - :lines: 2
+      :complexity: 2
+      :name: Address#to_s
+    :lines: 32
+    :complexity: 9
+    :name: Address
+  - :defs: 
+    - :lines: 6
+      :complexity: 5
+      :name: ApplicationController#write_access?
+    - :lines: 2
+      :complexity: 1
+      :name: ApplicationController#deny_access!
+    - :lines: 2
+      :complexity: 2
+      :name: ApplicationController#authorize_secretary!
+    :lines: 23
+    :complexity: 8
+    :name: ApplicationController
+  - :defs: 
+    - :lines: 0
+      :complexity: 1
+      :name: User#secretary?
+    - :lines: 0
+      :complexity: 1
+      :name: User#field_worker?
+    - :lines: 0
+      :complexity: 1
+      :name: User#human_model_name
+    - :lines: 2
+      :complexity: 1
+      :name: User#self.type_for_select
+    - :lines: 2
+      :complexity: 2
+      :name: User#self.for_select
+    - :lines: 2
+      :complexity: 1
+      :name: User#to_s
+    :lines: 35
+    :complexity: 7
+    :name: User
+  - :defs: 
+    - :lines: 10
+      :complexity: 4
+      :name: Geocoder#self.translate
+    - :lines: 4
+      :complexity: 2
+      :name: Geocoder#self.address_to_gps_position
+    :lines: 18
+    :complexity: 6
+    :name: Geocoder
+  - :defs: 
+    - :lines: 6
+      :complexity: 3
+      :name: Customer#self.for_select
+    - :lines: 4
+      :complexity: 2
+      :name: Customer#to_s
+    :lines: 26
+    :complexity: 6
+    :name: Customer
+  - :defs: 
+    - :lines: 2
+      :complexity: 2
+      :name: TimeEntryType#self.for_select
+    - :lines: 4
+      :complexity: 2
+      :name: TimeEntryType#to_s
+    :lines: 22
+    :complexity: 5
+    :name: TimeEntryType
+  - :defs: 
+    - :lines: 7
+      :complexity: 5
+      :name: SessionsController#create
+    :lines: 9
+    :complexity: 5
+    :name: SessionsController
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: ApplicationHelper#form_error_messages
+    - :lines: 0
+      :complexity: 1
+      :name: ApplicationHelper#fl
+    - :lines: 0
+      :complexity: 1
+      :name: ApplicationHelper#fr
+    - :lines: 0
+      :complexity: 1
+      :name: ApplicationHelper#clearer
+    :lines: 8
+    :complexity: 4
+    :name: ApplicationHelper
+  - :defs: 
+    - :lines: 2
+      :complexity: 2
+      :name: Material#self.for_select
+    - :lines: 2
+      :complexity: 2
+      :name: Material#to_s
+    :lines: 19
+    :complexity: 4
+    :name: Material
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntry#remove_hashcode
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntry#duration
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntry#to_s
+    :lines: 23
+    :complexity: 3
+    :name: TimeEntry
+  - :defs: 
+    - :lines: 2
+      :complexity: 2
+      :name: Order#self.for_select
+    - :lines: 2
+      :complexity: 1
+      :name: Order#to_s
+    :lines: 16
+    :complexity: 3
+    :name: Order
+  - :lines: 3
+    :complexity: 2
+    :name: ""
+  - :lines: 9
+    :complexity: 2
+    :name: ""
+  - :lines: 2
+    :complexity: 2
+    :name: ""
+  - :lines: 2
+    :complexity: 1
+    :name: ""
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :lines: 8
+    :complexity: 1
+    :name: ""
+  - :lines: 4
+    :complexity: 1
+    :name: ""
+  - :lines: 2
+    :complexity: 1
+    :name: ""
+  - :lines: 3
+    :complexity: 1
+    :name: ""
+  - :lines: 6
+    :complexity: 1
+    :name: ""
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: AppliedMaterial#to_s
+    :lines: 9
+    :complexity: 1
+    :name: AppliedMaterial
+  - :lines: 3
+    :complexity: 1
+    :name: ""
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: GpsPosition#to_s
+    :lines: 9
+    :complexity: 1
+    :name: GpsPosition
+  - :defs: 
+    - :lines: 2
+      :complexity: 1
+      :name: TimeEntryTypeMaterial#to_s
+    :lines: 9
+    :complexity: 1
+    :name: TimeEntryTypeMaterial
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :lines: 0
+    :complexity: 1
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: "Order::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 3
+    :complexity: 0
+    :name: Customer
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 4
+    :complexity: 0
+    :name: "::::"
+  - :lines: 3
+    :complexity: 0
+    :name: "::"
+  - :lines: 3
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: FieldWorker
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 3
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: "::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 7
+    :complexity: 0
+    :name: Order
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: Secretary
+  - :lines: 1
+    :complexity: 0
+    :name: WelcomeHelper
+  - :lines: 2
+    :complexity: 0
+    :name: UsersHelper
+  - :lines: 1
+    :complexity: 0
+    :name: TimeEntryTypeMaterialsHelper
+  - :lines: 1
+    :complexity: 0
+    :name: TimeEntryTypesHelper
+  - :lines: 1
+    :complexity: 0
+    :name: TimeEntriesHelper
+  - :lines: 1
+    :complexity: 0
+    :name: SessionHelper
+  - :lines: 1
+    :complexity: 0
+    :name: OrdersHelper
+  - :lines: 1
+    :complexity: 0
+    :name: MaterialsHelper
+  - :lines: 1
+    :complexity: 0
+    :name: CustomersHelper
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: AppliedMaterialsHelper
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: AddressesHelper
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 3
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 5
+    :complexity: 0
+    :name: "::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 4
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: "::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: "::::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 3
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 3
+    :complexity: 0
+    :name: "::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: "::::"
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  - :lines: 0
+    :complexity: 0
+    :name: ""
+  - :lines: 1
+    :complexity: 0
+    :name: ""
+  :methods: 
+  - :lines: 12
+    :complexity: 7
+    :name: TimeEntryTypeMaterialsController#update
+  - :lines: 13
+    :complexity: 7
+    :name: AddressesController#create
+  - :lines: 12
+    :complexity: 7
+    :name: AppliedMaterialsController#update
+  - :lines: 13
+    :complexity: 7
+    :name: AddressesController#update
+  - :lines: 12
+    :complexity: 6
+    :name: TimeEntriesController#update
+  - :lines: 10
+    :complexity: 5
+    :name: TimeEntryTypesController#create
+  - :lines: 11
+    :complexity: 5
+    :name: OrdersController#update
+  - :lines: 11
+    :complexity: 5
+    :name: OrdersController#create
+  - :lines: 6
+    :complexity: 5
+    :name: ApplicationController#write_access?
+  - :lines: 10
+    :complexity: 5
+    :name: MaterialsController#create
+  - :lines: 11
+    :complexity: 5
+    :name: MaterialsController#update
+  - :lines: 11
+    :complexity: 5
+    :name: TimeEntryTypesController#update
+  - :lines: 7
+    :complexity: 5
+    :name: SessionsController#create
+  - :lines: 8
+    :complexity: 4
+    :name: AddressesController#destroy
+  - :lines: 8
+    :complexity: 4
+    :name: TimeEntriesController#destroy
+  - :lines: 19
+    :complexity: 4
+    :name: TimeEntriesController#create_by_json
+  - :lines: 6
+    :complexity: 4
+    :name: TimeEntriesController#create
+  - :lines: 8
+    :complexity: 4
+    :name: TimeEntriesController#remove_hashcode
+  - :lines: 10
+    :complexity: 4
+    :name: Geocoder#self.translate
+  - :lines: 7
+    :complexity: 3
+    :name: AddressesController#index
+  - :lines: 6
+    :complexity: 3
+    :name: Customer#self.for_select
+  - :lines: 7
+    :complexity: 3
+    :name: MaterialsController#delete
+  - :lines: 7
+    :complexity: 3
+    :name: AppliedMaterialsController#new
+  - :lines: 7
+    :complexity: 3
+    :name: AppliedMaterialsController#index
+  - :lines: 7
+    :complexity: 3
+    :name: AddressesController#show
+  - :lines: 7
+    :complexity: 3
+    :name: AddressesController#new
+  - :lines: 7
+    :complexity: 3
+    :name: TimeEntryTypeMaterialsController#new
+  - :lines: 7
+    :complexity: 3
+    :name: TimeEntryTypeMaterialsController#show
+  - :lines: 7
+    :complexity: 3
+    :name: TimeEntriesController#destroy_all
+  - :lines: 7
+    :complexity: 3
+    :name: TimeEntryTypeMaterialsController#index
+  - :lines: 7
+    :complexity: 3
+    :name: TimeEntryTypesController#delete
+  - :lines: 7
+    :complexity: 3
+    :name: OrdersController#destroy
+  - :lines: 6
+    :complexity: 3
+    :name: TimeEntriesController#unassigned
+  - :lines: 7
+    :complexity: 3
+    :name: Address#update_gps_position
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntriesController#index
+  - :lines: 9
+    :complexity: 2
+    :name: UsersController#update
+  - :lines: 9
+    :complexity: 2
+    :name: UsersController#create
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntryTypesController#index
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntryTypesController#show
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntryTypesController#new
+  - :lines: 6
+    :complexity: 2
+    :name: UsersController#index
+  - :lines: 8
+    :complexity: 2
+    :name: CustomersController#synchronize
+  - :lines: 2
+    :complexity: 2
+    :name: Address#to_google_maps_address
+  - :lines: 2
+    :complexity: 2
+    :name: Address#self.for_select
+  - :lines: 8
+    :complexity: 2
+    :name: CustomersController#update
+  - :lines: 8
+    :complexity: 2
+    :name: CustomersController#create
+  - :lines: 2
+    :complexity: 2
+    :name: Address#to_s
+  - :lines: 6
+    :complexity: 2
+    :name: CustomersController#new
+  - :lines: 6
+    :complexity: 2
+    :name: CustomersController#show
+  - :lines: 10
+    :complexity: 2
+    :name: TimeEntryTypesController#synchronize
+  - :lines: 6
+    :complexity: 2
+    :name: MaterialsController#index
+  - :lines: 2
+    :complexity: 2
+    :name: ApplicationController#authorize_secretary!
+  - :lines: 6
+    :complexity: 2
+    :name: MaterialsController#show
+  - :lines: 6
+    :complexity: 2
+    :name: MaterialsController#new
+  - :lines: 2
+    :complexity: 2
+    :name: User#self.for_select
+  - :lines: 4
+    :complexity: 2
+    :name: Geocoder#self.address_to_gps_position
+  - :lines: 4
+    :complexity: 2
+    :name: Customer#to_s
+  - :lines: 2
+    :complexity: 2
+    :name: TimeEntryType#self.for_select
+  - :lines: 4
+    :complexity: 2
+    :name: TimeEntryType#to_s
+  - :lines: 2
+    :complexity: 2
+    :name: Material#self.for_select
+  - :lines: 2
+    :complexity: 2
+    :name: Material#to_s
+  - :lines: 8
+    :complexity: 2
+    :name: TimeEntriesController#create_by_html
+  - :lines: 4
+    :complexity: 2
+    :name: TimeEntriesController#edit
+  - :lines: 6
+    :complexity: 2
+    :name: OrdersController#index
+  - :lines: 2
+    :complexity: 2
+    :name: Order#self.for_select
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntriesController#new
+  - :lines: 6
+    :complexity: 2
+    :name: TimeEntriesController#show
+  - :lines: 6
+    :complexity: 2
+    :name: OrdersController#show
+  - :lines: 6
+    :complexity: 2
+    :name: OrdersController#new
+  - :lines: 0
+    :complexity: 1
+    :name: User#secretary?
+  - :lines: 3
+    :complexity: 1
+    :name: OrdersController#add_material
+  - :lines: 5
+    :complexity: 1
+    :name: MaterialsController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntryTypeMaterialsController#edit
+  - :lines: 3
+    :complexity: 1
+    :name: TimeEntryTypeMaterialsController#create
+  - :lines: 3
+    :complexity: 1
+    :name: TimeEntryTypeMaterialsController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: MaterialsController#edit
+  - :lines: 2
+    :complexity: 1
+    :name: AppliedMaterialsController#edit
+  - :lines: 3
+    :complexity: 1
+    :name: AppliedMaterialsController#create
+  - :lines: 3
+    :complexity: 1
+    :name: AppliedMaterialsController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: CustomersController#index
+  - :lines: 3
+    :complexity: 1
+    :name: TimeEntryTypesController#add_material
+  - :lines: 5
+    :complexity: 1
+    :name: TimeEntryTypesController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: CustomersController#edit
+  - :lines: 5
+    :complexity: 1
+    :name: CustomersController#delete
+  - :lines: 5
+    :complexity: 1
+    :name: CustomersController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntryTypesController#edit
+  - :lines: 2
+    :complexity: 1
+    :name: UsersController#show
+  - :lines: 2
+    :complexity: 1
+    :name: UsersController#new
+  - :lines: 2
+    :complexity: 1
+    :name: UsersController#edit
+  - :lines: 5
+    :complexity: 1
+    :name: UsersController#destroy
+  - :lines: 2
+    :complexity: 1
+    :name: ApplicationController#deny_access!
+  - :lines: 2
+    :complexity: 1
+    :name: OrdersController#edit
+  - :lines: 2
+    :complexity: 1
+    :name: AddressesController#edit
+  - :lines: 0
+    :complexity: 1
+    :name: User#field_worker?
+  - :lines: 0
+    :complexity: 1
+    :name: User#human_model_name
+  - :lines: 2
+    :complexity: 1
+    :name: User#self.type_for_select
+  - :lines: 2
+    :complexity: 1
+    :name: User#to_s
+  - :lines: 2
+    :complexity: 1
+    :name: ApplicationHelper#form_error_messages
+  - :lines: 0
+    :complexity: 1
+    :name: ApplicationHelper#fl
+  - :lines: 0
+    :complexity: 1
+    :name: ApplicationHelper#fr
+  - :lines: 0
+    :complexity: 1
+    :name: ApplicationHelper#clearer
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntry#remove_hashcode
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntry#duration
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntry#to_s
+  - :lines: 2
+    :complexity: 1
+    :name: Order#to_s
+  - :lines: 2
+    :complexity: 1
+    :name: AppliedMaterial#to_s
+  - :lines: 2
+    :complexity: 1
+    :name: GpsPosition#to_s
+  - :lines: 2
+    :complexity: 1
+    :name: TimeEntryTypeMaterial#to_s
+  :files: 
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntriesController
+      :methods: 
+      - :lines: 12
+        :complexity: 6
+        :name: TimeEntriesController#update
+      - :lines: 8
+        :complexity: 4
+        :name: TimeEntriesController#remove_hashcode
+      - :lines: 8
+        :complexity: 4
+        :name: TimeEntriesController#destroy
+      - :lines: 6
+        :complexity: 4
+        :name: TimeEntriesController#create
+      - :lines: 19
+        :complexity: 4
+        :name: TimeEntriesController#create_by_json
+      - :lines: 7
+        :complexity: 3
+        :name: TimeEntriesController#destroy_all
+      - :lines: 6
+        :complexity: 3
+        :name: TimeEntriesController#unassigned
+      - :lines: 8
+        :complexity: 2
+        :name: TimeEntriesController#create_by_html
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntriesController#new
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntriesController#show
+      - :lines: 4
+        :complexity: 2
+        :name: TimeEntriesController#edit
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntriesController#index
+      :lines: 138
+      :complexity: 38
+    :filename: app/controllers/time_entries_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: AddressesController
+      :methods: 
+      - :lines: 13
+        :complexity: 7
+        :name: AddressesController#create
+      - :lines: 13
+        :complexity: 7
+        :name: AddressesController#update
+      - :lines: 8
+        :complexity: 4
+        :name: AddressesController#destroy
+      - :lines: 7
+        :complexity: 3
+        :name: AddressesController#show
+      - :lines: 7
+        :complexity: 3
+        :name: AddressesController#new
+      - :lines: 7
+        :complexity: 3
+        :name: AddressesController#index
+      - :lines: 2
+        :complexity: 1
+        :name: AddressesController#edit
+      :lines: 85
+      :complexity: 28
+    :filename: app/controllers/addresses_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntryTypesController
+      :methods: 
+      - :lines: 11
+        :complexity: 5
+        :name: TimeEntryTypesController#update
+      - :lines: 10
+        :complexity: 5
+        :name: TimeEntryTypesController#create
+      - :lines: 7
+        :complexity: 3
+        :name: TimeEntryTypesController#delete
+      - :lines: 10
+        :complexity: 2
+        :name: TimeEntryTypesController#synchronize
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntryTypesController#index
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntryTypesController#show
+      - :lines: 6
+        :complexity: 2
+        :name: TimeEntryTypesController#new
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntryTypesController#edit
+      - :lines: 3
+        :complexity: 1
+        :name: TimeEntryTypesController#add_material
+      - :lines: 5
+        :complexity: 1
+        :name: TimeEntryTypesController#destroy
+      :lines: 96
+      :complexity: 24
+    :filename: app/controllers/time_entry_types_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: MaterialsController
+      :methods: 
+      - :lines: 10
+        :complexity: 5
+        :name: MaterialsController#create
+      - :lines: 11
+        :complexity: 5
+        :name: MaterialsController#update
+      - :lines: 7
+        :complexity: 3
+        :name: MaterialsController#delete
+      - :lines: 6
+        :complexity: 2
+        :name: MaterialsController#index
+      - :lines: 6
+        :complexity: 2
+        :name: MaterialsController#new
+      - :lines: 6
+        :complexity: 2
+        :name: MaterialsController#show
+      - :lines: 2
+        :complexity: 1
+        :name: MaterialsController#edit
+      - :lines: 5
+        :complexity: 1
+        :name: MaterialsController#destroy
+      :lines: 77
+      :complexity: 21
+    :filename: app/controllers/materials_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: OrdersController
+      :methods: 
+      - :lines: 11
+        :complexity: 5
+        :name: OrdersController#create
+      - :lines: 11
+        :complexity: 5
+        :name: OrdersController#update
+      - :lines: 7
+        :complexity: 3
+        :name: OrdersController#destroy
+      - :lines: 6
+        :complexity: 2
+        :name: OrdersController#index
+      - :lines: 6
+        :complexity: 2
+        :name: OrdersController#new
+      - :lines: 6
+        :complexity: 2
+        :name: OrdersController#show
+      - :lines: 2
+        :complexity: 1
+        :name: OrdersController#edit
+      - :lines: 3
+        :complexity: 1
+        :name: OrdersController#add_material
+      :lines: 75
+      :complexity: 21
+    :filename: app/controllers/orders_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntryTypeMaterialsController
+      :methods: 
+      - :lines: 12
+        :complexity: 7
+        :name: TimeEntryTypeMaterialsController#update
+      - :lines: 7
+        :complexity: 3
+        :name: TimeEntryTypeMaterialsController#index
+      - :lines: 7
+        :complexity: 3
+        :name: TimeEntryTypeMaterialsController#show
+      - :lines: 7
+        :complexity: 3
+        :name: TimeEntryTypeMaterialsController#new
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntryTypeMaterialsController#edit
+      - :lines: 3
+        :complexity: 1
+        :name: TimeEntryTypeMaterialsController#create
+      - :lines: 3
+        :complexity: 1
+        :name: TimeEntryTypeMaterialsController#destroy
+      :lines: 68
+      :complexity: 19
+    :filename: app/controllers/time_entry_type_materials_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: AppliedMaterialsController
+      :methods: 
+      - :lines: 12
+        :complexity: 7
+        :name: AppliedMaterialsController#update
+      - :lines: 7
+        :complexity: 3
+        :name: AppliedMaterialsController#index
+      - :lines: 7
+        :complexity: 3
+        :name: AppliedMaterialsController#new
+      - :lines: 3
+        :complexity: 1
+        :name: AppliedMaterialsController#create
+      - :lines: 2
+        :complexity: 1
+        :name: AppliedMaterialsController#edit
+      - :lines: 3
+        :complexity: 1
+        :name: AppliedMaterialsController#destroy
+      :lines: 57
+      :complexity: 16
+    :filename: app/controllers/applied_materials_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: CustomersController
+      :methods: 
+      - :lines: 8
+        :complexity: 2
+        :name: CustomersController#synchronize
+      - :lines: 6
+        :complexity: 2
+        :name: CustomersController#show
+      - :lines: 6
+        :complexity: 2
+        :name: CustomersController#new
+      - :lines: 8
+        :complexity: 2
+        :name: CustomersController#update
+      - :lines: 8
+        :complexity: 2
+        :name: CustomersController#create
+      - :lines: 2
+        :complexity: 1
+        :name: CustomersController#edit
+      - :lines: 5
+        :complexity: 1
+        :name: CustomersController#delete
+      - :lines: 5
+        :complexity: 1
+        :name: CustomersController#destroy
+      - :lines: 2
+        :complexity: 1
+        :name: CustomersController#index
+      :lines: 79
+      :complexity: 14
+    :filename: app/controllers/customers_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: UsersController
+      :methods: 
+      - :lines: 6
+        :complexity: 2
+        :name: UsersController#index
+      - :lines: 9
+        :complexity: 2
+        :name: UsersController#update
+      - :lines: 9
+        :complexity: 2
+        :name: UsersController#create
+      - :lines: 2
+        :complexity: 1
+        :name: UsersController#edit
+      - :lines: 2
+        :complexity: 1
+        :name: UsersController#new
+      - :lines: 2
+        :complexity: 1
+        :name: UsersController#show
+      - :lines: 5
+        :complexity: 1
+        :name: UsersController#destroy
+      :lines: 58
+      :complexity: 10
+    :filename: app/controllers/users_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Address
+      :methods: 
+      - :lines: 7
+        :complexity: 3
+        :name: Address#update_gps_position
+      - :lines: 2
+        :complexity: 2
+        :name: Address#self.for_select
+      - :lines: 2
+        :complexity: 2
+        :name: Address#to_google_maps_address
+      - :lines: 2
+        :complexity: 2
+        :name: Address#to_s
+      :lines: 32
+      :complexity: 9
+    :filename: app/models/address.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: ApplicationController
+      :methods: 
+      - :lines: 6
+        :complexity: 5
+        :name: ApplicationController#write_access?
+      - :lines: 2
+        :complexity: 2
+        :name: ApplicationController#authorize_secretary!
+      - :lines: 2
+        :complexity: 1
+        :name: ApplicationController#deny_access!
+      :lines: 23
+      :complexity: 8
+    :filename: app/controllers/application_controller.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: User
+      :methods: 
+      - :lines: 2
+        :complexity: 2
+        :name: User#self.for_select
+      - :lines: 2
+        :complexity: 1
+        :name: User#self.type_for_select
+      - :lines: 2
+        :complexity: 1
+        :name: User#to_s
+      - :lines: 0
+        :complexity: 1
+        :name: User#human_model_name
+      - :lines: 0
+        :complexity: 1
+        :name: User#field_worker?
+      - :lines: 0
+        :complexity: 1
+        :name: User#secretary?
+      :lines: 35
+      :complexity: 7
+    :filename: app/models/user.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Geocoder
+      :methods: 
+      - :lines: 10
+        :complexity: 4
+        :name: Geocoder#self.translate
+      - :lines: 4
+        :complexity: 2
+        :name: Geocoder#self.address_to_gps_position
+      :lines: 18
+      :complexity: 6
+    :filename: app/models/geocoder.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Customer
+      :methods: 
+      - :lines: 6
+        :complexity: 3
+        :name: Customer#self.for_select
+      - :lines: 4
+        :complexity: 2
+        :name: Customer#to_s
+      :lines: 26
+      :complexity: 6
+    :filename: app/models/customer.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntryType
+      :methods: 
+      - :lines: 4
+        :complexity: 2
+        :name: TimeEntryType#to_s
+      - :lines: 2
+        :complexity: 2
+        :name: TimeEntryType#self.for_select
+      :lines: 22
+      :complexity: 5
+    :filename: app/models/time_entry_type.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: SessionsController
+      :methods: 
+      - :lines: 7
+        :complexity: 5
+        :name: SessionsController#create
+      :lines: 9
+      :complexity: 5
+    :filename: app/controllers/sessions_controller.rb
+  - :classes: 
+    - :class_name: ApplicationHelper
+      :methods: 
+      - :lines: 0
+        :complexity: 1
+        :name: ApplicationHelper#clearer
+      - :lines: 0
+        :complexity: 1
+        :name: ApplicationHelper#fr
+      - :lines: 0
+        :complexity: 1
+        :name: ApplicationHelper#fl
+      - :lines: 2
+        :complexity: 1
+        :name: ApplicationHelper#form_error_messages
+      :lines: 8
+      :complexity: 4
+    :filename: app/helpers/application_helper.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Material
+      :methods: 
+      - :lines: 2
+        :complexity: 2
+        :name: Material#to_s
+      - :lines: 2
+        :complexity: 2
+        :name: Material#self.for_select
+      :lines: 19
+      :complexity: 4
+    :filename: app/models/material.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntry
+      :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntry#to_s
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntry#duration
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntry#remove_hashcode
+      :lines: 23
+      :complexity: 3
+    :filename: app/models/time_entry.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Order
+      :methods: 
+      - :lines: 2
+        :complexity: 2
+        :name: Order#self.for_select
+      - :lines: 2
+        :complexity: 1
+        :name: Order#to_s
+      :lines: 16
+      :complexity: 3
+    :filename: app/models/order.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 2
+    :filename: app/views/time_entries/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 9
+      :complexity: 2
+    :filename: app/views/orders/_add_material.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 2
+      :complexity: 2
+    :filename: app/views/addresses/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 2
+      :complexity: 1
+    :filename: app/views/orders/_applied_materials.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/users/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/users/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/materials/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 8
+      :complexity: 1
+    :filename: app/views/materials/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 5
+      :complexity: 1
+    :filename: app/views/time_entry_type_materials/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 2
+      :complexity: 1
+    :filename: app/views/time_entry_types/_time_entry_type_materials.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 1
+    :filename: app/views/time_entry_types/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 6
+      :complexity: 1
+    :filename: app/views/time_entry_types/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/customers/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: AppliedMaterial
+      :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: AppliedMaterial#to_s
+      :lines: 9
+      :complexity: 1
+    :filename: app/models/applied_material.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 4
+      :complexity: 1
+    :filename: app/views/applied_materials/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: GpsPosition
+      :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: GpsPosition#to_s
+      :lines: 9
+      :complexity: 1
+    :filename: app/models/gps_position.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: TimeEntryTypeMaterial
+      :methods: 
+      - :lines: 2
+        :complexity: 1
+        :name: TimeEntryTypeMaterial#to_s
+      :lines: 9
+      :complexity: 1
+    :filename: app/models/time_entry_type_material.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/orders/_accomplished_time_entries.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 1
+    :filename: app/views/addresses/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: FieldWorker
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/models/field_worker.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/addresses/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::"
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::::"
+      :methods: []
+
+      :lines: 4
+      :complexity: 0
+    :filename: app/views/addresses/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/applied_materials/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/orders/index.html.erb
+  - :classes: 
+    - :class_name: Customer
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    :filename: app/views/orders/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: Secretary
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/models/secretary.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/orders/_table.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::"
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/views/sessions/new.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/applied_materials/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entries/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/orders/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entries/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/customers/edit.html.erb
+  - :classes: 
+    - :class_name: Order
+      :methods: []
+
+      :lines: 7
+      :complexity: 0
+    - :class_name: "Order::"
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/views/time_entries/_form.html.erb
+  - :classes: 
+    - :class_name: WelcomeHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/welcome_helper.rb
+  - :classes: 
+    - :class_name: UsersHelper
+      :methods: []
+
+      :lines: 2
+      :complexity: 0
+    :filename: app/helpers/users_helper.rb
+  - :classes: 
+    - :class_name: TimeEntryTypeMaterialsHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/time_entry_type_materials_helper.rb
+  - :classes: 
+    - :class_name: TimeEntryTypesHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/time_entry_types_helper.rb
+  - :classes: 
+    - :class_name: TimeEntriesHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/time_entries_helper.rb
+  - :classes: 
+    - :class_name: SessionHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/session_helper.rb
+  - :classes: 
+    - :class_name: OrdersHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/orders_helper.rb
+  - :classes: 
+    - :class_name: MaterialsHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/materials_helper.rb
+  - :classes: 
+    - :class_name: CustomersHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/customers_helper.rb
+  - :classes: 
+    - :class_name: AppliedMaterialsHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/applied_materials_helper.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entries/_table.html.erb
+  - :classes: 
+    - :class_name: AddressesHelper
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/helpers/addresses_helper.rb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entry_types/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/customers/show.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::"
+      :methods: []
+
+      :lines: 5
+      :complexity: 0
+    :filename: app/views/customers/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 4
+      :complexity: 0
+    :filename: app/views/time_entry_types/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: "::"
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    - :class_name: "::::"
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/views/layouts/application.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entry_type_materials/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/time_entry_type_materials/index.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/materials/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/users/edit.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::"
+      :methods: []
+
+      :lines: 3
+      :complexity: 0
+    - :class_name: "::::"
+      :methods: []
+
+      :lines: 1
+      :complexity: 0
+    :filename: app/views/materials/_form.html.erb
+  - :classes: 
+    - :class_name: ""
+      :methods: []
+
+      :lines: 0
+      :complexity: 0
+    :filename: app/views/orders/edit.html.erb
+:roodi: 
+  :problems: []
+
+  :total: 
+  - Found 0 errors.
+:reek: 
+  :matches: 
+  - :file_path: app/controllers/addresses_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: AddressesController#create
+    - :type: Duplication
+      :message: calls format.xml twice
+      :method: AddressesController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#destroy
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#index
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#new
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#show
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: AddressesController#update
+    - :type: Duplication
+      :message: calls format.xml twice
+      :method: AddressesController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: AddressesController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AddressesController#update
+  - :file_path: app/controllers/application_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls current_user twice
+      :method: ApplicationController#authorize_secretary!
+    - :type: Duplication
+      :message: calls current_user 3 times
+      :method: ApplicationController#write_access?
+    - :type: LowCohesion
+      :message: refers to object more than self
+      :method: ApplicationController#write_access?
+  - :file_path: app/controllers/applied_materials_controller.rb
+    :code_smells: 
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AppliedMaterialsController#index
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AppliedMaterialsController#new
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: AppliedMaterialsController#update
+    - :type: Duplication
+      :message: calls format.xml twice
+      :method: AppliedMaterialsController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: AppliedMaterialsController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: AppliedMaterialsController#update
+  - :file_path: app/controllers/customers_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls params twice
+      :method: CustomersController#synchronize
+    - :type: Duplication
+      :message: calls params[:last_update] twice
+      :method: CustomersController#synchronize
+    - :type: Duplication
+      :message: calls params twice
+      :method: CustomersController#update
+  - :file_path: app/controllers/materials_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: MaterialsController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: MaterialsController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: MaterialsController#delete
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: MaterialsController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: MaterialsController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: MaterialsController#update
+  - :file_path: app/controllers/orders_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: OrdersController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: OrdersController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: OrdersController#destroy
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: OrdersController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: OrdersController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: OrdersController#update
+  - :file_path: app/controllers/sessions_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls current_user twice
+      :method: SessionsController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: SessionsController#create
+  - :file_path: app/controllers/time_entries_controller.rb
+    :code_smells: 
+    - :type: SimulatedPolymorphism
+      :message: tests write_access?(@time_entry) at least 3 times
+      :method: TimeEntriesController
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntriesController#create
+    - :type: Duplication
+      :message: calls params 5 times
+      :method: TimeEntriesController#create_by_json
+    - :type: Duplication
+      :message: calls params[:time_entry] 5 times
+      :method: TimeEntriesController#create_by_json
+    - :type: Duplication
+      :message: calls params[:time_entry][:hashcode] twice
+      :method: TimeEntriesController#create_by_json
+    - :type: Duplication
+      :message: calls render(:json => (@time_entry), :status => :created, :location => (@time_entry)) twice
+      :method: TimeEntriesController#create_by_json
+    - :type: LongMethod
+      :message: has approx 10 statements
+      :method: TimeEntriesController#create_by_json
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntriesController#destroy
+    - :type: UncommunicativeName
+      :message: has the variable name 't'
+      :method: TimeEntriesController#destroy_all
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntriesController#remove_hashcode
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntriesController#unassigned
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: TimeEntriesController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: TimeEntriesController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntriesController#update
+  - :file_path: app/controllers/time_entry_type_materials_controller.rb
+    :code_smells: 
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypeMaterialsController#index
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypeMaterialsController#new
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypeMaterialsController#show
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: TimeEntryTypeMaterialsController#update
+    - :type: Duplication
+      :message: calls format.xml twice
+      :method: TimeEntryTypeMaterialsController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: TimeEntryTypeMaterialsController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypeMaterialsController#update
+  - :file_path: app/controllers/time_entry_types_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: TimeEntryTypesController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypesController#create
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypesController#delete
+    - :type: Duplication
+      :message: calls params twice
+      :method: TimeEntryTypesController#synchronize
+    - :type: Duplication
+      :message: calls params[:last_update] twice
+      :method: TimeEntryTypesController#synchronize
+    - :type: Duplication
+      :message: calls format.html twice
+      :method: TimeEntryTypesController#update
+    - :type: Duplication
+      :message: calls params twice
+      :method: TimeEntryTypesController#update
+    - :type: NestedIterators
+      :message: contains iterators nested 2 deep
+      :method: TimeEntryTypesController#update
+  - :file_path: app/controllers/users_controller.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls params twice
+      :method: UsersController#create
+    - :type: Duplication
+      :message: calls params[:user] twice
+      :method: UsersController#create
+    - :type: Duplication
+      :message: calls params 3 times
+      :method: UsersController#update
+    - :type: Duplication
+      :message: calls params[:user] twice
+      :method: UsersController#update
+  - :file_path: app/helpers/addresses_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/application_helper.rb
+    :code_smells: 
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: ApplicationHelper#fl
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: ApplicationHelper#form_error_messages
+    - :type: UncommunicativeName
+      :message: has the parameter name 'f'
+      :method: ApplicationHelper#form_error_messages
+    - :type: LowCohesion
+      :message: refers to f more than self
+      :method: ApplicationHelper#form_error_messages
+    - :type: LowCohesion
+      :message: doesn't depend on instance state
+      :method: ApplicationHelper#fr
+  - :file_path: app/helpers/applied_materials_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/customers_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/materials_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/orders_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/session_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/time_entries_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/time_entry_type_materials_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/time_entry_types_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/users_helper.rb
+    :code_smells: []
+
+  - :file_path: app/helpers/welcome_helper.rb
+    :code_smells: []
+
+  - :file_path: app/models/address.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'a'
+      :method: Address#self.for_select
+    - :type: UncommunicativeName
+      :message: has the variable name 'v'
+      :method: Address#to_google_maps_address
+    - :type: UncommunicativeName
+      :message: has the variable name 'v'
+      :method: Address#to_s
+    - :type: Duplication
+      :message: calls self.gps_position 5 times
+      :method: Address#update_gps_position
+    - :type: Duplication
+      :message: calls self.gps_position.nil? twice
+      :method: Address#update_gps_position
+  - :file_path: app/models/applied_material.rb
+    :code_smells: []
+
+  - :file_path: app/models/customer.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'c'
+      :method: Customer#self.for_select
+    - :type: Duplication
+      :message: calls deleted_at twice
+      :method: Customer#to_s
+    - :type: UncommunicativeName
+      :message: has the variable name 's'
+      :method: Customer#to_s
+  - :file_path: app/models/field_worker.rb
+    :code_smells: []
+
+  - :file_path: app/models/geocoder.rb
+    :code_smells: 
+    - :type: Duplication
+      :message: calls parsed_json["status"] twice
+      :method: Geocoder#self.translate
+    - :type: Duplication
+      :message: calls result["geometry"] twice
+      :method: Geocoder#self.translate
+    - :type: Duplication
+      :message: calls result["geometry"]["location"] twice
+      :method: Geocoder#self.translate
+    - :type: LongMethod
+      :message: has approx 8 statements
+      :method: Geocoder#self.translate
+  - :file_path: app/models/gps_position.rb
+    :code_smells: []
+
+  - :file_path: app/models/material.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'o'
+      :method: Material#self.for_select
+    - :type: UncommunicativeName
+      :message: has the variable name 'v'
+      :method: Material#to_s
+  - :file_path: app/models/order.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'o'
+      :method: Order#self.for_select
+  - :file_path: app/models/secretary.rb
+    :code_smells: []
+
+  - :file_path: app/models/time_entry.rb
+    :code_smells: []
+
+  - :file_path: app/models/time_entry_type.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 't'
+      :method: TimeEntryType#self.for_select
+    - :type: Duplication
+      :message: calls valid_until twice
+      :method: TimeEntryType#to_s
+    - :type: UncommunicativeName
+      :message: has the variable name 's'
+      :method: TimeEntryType#to_s
+  - :file_path: app/models/time_entry_type_material.rb
+    :code_smells: []
+
+  - :file_path: app/models/user.rb
+    :code_smells: 
+    - :type: UncommunicativeName
+      :message: has the variable name 'u'
+      :method: User#self.for_select
+:churn: 
+  :class_churn: []
+
+  :method_churn: []
+
+  :changes: []
+
+:flay: 
+  :matches: 
+  - :matches: 
+    - :line: "13"
+      :name: app/views/addresses/index.html.erb
+    - :line: "14"
+      :name: app/views/customers/index.html.erb
+    - :line: "13"
+      :name: app/views/users/index.html.erb
+    :reason: 1) Similar code found in :iter (mass = 312)
+  :total_score: "312"
+:stats: 
+  :lines: 
+  - :classes: 11
+    :methods_per_class: 7
+    :methods: 78
+    :loc_per_method: 4
+    :lines: 787
+    :name: Controllers
+    :loc: 545
+  - :classes: 0
+    :methods_per_class: 0
+    :methods: 4
+    :loc_per_method: 5
+    :lines: 32
+    :name: Helpers
+    :loc: 30
+  - :classes: 13
+    :methods_per_class: 2
+    :methods: 26
+    :loc_per_method: 4
+    :lines: 246
+    :name: Models
+    :loc: 179
+  - :classes: 0
+    :methods_per_class: 0
+    :methods: 0
+    :loc_per_method: 0
+    :lines: 0
+    :name: Libraries
+    :loc: 0
+  - :classes: 0
+    :methods_per_class: 0
+    :methods: 0
+    :loc_per_method: 0
+    :lines: 0
+    :name: Integration tests
+    :loc: 0
+  - :classes: 10
+    :methods_per_class: 0
+    :methods: 0
+    :loc_per_method: 0
+    :lines: 789
+    :name: Functional tests
+    :loc: 618
+  - :classes: 22
+    :methods_per_class: 0
+    :methods: 0
+    :loc_per_method: 0
+    :lines: 283
+    :name: Unit tests
+    :loc: 229
+  - :classes: 56
+    :methods_per_class: 1
+    :methods: 108
+    :loc_per_method: 12
+    :lines: 2137
+    :name: Total
+    :loc: 1601
+  :codeLOC: 754
+  :testLOC: 847
+  :code_to_test_ratio: 1.1
+:flog: 
+  :average: 10.2584483896949
+  :total: 1251.53070354277
+  :method_containers: 
+  - :methods: 
+      TimeEntriesController#create_by_html: 
+        :operators: 
+          :+: 3.2
+          :params: 1.6
+          :model_name: 2.1
+          :human: 1.9
+          :branch: 1.2
+          :redirect_to: 1.3
+          :t: 1.7
+          :assignment: 2.4
+          :render: 1.3
+          :save: 1.2
+          :[]: 1.4
+          :new: 1.2
+        :score: 17.111691909335
+        :path: app/controllers/time_entries_controller.rb:59
+      TimeEntriesController#destroy: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :deny_access!: 1.4
+          :find: 1.2
+          :branch: 5.0
+          :redirect_to: 1.4
+          :time_entries_url: 1.6
+          :destroy: 1.2
+          :write_access?: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 14.6116391962025
+        :path: app/controllers/time_entries_controller.rb:108
+      TimeEntriesController#create: 
+        :operators: 
+          :create_by_html: 1.5
+          :respond_to: 1.2
+          :create_by_json: 1.5
+          :branch: 4.0
+          :assignment: 1.3
+          :html: 1.4
+          :json: 1.4
+        :score: 8.16639455328972
+        :path: app/controllers/time_entries_controller.rb:48
+      TimeEntriesController#edit: 
+        :operators: 
+          :params: 1.6
+          :deny_access!: 1.4
+          :find: 1.2
+          :branch: 2.5
+          :write_access?: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 7.34370478709486
+        :path: app/controllers/time_entries_controller.rb:41
+      TimeEntriesController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 7.25120679611332
+        :path: app/controllers/time_entries_controller.rb:23
+      TimeEntriesController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+        :score: 4.62385120867876
+        :path: app/controllers/time_entries_controller.rb:5
+      TimeEntriesController#destroy_all: 
+        :operators: 
+          :all: 1.2
+          :each: 1.2
+          :branch: 2.6
+          :redirect_to: 1.2
+          :time_entries_url: 1.4
+          :destroy: 1.4
+          :write_access?: 1.4
+          :assignment: 2.5
+        :score: 8.59360227145753
+        :path: app/controllers/time_entries_controller.rb:120
+      TimeEntriesController#update: 
+        :operators: 
+          :+: 3.6
+          :params: 3.3
+          :respond_to: 1.2
+          :update_attributes: 1.3
+          :deny_access!: 1.4
+          :find: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 7.8
+          :redirect_to: 1.5
+          :t: 1.9
+          :write_access?: 1.2
+          :assignment: 2.5
+          :render: 1.5
+          :html: 2.8
+          :[]: 2.9
+        :score: 29.3654558963419
+        :path: app/controllers/time_entries_controller.rb:93
+      TimeEntriesController#unassigned: 
+        :operators: 
+          :respond_to: 1.2
+          :unassigned: 1.2
+          :branch: 2.5
+          :assignment: 2.5
+          :render: 1.4
+          :html: 1.3
+        :score: 6.20564259364008
+        :path: app/controllers/time_entries_controller.rb:13
+      TimeEntriesController#new: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+          :new: 1.2
+        :score: 7.25120679611332
+        :path: app/controllers/time_entries_controller.rb:32
+      TimeEntriesController#none: 
+        :operators: 
+          :public: 1.1
+          :private: 1.1
+        :score: 2.2
+        :path: 
+      TimeEntriesController#create_by_json: 
+        :operators: 
+          :find_by_hashcode: 1.2
+          :errors: 1.6
+          :params: 8.6
+          :current_user: 1.2
+          :delete: 1.2
+          :blank?: 1.2
+          :branch: 7.5
+          :assignment: 6.0
+          :save: 1.2
+          :render: 5.4
+          :[]: 11.8
+          :new: 2.4
+          :nil?: 1.2
+        :score: 38.2262998470948
+        :path: app/controllers/time_entries_controller.rb:71
+      TimeEntriesController#remove_hashcode: 
+        :operators: 
+          :+: 3.6
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 4.0
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 2.5
+          :render: 1.5
+          :html: 1.4
+          :[]: 1.4
+          :json: 1.4
+          :remove_hashcode: 1.2
+        :score: 22.7934201031789
+        :path: app/controllers/time_entries_controller.rb:131
+    :average_score: 13.3649319968108
+    :total_score: 173.744115958541
+    :name: TimeEntriesController
+    :highest_score: 38.2262998470948
+    :path: app/controllers/time_entries_controller.rb
+  - :methods: 
+      AddressesController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+          :new: 1.2
+        :score: 7.60920495189872
+        :path: app/controllers/addresses_controller.rb:28
+      AddressesController#destroy: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :head: 1.5
+          :find: 1.2
+          :addresses_url: 1.7
+          :branch: 4.0
+          :redirect_to: 1.5
+          :destroy: 1.2
+          :assignment: 2.5
+          :xml: 1.4
+          :html: 1.4
+          :[]: 1.4
+        :score: 14.8680866287495
+        :path: app/controllers/addresses_controller.rb:78
+      AddressesController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+          :[]: 1.4
+        :score: 10.3489129863962
+        :path: app/controllers/addresses_controller.rb:17
+      AddressesController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+        :score: 7.60920495189872
+        :path: app/controllers/addresses_controller.rb:6
+      AddressesController#update: 
+        :operators: 
+          :+: 3.8
+          :errors: 1.8
+          :params: 3.3
+          :respond_to: 1.2
+          :update_attributes: 1.3
+          :head: 1.6
+          :find: 1.2
+          :model_name: 2.4
+          :human: 2.2
+          :branch: 8.5
+          :redirect_to: 1.6
+          :t: 2.0
+          :assignment: 2.5
+          :render: 3.2
+          :xml: 3.0
+          :html: 3.0
+          :[]: 2.9
+        :score: 35.6195171219375
+        :path: app/controllers/addresses_controller.rb:61
+      AddressesController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/addresses_controller.rb:38
+      AddressesController#create: 
+        :operators: 
+          :+: 3.8
+          :errors: 1.8
+          :params: 1.6
+          :respond_to: 1.2
+          :model_name: 2.4
+          :human: 2.2
+          :branch: 8.5
+          :redirect_to: 1.6
+          :t: 2.0
+          :assignment: 2.5
+          :render: 4.8
+          :xml: 3.0
+          :html: 3.0
+          :save: 1.3
+          :[]: 1.4
+          :new: 1.2
+        :score: 32.529832461911
+        :path: app/controllers/addresses_controller.rb:44
+      AddressesController#none: 
+        :operators: 
+          :before_filter: 1.1
+        :score: 1.1
+        :path: 
+    :average_score: 14.256603129545
+    :total_score: 114.05282503636
+    :name: AddressesController
+    :highest_score: 35.6195171219375
+    :path: app/controllers/addresses_controller.rb
+  - :methods: 
+      AppliedMaterialsController#update: 
+        :operators: 
+          :+: 3.8
+          :errors: 1.8
+          :params: 3.3
+          :respond_to: 1.2
+          :update_attributes: 1.3
+          :head: 1.6
+          :find: 1.2
+          :model_name: 2.4
+          :human: 2.2
+          :branch: 8.5
+          :redirect_to: 1.6
+          :t: 2.0
+          :assignment: 2.5
+          :render: 3.2
+          :xml: 3.0
+          :html: 3.0
+          :[]: 2.9
+        :score: 35.6195171219375
+        :path: app/controllers/applied_materials_controller.rb:39
+      AppliedMaterialsController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/applied_materials_controller.rb:26
+      AppliedMaterialsController#destroy: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :destroy: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 5.53172667437573
+        :path: app/controllers/applied_materials_controller.rb:55
+      AppliedMaterialsController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+        :score: 7.60920495189872
+        :path: app/controllers/applied_materials_controller.rb:5
+      AppliedMaterialsController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+          :new: 1.2
+        :score: 7.60920495189872
+        :path: app/controllers/applied_materials_controller.rb:16
+      AppliedMaterialsController#create: 
+        :operators: 
+          :params: 1.6
+          :assignment: 2.4
+          :save: 1.2
+          :[]: 1.4
+          :new: 1.2
+        :score: 5.90931468107766
+        :path: app/controllers/applied_materials_controller.rb:32
+    :average_score: 11.1078390524594
+    :total_score: 66.6470343147567
+    :name: AppliedMaterialsController
+    :highest_score: 35.6195171219375
+    :path: app/controllers/applied_materials_controller.rb
+  - :methods: 
+      TimeEntryTypesController#index: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :active: 1.2
+          :assignment: 2.5
+          :html: 1.3
+        :score: 4.62385120867876
+        :path: app/controllers/time_entry_types_controller.rb:4
+      TimeEntryTypesController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/time_entry_types_controller.rb:31
+      TimeEntryTypesController#synchronize: 
+        :operators: 
+          :all: 1.3
+          :/: 1.6
+          :params: 3.8
+          :at: 1.4
+          :to_i: 1.8
+          :blank?: 1.2
+          :branch: 1.2
+          :updated_after: 1.4
+          :assignment: 5.3
+          :render: 1.2
+          :[]: 3.4
+          :lit_fixnum: 0.45
+        :score: 18.3720575875431
+        :path: app/controllers/time_entry_types_controller.rb:87
+      TimeEntryTypesController#add_material: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 2.4
+          :[]: 1.4
+          :new: 1.2
+        :score: 5.90931468107766
+        :path: app/controllers/time_entry_types_controller.rb:81
+      TimeEntryTypesController#create: 
+        :operators: 
+          :+: 3.6
+          :params: 1.6
+          :respond_to: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 5.3
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 2.5
+          :render: 1.5
+          :html: 2.8
+          :save: 1.3
+          :[]: 1.4
+          :new: 1.2
+        :score: 23.1538333759229
+        :path: app/controllers/time_entry_types_controller.rb:36
+      TimeEntryTypesController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :new: 1.2
+        :score: 4.62385120867876
+        :path: app/controllers/time_entry_types_controller.rb:22
+      TimeEntryTypesController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 7.25120679611332
+        :path: app/controllers/time_entry_types_controller.rb:13
+      TimeEntryTypesController#delete: 
+        :operators: 
+          :time_entry_types_url: 1.6
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 2.5
+          :redirect_to: 1.4
+          :destroy: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 11.4590575528706
+        :path: app/controllers/time_entry_types_controller.rb:63
+      TimeEntryTypesController#destroy: 
+        :operators: 
+          :time_entry_types_url: 1.4
+          :now: 1.4
+          :update_attribute: 1.2
+          :params: 1.6
+          :find: 1.2
+          :redirect_to: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 9.47628619238571
+        :path: app/controllers/time_entry_types_controller.rb:73
+      TimeEntryTypesController#update: 
+        :operators: 
+          :+: 3.6
+          :now: 1.6
+          :update_attribute: 1.4
+          :params: 3.2
+          :respond_to: 1.2
+          :find: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 6.6
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 3.7
+          :render: 1.5
+          :html: 2.8
+          :save: 1.4
+          :[]: 2.8
+          :new: 1.2
+        :score: 30.6486541303203
+        :path: app/controllers/time_entry_types_controller.rb:49
+    :average_score: 11.9886178667159
+    :total_score: 119.886178667159
+    :name: TimeEntryTypesController
+    :highest_score: 30.6486541303203
+    :path: app/controllers/time_entry_types_controller.rb
+  - :methods: 
+      MaterialsController#destroy: 
+        :operators: 
+          :now: 1.4
+          :update_attribute: 1.2
+          :params: 1.6
+          :materials_url: 1.4
+          :find: 1.2
+          :redirect_to: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 9.47628619238571
+        :path: app/controllers/materials_controller.rb:73
+      MaterialsController#create: 
+        :operators: 
+          :+: 3.6
+          :params: 1.6
+          :respond_to: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 5.3
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 2.5
+          :render: 1.5
+          :html: 2.8
+          :save: 1.3
+          :[]: 1.4
+          :new: 1.2
+        :score: 23.1538333759229
+        :path: app/controllers/materials_controller.rb:36
+      MaterialsController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 7.25120679611332
+        :path: app/controllers/materials_controller.rb:13
+      MaterialsController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :new: 1.2
+        :score: 4.62385120867876
+        :path: app/controllers/materials_controller.rb:22
+      MaterialsController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/materials_controller.rb:31
+      MaterialsController#index: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :active: 1.2
+          :assignment: 2.5
+          :html: 1.3
+        :score: 4.62385120867876
+        :path: app/controllers/materials_controller.rb:4
+      MaterialsController#delete: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :materials_url: 1.6
+          :find: 1.2
+          :branch: 2.5
+          :redirect_to: 1.4
+          :destroy: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 11.4590575528706
+        :path: app/controllers/materials_controller.rb:63
+      MaterialsController#update: 
+        :operators: 
+          :+: 3.6
+          :now: 1.6
+          :update_attribute: 1.4
+          :params: 3.2
+          :respond_to: 1.2
+          :find: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 6.6
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 3.7
+          :render: 1.5
+          :html: 2.8
+          :save: 1.4
+          :[]: 2.8
+          :new: 1.2
+        :score: 30.6486541303203
+        :path: app/controllers/materials_controller.rb:49
+    :average_score: 11.9506007998173
+    :total_score: 95.6048063985386
+    :name: MaterialsController
+    :highest_score: 30.6486541303203
+    :path: app/controllers/materials_controller.rb
+  - :methods: 
+      OrdersController#update: 
+        :operators: 
+          :+: 3.6
+          :all: 1.2
+          :params: 3.3
+          :respond_to: 1.2
+          :update_attributes: 1.3
+          :find: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 5.3
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 3.7
+          :render: 1.5
+          :html: 2.8
+          :[]: 2.9
+        :score: 27.5684602399191
+        :path: app/controllers/orders_controller.rb:50
+      OrdersController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 7.25120679611332
+        :path: app/controllers/orders_controller.rb:13
+      OrdersController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/orders_controller.rb:31
+      OrdersController#destroy: 
+        :operators: 
+          :orders_url: 1.6
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 2.5
+          :redirect_to: 1.4
+          :destroy: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 11.4590575528706
+        :path: app/controllers/orders_controller.rb:64
+      OrdersController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+        :score: 4.62385120867876
+        :path: app/controllers/orders_controller.rb:4
+      OrdersController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :new: 1.2
+        :score: 4.62385120867876
+        :path: app/controllers/orders_controller.rb:22
+      OrdersController#add_material: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 2.4
+          :[]: 1.4
+          :new: 1.2
+        :score: 5.90931468107766
+        :path: app/controllers/orders_controller.rb:73
+      OrdersController#create: 
+        :operators: 
+          :+: 3.6
+          :all: 1.2
+          :params: 1.6
+          :respond_to: 1.2
+          :model_name: 2.3
+          :human: 2.1
+          :branch: 5.3
+          :redirect_to: 1.5
+          :t: 1.9
+          :assignment: 3.7
+          :render: 1.5
+          :html: 2.8
+          :save: 1.3
+          :[]: 1.4
+          :new: 1.2
+        :score: 24.4691642685238
+        :path: app/controllers/orders_controller.rb:36
+    :average_score: 11.2841214861788
+    :total_score: 90.2729718894303
+    :name: OrdersController
+    :highest_score: 27.5684602399191
+    :path: app/controllers/orders_controller.rb
+  - :methods: 
+      Geocoder::translate: 
+        :operators: 
+          :is_a?: 1.2
+          :empty?: 1.3
+          :body: 1.4
+          :get_response: 1.2
+          :first: 1.2
+          :branch: 4.8
+          :decode: 1.2
+          :escape: 1.6
+          :assignment: 4.8
+          :==: 1.2
+          :[]: 12.5
+          :parse: 1.4
+          :nil?: 1.3
+        :score: 26.3880654842298
+        :path: app/models/geocoder.rb:3
+    :average_score: 26.3880654842298
+    :total_score: 26.3880654842298
+    :name: Geocoder::translate
+    :highest_score: 26.3880654842298
+    :path: app/models/geocoder.rb
+  - :methods: 
+      UsersController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/users_controller.rb:25
+      UsersController#update: 
+        :operators: 
+          :+: 3.2
+          :params: 4.8
+          :update_attributes: 1.2
+          :find: 1.2
+          :model_name: 2.1
+          :human: 1.9
+          :branch: 1.2
+          :redirect_to: 1.3
+          :t: 1.7
+          :assignment: 2.4
+          :render: 1.3
+          :user_path: 1.5
+          :[]: 5.4
+        :score: 25.7402408691139
+        :path: app/controllers/users_controller.rb:42
+      UsersController#none: 
+        :operators: 
+          :before_filter: 1.1
+        :score: 1.1
+        :path: 
+      UsersController#new: 
+        :operators: 
+          :assignment: 1.2
+          :new: 1.2
+        :score: 1.69705627484771
+        :path: app/controllers/users_controller.rb:20
+      UsersController#destroy: 
+        :operators: 
+          :users_url: 1.4
+          :params: 1.6
+          :find: 1.2
+          :redirect_to: 1.2
+          :destroy: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 8.08949936646267
+        :path: app/controllers/users_controller.rb:54
+      UsersController#create: 
+        :operators: 
+          :+: 3.2
+          :params: 3.2
+          :model_name: 2.1
+          :human: 1.9
+          :branch: 1.2
+          :redirect_to: 1.3
+          :t: 1.7
+          :assignment: 2.4
+          :render: 1.3
+          :user_path: 1.5
+          :save: 1.2
+          :[]: 4.0
+          :new: 1.2
+        :score: 22.7587345869668
+        :path: app/controllers/users_controller.rb:30
+      UsersController#show: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/users_controller.rb:15
+      UsersController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+        :score: 4.62385120867876
+        :path: app/controllers/users_controller.rb:6
+    :average_score: 9.09318927165081
+    :total_score: 72.7455141732065
+    :name: UsersController
+    :highest_score: 25.7402408691139
+    :path: app/controllers/users_controller.rb
+  - :methods: 
+      TimeEntryTypeMaterialsController#index: 
+        :operators: 
+          :all: 1.2
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+        :score: 7.60920495189872
+        :path: app/controllers/time_entry_type_materials_controller.rb:5
+      TimeEntryTypeMaterialsController#create: 
+        :operators: 
+          :params: 1.6
+          :assignment: 2.4
+          :save: 1.2
+          :[]: 1.4
+          :new: 1.2
+        :score: 5.90931468107766
+        :path: app/controllers/time_entry_type_materials_controller.rb:43
+      TimeEntryTypeMaterialsController#destroy: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :destroy: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 5.53172667437573
+        :path: app/controllers/time_entry_type_materials_controller.rb:66
+      TimeEntryTypeMaterialsController#update: 
+        :operators: 
+          :errors: 1.8
+          :params: 3.3
+          :respond_to: 1.2
+          :update_attributes: 1.3
+          :head: 1.6
+          :find: 1.2
+          :branch: 8.5
+          :redirect_to: 1.6
+          :assignment: 2.5
+          :render: 3.2
+          :xml: 3.0
+          :html: 3.0
+          :[]: 2.9
+        :score: 25.6770325388274
+        :path: app/controllers/time_entry_type_materials_controller.rb:50
+      TimeEntryTypeMaterialsController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+          :[]: 1.4
+        :score: 10.3489129863962
+        :path: app/controllers/time_entry_type_materials_controller.rb:16
+      TimeEntryTypeMaterialsController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/time_entry_type_materials_controller.rb:37
+      TimeEntryTypeMaterialsController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 2.6
+          :assignment: 2.5
+          :render: 1.5
+          :xml: 1.4
+          :html: 1.4
+          :new: 1.2
+        :score: 7.60920495189872
+        :path: app/controllers/time_entry_type_materials_controller.rb:27
+    :average_score: 9.57906610257753
+    :total_score: 67.0534627180427
+    :name: TimeEntryTypeMaterialsController
+    :highest_score: 25.6770325388274
+    :path: app/controllers/time_entry_type_materials_controller.rb
+  - :methods: 
+      Customer#none: 
+        :operators: 
+          :scope: 2.2
+          :has_many: 2.2
+          :accepts_nested_attributes_for: 1.1
+          :branch: 1.3
+          :belongs_to: 1.1
+          :assignment: 1.4
+          :validates: 1.1
+          :lambda: 1.3
+          :where: 2.7
+        :score: 11.8549567692168
+        :path: 
+      Customer#to_s: 
+        :operators: 
+          :translate: 2.1
+          :localize: 1.7
+          :<<: 8.5
+          :deleted_at: 3.3
+          :join: 1.2
+          :first_name: 1.4
+          :branch: 1.2
+          :assignment: 1.2
+          :last_name: 1.4
+          :nil?: 1.2
+        :score: 20.8691159371929
+        :path: app/models/customer.rb:23
+    :average_score: 16.3620363532049
+    :total_score: 32.7240727064098
+    :name: Customer
+    :highest_score: 20.8691159371929
+    :path: app/models/customer.rb
+  - :methods: 
+      TimeEntryType#none: 
+        :operators: 
+          :scope: 2.2
+          :has_many: 3.3
+          :has_one: 1.1
+          :branch: 1.3
+          :belongs_to: 1.1
+          :assignment: 1.4
+          :lambda: 1.3
+          :validates: 1.1
+          :where: 2.7
+        :score: 12.9417927660738
+        :path: 
+      TimeEntryType#to_s: 
+        :operators: 
+          :+: 8.5
+          :valid_until: 3.5
+          :description: 1.4
+          :localize: 1.9
+          :join: 1.2
+          :branch: 1.2
+          :t: 2.3
+          :assignment: 2.5
+          :nil?: 1.2
+        :score: 20.191334775096
+        :path: app/models/time_entry_type.rb:19
+    :average_score: 16.5665637705849
+    :total_score: 33.1331275411698
+    :name: TimeEntryType
+    :highest_score: 20.191334775096
+    :path: app/models/time_entry_type.rb
+  - :methods: 
+      CustomersController#delete: 
+        :operators: 
+          :customers_url: 1.4
+          :params: 1.6
+          :find: 1.2
+          :redirect_to: 1.2
+          :destroy: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 8.08949936646267
+        :path: app/controllers/customers_controller.rb:56
+      CustomersController#index: 
+        :operators: 
+          :active: 1.2
+          :assignment: 1.2
+        :score: 1.69705627484771
+        :path: app/controllers/customers_controller.rb:6
+      CustomersController#create: 
+        :operators: 
+          :+: 3.2
+          :params: 1.6
+          :model_name: 2.1
+          :human: 1.9
+          :branch: 1.2
+          :redirect_to: 1.3
+          :t: 1.7
+          :assignment: 1.2
+          :render: 1.3
+          :save: 1.2
+          :[]: 1.4
+          :new: 1.2
+        :score: 16.9849933765074
+        :path: app/controllers/customers_controller.rb:34
+      CustomersController#new: 
+        :operators: 
+          :respond_to: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :new: 1.2
+        :score: 4.62385120867876
+        :path: app/controllers/customers_controller.rb:20
+      CustomersController#show: 
+        :operators: 
+          :params: 1.6
+          :respond_to: 1.2
+          :find: 1.2
+          :branch: 1.2
+          :assignment: 2.5
+          :html: 1.3
+          :[]: 1.4
+        :score: 7.25120679611332
+        :path: app/controllers/customers_controller.rb:11
+      CustomersController#edit: 
+        :operators: 
+          :params: 1.6
+          :find: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 4.36806593356831
+        :path: app/controllers/customers_controller.rb:29
+      CustomersController#update: 
+        :operators: 
+          :+: 3.2
+          :params: 3.2
+          :update_attributes: 1.2
+          :find: 1.2
+          :model_name: 2.1
+          :human: 1.9
+          :branch: 1.2
+          :redirect_to: 1.3
+          :t: 1.7
+          :assignment: 1.2
+          :render: 1.3
+          :[]: 2.8
+        :score: 19.9722307216795
+        :path: app/controllers/customers_controller.rb:45
+      CustomersController#destroy: 
+        :operators: 
+          :now: 1.4
+          :customers_url: 1.4
+          :update_attribute: 1.2
+          :params: 1.6
+          :find: 1.2
+          :redirect_to: 1.2
+          :assignment: 1.2
+          :[]: 1.4
+        :score: 9.47628619238571
+        :path: app/controllers/customers_controller.rb:64
+      CustomersController#synchronize: 
+        :operators: 
+          :all: 1.3
+          :/: 1.6
+          :params: 3.8
+          :at: 1.4
+          :to_i: 1.8
+          :blank?: 1.2
+          :branch: 1.2
+          :to_json: 1.4
+          :updated_after: 1.4
+          :assignment: 4.1
+          :render: 1.2
+          :[]: 3.4
+          :lit_fixnum: 0.45
+        :score: 19.4255630549027
+        :path: app/controllers/customers_controller.rb:72
+      CustomersController#none: 
+        :operators: 
+          :before_filter: 1.1
+        :score: 1.1
+        :path: 
+    :average_score: 9.29887529251461
+    :total_score: 92.9887529251461
+    :name: CustomersController
+    :highest_score: 19.9722307216795
+    :path: app/controllers/customers_controller.rb
+  - :methods: 
+      SessionsController#create: 
+        :operators: 
+          :current_user: 3.8
+          :warden: 1.7
+          :respond_to: 1.1
+          :resource_name: 1.7
+          :branch: 6.8
+          :to_json: 1.9
+          :assignment: 1.2
+          :render: 1.7
+          :authenticate!: 1.5
+          :html: 1.3
+          :lit_fixnum: 0.475
+          :nil?: 1.5
+          :json: 1.3
+        :score: 19.2556647509246
+        :path: app/controllers/sessions_controller.rb:3
+    :average_score: 19.2556647509246
+    :total_score: 19.2556647509246
+    :name: SessionsController
+    :highest_score: 19.2556647509246
+    :path: app/controllers/sessions_controller.rb
+  - :methods: 
+      Address#to_s: 
+        :operators: 
+          :line2: 1.8
+          :delete_if: 1.4
+          :line3: 1.8
+          :join: 1.2
+          :zip: 1.8
+          :strip: 1.7
+          :blank?: 1.5
+          :place: 1.8
+          :branch: 1.4
+          :assignment: 1.5
+          :compact: 1.6
+          :line1: 1.8
+        :score: 16.5278552752618
+        :path: app/models/address.rb:31
+      Address#none: 
+        :operators: 
+          :before_save: 1.1
+          :has_many: 2.2
+          :belongs_to: 1.1
+          :validates: 1.1
+        :score: 5.5
+        :path: 
+      Address#update_gps_position: 
+        :operators: 
+          :address_to_gps_position: 1.2
+          :branch: 2.4
+          :assignment: 2.6
+          :destroy: 1.3
+          :id: 1.4
+          :save: 1.4
+          :nil?: 2.4
+          :gps_position: 7.5
+        :score: 15.6064089399195
+        :path: app/models/address.rb:12
+      Address#to_google_maps_address: 
+        :operators: 
+          :line2: 1.8
+          :delete_if: 1.4
+          :line3: 1.8
+          :join: 1.2
+          :zip: 1.8
+          :strip: 1.7
+          :blank?: 1.5
+          :place: 1.8
+          :branch: 1.4
+          :assignment: 1.5
+          :compact: 1.6
+          :line1: 1.8
+        :score: 16.5278552752618
+        :path: app/models/address.rb:22
+    :average_score: 13.5405298726108
+    :total_score: 54.1621194904432
+    :name: Address
+    :highest_score: 16.5278552752618
+    :path: app/models/address.rb
+  - :methods: 
+      ApplicationController#deny_access!: 
+        :operators: 
+          :render: 1.2
+          :lit_fixnum: 0.35
+        :score: 1.55
+        :path: app/controllers/application_controller.rb:17
+      ApplicationController#authorize_secretary!: 
+        :operators: 
+          :secretary?: 1.3
+          :current_user: 3.0
+          :deny_access!: 1.3
+          :branch: 2.4
+          :nil?: 1.3
+        :score: 7.30547739713155
+        :path: app/controllers/application_controller.rb:22
+      ApplicationController#write_access?: 
+        :operators: 
+          :new_record?: 1.4
+          :is_a?: 1.3
+          :secretary?: 1.2
+          :current_user: 4.4
+          :branch: 7.3
+          :user: 1.6
+          :assignment: 1.2
+          :==: 1.4
+          :nil?: 2.4
+        :score: 15.5698426453192
+        :path: app/controllers/application_controller.rb:8
+      ApplicationController#none: 
+        :operators: 
+          :helper_method: 1.1
+          :before_filter: 1.1
+          :protect_from_forgery: 1.1
+        :score: 3.3
+        :path: 
+    :average_score: 6.93133001061269
+    :total_score: 27.7253200424507
+    :name: ApplicationController
+    :highest_score: 15.5698426453192
+    :path: app/controllers/application_controller.rb
+  - :methods: 
+      Material#none: 
+        :operators: 
+          :scope: 1.1
+          :has_many: 4.4
+          :has_one: 1.1
+          :belongs_to: 1.1
+          :validates: 1.1
+          :where: 1.3
+        :score: 10.1
+        :path: 
+      Material#to_s: 
+        :operators: 
+          :delete_if: 1.4
+          :description: 1.8
+          :join: 1.2
+          :strip: 1.7
+          :catalog_number: 1.8
+          :blank?: 1.5
+          :branch: 1.4
+          :assignment: 1.5
+          :compact: 1.6
+          :dimensions: 1.8
+          :to_s: 1.9
+        :score: 14.842506526864
+        :path: app/models/material.rb:18
+    :average_score: 12.471253263432
+    :total_score: 24.942506526864
+    :name: Material
+    :highest_score: 14.842506526864
+    :path: app/models/material.rb
+  - :methods: 
+      Customer::for_select: 
+        :operators: 
+          :+: 1.3
+          :deleted_at: 1.5
+          :collect: 1.2
+          :active: 1.6
+          :branch: 3.6
+          :order: 1.4
+          :assignment: 5.0
+          :id: 2.8
+          :nil?: 2.6
+        :score: 13.8462991445368
+        :path: app/models/customer.rb:15
+    :average_score: 13.8462991445368
+    :total_score: 13.8462991445368
+    :name: Customer::for_select
+    :highest_score: 13.8462991445368
+    :path: app/models/customer.rb
+  - :methods: 
+      Geocoder::address_to_gps_position: 
+        :operators: 
+          :translate: 1.2
+          :branch: 1.2
+          :assignment: 1.2
+          :[]: 4.2
+          :to_google_maps_address: 1.4
+          :new: 1.2
+          :nil?: 1.2
+        :score: 9.3552124508212
+        :path: app/models/geocoder.rb:15
+    :average_score: 9.3552124508212
+    :total_score: 9.3552124508212
+    :name: Geocoder::address_to_gps_position
+    :highest_score: 9.3552124508212
+    :path: app/models/geocoder.rb
+  - :methods: 
+      User#secretary?: 
+        :operators: 
+          :is_a?: 1.2
+        :score: 1.2
+        :path: app/models/user.rb:22
+      User#human_model_name: 
+        :operators: 
+          :class: 1.6
+          :model_name: 1.4
+          :human: 1.2
+        :score: 4.2
+        :path: app/models/user.rb:24
+      User#none: 
+        :operators: 
+          :scope: 2.2
+          :has_many: 1.1
+          :devise: 1.1
+          :validates: 2.2
+          :where: 2.6
+        :score: 9.2
+        :path: 
+      User#field_worker?: 
+        :operators: 
+          :is_a?: 1.2
+        :score: 1.2
+        :path: app/models/user.rb:23
+      User#to_s: 
+        :operators: 
+          :join: 1.2
+          :first_name: 1.4
+          :last_name: 1.4
+        :score: 4.0
+        :path: app/models/user.rb:34
+    :average_score: 3.96
+    :total_score: 19.8
+    :name: User
+    :highest_score: 9.2
+    :path: app/models/user.rb
+  - :methods: 
+      TimeEntry#none: 
+        :operators: 
+          :scope: 1.1
+          :belongs_to: 5.5
+          :validates: 1.1
+          :where: 1.3
+        :score: 9.0
+        :path: 
+      TimeEntry#remove_hashcode: 
+        :operators: 
+          :update_attribute: 1.2
+        :score: 1.2
+        :path: app/models/time_entry.rb:14
+      TimeEntry#to_s: 
+        :operators: 
+          :created_at: 1.2
+          :user: 1.2
+          :id: 1.2
+        :score: 3.6
+        :path: app/models/time_entry.rb:22
+      TimeEntry#duration: 
+        :operators: 
+          :gmtime: 1.2
+          :time_start: 1.8
+          :at: 1.4
+          :time_stop: 1.8
+          :-: 1.6
+        :score: 7.8
+        :path: app/models/time_entry.rb:18
+    :average_score: 5.4
+    :total_score: 21.6
+    :name: TimeEntry
+    :highest_score: 9.0
+    :path: app/models/time_entry.rb
+  - :methods: 
+      ApplicationHelper#fl: 
+        :operators: 
+          :+: 2.6
+          :yield: 1.6
+        :score: 4.2
+        :path: app/helpers/application_helper.rb:6
+      ApplicationHelper#form_error_messages: 
+        :operators: 
+          :error_messages: 1.2
+          :class: 1.8
+          :object: 2.0
+          :model_name: 1.6
+          :human: 1.4
+        :score: 8.0
+        :path: app/helpers/application_helper.rb:2
+      ApplicationHelper#fr: 
+        :operators: 
+          :+: 2.6
+          :yield: 1.6
+        :score: 4.2
+        :path: app/helpers/application_helper.rb:7
+    :average_score: 5.46666666666667
+    :total_score: 16.4
+    :name: ApplicationHelper
+    :highest_score: 8.0
+    :path: app/helpers/application_helper.rb
+  - :methods: 
+      Order#none: 
+        :operators: 
+          :has_many: 2.2
+          :belongs_to: 2.2
+          :validates: 1.1
+        :score: 5.5
+        :path: 
+      Order#to_s: 
+        :operators: 
+          :customer: 1.4
+          :localize: 1.4
+          :<<: 1.2
+          :created_at: 1.6
+          :id: 1.4
+        :score: 7.0
+        :path: app/models/order.rb:15
+    :average_score: 6.25
+    :total_score: 12.5
+    :name: Order
+    :highest_score: 7.0
+    :path: app/models/order.rb
+  - :methods: 
+      Material::for_select: 
+        :operators: 
+          :collect: 1.2
+          :active: 1.6
+          :branch: 1.2
+          :assignment: 1.3
+          :order: 1.4
+          :id: 1.3
+        :score: 5.77754273026172
+        :path: app/models/material.rb:14
+    :average_score: 5.77754273026172
+    :total_score: 5.77754273026172
+    :name: Material::for_select
+    :highest_score: 5.77754273026172
+    :path: app/models/material.rb
+  - :methods: 
+      TimeEntryType::for_select: 
+        :operators: 
+          :collect: 1.2
+          :active: 1.6
+          :branch: 1.2
+          :assignment: 1.3
+          :order: 1.4
+          :id: 1.3
+        :score: 5.77754273026172
+        :path: app/models/time_entry_type.rb:15
+    :average_score: 5.77754273026172
+    :total_score: 5.77754273026172
+    :name: TimeEntryType::for_select
+    :highest_score: 5.77754273026172
+    :path: app/models/time_entry_type.rb
+  - :methods: 
+      User::type_for_select: 
+        :operators: 
+          :model_name: 2.8
+          :human: 2.4
+        :score: 5.2
+        :path: app/models/user.rb:26
+    :average_score: 5.2
+    :total_score: 5.2
+    :name: User::type_for_select
+    :highest_score: 5.2
+    :path: app/models/user.rb
+  - :methods: 
+      User::for_select: 
+        :operators: 
+          :find: 1.4
+          :collect: 1.2
+          :branch: 1.2
+          :assignment: 1.3
+          :id: 1.3
+        :score: 4.28252262107277
+        :path: app/models/user.rb:30
+    :average_score: 4.28252262107277
+    :total_score: 4.28252262107277
+    :name: User::for_select
+    :highest_score: 4.28252262107277
+    :path: app/models/user.rb
+  - :methods: 
+      Address::for_select: 
+        :operators: 
+          :find: 1.4
+          :collect: 1.2
+          :branch: 1.2
+          :assignment: 1.3
+          :id: 1.3
+        :score: 4.28252262107277
+        :path: app/models/address.rb:27
+    :average_score: 4.28252262107277
+    :total_score: 4.28252262107277
+    :name: Address::for_select
+    :highest_score: 4.28252262107277
+    :path: app/models/address.rb
+  - :methods: 
+      Order::for_select: 
+        :operators: 
+          :all: 1.4
+          :collect: 1.2
+          :branch: 1.2
+          :assignment: 1.3
+          :id: 1.3
+        :score: 4.28252262107277
+        :path: app/models/order.rb:11
+    :average_score: 4.28252262107277
+    :total_score: 4.28252262107277
+    :name: Order::for_select
+    :highest_score: 4.28252262107277
+    :path: app/models/order.rb
+  - :methods: 
+      AppliedMaterial#to_s: 
+        :operators: 
+          :amount: 1.2
+          :material: 1.2
+        :score: 2.4
+        :path: app/models/applied_material.rb:8
+      AppliedMaterial#none: 
+        :operators: 
+          :belongs_to: 2.2
+          :validates: 1.1
+        :score: 3.3
+        :path: 
+    :average_score: 2.85
+    :total_score: 5.7
+    :name: AppliedMaterial
+    :highest_score: 3.3
+    :path: app/models/applied_material.rb
+  - :methods: 
+      GpsPosition#none: 
+        :operators: 
+          :has_one: 2.2
+          :validates: 1.1
+        :score: 3.3
+        :path: 
+      GpsPosition#to_s: 
+        :operators: 
+          :latitude: 1.2
+          :longitude: 1.2
+        :score: 2.4
+        :path: app/models/gps_position.rb:8
+    :average_score: 2.85
+    :total_score: 5.7
+    :name: GpsPosition
+    :highest_score: 3.3
+    :path: app/models/gps_position.rb
+  - :methods: 
+      TimeEntryTypeMaterial#none: 
+        :operators: 
+          :belongs_to: 2.2
+          :validates: 1.1
+        :score: 3.3
+        :path: 
+      TimeEntryTypeMaterial#to_s: 
+        :operators: 
+          :amount: 1.2
+          :time_entry_type: 1.2
+        :score: 2.4
+        :path: app/models/time_entry_type_material.rb:8
+    :average_score: 2.85
+    :total_score: 5.7
+    :name: TimeEntryTypeMaterial
+    :highest_score: 3.3
+    :path: app/models/time_entry_type_material.rb
