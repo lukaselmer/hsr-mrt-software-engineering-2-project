@@ -6,7 +6,7 @@
     1305575445338
   </project_id>
   <timestamp>
-    16.05.11 22:07
+    30.05.11 08:50
   </timestamp>
   <classDirectories>
     <classDirectory>
@@ -34,10 +34,10 @@
       E:\mrt
     </libClasspath>
     <libClasspath>
-      E:\mrt\lib\ormlite-android-4.18.jar
+      E:\mrt\lib\ormlite-core-4.22.jar
     </libClasspath>
     <libClasspath>
-      E:\mrt\lib\ormlite-core-4.18.jar
+      E:\mrt\lib\ormlite-android-4.22.jar
     </libClasspath>
     <libClasspath>
       E:\dev\eclipse\plugins\org.junit_3.8.2.v3_8_2_v20100427-1100\junit.jar
@@ -51,22 +51,22 @@
       Method Crap Stats
     </name>
     <totalCrap>
-      1620.00
+      1648.00
     </totalCrap>
     <crap>
-      3.33
+      3.32
     </crap>
     <median>
       2.00
     </median>
     <average>
-      3.33
+      3.32
     </average>
     <stdDev>
-      3.24
+      3.14
     </stdDev>
     <methodCount>
-      486
+      497
     </methodCount>
     <crapMethodCount>
       0
@@ -93,7 +93,7 @@
       -1.00
     </globalTotalMethodAverage>
     <globalAverageDiff>
-      4.33
+      4.32
     </globalAverageDiff>
     <globalCraploadAverageDiff>
       1.00
@@ -102,10 +102,10 @@
       1.00
     </globalCrapMethodAverageDiff>
     <globalTotalMethodAverageDiff>
-      487.00
+      498.00
     </globalTotalMethodAverageDiff>
     <shareStatsUrl>
-      http://www.crap4j.org/benchmark/stats/new?stat[project_hash]=1305575445338&amp;stat[project_url]=mrt&amp;stat[crap]=0.00&amp;stat[crap_load]=0&amp;stat[crap_methods]=0&amp;stat[total_methods]=486&amp;stat[ones]=0&amp;stat[twos]=389&amp;stat[fours]=63&amp;stat[eights]=27&amp;stat[sixteens]=7&amp;stat[thirtytwos]=0&amp;stat[sixtyfours]=0&amp;stat[one28s]=0&amp;stat[two56s]=0
+      http://www.crap4j.org/benchmark/stats/new?stat[project_hash]=1305575445338&amp;stat[project_url]=mrt&amp;stat[crap]=0.00&amp;stat[crap_load]=0&amp;stat[crap_methods]=0&amp;stat[total_methods]=497&amp;stat[ones]=0&amp;stat[twos]=395&amp;stat[fours]=69&amp;stat[eights]=27&amp;stat[sixteens]=6&amp;stat[thirtytwos]=0&amp;stat[sixtyfours]=0&amp;stat[one28s]=0&amp;stat[two56s]=0
     </shareStatsUrl>
     <histogram>
       <hist>
@@ -124,7 +124,7 @@
           two
         </place>
         <value>
-          389
+          395
         </value>
         <height>
           170.00px
@@ -135,10 +135,10 @@
           four
         </place>
         <value>
-          63
+          69
         </value>
         <height>
-          28.00px
+          29.70px
         </height>
       </hist>
       <hist>
@@ -157,7 +157,7 @@
           sixteen
         </place>
         <value>
-          7
+          6
         </value>
         <height>
           28.00px
@@ -824,16 +824,219 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
-        LoginActivity$1
+        LocationService$1
       </className>
       <methodName>
         &lt;init&gt;
       </methodName>
       <methodSignature>
+        (Lch/hsr/se2p/mrt/activities/LocationService;)V
+      </methodSignature>
+      <fullMethod>
+         void &lt;init&gt;(ch.hsr.se2p.mrt.activities.LocationService)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        &lt;init&gt;
+      </methodName>
+      <methodSignature>
+        (Landroid/location/LocationManager;Ljava/lang/Runnable;)V
+      </methodSignature>
+      <fullMethod>
+        protected  void &lt;init&gt;(android.location.LocationManager, java.lang.Runnable)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        access$0
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/activities/LocationService;Lch/hsr/se2p/mrt/models/GpsPosition;)V
+      </methodSignature>
+      <fullMethod>
+        static  void access$0(ch.hsr.se2p.mrt.activities.LocationService, ch.hsr.se2p.mrt.models.GpsPosition)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        access$1
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/activities/LocationService;)Ljava/lang/Runnable;
+      </methodSignature>
+      <fullMethod>
+        static  java.lang.Runnable access$1(ch.hsr.se2p.mrt.activities.LocationService)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        getCurrentGPSPosition
+      </methodName>
+      <methodSignature>
+        ()Lch/hsr/se2p/mrt/models/GpsPosition;
+      </methodSignature>
+      <fullMethod>
+        protected  ch.hsr.se2p.mrt.models.GpsPosition getCurrentGPSPosition()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        getCurrentLocation
+      </methodName>
+      <methodSignature>
+        ()Landroid/location/Location;
+      </methodSignature>
+      <fullMethod>
+        protected  android.location.Location getCurrentLocation()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        getLocationProvider
+      </methodName>
+      <methodSignature>
+        ()Ljava/lang/String;
+      </methodSignature>
+      <fullMethod>
+        private  java.lang.String getLocationProvider()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        LocationService
+      </className>
+      <methodName>
+        stop
+      </methodName>
+      <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-         void &lt;init&gt;()
+        protected  void stop()
       </fullMethod>
       <crap>
         2.00
@@ -854,35 +1057,6 @@
       </package>
       <className>
         LoginActivity$1
-      </className>
-      <methodName>
-        getHelper
-      </methodName>
-      <methodSignature>
-        (Landroid/content/Context;)Lcom/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper;
-      </methodSignature>
-      <fullMethod>
-        public  com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper(android.content.Context)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        LoginActivity$2
       </className>
       <methodName>
         &lt;init&gt;
@@ -911,7 +1085,7 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
-        LoginActivity$2
+        LoginActivity$1
       </className>
       <methodName>
         onClick
@@ -921,35 +1095,6 @@
       </methodSignature>
       <fullMethod>
         public  void onClick(android.view.View)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        LoginActivity
-      </className>
-      <methodName>
-        &lt;clinit&gt;
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        static  void &lt;clinit&gt;()
       </fullMethod>
       <crap>
         2.00
@@ -2535,7 +2680,7 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
-        TimeEntryActivity$1
+        Measurement
       </className>
       <methodName>
         &lt;init&gt;
@@ -2544,7 +2689,123 @@
         ()V
       </methodSignature>
       <fullMethod>
-         void &lt;init&gt;()
+        public  void &lt;init&gt;()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        Measurement
+      </className>
+      <methodName>
+        getTimeEntry
+      </methodName>
+      <methodSignature>
+        ()Lch/hsr/se2p/mrt/models/TimeEntry;
+      </methodSignature>
+      <fullMethod>
+        public  ch.hsr.se2p.mrt.models.TimeEntry getTimeEntry()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        Measurement
+      </className>
+      <methodName>
+        isStarted
+      </methodName>
+      <methodSignature>
+        ()Z
+      </methodSignature>
+      <fullMethod>
+        public  boolean isStarted()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        Measurement
+      </className>
+      <methodName>
+        start
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        private  void start()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        Measurement
+      </className>
+      <methodName>
+        stop
+      </methodName>
+      <methodSignature>
+        (Landroid/widget/Spinner;Landroid/widget/TextView;Ljava/lang/Integer;Lch/hsr/se2p/mrt/activities/MRTAutocompleteSpinner;Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;)Lch/hsr/se2p/mrt/models/TimeEntry;
+      </methodSignature>
+      <fullMethod>
+        public  ch.hsr.se2p.mrt.models.TimeEntry stop(android.widget.Spinner, android.widget.TextView, java.lang.Integer, ch.hsr.se2p.mrt.activities.MRTAutocompleteSpinner, java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt;)
       </fullMethod>
       <crap>
         2.00
@@ -2567,13 +2828,42 @@
         TimeEntryActivity$1
       </className>
       <methodName>
-        getHelper
+        &lt;init&gt;
       </methodName>
       <methodSignature>
-        (Landroid/content/Context;)Lcom/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper;
+        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)V
       </methodSignature>
       <fullMethod>
-        public  com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper(android.content.Context)
+         void &lt;init&gt;(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity$1
+      </className>
+      <methodName>
+        onClick
+      </methodName>
+      <methodSignature>
+        (Landroid/view/View;)V
+      </methodSignature>
+      <fullMethod>
+        public  void onClick(android.view.View)
       </fullMethod>
       <crap>
         2.00
@@ -2625,129 +2915,13 @@
         TimeEntryActivity$2
       </className>
       <methodName>
-        setMeasurementStarted
-      </methodName>
-      <methodSignature>
-        (Z)V
-      </methodSignature>
-      <fullMethod>
-        private  void setMeasurementStarted(boolean)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity$2
-      </className>
-      <methodName>
-        startTimeMeasurement
+        run
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void startTimeMeasurement()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity$2
-      </className>
-      <methodName>
-        stopTimeMeasurement
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        private  void stopTimeMeasurement()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity$3
-      </className>
-      <methodName>
-        &lt;init&gt;
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)V
-      </methodSignature>
-      <fullMethod>
-         void &lt;init&gt;(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity$3
-      </className>
-      <methodName>
-        onLocationChanged
-      </methodName>
-      <methodSignature>
-        (Landroid/location/Location;)V
-      </methodSignature>
-      <fullMethod>
-        public  void onLocationChanged(android.location.Location)
+        public  void run()
       </fullMethod>
       <crap>
         2.00
@@ -2831,10 +3005,10 @@
         access$0
       </methodName>
       <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)Z
+        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)V
       </methodSignature>
       <fullMethod>
-        static  boolean access$0(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
+        static  void access$0(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
       </fullMethod>
       <crap>
         2.00
@@ -2886,158 +3060,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        access$10
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;Lch/hsr/se2p/mrt/models/TimeEntry;)V
-      </methodSignature>
-      <fullMethod>
-        static  void access$10(ch.hsr.se2p.mrt.activities.TimeEntryActivity, ch.hsr.se2p.mrt.models.TimeEntry)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$11
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)Ljava/lang/String;
-      </methodSignature>
-      <fullMethod>
-        static  java.lang.String access$11(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$12
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)Ljava/util/List;
-      </methodSignature>
-      <fullMethod>
-        static  java.util.List access$12(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$13
-      </methodName>
-      <methodSignature>
-        (Lcom/j256/ormlite/dao/Dao;Ljava/util/List;Lch/hsr/se2p/mrt/models/GpsPosition;)V
-      </methodSignature>
-      <fullMethod>
-        static  void access$13(com.j256.ormlite.dao.Dao, java.util.List, ch.hsr.se2p.mrt.models.GpsPosition)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$14
+        access$2
       </methodName>
       <methodSignature>
         (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)V
       </methodSignature>
       <fullMethod>
-        static  void access$14(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$2
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;Z)V
-      </methodSignature>
-      <fullMethod>
-        static  void access$2(ch.hsr.se2p.mrt.activities.TimeEntryActivity, boolean)
+        static  void access$2(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
       </fullMethod>
       <crap>
         2.00
@@ -3063,184 +3092,10 @@
         access$3
       </methodName>
       <methodSignature>
-        ()Landroid/location/LocationManager;
-      </methodSignature>
-      <fullMethod>
-        static  android.location.LocationManager access$3()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$4
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)Landroid/location/LocationListener;
-      </methodSignature>
-      <fullMethod>
-        static  android.location.LocationListener access$4(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$5
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)V
-      </methodSignature>
-      <fullMethod>
-        static  void access$5(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$6
-      </methodName>
-      <methodSignature>
-        ()Ljava/lang/String;
-      </methodSignature>
-      <fullMethod>
-        static  java.lang.String access$6()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$7
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;)Lch/hsr/se2p/mrt/models/GpsPosition;
-      </methodSignature>
-      <fullMethod>
-        static  ch.hsr.se2p.mrt.models.GpsPosition access$7(ch.hsr.se2p.mrt.activities.TimeEntryActivity)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$8
-      </methodName>
-      <methodSignature>
-        (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;Lch/hsr/se2p/mrt/models/GpsPosition;)V
-      </methodSignature>
-      <fullMethod>
-        static  void access$8(ch.hsr.se2p.mrt.activities.TimeEntryActivity, ch.hsr.se2p.mrt.models.GpsPosition)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        access$9
-      </methodName>
-      <methodSignature>
         (Lch/hsr/se2p/mrt/activities/TimeEntryActivity;Z)V
       </methodSignature>
       <fullMethod>
-        static  void access$9(ch.hsr.se2p.mrt.activities.TimeEntryActivity, boolean)
+        static  void access$3(ch.hsr.se2p.mrt.activities.TimeEntryActivity, boolean)
       </fullMethod>
       <crap>
         2.00
@@ -3263,71 +3118,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        getCustomerAdapter
-      </methodName>
-      <methodSignature>
-        ()Landroid/widget/ArrayAdapter&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;
-      </methodSignature>
-      <fullMethod>
-        private  android.widget.ArrayAdapter&lt;ch.hsr.se2p.mrt.models.Customer&gt; getCustomerAdapter()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        getInitializedCriteria
-      </methodName>
-      <methodSignature>
-        ()Landroid/location/Criteria;
-      </methodSignature>
-      <fullMethod>
-        private  android.location.Criteria getInitializedCriteria()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        initComboBox
+        initComboboxCustomers
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void initComboBox()
+        private  void initComboboxCustomers()
       </fullMethod>
       <crap>
         2.00
@@ -3350,13 +3147,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        initData
+        initGui
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void initData()
+        private  void initGui()
       </fullMethod>
       <crap>
         2.00
@@ -3379,13 +3176,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        initLocationListener
+        initLocationService
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void initLocationListener()
+        private  void initLocationService()
       </fullMethod>
       <crap>
         2.00
@@ -3408,42 +3205,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        initSpinnerTimeEntryType
+        initSpinnerTimeEntryTypes
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void initSpinnerTimeEntryType()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        isMeasurementStarted
-      </methodName>
-      <methodSignature>
-        ()Z
-      </methodSignature>
-      <fullMethod>
-        private  boolean isMeasurementStarted()
+        private  void initSpinnerTimeEntryTypes()
       </fullMethod>
       <crap>
         2.00
@@ -3495,6 +3263,35 @@
         TimeEntryActivity
       </className>
       <methodName>
+        loadLists
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        private  void loadLists()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
         loadTimeEntryTypes
       </methodName>
       <methodSignature>
@@ -3502,6 +3299,35 @@
       </methodSignature>
       <fullMethod>
         private  void loadTimeEntryTypes()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
+        logAndDisplaySQLException
+      </methodName>
+      <methodSignature>
+        (Ljava/sql/SQLException;)V
+      </methodSignature>
+      <fullMethod>
+        private  void logAndDisplaySQLException(java.sql.SQLException)
       </fullMethod>
       <crap>
         2.00
@@ -3611,71 +3437,129 @@
         TimeEntryActivity
       </className>
       <methodName>
-        setLayout
+        resetInputFields
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        private  void resetInputFields()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
+        saveTimeEntry
+      </methodName>
+      <methodSignature>
+        ()Lch/hsr/se2p/mrt/models/TimeEntry;
+      </methodSignature>
+      <fullMethod>
+        private  ch.hsr.se2p.mrt.models.TimeEntry saveTimeEntry()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
+        sortCustomersByCurrentLocation
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        private  void sortCustomersByCurrentLocation()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
+        stopTimeMeasurement
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        private  void stopTimeMeasurement()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivity
+      </className>
+      <methodName>
+        updateGuiAfterMeasurement
       </methodName>
       <methodSignature>
         (Ljava/lang/String;Ljava/lang/String;I)V
       </methodSignature>
       <fullMethod>
-        private  void setLayout(java.lang.String, java.lang.String, int)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        switchToLoginActivity
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        private  void switchToLoginActivity()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        updateComboboxCustomers
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        private  void updateComboboxCustomers()
+        private  void updateGuiAfterMeasurement(java.lang.String, java.lang.String, int)
       </fullMethod>
       <crap>
         2.00
@@ -4510,6 +4394,35 @@
         TimeEntryActivityTest
       </className>
       <methodName>
+        sortTimeEntryTypes
+      </methodName>
+      <methodSignature>
+        ()Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/TimeEntryType;&gt;;
+      </methodSignature>
+      <fullMethod>
+        private  java.util.List&lt;ch.hsr.se2p.mrt.models.TimeEntryType&gt; sortTimeEntryTypes()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        TimeEntryActivityTest
+      </className>
+      <methodName>
         tearDown
       </methodName>
       <methodSignature>
@@ -5039,6 +4952,64 @@
       </methodSignature>
       <fullMethod>
         public  void testCreateDatabase()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.database
+      </package>
+      <className>
+        DatabaseSpec
+      </className>
+      <methodName>
+        &lt;clinit&gt;
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        static  void &lt;clinit&gt;()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.database
+      </package>
+      <className>
+        DatabaseSpec
+      </className>
+      <methodName>
+        &lt;init&gt;
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        public  void &lt;init&gt;()
       </fullMethod>
       <crap>
         2.00
@@ -6279,13 +6250,42 @@
         ISO8601DateParser
       </className>
       <methodName>
-        toString
+        format
       </methodName>
       <methodSignature>
         (Ljava/util/Date;)Ljava/lang/String;
       </methodSignature>
       <fullMethod>
-        protected static  java.lang.String toString(java.util.Date)
+        protected static  java.lang.String format(java.util.Date)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        ISO8601DateParser
+      </className>
+      <methodName>
+        parse
+      </methodName>
+      <methodSignature>
+        (Ljava/lang/String;Ljava/text/SimpleDateFormat;)Ljava/util/Date;
+      </methodSignature>
+      <fullMethod>
+        private static  java.util.Date parse(java.lang.String, java.text.SimpleDateFormat)
       </fullMethod>
       <crap>
         2.00
@@ -6685,6 +6685,35 @@
         TimeEntry
       </className>
       <methodName>
+        putMembersToJson
+      </methodName>
+      <methodSignature>
+        (Lorg/json/JSONObject;)V
+      </methodSignature>
+      <fullMethod>
+        private  void putMembersToJson(org.json.JSONObject)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntry
+      </className>
+      <methodName>
         setCustomer
       </methodName>
       <methodSignature>
@@ -6972,6 +7001,35 @@
         ch.hsr.se2p.mrt.models
       </package>
       <className>
+        TimeEntry
+      </className>
+      <methodName>
+        toJSONObject
+      </methodName>
+      <methodSignature>
+        ()Lorg/json/JSONObject;
+      </methodSignature>
+      <fullMethod>
+        public  org.json.JSONObject toJSONObject()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
         TimeEntryTest
       </className>
       <methodName>
@@ -7127,6 +7185,64 @@
       </methodSignature>
       <fullMethod>
         public  void &lt;init&gt;(java.lang.Integer, java.lang.String)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryType
+      </className>
+      <methodName>
+        compareTo
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/models/TimeEntryType;)I
+      </methodSignature>
+      <fullMethod>
+        public  int compareTo(ch.hsr.se2p.mrt.models.TimeEntryType)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryType
+      </className>
+      <methodName>
+        compareTo
+      </methodName>
+      <methodSignature>
+        (Ljava/lang/Object;)I
+      </methodSignature>
+      <fullMethod>
+        public  int compareTo(java.lang.Object)
       </fullMethod>
       <crap>
         2.00
@@ -7388,6 +7504,93 @@
       </methodSignature>
       <fullMethod>
         public  void &lt;init&gt;()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryTypeTest
+      </className>
+      <methodName>
+        getTimeEntryTypeJSON
+      </methodName>
+      <methodSignature>
+        ()Lorg/json/JSONObject;
+      </methodSignature>
+      <fullMethod>
+        private  org.json.JSONObject getTimeEntryTypeJSON()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryTypeTest
+      </className>
+      <methodName>
+        setUp
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        protected  void setUp()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryTypeTest
+      </className>
+      <methodName>
+        testTimeEntryTypeSort
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        public  void testTimeEntryTypeSort()
       </fullMethod>
       <crap>
         2.00
@@ -10600,35 +10803,6 @@
         CustomerSynchronizer
       </className>
       <methodName>
-        handleUpdate
-      </methodName>
-      <methodSignature>
-        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/models/Customer;)V
-      </methodSignature>
-      <fullMethod>
-        private  void handleUpdate(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        CustomerSynchronizer
-      </className>
-      <methodName>
         synchronize
       </methodName>
       <methodSignature>
@@ -10665,93 +10839,6 @@
       </methodSignature>
       <fullMethod>
         public  void &lt;init&gt;()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        CustomerSynchronizerTest
-      </className>
-      <methodName>
-        setUp
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        protected  void setUp()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        SynchronizationService$1
-      </className>
-      <methodName>
-        &lt;init&gt;
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-         void &lt;init&gt;()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        SynchronizationService$1
-      </className>
-      <methodName>
-        getHelper
-      </methodName>
-      <methodSignature>
-        (Landroid/content/Context;)Lcom/j256/ormlite/android/apptools/OrmLiteSqliteOpenHelper;
-      </methodSignature>
-      <fullMethod>
-        public  com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper getHelper(android.content.Context)
       </fullMethod>
       <crap>
         2.00
@@ -10945,6 +11032,93 @@
         ch.hsr.se2p.mrt.services
       </package>
       <className>
+        SynchronizationServiceSpec
+      </className>
+      <methodName>
+        &lt;clinit&gt;
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        static  void &lt;clinit&gt;()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        SynchronizationServiceSpec
+      </className>
+      <methodName>
+        &lt;init&gt;
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+         void &lt;init&gt;()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        SynchronizationServiceSpec
+      </className>
+      <methodName>
+        getSynchronizers
+      </methodName>
+      <methodSignature>
+        ()[Ljava/lang/Class&lt;*&gt;;
+      </methodSignature>
+      <fullMethod>
+        protected  java.lang.Class&lt;?&gt;[] getSynchronizers()
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
         SynchronizationServiceTask
       </className>
       <methodName>
@@ -10984,6 +11158,35 @@
       </methodSignature>
       <fullMethod>
         public  void &lt;init&gt;(ch.hsr.se2p.mrt.services.SynchronizationService)
+      </fullMethod>
+      <crap>
+        2.00
+      </crap>
+      <complexity>
+        1
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        SynchronizationServiceTask
+      </className>
+      <methodName>
+        getSynchronizationServiceSpec
+      </methodName>
+      <methodSignature>
+        ()Lch/hsr/se2p/mrt/services/SynchronizationServiceSpec;
+      </methodSignature>
+      <fullMethod>
+        protected  ch.hsr.se2p.mrt.services.SynchronizationServiceSpec getSynchronizationServiceSpec()
       </fullMethod>
       <crap>
         2.00
@@ -11129,35 +11332,6 @@
       </methodSignature>
       <fullMethod>
         public  void &lt;init&gt;()
-      </fullMethod>
-      <crap>
-        2.00
-      </crap>
-      <complexity>
-        1
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        SynchronizationServiceTest
-      </className>
-      <methodName>
-        testCustomerSync
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        public  void testCustomerSync()
       </fullMethod>
       <crap>
         2.00
@@ -11525,6 +11699,35 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
+        LocationService$1
+      </className>
+      <methodName>
+        onLocationChanged
+      </methodName>
+      <methodSignature>
+        (Landroid/location/Location;)V
+      </methodSignature>
+      <fullMethod>
+        public  void onLocationChanged(android.location.Location)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
         LoginActivity
       </className>
       <methodName>
@@ -11583,16 +11786,45 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
-        TimeEntryActivity$2
+        Measurement
       </className>
       <methodName>
-        onClick
+        &lt;init&gt;
       </methodName>
       <methodSignature>
-        (Landroid/view/View;)V
+        (Z)V
       </methodSignature>
       <fullMethod>
-        public  void onClick(android.view.View)
+        public  void &lt;init&gt;(boolean)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
+        Measurement
+      </className>
+      <methodName>
+        setTimeEntryType
+      </methodName>
+      <methodSignature>
+        (Landroid/widget/Spinner;)V
+      </methodSignature>
+      <fullMethod>
+        private  void setTimeEntryType(android.widget.Spinner)
       </fullMethod>
       <crap>
         6.00
@@ -11615,13 +11847,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        calculateAndSetDistances
+        onDestroy
       </methodName>
       <methodSignature>
-        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/GpsPosition;Ljava/lang/Integer;&gt;;Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;Lch/hsr/se2p/mrt/models/GpsPosition;)V
+        ()V
       </methodSignature>
       <fullMethod>
-        private static  void calculateAndSetDistances(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.GpsPosition, java.lang.Integer&gt;, java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt;, ch.hsr.se2p.mrt.models.GpsPosition)
+        protected  void onDestroy()
       </fullMethod>
       <crap>
         6.00
@@ -11644,71 +11876,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        getCustomer
+        saveGpsPosition
       </methodName>
       <methodSignature>
-        ()Lch/hsr/se2p/mrt/models/Customer;
+        ()Ljava/lang/Integer;
       </methodSignature>
       <fullMethod>
-        private  ch.hsr.se2p.mrt.models.Customer getCustomer()
-      </fullMethod>
-      <crap>
-        6.00
-      </crap>
-      <complexity>
-        2
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        getCustomers
-      </methodName>
-      <methodSignature>
-        ()Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;
-      </methodSignature>
-      <fullMethod>
-        private synchronized  java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt; getCustomers()
-      </fullMethod>
-      <crap>
-        6.00
-      </crap>
-      <complexity>
-        2
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        saveGpsData
-      </methodName>
-      <methodSignature>
-        ()I
-      </methodSignature>
-      <fullMethod>
-        private  int saveGpsData()
+        private  java.lang.Integer saveGpsPosition()
       </fullMethod>
       <crap>
         6.00
@@ -11760,13 +11934,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        updateView
+        startOrStopTimeMeasurement
       </methodName>
       <methodSignature>
         ()V
       </methodSignature>
       <fullMethod>
-        private  void updateView()
+        private  void startOrStopTimeMeasurement()
       </fullMethod>
       <crap>
         6.00
@@ -12202,6 +12376,35 @@
       </methodSignature>
       <fullMethod>
         private  void reset(android.database.sqlite.SQLiteDatabase, com.j256.ormlite.support.ConnectionSource)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        Customer
+      </className>
+      <methodName>
+        compareTo
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/models/Customer;)I
+      </methodSignature>
+      <fullMethod>
+        public  int compareTo(ch.hsr.se2p.mrt.models.Customer)
       </fullMethod>
       <crap>
         6.00
@@ -12685,6 +12888,93 @@
         ch.hsr.se2p.mrt.models
       </package>
       <className>
+        TimeEntryType
+      </className>
+      <methodName>
+        parseMembersFromJson
+      </methodName>
+      <methodSignature>
+        (Lorg/json/JSONObject;)V
+      </methodSignature>
+      <fullMethod>
+        private  void parseMembersFromJson(org.json.JSONObject)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryTypeTest
+      </className>
+      <methodName>
+        &lt;clinit&gt;
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        static  void &lt;clinit&gt;()
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryTypeTest
+      </className>
+      <methodName>
+        testFromJSON
+      </methodName>
+      <methodSignature>
+        ()V
+      </methodSignature>
+      <fullMethod>
+        public  void testFromJSON()
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
         User
       </className>
       <methodName>
@@ -13065,13 +13355,71 @@
         CustomerSynchronizer
       </className>
       <methodName>
-        handleCreation
+        handleGpsPosition
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/models/Customer;)V
+      </methodSignature>
+      <fullMethod>
+        private  void handleGpsPosition(ch.hsr.se2p.mrt.models.Customer)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        CustomerSynchronizer
+      </className>
+      <methodName>
+        handleUpdate
       </methodName>
       <methodSignature>
         (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/models/Customer;)V
       </methodSignature>
       <fullMethod>
-        private  void handleCreation(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
+        private  void handleUpdate(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
+      </fullMethod>
+      <crap>
+        6.00
+      </crap>
+      <complexity>
+        2
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        CustomerSynchronizer
+      </className>
+      <methodName>
+        updatePosition
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/models/Customer;)V
+      </methodSignature>
+      <fullMethod>
+        private  void updatePosition(ch.hsr.se2p.mrt.models.Customer)
       </fullMethod>
       <crap>
         6.00
@@ -13352,16 +13700,16 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
-        TimeEntryActivity$2
+        Measurement
       </className>
       <methodName>
-        checkGpsPositionIsSet
+        setCustomer
       </methodName>
       <methodSignature>
-        ()V
+        (Lch/hsr/se2p/mrt/activities/MRTAutocompleteSpinner;Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;)V
       </methodSignature>
       <fullMethod>
-        private  void checkGpsPositionIsSet()
+        private  void setCustomer(ch.hsr.se2p.mrt.activities.MRTAutocompleteSpinner, java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt;)
       </fullMethod>
       <crap>
         12.00
@@ -13384,13 +13732,13 @@
         TimeEntryActivity
       </className>
       <methodName>
-        findCustomer
+        calculateAndSetDistances
       </methodName>
       <methodSignature>
-        (Ljava/lang/String;)Lch/hsr/se2p/mrt/models/Customer;
+        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/GpsPosition;Ljava/lang/Integer;&gt;;Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;Lch/hsr/se2p/mrt/models/GpsPosition;)V
       </methodSignature>
       <fullMethod>
-        private  ch.hsr.se2p.mrt.models.Customer findCustomer(java.lang.String)
+        private static  void calculateAndSetDistances(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.GpsPosition, java.lang.Integer&gt;, java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt;, ch.hsr.se2p.mrt.models.GpsPosition)
       </fullMethod>
       <crap>
         12.00
@@ -13420,64 +13768,6 @@
       </methodSignature>
       <fullMethod>
         public  boolean onOptionsItemSelected(android.view.MenuItem)
-      </fullMethod>
-      <crap>
-        12.00
-      </crap>
-      <complexity>
-        3
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        saveTimeEntry
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        private  void saveTimeEntry()
-      </fullMethod>
-      <crap>
-        12.00
-      </crap>
-      <complexity>
-        3
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.activities
-      </package>
-      <className>
-        TimeEntryActivity
-      </className>
-      <methodName>
-        setCustomer
-      </methodName>
-      <methodSignature>
-        ()V
-      </methodSignature>
-      <fullMethod>
-        private  void setCustomer()
       </fullMethod>
       <crap>
         12.00
@@ -13726,6 +14016,35 @@
     </method>
     <method>
       <package>
+        ch.hsr.se2p.mrt.models
+      </package>
+      <className>
+        TimeEntryType
+      </className>
+      <methodName>
+        fromJSON
+      </methodName>
+      <methodSignature>
+        (Lorg/json/JSONObject;)Z
+      </methodSignature>
+      <fullMethod>
+        public  boolean fromJSON(org.json.JSONObject)
+      </fullMethod>
+      <crap>
+        12.00
+      </crap>
+      <complexity>
+        3
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
         ch.hsr.se2p.mrt.network
       </package>
       <className>
@@ -13906,13 +14225,13 @@
         CustomerSynchronizer
       </className>
       <methodName>
-        synchronizeCustomers
+        handleCreation
       </methodName>
       <methodSignature>
-        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/network/CustomerHelper;Ljava/util/List&lt;Lch/hsr/se2p/mrt/interfaces/Receivable;&gt;;)V
+        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/models/Customer;)Z
       </methodSignature>
       <fullMethod>
-        protected  void synchronizeCustomers(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.network.CustomerHelper, java.util.List&lt;ch.hsr.se2p.mrt.interfaces.Receivable&gt;)
+        private  boolean handleCreation(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
       </fullMethod>
       <crap>
         12.00
@@ -13935,13 +14254,42 @@
         CustomerSynchronizer
       </className>
       <methodName>
-        updatePosition
+        processCustomer
       </methodName>
       <methodSignature>
-        (Lch/hsr/se2p/mrt/models/Customer;)V
+        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/models/Customer;)V
       </methodSignature>
       <fullMethod>
-        private  void updatePosition(ch.hsr.se2p.mrt.models.Customer)
+        protected  void processCustomer(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
+      </fullMethod>
+      <crap>
+        12.00
+      </crap>
+      <complexity>
+        3
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.services
+      </package>
+      <className>
+        CustomerSynchronizer
+      </className>
+      <methodName>
+        synchronizeCustomers
+      </methodName>
+      <methodSignature>
+        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/network/CustomerHelper;Ljava/util/List&lt;Lch/hsr/se2p/mrt/interfaces/Receivable;&gt;;)V
+      </methodSignature>
+      <fullMethod>
+        protected  void synchronizeCustomers(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.network.CustomerHelper, java.util.List&lt;ch.hsr.se2p.mrt.interfaces.Receivable&gt;)
       </fullMethod>
       <crap>
         12.00
@@ -14106,6 +14454,35 @@
         ch.hsr.se2p.mrt.activities
       </package>
       <className>
+        Measurement
+      </className>
+      <methodName>
+        getCustomer
+      </methodName>
+      <methodSignature>
+        (Lch/hsr/se2p/mrt/activities/MRTAutocompleteSpinner;Ljava/util/List&lt;Lch/hsr/se2p/mrt/models/Customer;&gt;;)Lch/hsr/se2p/mrt/models/Customer;
+      </methodSignature>
+      <fullMethod>
+        private  ch.hsr.se2p.mrt.models.Customer getCustomer(ch.hsr.se2p.mrt.activities.MRTAutocompleteSpinner, java.util.List&lt;ch.hsr.se2p.mrt.models.Customer&gt;)
+      </fullMethod>
+      <crap>
+        20.00
+      </crap>
+      <complexity>
+        4
+      </complexity>
+      <coverage>
+        0.00
+      </coverage>
+      <crapLoad>
+        0
+      </crapLoad>
+    </method>
+    <method>
+      <package>
+        ch.hsr.se2p.mrt.activities
+      </package>
+      <className>
         TimeEntryActivity
       </className>
       <methodName>
@@ -14138,13 +14515,13 @@
         Customer
       </className>
       <methodName>
-        compareTo
+        compareToNotEquals
       </methodName>
       <methodSignature>
         (Lch/hsr/se2p/mrt/models/Customer;)I
       </methodSignature>
       <fullMethod>
-        public  int compareTo(ch.hsr.se2p.mrt.models.Customer)
+        private  int compareToNotEquals(ch.hsr.se2p.mrt.models.Customer)
       </fullMethod>
       <crap>
         20.00
@@ -14167,42 +14544,13 @@
         TimeEntry
       </className>
       <methodName>
-        toJSONObject
+        putRelationsToJson
       </methodName>
       <methodSignature>
-        ()Lorg/json/JSONObject;
+        (Lorg/json/JSONObject;)V
       </methodSignature>
       <fullMethod>
-        public  org.json.JSONObject toJSONObject()
-      </fullMethod>
-      <crap>
-        20.00
-      </crap>
-      <complexity>
-        4
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.models
-      </package>
-      <className>
-        TimeEntryType
-      </className>
-      <methodName>
-        fromJSON
-      </methodName>
-      <methodSignature>
-        (Lorg/json/JSONObject;)Z
-      </methodSignature>
-      <fullMethod>
-        public  boolean fromJSON(org.json.JSONObject)
+        private  void putRelationsToJson(org.json.JSONObject)
       </fullMethod>
       <crap>
         20.00
@@ -14261,35 +14609,6 @@
       </methodSignature>
       <fullMethod>
         private  boolean handleDeletion(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
-      </fullMethod>
-      <crap>
-        20.00
-      </crap>
-      <complexity>
-        4
-      </complexity>
-      <coverage>
-        0.00
-      </coverage>
-      <crapLoad>
-        0
-      </crapLoad>
-    </method>
-    <method>
-      <package>
-        ch.hsr.se2p.mrt.services
-      </package>
-      <className>
-        CustomerSynchronizer
-      </className>
-      <methodName>
-        processCustomer
-      </methodName>
-      <methodSignature>
-        (Lcom/j256/ormlite/dao/Dao&lt;Lch/hsr/se2p/mrt/models/Customer;Ljava/lang/Integer;&gt;;Lch/hsr/se2p/mrt/models/Customer;)V
-      </methodSignature>
-      <fullMethod>
-        protected  void processCustomer(com.j256.ormlite.dao.Dao&lt;ch.hsr.se2p.mrt.models.Customer, java.lang.Integer&gt;, ch.hsr.se2p.mrt.models.Customer)
       </fullMethod>
       <crap>
         20.00
