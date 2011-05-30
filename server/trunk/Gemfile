@@ -52,3 +52,4 @@ end
 # Test coverage
 gem 'rcov'
 gem 'dynamic_form'
+gem 'metric_fu'
