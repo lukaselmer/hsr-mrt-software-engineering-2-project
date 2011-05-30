@@ -30,7 +30,7 @@ public class CustomerTest extends AndroidTestCase {
 	}
 
 	public void testInitialCustomer() {
-		assertEquals(new Integer(0), customer.getId());
+		assertEquals(Integer.valueOf(0), customer.getId());
 		assertEquals(0, customer.getIdOnServer());
 		assertNull(customer.getFirstName());
 		assertNull(customer.getLastName());

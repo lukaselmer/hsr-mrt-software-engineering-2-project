@@ -91,6 +91,10 @@ public class TimeEntryType implements Receivable, Comparable<TimeEntryType> {
 		return name;
 	}
 
+	/**
+	 * Findbugs: this class uses the Object's equals method. This is considered bad style because (x.compareTo(y)==0) == (x.equals(y)) is not
+	 * guaranteed. If this class was in a library this problem would have to be fixed.
+	 */
 	@Override
 	public int compareTo(TimeEntryType anotherTimeEntryType) {
 		return getName().compareTo(anotherTimeEntryType.getName());

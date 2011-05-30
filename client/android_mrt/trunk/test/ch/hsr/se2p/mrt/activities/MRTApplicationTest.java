@@ -8,7 +8,7 @@ import ch.hsr.se2p.mrt.application.MRTApplication;
 public class MRTApplicationTest extends AndroidTestCase {
 
 	private MRTApplication mrtApp;
-	private final String EMAIL = "field_worker@mrt.ch", PASSWORD = "mrt";
+	private static final String EMAIL = "field_worker@mrt.ch", PASSWORD = "mrt";
 
 	@Override
 	protected void setUp() throws Exception {

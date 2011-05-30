@@ -42,6 +42,10 @@ public class Customer implements Receivable, Comparable<Customer> {
 		this.distance = distance;
 	}
 
+	/**
+	 * Findbugs: this class uses the Object's equals method. This is considered bad style because (x.compareTo(y)==0) == (x.equals(y)) is not
+	 * guaranteed. If this class was in a library this problem would have to be fixed.
+	 */
 	@Override
 	public int compareTo(Customer another) {
 		if (equals(another))

@@ -39,7 +39,8 @@ import com.j256.ormlite.dao.Dao;
 /**
  * Creates new TimeEntry. A new TimeEntry with the current time is created after the user presses the button start. A customer, a TimeEntry type and a
  * description about the given task can be added to the TimeEntry. After the button stop is pressed the current time is added to the TimeEntry. If the
- * TimeEntry was successfully created a toast appears otherwise an alert dialog is shown.
+ * TimeEntry was successfully created a toast appears otherwise an alert dialog is shown. Metrics: This class has too many weighted methods and a to
+ * high efferent coupling. The reason for this is that this class manages the program flow and therefore contains many different classes.
  */
 public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 	private static final String TAG = TimeEntryActivity.class.getSimpleName();
