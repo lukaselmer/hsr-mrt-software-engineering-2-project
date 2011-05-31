@@ -1,0 +1,44 @@
+<html><head><style>table { background: #fff; color: #000; }
+.ruby .normal { color: #000; }
+.ruby .comment { color: #005; font-style: italic; }
+.ruby .keyword { color: #A44; font-weight: bold; }
+.ruby .method { color: #44f; }
+.ruby .class { color: #b1713d; }
+.ruby .module { color: #050; }
+.ruby .punct { color: #668; font-weight: bold; }
+.ruby .symbol { color: #00f; }
+.ruby .string { color: #4a4; }
+.ruby .char { color: #F07; }
+.ruby .ident { color: #000; }
+.ruby .constant { color: #b1713d; }
+.ruby .regex { color: #B66; background: #FEF; }
+.ruby .number { color: #F99; }
+.ruby .attribute { color: #f84; }
+.ruby .global { color: #7FB; }
+.ruby .expr { color: #227; }
+.ruby .escape { color: #277; }</style></head><body><table cellpadding='0' cellspacing='0' class='ruby'><tr><td valign='top'><small>1</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line1'><pre><span class="comment"># The ApplicationController is the base of all Controllers in this project</span>
+</pre></a></td></tr><tr><td valign='top'><small>2</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line2'><pre><span class="keyword">class </span><span class="class">ApplicationController</span> <span class="punct">&lt;</span> <span class="constant">ActionController</span><span class="punct">::</span><span class="constant">Base</span>
+</pre></a></td></tr><tr><td valign='top'><small>3</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line3'><pre>  <span class="ident">protect_from_forgery</span>
+</pre></a></td></tr><tr><td valign='top'><small>4</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line4'><pre>  <span class="ident">before_filter</span> <span class="symbol">:authenticate_user!</span>
+</pre></a></td></tr><tr><td valign='top'><small>5</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line5'><pre>  <span class="ident">helper_method</span> <span class="symbol">:write_access?</span>
+</pre></a></td></tr><tr><td valign='top'><small>6</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line6'><pre>
+</pre></a></td></tr><tr><td valign='top'><small>7</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line7'><pre>  <span class="comment"># Has the current_user (see Devise) access to a given object?</span>
+</pre></a></td></tr><tr><td valign='top'><small>8</small></td><td valign='top'><ul><li>Score of 15.57 &raquo; flog</li><li>Duplication - calls current_user 3 times &raquo; reek</li><li>LowCohesion - refers to object more than self &raquo; reek</li><li>Complexity 5 &raquo; saikuro</li><li>move model logic into model (object use_count > 4) &raquo; rails_best_practices</li></ul></td><td valign='top'><a name='line8'><pre>  <span class="keyword">def </span><span class="method">write_access?</span><span class="punct">(</span><span class="ident">object</span> <span class="punct">=</span> <span class="constant">nil</span><span class="punct">)</span>
+</pre></a></td></tr><tr><td valign='top'><small>9</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line9'><pre>    <span class="keyword">return</span> <span class="constant">false</span> <span class="keyword">if</span> <span class="ident">current_user</span><span class="punct">.</span><span class="ident">nil?</span>
+</pre></a></td></tr><tr><td valign='top'><small>10</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line10'><pre>    <span class="keyword">return</span> <span class="constant">true</span> <span class="keyword">if</span> <span class="ident">current_user</span><span class="punct">.</span><span class="ident">secretary?</span>
+</pre></a></td></tr><tr><td valign='top'><small>11</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line11'><pre>    <span class="keyword">return</span> <span class="constant">false</span> <span class="keyword">if</span> <span class="ident">object</span><span class="punct">.</span><span class="ident">nil?</span>
+</pre></a></td></tr><tr><td valign='top'><small>12</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line12'><pre>    <span class="keyword">return</span> <span class="constant">true</span> <span class="keyword">if</span> <span class="ident">object</span><span class="punct">.</span><span class="ident">is_a?</span><span class="punct">(</span><span class="constant">TimeEntry</span><span class="punct">)</span> <span class="punct">&amp;&amp;</span> <span class="punct">(</span><span class="ident">object</span><span class="punct">.</span><span class="ident">new_record?</span> <span class="punct">||</span> <span class="ident">object</span><span class="punct">.</span><span class="ident">user</span> <span class="punct">==</span> <span class="ident">current_user</span><span class="punct">)</span>
+</pre></a></td></tr><tr><td valign='top'><small>13</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line13'><pre>    <span class="keyword">return</span> <span class="constant">false</span>
+</pre></a></td></tr><tr><td valign='top'><small>14</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line14'><pre>  <span class="keyword">end</span>
+</pre></a></td></tr><tr><td valign='top'><small>15</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line15'><pre>
+</pre></a></td></tr><tr><td valign='top'><small>16</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line16'><pre>  <span class="comment"># Status 403</span>
+</pre></a></td></tr><tr><td valign='top'><small>17</small></td><td valign='top'><ul><li>Score of 1.55 &raquo; flog</li><li>Complexity 1 &raquo; saikuro</li></ul></td><td valign='top'><a name='line17'><pre>  <span class="keyword">def </span><span class="method">deny_access!</span>
+</pre></a></td></tr><tr><td valign='top'><small>18</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line18'><pre>    <span class="ident">render</span> <span class="symbol">:file</span> <span class="punct">=&gt;</span> <span class="punct">&quot;</span><span class="string">/public/403.html</span><span class="punct">&quot;,</span> <span class="symbol">:status</span> <span class="punct">=&gt;</span> <span class="number">403</span><span class="punct">,</span> <span class="symbol">:layout</span> <span class="punct">=&gt;</span> <span class="constant">false</span>
+</pre></a></td></tr><tr><td valign='top'><small>19</small></td><td valign='top'><ul><li>simplify render in controllers &raquo; rails_best_practices</li></ul></td><td valign='top'><a name='line19'><pre>  <span class="keyword">end</span>
+</pre></a></td></tr><tr><td valign='top'><small>20</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line20'><pre>
+</pre></a></td></tr><tr><td valign='top'><small>21</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line21'><pre>  <span class="comment"># Current user needs to be secretary to continue</span>
+</pre></a></td></tr><tr><td valign='top'><small>22</small></td><td valign='top'><ul><li>Score of 7.31 &raquo; flog</li><li>Duplication - calls current_user twice &raquo; reek</li><li>Complexity 2 &raquo; saikuro</li></ul></td><td valign='top'><a name='line22'><pre>  <span class="keyword">def </span><span class="method">authorize_secretary!</span>
+</pre></a></td></tr><tr><td valign='top'><small>23</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line23'><pre>    <span class="ident">deny_access!</span> <span class="keyword">if</span> <span class="ident">current_user</span><span class="punct">.</span><span class="ident">nil?</span> <span class="punct">||</span> <span class="punct">!</span><span class="ident">current_user</span><span class="punct">.</span><span class="ident">secretary?</span>
+</pre></a></td></tr><tr><td valign='top'><small>24</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line24'><pre>  <span class="keyword">end</span>
+</pre></a></td></tr><tr><td valign='top'><small>25</small></td><td valign='top'>&nbsp;</td><td valign='top'><a name='line25'><pre><span class="keyword">end</span>
+</pre></a></td></tr><table></body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>ch.hsr.se2p.mrt.models.CustomerTest (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">CustomerTest.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> ch.hsr.se2p.mrt.models;
+<FONT ID="LN">2   </FONT><A NAME="2"></A>
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.sql.Timestamp;
+<FONT ID="LN">4   </FONT><A NAME="4"></A><FONT ID="Import">import</FONT> java.util.Set;
+<FONT ID="LN">5   </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> java.util.TreeSet;
+<FONT ID="LN">6   </FONT><A NAME="6"></A>
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Import">import</FONT> org.json.JSONException;
+<FONT ID="LN">8   </FONT><A NAME="8"></A><FONT ID="Import">import</FONT> org.json.JSONObject;
+<FONT ID="LN">9   </FONT><A NAME="9"></A>
+<FONT ID="LN">10  </FONT><A NAME="10"></A><FONT ID="Import">import</FONT> android.test.AndroidTestCase;
+<FONT ID="LN">11  </FONT><A NAME="11"></A>
+<FONT ID="LN">12  </FONT><A NAME="12"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> CustomerTest <FONT ID="Extends">extends</FONT> AndroidTestCase {
+<FONT ID="LN">13  </FONT><A NAME="13"></A>
+<FONT ID="LN">14  </FONT><A NAME="14"></A>    <FONT ID="Private">private</FONT> <FONT ID="Static">static</FONT> <FONT ID="Final">final</FONT> String PHONE = <FONT ID="StringLiteral">"+41 444 44 44"</FONT>, FIRST_NAME = <FONT ID="StringLiteral">"Test"</FONT>, LAST_NAME = <FONT ID="StringLiteral">"customer"</FONT>;
+<FONT ID="LN">15  </FONT><A NAME="15"></A>    <FONT ID="Private">private</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A> customer;
+<FONT ID="LN">16  </FONT><A NAME="16"></A>    <FONT ID="Private">private</FONT> JSONObject customerObj;
+<FONT ID="LN">17  </FONT><A NAME="17"></A>    <FONT ID="Private">private</FONT> Timestamp timeStamp;
+<FONT ID="LN">18  </FONT><A NAME="18"></A>
+<FONT ID="LN">19  </FONT><A NAME="19"></A>    @Override
+<FONT ID="LN">20  </FONT><A NAME="20"></A>    <FONT ID="Protected">protected</FONT> <FONT ID="Void">void</FONT> setUp() <FONT ID="Throws">throws</FONT> Exception {
+<FONT ID="LN">21  </FONT><A NAME="21"></A>        <FONT ID="Super">super</FONT>.setUp();
+<FONT ID="LN">22  </FONT><A NAME="22"></A>        customer = <FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>();
+<FONT ID="LN">23  </FONT><A NAME="23"></A>        timeStamp = <FONT ID="New">new</FONT> Timestamp(System.currentTimeMillis());
+<FONT ID="LN">24  </FONT><A NAME="24"></A>        customerObj = <FONT ID="New">new</FONT> JSONObject().put(<FONT ID="StringLiteral">"customer"</FONT>, getCustomerJSON());
+<FONT ID="LN">25  </FONT><A NAME="25"></A>    }
+<FONT ID="LN">26  </FONT><A NAME="26"></A>
+<FONT ID="LN">27  </FONT><A NAME="27"></A>    <FONT ID="Private">private</FONT> JSONObject getCustomerJSON() <FONT ID="Throws">throws</FONT> JSONException {
+<FONT ID="LN">28  </FONT><A NAME="28"></A>        <FONT ID="Return">return</FONT> <FONT ID="New">new</FONT> JSONObject().put(<FONT ID="StringLiteral">"id"</FONT>, <FONT ID="IntegerLiteral">1</FONT>).put(<FONT ID="StringLiteral">"first_name"</FONT>, FIRST_NAME).put(<FONT ID="StringLiteral">"last_name"</FONT>, LAST_NAME).put(<FONT ID="StringLiteral">"phone"</FONT>, PHONE)
+<FONT ID="LN">29  </FONT><A NAME="29"></A>                .put(<FONT ID="StringLiteral">"updated_at"</FONT>, ISO8601DateParser.format(timeStamp));
+<FONT ID="LN">30  </FONT><A NAME="30"></A>    }
+<FONT ID="LN">31  </FONT><A NAME="31"></A>
+<FONT ID="LN">32  </FONT><A NAME="32"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> testInitialCustomer() {
+<FONT ID="LN">33  </FONT><A NAME="33"></A>        assertEquals(<FONT ID="New">new</FONT> Integer(<FONT ID="IntegerLiteral">0</FONT>), customer.getId());
+<FONT ID="LN">34  </FONT><A NAME="34"></A>        assertEquals(<FONT ID="IntegerLiteral">0</FONT>, customer.getIdOnServer());
+<FONT ID="LN">35  </FONT><A NAME="35"></A>        assertNull(customer.getFirstName());
+<FONT ID="LN">36  </FONT><A NAME="36"></A>        assertNull(customer.getLastName());
+<FONT ID="LN">37  </FONT><A NAME="37"></A>        assertNull(customer.getPhone());
+<FONT ID="LN">38  </FONT><A NAME="38"></A>        assertNull(customer.getGpsPositionId());
+<FONT ID="LN">39  </FONT><A NAME="39"></A>        assertEquals(<FONT ID="New">new</FONT> Timestamp(<FONT ID="IntegerLiteral">0</FONT>), customer.getUpdatedAt());
+<FONT ID="LN">40  </FONT><A NAME="40"></A>        assertFalse(customer.isDeleted());
+<FONT ID="LN">41  </FONT><A NAME="41"></A>    }
+<FONT ID="LN">42  </FONT><A NAME="42"></A>
+<FONT ID="LN">43  </FONT><A NAME="43"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> testFromJSON() {
+<FONT ID="LN">44  </FONT><A NAME="44"></A>        <FONT ID="Try">try</FONT> {
+<FONT ID="LN">45  </FONT><A NAME="45"></A>            customer.fromJSON(customerObj);
+<FONT ID="LN">46  </FONT><A NAME="46"></A>            assertEquals(<FONT ID="IntegerLiteral">1</FONT>, customer.getIdOnServer());
+<FONT ID="LN">47  </FONT><A NAME="47"></A>            assertEquals(FIRST_NAME, customer.getFirstName());
+<FONT ID="LN">48  </FONT><A NAME="48"></A>            assertEquals(LAST_NAME, customer.getLastName());
+<FONT ID="LN">49  </FONT><A NAME="49"></A>            assertEquals(PHONE, customer.getPhone());
+<FONT ID="LN">50  </FONT><A NAME="50"></A>            assertEquals(timeStamp, customer.getUpdatedAt());
+<FONT ID="LN">51  </FONT><A NAME="51"></A>            assertEquals(FIRST_NAME + <FONT ID="StringLiteral">" "</FONT> + LAST_NAME, customer.toString());
+<FONT ID="LN">52  </FONT><A NAME="52"></A>        } <FONT ID="Catch">catch</FONT> (JSONException e) {
+<FONT ID="LN">53  </FONT><A NAME="53"></A>            assert (<FONT ID="False">false</FONT>);
+<FONT ID="LN">54  </FONT><A NAME="54"></A>            e.printStackTrace();
+<FONT ID="LN">55  </FONT><A NAME="55"></A>        }
+<FONT ID="LN">56  </FONT><A NAME="56"></A>    }
+<FONT ID="LN">57  </FONT><A NAME="57"></A>
+<FONT ID="LN">58  </FONT><A NAME="58"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> testCustomerSort() {
+<FONT ID="LN">59  </FONT><A NAME="59"></A>        Set&lt;<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>&gt; set = <FONT ID="New">new</FONT> TreeSet&lt;<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>&gt;();
+<FONT ID="LN">60  </FONT><A NAME="60"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"Jasper"</FONT>, <FONT ID="StringLiteral">"Zazoo"</FONT>, <FONT ID="StringLiteral">"+41 444 44 11"</FONT>, <FONT ID="Null">null</FONT>));
+<FONT ID="LN">61  </FONT><A NAME="61"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"Duelue"</FONT>, <FONT ID="StringLiteral">"Anton"</FONT>, <FONT ID="StringLiteral">"+41 444 44 22"</FONT>, <FONT ID="Null">null</FONT>));
+<FONT ID="LN">62  </FONT><A NAME="62"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"The"</FONT>, <FONT ID="StringLiteral">"Zombie"</FONT>, <FONT ID="StringLiteral">"+41 444 44 33"</FONT>, <FONT ID="FloatPointLiteral">100.0</FONT>));
+<FONT ID="LN">63  </FONT><A NAME="63"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"Klara"</FONT>, <FONT ID="StringLiteral">"Wayne"</FONT>, <FONT ID="StringLiteral">"+41 444 44 44"</FONT>, <FONT ID="FloatPointLiteral">499.9</FONT>));
+<FONT ID="LN">64  </FONT><A NAME="64"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"Fritz"</FONT>, <FONT ID="StringLiteral">"Arnold"</FONT>, <FONT ID="StringLiteral">"+41 444 44 55"</FONT>, <FONT ID="FloatPointLiteral">800.0</FONT>));
+<FONT ID="LN">65  </FONT><A NAME="65"></A>        set.add(<FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>(<FONT ID="StringLiteral">"Hans"</FONT>, <FONT ID="StringLiteral">"Peter"</FONT>, <FONT ID="StringLiteral">"+41 444 44 66"</FONT>, <FONT ID="FloatPointLiteral">500.0</FONT>));
+<FONT ID="LN">66  </FONT><A NAME="66"></A>        Object[] custArray = set.toArray();
+<FONT ID="LN">67  </FONT><A NAME="67"></A>        assertEquals(<FONT ID="StringLiteral">"Zombie"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">0</FONT>]).getLastName());
+<FONT ID="LN">68  </FONT><A NAME="68"></A>        assertEquals(<FONT ID="StringLiteral">"Peter"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">1</FONT>]).getLastName());
+<FONT ID="LN">69  </FONT><A NAME="69"></A>        assertEquals(<FONT ID="StringLiteral">"Wayne"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">2</FONT>]).getLastName());
+<FONT ID="LN">70  </FONT><A NAME="70"></A>        assertEquals(<FONT ID="StringLiteral">"Arnold"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">3</FONT>]).getLastName());
+<FONT ID="LN">71  </FONT><A NAME="71"></A>        assertEquals(<FONT ID="StringLiteral">"Anton"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">4</FONT>]).getLastName());
+<FONT ID="LN">72  </FONT><A NAME="72"></A>        assertEquals(<FONT ID="StringLiteral">"Zazoo"</FONT>, ((<A HREF="../../../../../ch/hsr/se2p/mrt/models/Customer.java.html">Customer</A>) custArray[<FONT ID="IntegerLiteral">5</FONT>]).getLastName());
+<FONT ID="LN">73  </FONT><A NAME="73"></A>    }
+<FONT ID="LN">74  </FONT><A NAME="74"></A>}
+<FONT ID="LN">75  </FONT><A NAME="75"></A></pre>
+</BODY>
+</HTML>

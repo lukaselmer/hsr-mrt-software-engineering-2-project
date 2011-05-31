@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<LINK REL=STYLESHEET TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+<META NAME="GENERATOR" CONTENT="Java2HTML Version 1.5">
+<TITLE>ch.hsr.se2p.mrt.network.TimeEntryHelperTest (Java2HTML)</TITLE>
+</HEAD>
+<BODY><TABLE id="Header" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+<td colspan="2" width="33%">&nbsp;</td>
+<td align="center" colspan="2" width="33%">
+<font size="4">TimeEntryHelperTest.java</font>
+</td>
+<td align="right" colspan="2" width="33%">&nbsp;</td>
+</tr>
+</TABLE>
+<pre ID="Classes">
+<FONT ID="LN">1   </FONT><A NAME="1"></A><FONT ID="Package">package</FONT> ch.hsr.se2p.mrt.network;
+<FONT ID="LN">2   </FONT><A NAME="2"></A>
+<FONT ID="LN">3   </FONT><A NAME="3"></A><FONT ID="Import">import</FONT> java.sql.Timestamp;
+<FONT ID="LN">4   </FONT><A NAME="4"></A>
+<FONT ID="LN">5   </FONT><A NAME="5"></A><FONT ID="Import">import</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/TimeEntry.java.html">ch.hsr.se2p.mrt.models.TimeEntry</A>;
+<FONT ID="LN">6   </FONT><A NAME="6"></A>
+<FONT ID="LN">7   </FONT><A NAME="7"></A><FONT ID="Public">public</FONT> <FONT ID="Class">class</FONT> TimeEntryHelperTest <FONT ID="Extends">extends</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/network/HttpTestCase.java.html">HttpTestCase</A> {
+<FONT ID="LN">8   </FONT><A NAME="8"></A>
+<FONT ID="LN">9   </FONT><A NAME="9"></A>    <FONT ID="Public">public</FONT> <FONT ID="Void">void</FONT> testTimeEntryTransmission() {
+<FONT ID="LN">10  </FONT><A NAME="10"></A>        <A HREF="../../../../../ch/hsr/se2p/mrt/models/TimeEntry.java.html">TimeEntry</A> timeEntry = <FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/models/TimeEntry.java.html">TimeEntry</A>(<FONT ID="New">new</FONT> Timestamp(System.currentTimeMillis() - <FONT ID="IntegerLiteral">1000</FONT> * <FONT ID="IntegerLiteral">60</FONT> * <FONT ID="IntegerLiteral">60</FONT>));
+<FONT ID="LN">11  </FONT><A NAME="11"></A>        timeEntry.setTimeStop(<FONT ID="New">new</FONT> Timestamp(System.currentTimeMillis()));
+<FONT ID="LN">12  </FONT><A NAME="12"></A>        timeEntry.setDescription(<FONT ID="StringLiteral">"bla"</FONT>);
+<FONT ID="LN">13  </FONT><A NAME="13"></A>        expectedResultFromTransmitter(<FONT ID="StringLiteral">"{\"time_entry\":{\"created_at\":\"2011-04-12T21:57:32+02:00\",\"time_stop\":\""</FONT>
+<FONT ID="LN">14  </FONT><A NAME="14"></A>                + <FONT ID="StringLiteral">"2011-04-12T23:57:28+02:00\",\"time_entry_type_id\":null,\"updated_at\":\"2011-04-12T21:57:32+02:00\","</FONT>
+<FONT ID="LN">15  </FONT><A NAME="15"></A>                + <FONT ID="StringLiteral">"\"audio_record_name\":null,\"hashcode\":\""</FONT> + timeEntry.getHashcode() + <FONT ID="StringLiteral">"\",\"id\":165,\"customer_id\":null,"</FONT>
+<FONT ID="LN">16  </FONT><A NAME="16"></A>                + <FONT ID="StringLiteral">"\"description\":null,\"position_id\":null,\"time_start\":\"2011-04-12T19:57:28+02:00\"}}"</FONT>);
+<FONT ID="LN">17  </FONT><A NAME="17"></A>        <A HREF="../../../../../ch/hsr/se2p/mrt/network/TimeEntryHelper.java.html">TimeEntryHelper</A> timeEntryHelper = <FONT ID="New">new</FONT> <A HREF="../../../../../ch/hsr/se2p/mrt/network/TimeEntryHelper.java.html">TimeEntryHelper</A>(httpHelper);
+<FONT ID="LN">18  </FONT><A NAME="18"></A>        assertTrue(timeEntryHelper.transmit(timeEntry));
+<FONT ID="LN">19  </FONT><A NAME="19"></A>    }
+<FONT ID="LN">20  </FONT><A NAME="20"></A>}
+<FONT ID="LN">21  </FONT><A NAME="21"></A></pre>
+</BODY>
+</HTML>
