@@ -146,8 +146,8 @@ public class Customer implements Receivable, Comparable<Customer> {
 
 	private void setAddressAndGpsPosition(JSONObject customerObj) throws JSONException {
 		if (customerObj.has("address")) {
-			JSONObject address_postition = customerObj.getJSONObject("address").getJSONObject("gps_position");
-			setGpsPosition(new GpsPosition(address_postition.getDouble("latitude"), address_postition.getDouble("longitude")));
+			JSONObject gpsPostition = customerObj.getJSONObject("address").getJSONObject("gps_position");
+			setGpsPosition(new GpsPosition(gpsPostition.getDouble("latitude"), gpsPostition.getDouble("longitude")));
 		}
 	}
 
