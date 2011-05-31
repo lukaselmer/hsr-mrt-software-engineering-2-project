@@ -167,7 +167,8 @@ public class TimeEntryActivity extends OrmLiteBaseActivity<DatabaseHelper> {
 		try {
 			calculateAndSetDistances(getHelper().getGpsPositionDao(), customers, locationService.getCurrentGPSPosition());
 			Collections.sort(customers);
-			customerAdapter.notifyDataSetChanged();
+			if (customerAdapter != null)
+				customerAdapter.notifyDataSetChanged();
 		} catch (SQLException e) {
 			Log.e(TAG, "SQLException", e);
 		} catch (NullPointerException e) {
