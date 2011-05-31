@@ -13,7 +13,7 @@ import com.j256.ormlite.field.DatabaseField;
  * createdAt is the time when the gpsPosition was saved the first time.
  */
 public class GpsPosition {
-	private static final String TAG = TimeEntry.class.getSimpleName();
+	private static final String TAG = GpsPosition.class.getSimpleName();
 
 	@DatabaseField(generatedId = true)
 	private int id;
