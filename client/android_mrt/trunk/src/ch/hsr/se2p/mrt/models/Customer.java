@@ -54,15 +54,11 @@ public class Customer implements Receivable, Comparable<Customer> {
 	}
 
 	private int compareToNotEquals(Customer another) {
-		if (bothDistancesNull(another))
+		if (getDistance() == null && another.getDistance() == null)
 			return compareLastName(another);
 		if (getDistance() == null || another.getDistance() == null)
 			return compareToNullDistance();
 		return compareToNonNullDistance(another);
-	}
-
-	private boolean bothDistancesNull(Customer another) {
-		return getDistance() == null && another.getDistance() == null;
 	}
 
 	private int compareToNullDistance() {
