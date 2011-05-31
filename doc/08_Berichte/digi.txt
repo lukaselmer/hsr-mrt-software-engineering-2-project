@@ -1,0 +1,18 @@
+*Bericht*
+Das SE2 Projekt bot die Möglichkeit endlich das gelernte praxisnah einzusetzen. Ich persönlich profitiere am meisten, wenn ich in einer "real-life" Umgebung arbeiten kann, als wenn ich die Theorie auswendig lerne oder in den Übungen die Sachen trocken durchspiele.
+
+*Positives*
+Die Methoden aus SE1 fanden im Projekt anwendung, was de Effekt hatte das viele dieser Methoden klarer erschienen und aufzeigten, warum solche Muster überhaupt gebraucht werden. Dies wurde auch dadurch bekräftigt, dass wir unseren Fokus auf die Planung und dessen Dokumente setzten. 
+
+Ich hatte vor dem Start des Projektes noch sehr wenig am Hut sowohl mit Ruby als auch mit Rails. Durch meine Praxiserfahrung vor dem Studium, das realitätsnahe Umfeld und durch Lukas' Unterstützung konnte ich eine relativ steile Lernkurve erzielen. Ruby on Rails hat durch dieses Projekt einen Fan gefunden - mich.
+
+Wir haben uns als Team besser kennengelernt. Die Erfahrung die so ein Projekt auf der zwischenmenschlichen Ebene mit sich bringt (inklusive/gerade wegen aller Auseinandersetzungen und Missverständnissen). Dies ist in Informatikerkreisen sicherlich Gold wert.
+
+*Negatives*
+Da ich als ehemaliger Teilzeitstudent einen gänzlich anderen
+Der Aufwand, den wir für die uns gesteckten Ziele geplant und betrieben haben, überstieg die für das Fach vorgesehene Stundenanzahl deutlich. 
+
+*Probleme*
+
+
+*Fazit*
