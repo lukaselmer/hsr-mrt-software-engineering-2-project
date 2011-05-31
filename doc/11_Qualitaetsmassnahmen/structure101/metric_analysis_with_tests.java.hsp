@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local-project language="java" version="3.4.1223" flavor="j2se">
+  <property name="hide-externals" value="true" />
+  <property name="show-needs-to-compile" value="false" />
+  <property name="detail-mode" value="false" />
+  <classpath>
+    <classpathentry kind="lib" path="./bin_with_tests" />
+  </classpath>
+  <excludes>
+    <exclude expression="a" />
+  </excludes>
+  <restructuring>
+    <set version="1" name="Sandbox 1" hiview="Codemap" active="true" todo="false" />
+    <set version="1" name="Flattened to classes" hiview="Codemap" active="false" todo="false">
+      <action type="flatten" active="true" description="Flatten root">
+        <params flattenLeafFolders="true">
+          <container-fqn fqn="root" type="root" path="" isroot="true" />
+        </params>
+        <composite-set />
+      </action>
+    </set>
+    <set version="1" name="Flattened to leaf packages" hiview="Codemap" active="false" todo="false">
+      <action type="flatten" active="true" description="Flatten root">
+        <params flattenLeafFolders="false">
+          <container-fqn fqn="root" type="root" path="" isroot="true" />
+        </params>
+        <composite-set />
+      </action>
+    </set>
+  </restructuring>
+</local-project>
+
