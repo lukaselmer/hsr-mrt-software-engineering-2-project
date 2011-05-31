@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metrics
+    xmlns="http://eclipse-metrics.sourceforge.net"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://eclipse-metrics.sourceforge.net metrics.xsd">
+  <package name="ch.hsr.se2p.mrt">
+    <type name="R" line="10" WMC="0" Ce="1" NOF="0">
+    </type>
+    <type name="R.attr" line="11" NOF="0" Ce="1" WMC="0">
+    </type>
+    <type name="R.drawable" line="13" Ce="2" NOF="0" WMC="0">
+    </type>
+    <type name="R.id" line="22" Ce="2" WMC="0" NOF="0">
+    </type>
+    <type name="R.layout" line="45" NOF="0" WMC="0" Ce="2">
+    </type>
+    <type name="R.menu" line="51" WMC="0" NOF="0" Ce="2">
+    </type>
+    <type name="R.string" line="54" NOF="0" WMC="0" Ce="2">
+    </type>
+    <type name="R.xml" line="62" WMC="0" NOF="0" Ce="2">
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.activities">
+    <type name="ActivityHelper" line="11" Ce="6" WMC="3" NOF="0">
+      <method name="displayAlertDialog" line="21" NOP="3" NLS="0" LOCm="6" CC="1" NOL="1" NOS="2"/>
+      <method name="getAlertDialog" line="28" NOP="3" NLS="0" NOL="1" CC="1" NOS="7" LOCm="8"/>
+      <method name="startSyncService" line="14" NOP="1" NOL="1" NLS="0" CC="1" NOS="1" LOCm="6"/>
+    </type>
+    <type name="LocationListenerAdapter" line="10" WMC="4" NOF="0" Ce="6">
+      <method name="onLocationChanged" line="11" CC="1" FE="0" NLS="0" NOL="1" NOP="1" NOS="0" LOCm="3"/>
+      <method name="onProviderDisabled" line="23" NOP="1" FE="0" NLS="0" CC="1" LOCm="3" NOS="0" NOL="1"/>
+      <method name="onProviderEnabled" line="19" NOL="1" NOS="0" NLS="0" CC="1" FE="0" LOCm="3" NOP="1"/>
+      <method name="onStatusChanged" line="15" NOP="3" FE="0" CC="1" NOS="0" NLS="0" NOL="1" LOCm="3"/>
+    </type>
+    <type name="LocationService" line="9" NOF="5" Ce="10" WMC="7" LCOMPFI="89" LCOMCK="4" LCOMHS="81">
+      <method name="LocationService" line="23" CC="1" NOS="7" LOCm="7" FE="0" NOP="2" NLS="0" NOL="1"/>
+      <method name="getCurrentGPSPosition" line="35" NLS="0" CC="1" NOL="1" NOS="1" LOCm="3" FE="0" NOP="0"/>
+      <method name="getCurrentLocation" line="31" NLS="0" LOCm="3" NOL="1" NOP="0" CC="1" FE="0" NOS="1"/>
+      <method name="getLocationProvider" line="39" NOS="8" NLS="0" CC="1" LOCm="9" NOL="1" FE="0" NOP="0"/>
+      <method name="stop" line="49" NLS="0" NOS="1" FE="0" LOCm="3" CC="1" NOP="0" NOL="1"/>
+    </type>
+    <type name="LocationService$(anonymous)" line="11" WMC="2" NOF="0" Ce="3">
+      <method name="onLocationChanged" line="12" CC="2" FE="3" LOCm="6" NOL="1" NOS="3" NOP="1"/>
+    </type>
+    <type name="LoginActivity" line="21" Ce="13" LCOMCK="0" NOF="4" WMC="11" LCOMHS="63" LCOMPFI="65">
+      <method name="checkLoginData" line="67" LOCm="7" CC="2" NOS="11" NOL="2" FE="0" NOP="0" NLS="0"/>
+      <method name="checkPreferencesForAutoLogin" line="61" NOP="0" FE="1" NLS="0" NOL="2" LOCm="5" NOS="5" CC="2"/>
+      <method name="createClickListener" line="52" FE="0" NLS="0" NOP="1" LOCm="8" NOS="2" CC="2" NOL="2"/>
+      <method name="initApplication" line="41" NOS="4" NLS="0" CC="1" NOP="0" LOCm="4" FE="0" NOL="1"/>
+      <method name="initData" line="46" CC="1" LOCm="5" NOP="0" NOL="1" NOS="6" NLS="0" FE="0"/>
+      <method name="onCreate" line="28" FE="0" CC="1" NLS="0" NOP="1" NOS="6" NOL="1" LOCm="12"/>
+      <method name="processLogin" line="75" NLS="0" LOCm="9" FE="0" NOL="2" NOS="9" CC="2" NOP="2"/>
+      <method name="switchToTimeEntryActivity" line="85" NOS="2" NLS="0" NOL="1" NOP="0" CC="1" FE="0" LOCm="4"/>
+    </type>
+    <type name="LoginActivity$(anonymous)" line="53" Ce="3" WMC="1" NOF="0">
+      <method name="onClick" line="54" NOL="1" NOS="1" NLS="0" CC="1" FE="1" NOP="1"/>
+    </type>
+    <type name="MRTAutocompleteSpinner" line="16" LCOMCK="0" WMC="10" LCOMHS="0" LCOMPFI="0" Ce="12" NOF="1">
+      <method name="MRTAutocompleteSpinner" line="19" NOL="1" LOCm="4" NOP="2" NOS="2" FE="0" CC="1" NLS="0"/>
+      <method name="getButtonListener" line="38" NOS="2" FE="0" CC="2" LOCm="8" NOL="2" NOP="0" NLS="0"/>
+      <method name="getInputTypeForTextView" line="56" NOL="1" NOS="1" NOP="0" FE="0" CC="1" NLS="0" LOCm="4"/>
+      <method name="getText" line="65" CC="1" NOL="1" LOCm="3" NOP="0" FE="0" NLS="0" NOS="3"/>
+      <method name="initButton" line="31" CC="1" NOS="6" NLS="0" LOCm="6" NOL="1" NOP="0" FE="0"/>
+      <method name="initControls" line="24" NOL="1" FE="0" LOCm="6" NOP="0" NOS="5" NLS="0" CC="1"/>
+      <method name="initTextView" line="47" NOL="1" CC="1" LOCm="8" NOP="1" NOS="7" FE="0" NLS="0"/>
+      <method name="resetText" line="69" NOS="1" CC="1" LOCm="3" NLS="0" FE="0" NOL="1" NOP="0"/>
+      <method name="setAdapter" line="61" CC="1" NOS="1" NOP="1" FE="0" LOCm="3" NLS="0" NOL="1"/>
+      <method name="setText" line="73" FE="0" NLS="0" NOP="1" NOS="1" CC="1" NOL="1" LOCm="3"/>
+    </type>
+    <type name="MRTAutocompleteSpinner$(anonymous)" line="39" WMC="1" Ce="3" NOF="0">
+      <method name="onClick" line="40" NOL="1" FE="1" NOS="1" NLS="0" CC="1" NOP="1"/>
+    </type>
+    <type name="Measurement" line="12" LCOMCK="0" LCOMHS="38" Ce="12" LCOMPFI="60" WMC="15" NOF="2">
+      <method name="Measurement" line="16" NOP="0" CC="1" FE="0" NOS="1" LOCm="3" NOL="1" NLS="0"/>
+      <method name="Measurement" line="20" NOP="1" NOS="2" LOCm="4" FE="0" CC="2" NOL="2" NLS="0"/>
+      <method name="getCustomer" line="50" NOP="2" FE="1" NLS="0" LOCm="11" NOL="3" NOS="11" CC="4"/>
+      <method name="getTimeEntry" line="30" NOL="1" NOS="1" CC="1" FE="0" NOP="0" NLS="0" LOCm="3"/>
+      <method name="isStarted" line="67" LOCm="3" NOS="1" NOP="0" CC="1" NLS="0" FE="0" NOL="1"/>
+      <method name="setCustomer" line="45" NOP="2" NLS="0" NOL="2" NOS="8" CC="2" FE="0" LOCm="4"/>
+      <method name="setTimeEntryType" line="62" LOCm="4" FE="0" NOS="5" NLS="0" NOP="1" CC="2" NOL="2"/>
+      <method name="start" line="25" NOL="1" LOCm="4" NLS="0" NOS="3" FE="0" CC="1" NOP="0"/>
+      <method name="stop" line="34" NOP="5" NOS="10" NOL="1" LOCm="10" CC="1" NLS="0" FE="0"/>
+    </type>
+    <type name="TimeEntryActivity" line="45" LCOMHS="87" WMC="41" LCOMPFI="94" LCOMCK="40" NOF="7" Ce="41">
+      <method name="calculateAndSetDistances" line="116" NLS="0" LOCm="12" NOS="11" NOP="3" CC="4" NOL="2"/>
+      <method name="calculateAndSetDistances" line="104" NLS="0" LOCm="11" NOP="3" NOL="2" NOS="4" CC="3"/>
+      <method name="initComboboxCustomers" line="99" CC="1" NOP="0" NOL="1" LOCm="4" FE="0" NLS="0" NOS="3"/>
+      <method name="initGui" line="73" NLS="0" NOL="1" NOS="6" LOCm="7" FE="0" NOP="0" CC="1"/>
+      <method name="initLocationService" line="87" CC="2" NLS="0" FE="0" LOCm="11" NOS="6" NOL="2" NOP="0"/>
+      <method name="initSpinnerTimeEntryTypes" line="81" LOCm="5" NLS="0" NOS="4" NOL="1" NOP="0" CC="1" FE="0"/>
+      <method name="loadCustomers" line="198" NOL="2" NLS="1" NOP="0" CC="2" FE="0" LOCm="9" NOS="9"/>
+      <method name="loadLists" line="193" NLS="0" NOP="0" CC="1" NOL="1" LOCm="4" NOS="2" FE="0"/>
+      <method name="loadTimeEntryTypes" line="208" NOP="0" CC="2" NOL="2" LOCm="10" FE="0" NOS="10" NLS="1"/>
+      <method name="logAndDisplaySQLException" line="148" LOCm="4" NOL="1" NOP="1" FE="0" NLS="0" CC="1" NOS="3"/>
+      <method name="logout" line="227" NLS="0" NOP="0" NOL="1" FE="0" NOS="4" LOCm="6" CC="1"/>
+      <method name="onCreate" line="63" NOS="6" LOCm="9" NOL="1" FE="0" NOP="1" NLS="0" CC="1"/>
+      <method name="onCreateOptionsMenu" line="241" NOP="1" CC="1" LOCm="6" NOS="4" FE="1" NOL="1" NLS="0"/>
+      <method name="onDestroy" line="234" NLS="0" NOP="0" CC="2" LOCm="6" NOL="2" FE="0" NOS="2"/>
+      <method name="onOptionsItemSelected" line="248" CC="4" NOL="2" LOCm="15" NOP="1" FE="0" NLS="0" NOS="12"/>
+      <method name="resetInputFields" line="142" NOP="0" NLS="0" NOS="6" LOCm="5" CC="1" FE="3" NOL="1"/>
+      <method name="saveGpsPosition" line="219" LOCm="7" NOP="0" NOS="11" NLS="0" NOL="2" CC="2" FE="0"/>
+      <method name="saveTimeEntry" line="158" FE="0" NOL="1" CC="1" NOP="0" NLS="0" LOCm="7" NOS="12"/>
+      <method name="setGPSImage" line="153" NOS="3" NLS="0" FE="2" NOP="1" NOL="1" CC="2" LOCm="4"/>
+      <method name="sortCustomersByCurrentLocation" line="166" NLS="1" NOP="0" NOL="2" CC="3" NOS="11" FE="0" LOCm="11"/>
+      <method name="startOrStopTimeMeasurement" line="178" NOL="2" NOS="6" LOCm="8" NOP="0" NLS="0" CC="2" FE="0"/>
+      <method name="stopTimeMeasurement" line="129" NLS="1" NOL="2" CC="2" NOS="11" NOP="0" FE="0" LOCm="12"/>
+      <method name="updateGuiAfterMeasurement" line="187" NOL="1" NOS="7" FE="2" NOP="3" NLS="0" LOCm="5" CC="1"/>
+    </type>
+    <type name="TimeEntryActivity$(anonymous)" line="55" NOF="0" WMC="1" Ce="3">
+      <method name="onClick" line="56" NOP="1" FE="2" CC="1" LOCm="5" NOS="2" NOL="1"/>
+    </type>
+    <type name="TimeEntryActivity$(anonymous)" line="88" NOF="0" Ce="2" WMC="1">
+      <method name="run" line="89" NLS="0" FE="2" NOL="1" NOS="2" NOP="0" CC="1"/>
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.application">
+    <type name="MRTApplication" line="12" WMC="12" LCOMCK="17" Ce="7" NOF="4" LCOMPFI="87" LCOMHS="78">
+      <method name="MRTApplication" line="18" NLS="0" CC="1" LOCm="4" NOP="0" NOL="1" FE="0" NOS="2"/>
+      <method name="getCurrentUser" line="23" NOL="1" LOCm="3" NOP="0" CC="1" FE="0" NLS="0" NOS="1"/>
+      <method name="getEmail" line="27" LOCm="3" NOL="1" CC="1" NOP="0" NOS="1" FE="0" NLS="0"/>
+      <method name="getHttpHelper" line="31" CC="1" NOL="1" FE="0" NOS="1" NOP="0" LOCm="3" NLS="0"/>
+      <method name="getPassword" line="35" NOP="0" NLS="0" NOL="1" NOS="1" LOCm="3" FE="0" CC="1"/>
+      <method name="getPreferences" line="39" NOP="0" NOS="1" CC="1" LOCm="3" NOL="1" FE="0" NLS="0"/>
+      <method name="login" line="43" NOP="3" NLS="0" NOL="2" NOS="8" FE="0" CC="2" LOCm="10"/>
+      <method name="logout" line="54" NOL="2" LOCm="10" CC="2" NOS="8" NOP="0" NLS="0" FE="0"/>
+      <method name="mayLogin" line="65" NOS="1" FE="0" LOCm="3" CC="1" NOP="0" NOL="1" NLS="0"/>
+      <method name="setPreferences" line="69" NLS="0" CC="1" FE="0" NOL="1" NOP="1" LOCm="5" NOS="5"/>
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.database">
+    <type name="DatabaseHelper" line="22" LCOMHS="75" LCOMCK="2" WMC="18" LCOMPFI="67" NOF="4" Ce="18">
+      <method name="DatabaseHelper" line="30" CC="1" NLS="0" NOP="1" NOS="1" FE="2" NOL="1" LOCm="3"/>
+      <method name="close" line="94" CC="1" NLS="0" FE="0" NOS="4" NOP="0" LOCm="8" NOL="1"/>
+      <method name="getCustomerDao" line="76" NLS="0" CC="2" NOS="4" NOP="0" LOCm="5" NOL="2" FE="0"/>
+      <method name="getGpsPositionDao" line="82" NOL="2" NOP="0" NOS="4" NLS="0" LOCm="5" FE="0" CC="2"/>
+      <method name="getTimeEntryDao" line="70" NOS="4" FE="0" CC="2" NLS="0" NOL="2" NOP="0" LOCm="5"/>
+      <method name="getTimeEntryTypeDao" line="88" NOS="4" FE="0" LOCm="5" CC="2" NOL="2" NLS="0" NOP="0"/>
+      <method name="onCreate" line="34" CC="3" LOCm="12" NOP="2" FE="0" NLS="1" NOL="3" NOS="7"/>
+      <method name="onUpgrade" line="47" NOL="1" FE="0" NOS="1" NLS="0" CC="1" NOP="4" LOCm="4"/>
+      <method name="reset" line="52" NOP="0" CC="1" NOS="4" NOL="1" FE="0" NLS="0" LOCm="4"/>
+      <method name="reset" line="57" NOP="2" LOCm="12" NLS="1" CC="3" NOS="8" FE="0" NOL="3"/>
+    </type>
+    <type name="DatabaseSpec" line="8" NOF="0" Ce="8" WMC="0">
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.interfaces">
+    <type name="Confirmable" line="9">
+      <method name="getIdOnServer" line="17" NOP="0"/>
+      <method name="processConfirmation" line="22" NOP="1"/>
+      <method name="toJSONObject" line="10" NOP="0"/>
+    </type>
+    <type name="Receivable" line="11">
+      <method name="fromJSON" line="22" NOP="1"/>
+      <method name="getIdOnServer" line="12" NOP="0"/>
+      <method name="getUpdatedAt" line="17" NOP="0"/>
+    </type>
+    <type name="Transmittable" line="9">
+      <method name="isTransmitted" line="17" NOP="0"/>
+      <method name="processTransmission" line="22" NOP="1"/>
+      <method name="toJSONObject" line="10" NOP="0"/>
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.models">
+    <type name="Customer" line="16" LCOMHS="94" LCOMPFI="95" WMC="41" LCOMCK="83" Ce="15" NOF="9">
+      <method name="Customer" line="34" NOL="1" LOCm="3" NOP="0" NOS="0" NLS="0" CC="1" FE="0"/>
+      <method name="Customer" line="38" NOS="4" LOCm="6" NOL="1" CC="1" NLS="0" FE="0" NOP="4"/>
+      <method name="bothDistancesNull" line="64" LOCm="3" NOL="1" CC="1" NLS="0" FE="0" NOS="3" NOP="1"/>
+      <method name="compareLastName" line="77" FE="0" NOS="4" LOCm="3" CC="1" NLS="0" NOP="1" NOL="1"/>
+      <method name="compareTo" line="45" NOL="2" NOP="1" LOCm="10" FE="0" NLS="0" CC="2" NOS="5"/>
+      <method name="compareToNonNullDistance" line="72" FE="0" NOS="6" NOP="1" NLS="0" NOL="1" CC="2" LOCm="4"/>
+      <method name="compareToNotEquals" line="56" NOS="11" NLS="0" NOP="1" LOCm="7" CC="3" FE="0" NOL="2"/>
+      <method name="compareToNullDistance" line="68" NLS="0" LOCm="3" FE="0" NOS="2" CC="2" NOL="1" NOP="0"/>
+      <method name="fromJSON" line="81" NLS="0" FE="0" CC="2" NOS="9" NOP="1" NOL="2" LOCm="11"/>
+      <method name="getDistance" line="93" CC="1" NLS="0" FE="0" NOP="0" NOS="1" NOL="1" LOCm="3"/>
+      <method name="getDistanceString" line="189" NOL="2" NOS="10" NOP="0" CC="2" FE="0" NLS="0" LOCm="9"/>
+      <method name="getFirstName" line="101" NOP="0" FE="0" NOL="1" NLS="0" CC="1" NOS="1" LOCm="3"/>
+      <method name="getGpsPosition" line="105" LOCm="3" NLS="0" FE="0" NOP="0" CC="1" NOL="1" NOS="1"/>
+      <method name="getGpsPositionId" line="109" NLS="0" NOP="0" CC="1" FE="0" NOS="1" LOCm="3" NOL="1"/>
+      <method name="getId" line="113" NOS="1" NOL="1" NOP="0" NLS="0" LOCm="3" FE="0" CC="1"/>
+      <method name="getIdOnServer" line="117" LOCm="4" CC="1" NLS="0" NOP="0" FE="0" NOS="1" NOL="1"/>
+      <method name="getLastName" line="122" FE="0" CC="1" NOL="1" LOCm="3" NLS="0" NOS="1" NOP="0"/>
+      <method name="getPhone" line="126" NLS="0" CC="1" NOL="1" NOP="0" NOS="1" LOCm="3" FE="0"/>
+      <method name="getRoundedDistance" line="97" NOP="0" LOCm="3" NLS="0" CC="1" FE="0" NOL="1" NOS="3"/>
+      <method name="getUpdatedAt" line="130" NOL="1" LOCm="4" FE="0" NOP="0" NLS="0" CC="1" NOS="1"/>
+      <method name="hasChanged" line="135" FE="0" CC="1" NLS="0" NOP="0" LOCm="3" NOS="1" NOL="1"/>
+      <method name="hasGpsPosition" line="139" LOCm="3" NOP="0" NOS="1" NLS="0" NOL="1" CC="1" FE="0"/>
+      <method name="isDeleted" line="143" CC="1" NOP="0" NOS="1" NLS="0" FE="0" NOL="1" LOCm="3"/>
+      <method name="setAddressAndGpsPosition" line="147" NOL="2" CC="2" LOCm="6" FE="0" NLS="0" NOS="8" NOP="1"/>
+      <method name="setChanged" line="154" FE="0" NOP="0" NOS="1" CC="1" NOL="1" NLS="0" LOCm="3"/>
+      <method name="setChanged" line="158" NOP="1" FE="0" NOL="1" CC="1" LOCm="3" NLS="0" NOS="1"/>
+      <method name="setDistance" line="162" NOP="1" NLS="0" FE="0" NOS="1" CC="1" NOL="1" LOCm="3"/>
+      <method name="setGpsPosition" line="166" NOS="1" NOL="1" CC="1" FE="0" LOCm="3" NOP="1" NLS="0"/>
+      <method name="setGpsPositionId" line="170" LOCm="5" NLS="0" CC="2" NOL="2" NOS="4" FE="0" NOP="1"/>
+      <method name="setNormalAttributes" line="176" LOCm="7" FE="0" NOL="1" NLS="0" NOS="12" NOP="1" CC="1"/>
+      <method name="toString" line="184" LOCm="4" NLS="0" NOS="5" FE="0" CC="2" NOL="1" NOP="0"/>
+    </type>
+    <type name="GpsPosition" line="15" NOF="3" WMC="11" LCOMCK="0" Ce="11" LCOMPFI="80" LCOMHS="60">
+      <method name="GpsPosition" line="25" NLS="0" FE="0" CC="1" LOCm="3" NOL="1" NOP="0" NOS="0"/>
+      <method name="GpsPosition" line="33" CC="1" NLS="0" LOCm="4" FE="0" NOP="1" NOL="1" NOS="4"/>
+      <method name="GpsPosition" line="29" NOL="1" CC="1" FE="0" LOCm="3" NOS="1" NOP="2" NLS="0"/>
+      <method name="GpsPosition" line="38" CC="1" NLS="0" LOCm="4" NOP="3" FE="0" NOL="1" NOS="2"/>
+      <method name="distance" line="50" NOL="1" NOS="3" CC="1" FE="0" NOP="4" LOCm="5" NLS="0"/>
+      <method name="distanceTo" line="43" NOS="4" CC="1" NLS="0" FE="0" NOP="1" NOL="1" LOCm="6"/>
+      <method name="getId" line="56" NOP="0" LOCm="3" NLS="0" NOL="1" FE="0" CC="1" NOS="1"/>
+      <method name="getLatitude" line="60" NLS="0" LOCm="3" NOP="0" CC="1" FE="0" NOS="1" NOL="1"/>
+      <method name="getLongitude" line="64" NOP="0" NOL="1" LOCm="3" CC="1" NLS="0" NOS="1" FE="0"/>
+      <method name="toJSONObject" line="68" LOCm="11" CC="2" NOL="2" FE="0" NOP="0" NOS="7" NLS="2"/>
+    </type>
+    <type name="ISO8601DateParser" line="13" Ce="6" NOF="0" WMC="5">
+      <method name="format" line="86" NOP="1" NOL="1" NOS="18" LOCm="12" CC="1" NLS="0"/>
+      <method name="parse" line="61" NOS="17" LOCm="14" NLS="0" NOL="2" NOP="1" CC="2"/>
+      <method name="parse" line="76" LOCm="8" NOS="7" NOP="2" CC="2" NOL="2" NLS="1"/>
+    </type>
+    <type name="TimeEntry" line="21" WMC="35" LCOMPFI="94" NOF="8" LCOMCK="112" Ce="16" LCOMHS="96">
+      <method name="TimeEntry" line="41" FE="0" NOP="0" CC="1" NOS="0" LOCm="3" NLS="0" NOL="1"/>
+      <method name="TimeEntry" line="45" CC="1" NOS="4" NOP="1" FE="0" NLS="0" LOCm="7" NOL="1"/>
+      <method name="getCustomerId" line="53" NOL="1" NOS="1" NOP="0" CC="1" FE="0" NLS="0" LOCm="3"/>
+      <method name="getDescription" line="57" NOL="1" NOP="0" NLS="0" LOCm="3" CC="1" NOS="1" FE="0"/>
+      <method name="getGpsPositionId" line="61" CC="1" NOP="0" NOS="1" LOCm="3" FE="0" NOL="1" NLS="0"/>
+      <method name="getHashcode" line="65" NOS="1" NOL="1" NOP="0" CC="1" LOCm="3" FE="0" NLS="0"/>
+      <method name="getId" line="69" NOS="1" NOP="0" LOCm="3" NOL="1" NLS="0" FE="0" CC="1"/>
+      <method name="getIdOnServer" line="73" FE="0" LOCm="4" NLS="0" NOL="1" NOP="0" NOS="1" CC="1"/>
+      <method name="getTimeEntryTypeId" line="78" NOL="1" FE="0" NLS="0" NOP="0" NOS="1" CC="1" LOCm="3"/>
+      <method name="getTimeStart" line="82" NOL="1" CC="1" NOS="1" FE="0" NOP="0" NLS="0" LOCm="3"/>
+      <method name="getTimeStop" line="86" FE="0" NOS="1" NOL="1" NLS="0" LOCm="3" CC="1" NOP="0"/>
+      <method name="hasCustomer" line="90" LOCm="3" NOP="0" NLS="0" FE="0" CC="1" NOS="1" NOL="1"/>
+      <method name="hasGpsPosition" line="94" CC="1" LOCm="3" NOS="1" NOP="0" NOL="1" FE="0" NLS="0"/>
+      <method name="hasTimeEntryType" line="98" LOCm="3" NOL="1" NOS="1" NLS="0" NOP="0" FE="0" CC="1"/>
+      <method name="isTransmitted" line="102" FE="0" CC="1" NOP="0" LOCm="4" NOS="1" NLS="0" NOL="1"/>
+      <method name="processConfirmation" line="107" NLS="0" NOL="1" NOP="1" FE="0" CC="1" LOCm="4" NOS="4"/>
+      <method name="processTransmission" line="112" NOL="2" NLS="0" CC="2" NOP="1" LOCm="12" NOS="12" FE="0"/>
+      <method name="putMembersToJson" line="177" NOS="10" NOL="1" NOP="1" NLS="0" FE="0" LOCm="8" CC="1"/>
+      <method name="putRelationsToJson" line="186" FE="0" NLS="0" LOCm="8" NOS="9" NOL="2" NOP="1" CC="4"/>
+      <method name="setCustomer" line="125" NLS="0" LOCm="3" NOS="1" NOP="1" CC="1" NOL="1" FE="0"/>
+      <method name="setCustomerId" line="129" NOP="1" NLS="0" CC="1" FE="0" LOCm="3" NOL="1" NOS="1"/>
+      <method name="setDescription" line="133" CC="1" FE="0" NLS="0" NOP="1" NOL="1" NOS="1" LOCm="3"/>
+      <method name="setGpsPosition" line="137" NOS="1" FE="0" NLS="0" LOCm="3" NOL="1" CC="1" NOP="1"/>
+      <method name="setGpsPositionId" line="141" NOL="1" CC="1" NOS="1" NLS="0" FE="0" LOCm="3" NOP="1"/>
+      <method name="setRailsId" line="145" NLS="0" NOS="1" LOCm="3" NOL="1" NOP="1" CC="1" FE="0"/>
+      <method name="setTimeEntryType" line="149" NOS="1" NOL="1" FE="0" LOCm="3" NOP="1" CC="1" NLS="0"/>
+      <method name="setTimeEntryTypeId" line="153" NLS="0" NOS="1" CC="1" LOCm="3" FE="0" NOP="1" NOL="1"/>
+      <method name="setTimeStop" line="157" LOCm="3" NLS="0" FE="0" NOS="2" NOL="1" NOP="1" CC="1"/>
+      <method name="setTransmitted" line="161" NOS="1" CC="1" LOCm="3" NOL="1" NOP="0" FE="0" NLS="0"/>
+      <method name="toJSONObject" line="165" NOS="7" NOL="2" LOCm="11" CC="2" NOP="0" NLS="2" FE="0"/>
+    </type>
+    <type name="TimeEntryType" line="15" NOF="7" LCOMHS="89" LCOMPFI="92" WMC="15" LCOMCK="27" Ce="11">
+      <method name="TimeEntryType" line="31" LOCm="3" NOP="0" CC="1" NOS="0" NLS="0" NOL="1" FE="0"/>
+      <method name="TimeEntryType" line="35" NOL="1" NOP="2" FE="0" NLS="0" CC="1" NOS="2" LOCm="4"/>
+      <method name="compareTo" line="94" NOL="1" CC="1" FE="0" LOCm="8" NOP="1" NLS="0" NOS="4"/>
+      <method name="fromJSON" line="40" FE="0" NOS="12" LOCm="11" NOP="1" CC="3" NOL="2" NLS="0"/>
+      <method name="getCreatedAt" line="59" LOCm="3" NOS="1" NOL="1" FE="0" NLS="0" CC="1" NOP="0"/>
+      <method name="getId" line="63" CC="1" NLS="0" NOP="0" LOCm="3" NOS="1" FE="0" NOL="1"/>
+      <method name="getIdOnServer" line="67" FE="0" NLS="0" CC="1" NOL="1" NOP="0" NOS="1" LOCm="4"/>
+      <method name="getName" line="72" FE="0" NOL="1" CC="1" NLS="0" NOS="1" NOP="0" LOCm="3"/>
+      <method name="getUpdatedAt" line="76" NLS="0" NOP="0" LOCm="4" CC="1" FE="0" NOL="1" NOS="1"/>
+      <method name="getValidUntil" line="81" NOL="1" LOCm="3" NOS="1" NOP="0" NLS="0" CC="1" FE="0"/>
+      <method name="isDeleted" line="85" LOCm="3" NOS="1" NLS="0" NOP="0" CC="1" FE="0" NOL="1"/>
+      <method name="parseMembersFromJson" line="52" CC="1" NLS="0" NOS="12" FE="0" LOCm="6" NOP="1" NOL="1"/>
+      <method name="toString" line="89" NLS="0" LOCm="4" NOP="0" NOL="1" NOS="1" CC="1" FE="0"/>
+    </type>
+    <type name="User" line="15" LCOMPFI="78" LCOMCK="11" Ce="9" NOF="4" WMC="10" LCOMHS="86">
+      <method name="User" line="25" NLS="0" NOL="1" FE="0" NOP="0" CC="1" NOS="0" LOCm="3"/>
+      <method name="fromJSON" line="29" NOS="18" FE="0" LOCm="13" NLS="0" CC="2" NOL="2" NOP="1"/>
+      <method name="getEmail" line="43" LOCm="3" NLS="0" FE="0" CC="1" NOL="1" NOP="0" NOS="1"/>
+      <method name="getFirstName" line="47" NOP="0" FE="0" LOCm="3" NOL="1" NLS="0" NOS="1" CC="1"/>
+      <method name="getId" line="51" NOL="1" LOCm="3" NOP="0" CC="1" NOS="1" FE="0" NLS="0"/>
+      <method name="getIdOnServer" line="55" CC="1" NOL="1" LOCm="4" FE="0" NOP="0" NOS="2" NLS="0"/>
+      <method name="getLastName" line="60" NOP="0" LOCm="3" NLS="0" NOS="1" FE="0" NOL="1" CC="1"/>
+      <method name="getRailsId" line="64" NOL="1" NLS="0" CC="1" FE="0" NOP="0" NOS="1" LOCm="3"/>
+      <method name="getUpdatedAt" line="68" LOCm="4" FE="0" NOL="1" NLS="0" NOP="0" NOS="1" CC="1"/>
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.network">
+    <type name="CustomerHelper" line="14" NOF="1" LCOMPFI="0" LCOMHS="0" WMC="13" LCOMCK="0" Ce="17">
+      <method name="CustomerHelper" line="17" NLS="0" LOCm="3" NOP="1" FE="0" NOL="1" NOS="1" CC="1"/>
+      <method name="generateJSONRequest" line="59" NOS="13" NOP="1" LOCm="13" NOL="3" CC="3" FE="1" NLS="0"/>
+      <method name="synchronize" line="21" NOP="2" NLS="3" NOL="3" LOCm="13" CC="3" NOS="11" FE="0"/>
+      <method name="synchronizeRequest" line="55" FE="0" LOCm="3" NLS="0" NOP="1" NOL="1" NOS="3" CC="1"/>
+      <method name="updateOrCreateReceivable" line="45" NOP="3" LOCm="9" NLS="0" NOL="3" CC="3" FE="2" NOS="7"/>
+      <method name="updateOrCreateReceivables" line="35" CC="2" FE="0" LOCm="9" NOS="10" NOL="2" NLS="0" NOP="3"/>
+    </type>
+    <type name="HttpHelper" line="22" LCOMCK="0" LCOMPFI="0" Ce="16" LCOMHS="0" WMC="14" NOF="1">
+      <method name="doHttpPost" line="27" NOS="3" FE="0" NOP="2" CC="1" NOL="1" NLS="0" LOCm="3"/>
+      <method name="doHttpRequest" line="35" NOP="3" NOS="7" NOL="1" NLS="0" CC="1" FE="0" LOCm="6"/>
+      <method name="executeRequest" line="69" NOL="2" NOP="2" NOS="12" CC="3" NLS="2" FE="0" LOCm="15"/>
+      <method name="getCookie" line="98" NOS="1" CC="1" NOP="0" FE="0" NOL="1" NLS="0" LOCm="3"/>
+      <method name="getHttpClient" line="42" NOS="2" LOCm="3" NOP="0" FE="0" NLS="0" NOL="1" CC="1"/>
+      <method name="getHttpParams" line="46" NOP="0" NOS="4" FE="0" NOL="1" NLS="0" LOCm="9" CC="1"/>
+      <method name="getHttpPost" line="31" NOS="1" NOP="1" NOL="1" CC="1" FE="0" LOCm="3" NLS="0"/>
+      <method name="handleResponse" line="85" NOS="14" NOL="2" NOP="1" FE="0" NLS="0" CC="2" LOCm="12"/>
+      <method name="prepareRequest" line="56" NOS="10" FE="0" NOL="2" NOP="3" LOCm="12" CC="3" NLS="2"/>
+    </type>
+    <type name="NetworkConfig" line="3" NOF="0" WMC="1" Ce="2">
+      <method name="NetworkConfig" line="4" FE="0" NOP="0" CC="1" NOS="0" NLS="0" NOL="1" LOCm="2"/>
+    </type>
+    <type name="SynchronizationException" line="3" NOF="0" Ce="2" WMC="1">
+      <method name="SynchronizationException" line="6" CC="1" LOCm="3" NLS="0" NOP="1" NOS="1" NOL="1" FE="0"/>
+    </type>
+    <type name="TimeEntryHelper" line="12" Ce="11" NOF="1" WMC="9" LCOMPFI="0" LCOMCK="0" LCOMHS="0">
+      <method name="TimeEntryHelper" line="17" NOS="1" LOCm="3" CC="1" NOP="1" NLS="0" FE="0" NOL="1"/>
+      <method name="confirm" line="39" NOP="1" NOL="2" NLS="2" FE="2" NOS="12" CC="4" LOCm="14"/>
+      <method name="getJSONParameters" line="35" NOS="2" CC="1" LOCm="3" NOP="1" NOL="1" NLS="0" FE="0"/>
+      <method name="transmit" line="21" LOCm="13" NOP="1" NOL="2" CC="3" NLS="3" FE="0" NOS="14"/>
+    </type>
+    <type name="TimeEntryTypeHelper" line="13" LCOMCK="0" WMC="13" LCOMPFI="0" Ce="17" NOF="1" LCOMHS="0">
+      <method name="TimeEntryTypeHelper" line="16" NOP="1" NLS="0" LOCm="3" NOL="1" CC="1" NOS="1" FE="0"/>
+      <method name="generateJSONRequest" line="58" LOCm="11" NOP="1" CC="3" NLS="0" NOL="3" FE="1" NOS="11"/>
+      <method name="synchronize" line="20" LOCm="13" NLS="3" NOP="2" CC="3" NOL="3" FE="0" NOS="11"/>
+      <method name="synchronizeRequest" line="54" NOL="1" NOS="3" CC="1" NLS="0" NOP="1" FE="0" LOCm="3"/>
+      <method name="updateOrCreateReceivable" line="44" NOP="3" LOCm="9" CC="3" NOL="3" NOS="7" NLS="0" FE="2"/>
+      <method name="updateOrCreateReceivables" line="34" LOCm="9" NLS="0" NOS="10" NOP="3" CC="2" FE="0" NOL="2"/>
+    </type>
+    <type name="UserHelper" line="10" WMC="6" LCOMCK="0" Ce="9" LCOMPFI="0" NOF="1" LCOMHS="0">
+      <method name="UserHelper" line="13" LOCm="3" NLS="0" CC="1" FE="0" NOS="1" NOL="1" NOP="1"/>
+      <method name="generateJSONObject" line="31" NOL="1" NOP="2" LOCm="8" FE="0" NOS="7" CC="1" NLS="0"/>
+      <method name="login" line="17" FE="0" LOCm="13" NLS="2" NOL="2" NOP="3" NOS="10" CC="4"/>
+    </type>
+  </package>
+  <package name="ch.hsr.se2p.mrt.services">
+    <type name="CustomerSynchronizer" line="21" LCOMCK="0" Ce="18" NOF="2" LCOMPFI="75" LCOMHS="50" WMC="24">
+      <method name="CustomerSynchronizer" line="27" NLS="0" FE="0" NOS="2" CC="1" NOP="2" NOL="1" LOCm="4"/>
+      <method name="existingCustomer" line="71" CC="1" NOL="1" NOP="1" NLS="0" NOS="3" FE="1" LOCm="3"/>
+      <method name="handleCreation" line="91" NOS="15" FE="0" NOP="2" CC="3" NLS="0" NOL="2" LOCm="13"/>
+      <method name="handleDeletion" line="105" LOCm="11" CC="3" NOP="2" NLS="0" NOL="2" FE="0" NOS="11"/>
+      <method name="handleGpsPosition" line="117" NLS="0" NOP="1" FE="1" LOCm="7" CC="2" NOS="8" NOL="2"/>
+      <method name="handleUpdate" line="75" CC="2" NOP="2" NOS="6" NOL="2" NLS="0" FE="0" LOCm="7"/>
+      <method name="processCustomer" line="58" NOL="3" FE="0" NOP="2" LOCm="12" CC="3" NLS="0" NOS="10"/>
+      <method name="synchronize" line="32" FE="0" CC="3" NOP="0" NOL="2" NLS="3" LOCm="13" NOS="12"/>
+      <method name="synchronizeCustomers" line="46" FE="0" NLS="1" NOL="4" LOCm="11" CC="4" NOS="7" NOP="3"/>
+      <method name="updatePosition" line="83" CC="2" FE="0" LOCm="7" NOL="2" NOS="9" NLS="0" NOP="1"/>
+    </type>
+    <type name="SynchronizationService" line="12" Ce="8" NOF="2" WMC="4" LCOMCK="0" LCOMHS="50" LCOMPFI="50">
+      <method name="onBind" line="29" FE="0" LOCm="5" NLS="0" NOL="1" NOS="1" CC="1" NOP="1"/>
+      <method name="onCreate" line="35" NOL="1" NOP="0" NOS="4" LOCm="8" FE="0" NLS="0" CC="1"/>
+      <method name="onDestroy" line="44" LOCm="7" CC="1" NOS="3" NOP="0" NOL="1" NLS="0" FE="0"/>
+      <method name="onStartCommand" line="21" NOL="1" NOS="2" NLS="0" FE="0" CC="1" NOP="3" LOCm="7"/>
+    </type>
+    <type name="SynchronizationServiceSpec" line="3" Ce="5" NOF="0" WMC="1">
+      <method name="getSynchronizers" line="6" CC="1" LOCm="3" NOS="1" NOP="0" FE="0" NLS="0" NOL="1"/>
+    </type>
+    <type name="SynchronizationServiceTask" line="14" LCOMPFI="83" NOF="3" LCOMCK="0" LCOMHS="67" WMC="10" Ce="12">
+      <method name="SynchronizationServiceTask" line="20" FE="0" NOS="7" NOL="1" LOCm="6" CC="1" NOP="1" NLS="0"/>
+      <method name="getSynchronizationServiceSpec" line="37" LOCm="3" NOL="1" CC="1" NOP="0" NOS="1" NLS="0" FE="0"/>
+      <method name="loadPreferences" line="58" NOP="0" NOL="1" LOCm="3" FE="0" CC="1" NLS="0" NOS="2"/>
+      <method name="login" line="62" CC="1" NLS="0" NOL="1" NOP="0" NOS="7" FE="3" LOCm="4"/>
+      <method name="newSynchronizerInstance" line="54" LOCm="3" NOL="1" NOS="3" CC="1" NOP="1" NLS="0" FE="0"/>
+      <method name="run" line="27" CC="2" LOCm="9" FE="0" NOP="0" NOS="6" NOL="2" NLS="0"/>
+      <method name="runSynchronizers" line="41" NLS="2" NOL="3" NOP="0" FE="0" NOS="12" LOCm="12" CC="3"/>
+    </type>
+    <type name="Synchronizer" line="6">
+      <method name="synchronize" line="8" NOP="0"/>
+    </type>
+    <type name="TimeEntrySynchronizer" line="17" WMC="19" Ce="11" LCOMPFI="80" NOF="2" LCOMHS="50" LCOMCK="0">
+      <method name="TimeEntrySynchronizer" line="23" NOP="2" FE="0" NOS="2" LOCm="4" NLS="0" CC="1" NOL="1"/>
+      <method name="getTimeEntriesToTransmit" line="94" LOCm="4" NLS="0" CC="1" NOS="4" FE="0" NOL="1" NOP="0"/>
+      <method name="handleTransmittedTimeEntry" line="78" NOL="2" NOP="3" FE="0" NLS="0" NOS="5" CC="2" LOCm="8"/>
+      <method name="setCustomerRelationOnTimeEntry" line="73" FE="2" NOP="1" CC="2" LOCm="4" NLS="0" NOL="2" NOS="6"/>
+      <method name="setGpsPositionRelationOnTimeEntry" line="68" NLS="0" NOP="1" NOS="6" CC="2" NOL="2" FE="2" LOCm="4"/>
+      <method name="setRelationObjectsOnTimeEntry" line="57" NOP="1" NOL="1" CC="1" NLS="0" LOCm="5" NOS="3" FE="0"/>
+      <method name="setTimeEntryTypeRelationOnTimeEntry" line="63" LOCm="4" NOS="6" NOP="1" NOL="2" NLS="0" CC="2" FE="2"/>
+      <method name="setTransmitted" line="87" FE="2" CC="2" NOL="2" NOP="2" LOCm="6" NOS="4" NLS="0"/>
+      <method name="synchronize" line="28" LOCm="15" NOL="3" NOP="0" FE="0" CC="3" NLS="2" NOS="12"/>
+      <method name="transmitTimeEnties" line="44" NOL="3" FE="0" CC="3" NOP="1" NOS="10" NLS="0" LOCm="12"/>
+    </type>
+    <type name="TimeEntryTypeSynchronizer" line="20" LCOMCK="0" LCOMHS="0" LCOMPFI="0" Ce="16" NOF="2" WMC="17">
+      <method name="TimeEntryTypeSynchronizer" line="26" NOS="2" LOCm="4" NOL="1" FE="0" CC="1" NOP="2" NLS="0"/>
+      <method name="handleCreation" line="78" NOL="1" LOCm="4" NLS="0" NOS="2" FE="0" CC="1" NOP="2"/>
+      <method name="handleDeletion" line="83" CC="3" LOCm="10" FE="0" NOP="2" NOS="8" NLS="0" NOL="3"/>
+      <method name="handleUpdate" line="73" NOS="2" FE="0" NOL="1" CC="1" NOP="2" NLS="0" LOCm="4"/>
+      <method name="needsUpdating" line="69" NOP="1" FE="1" NOL="1" LOCm="3" CC="1" NLS="0" NOS="3"/>
+      <method name="processTimeEntryType" line="58" NLS="0" LOCm="10" CC="3" NOP="2" NOS="7" FE="0" NOL="2"/>
+      <method name="synchronize" line="31" NOP="0" NOS="12" LOCm="13" NLS="3" CC="3" FE="0" NOL="2"/>
+      <method name="synchronizeTimeEntryTypes" line="45" NOS="7" NOP="3" NLS="1" NOL="4" LOCm="12" FE="0" CC="4"/>
+    </type>
+  </package>
+</metrics>
