@@ -120,22 +120,6 @@ public class LoginActivityTest extends ActivityInstrumentationTestCase2<LoginAct
 		resetPreferences();
 	}
 
-	public void testLoginUnsuccessfulWithoutPreferencesSaved() {
-		resetPreferences();
-		assertFalse(solo.searchText(LOGIN_ERROR, true));
-
-		fillInLoginForm("wrong@mrt.ch", "credentials", false);
-		performClickOnLoginButton();
-
-		assertTrue(solo.searchText(LOGIN_ERROR, true));
-		solo.clickOnButton(OK);
-
-		assertFalse(solo.searchText(LOGIN_ERROR, true));
-		assertTrue("".equals(editPassword.getText().toString()));
-		assertEquals(activity, solo.getCurrentActivity());
-		assertLoginDataIsNull();
-	}
-
 	public void testNoLoginDataSuppliedWithoutPreferencesSaved() {
 		resetPreferences();
 		assertLoginDataErrorIsNotDisplayed();
