@@ -1,51 +1,63 @@
 $ rake test:benchmark
 (in /home/digi/workspaces/www/mrt-server)
-Loaded suite /var/lib/gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_loader
+Loaded suite /var/lib/gems/1.8/gems/rake-0.8.7/lib/rake/rake_test_l
 Started
-Synchronize1000TimeEntryTypesTest#test_synchronize_1000_time_entry_types (938 ms warmup)
-           wall_time: 1.01 sec
+Synchronize1000CustomersTest#test_synchronize_1000_customers (4.80 
+           wall_time: 5.62 sec
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.Synchronize100TimeEntryTypesTest#test_synchronize_100_time_entry_types (61 ms warmup)
+.Synchronize1000TimeEntryTypesTest#test_synchronize_1000_time_entry_types (1.54 sec warmup)
+           wall_time: 1.30 sec
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.Synchronize100CustomersTest#test_synchronize_100_customers (879 ms warmup)
+           wall_time: 526 ms
+              memory: 0.00 KB
+             objects: 0
+             gc_runs: 0
+             gc_time: 0.00 ms
+.Synchronize100TimeEntryTypesTest#test_synchronize_100_time_entry_types (68 ms warmup)
            wall_time: 64 ms
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.Synchronize10CustomersTest#test_synchronize_10_customers (3.36 sec warmup)
-           wall_time: 3.42 sec
+.Synchronize10CustomersTest#test_synchronize_10_customers (36 ms warmup)
+           wall_time: 30 ms
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.Synchronize10TimeEntryTypesTest#test_synchronize_10_time_entry_types (14 ms warmup)
+.Synchronize10TimeEntryTypesTest#test_synchronize_10_time_entry_types (13 ms warmup)
            wall_time: 13 ms
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.SynchronizeTimeEntriesTest#test_post_1000_time_entries (12.40 sec warmup)
-           wall_time: 12.26 sec
+.SynchronizeTimeEntriesTest#test_post_1000_time_entries (11.67 sec warmup)
+           wall_time: 12.47 sec
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.SynchronizeTimeEntriesTest#test_post_100_time_entries (699 ms warmup)
-           wall_time: 1.21 sec
+.SynchronizeTimeEntriesTest#test_post_100_time_entries (755 ms warmup)
+           wall_time: 1.17 sec
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
-.SynchronizeTimeEntriesTest#test_post_10_time_entries (90 ms warmup)
-           wall_time: 80 ms
+.SynchronizeTimeEntriesTest#test_post_10_time_entries (100 ms warmup)
+           wall_time: 90 ms
               memory: 0.00 KB
              objects: 0
              gc_runs: 0
              gc_time: 0.00 ms
 .
-Finished in 2582.957205 seconds.
+Finished in 3229.177307 seconds.
 
-35 tests, 23457 assertions, 0 failures, 0 errors
+45 tests, 23499 assertions, 0 failures, 0 errors
 
