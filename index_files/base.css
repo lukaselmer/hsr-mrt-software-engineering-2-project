@@ -1,0 +1,11 @@
+.outer-main{
+    padding: 20px;
+}
+
+div.logo {
+    margin: 0 0 0 25px;
+}
+
+div.logo a, div.logo a:hover {
+    border: none;
+}
