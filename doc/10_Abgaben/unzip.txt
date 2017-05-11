@@ -1,0 +1,2 @@
+zip -s 0 se2p_ms6_final_abgabe_03_06_2011.7z.data.zip --out se2p_ms6_final_abgabe_03_06_2011.7z.single_file.zip
+unxip se2p_ms6_final_abgabe_03_06_2011.7z.single_file.zip
